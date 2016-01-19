@@ -2,6 +2,11 @@ machine:
   environment:
     FIREBASE_TOKEN: -K8NQX-IOHSbncOIwSal|bbff741f4ca02bb432a6646a005845d9
 
+dependencies:
+  override:
+    - npm install
+    - npm install -g firebase-tools
+
 deployment:
   production:
     branch: develop
