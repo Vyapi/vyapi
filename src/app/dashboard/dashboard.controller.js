@@ -12,15 +12,9 @@ export class DashboardController {
 					console.log("members available");
 					var members = snapshot.val();
 					var roomLength = Object.keys(members).length;
-					key = Object.keys(members));
+					var key = Object.keys(members);
 					console.log(key);
-					
-					for(var room = 1; room <= roomLength; room++){
-						var ref = new Firebase(membersRef +'/'+ key);
-						ref.once("value",function(snapshot){
-								console.log(snapshot.val());
-						});
-					}
+					console.log(roomLength);
 					
 				}
 				else
