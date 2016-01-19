@@ -1,0 +1,9 @@
+{
+  "firebase": "dazzling-inferno-9828",
+  "public": "src",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}
