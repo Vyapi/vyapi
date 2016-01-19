@@ -9,10 +9,10 @@
   </head>
 
   <body>
-    	<div class="btn-group" onclick="login()" id="login">
-		<a class='btn btn-danger disabled'><i class="fa fa-google-plus" style="width:16px; height:20px"></i></a>
-		<a class='btn btn-danger' href='' style="width:12em;"> Sign in with Google</a>
-	</div>
+    <div class="btn-group" onclick="login()" id="login">
+      <a class='btn btn-danger disabled'><i class="fa fa-google-plus" style="width:16px; height:20px"></i></a>
+      <a class='btn btn-danger' href='' style="width:12em;"> Sign in with Google</a>
+    </div>
     <button id="check" onclick="check()">Check Status</button>
     <button id="logout" onclick="logout()">logout</button>
 
@@ -21,20 +21,20 @@
       {
 
         var ref = new Firebase("https://vyapi-userauth.firebaseio.com/");
-                var authData = ref.getAuth();
+        var authData = ref.getAuth();
 
         if (authData) {
           console.log("Already the User " + authData.uid + " is logged in with " + authData.provider);
         } else {
-                  ref.authWithOAuthPopup("google", function(error, authData) {
-          if (error) {
-            console.log("Login Failed!", error);
-          } else {
-            console.log("Authenticated successfully with payload:", authData);
-            var myDataRef = new Firebase('https://vyapi-userauth.firebaseio.com/');
-            myDataRef.push(authData);
-          }
-        });
+          ref.authWithOAuthPopup("google", function(error, authData) {
+            if (error) {
+              console.log("Login Failed!", error);
+            } else {
+              console.log("Authenticated successfully with payload:", authData);
+              var myDataRef = new Firebase('https://vyapi-userauth.firebaseio.com/');
+              myDataRef.push(authData);
+            }
+          });
         }
 
       }
