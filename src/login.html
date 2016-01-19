@@ -1,33 +1,63 @@
 <html>
-<head>
-<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
- </head>
-  <body>
-   <div onclick="check()" id="login">
-    <a class="btn btn-block btn-social btn-google">
-    <span class="fa fa-google"></span> Sign in with Google</a>
-    </div>
-       <div id="logout">
 
-       </div>
-        <script>
-	   function check()
-	     {
-		            var ref = new Firebase("https://vyapi-userauth.firebaseio.com/");
-			    ref.authWithOAuthPopup("google", function(error, authData) {
-					     if (error) {
-					        console.log("Login Failed!", error);
-						 } else {
-						    console.log("Authenticated successfully with payload:", authData);
-						    var myDataRef = new Firebase('https://vyapi-userauth.firebaseio.com/');
-						    myDataRef.push(authData);
-						    }
-						     });
-			         }
-   </script>
-    </body>
-    </html>
+  <head>
+    <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+    	<div class="btn-group" onclick="login()" id="login">
+		<a class='btn btn-danger disabled'><i class="fa fa-google-plus" style="width:16px; height:20px"></i></a>
+		<a class='btn btn-danger' href='' style="width:12em;"> Sign in with Google</a>
+	</div>
+    <button id="check" onclick="check()">Check Status</button>
+    <button id="logout" onclick="logout()">logout</button>
+
+    <script>
+      function login()
+      {
+
+        var ref = new Firebase("https://vyapi-userauth.firebaseio.com/");
+                var authData = ref.getAuth();
+
+        if (authData) {
+          console.log("Already the User " + authData.uid + " is logged in with " + authData.provider);
+        } else {
+                  ref.authWithOAuthPopup("google", function(error, authData) {
+          if (error) {
+            console.log("Login Failed!", error);
+          } else {
+            console.log("Authenticated successfully with payload:", authData);
+            var myDataRef = new Firebase('https://vyapi-userauth.firebaseio.com/');
+            myDataRef.push(authData);
+          }
+        });
+        }
+
+      }
+
+      function check()
+      {
+        var ref = new Firebase("https://vyapi-userauth.firebaseio.com/");
+
+        var authData = ref.getAuth();
+
+        if (authData) {
+          console.log("User " + authData.uid + " is logged in with " + authData.provider);
+        } else {
+          console.log("User is logged out");
+        }
+
+      }
+
+      function logout()
+      {
+        var ref = new Firebase("https://vyapi-userauth.firebaseio.com/");
+        ref.unauth();
+      }
+    </script>
+  </body>
+</html>
