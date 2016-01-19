@@ -1,13 +1,11 @@
 export class ActionController {
-  constructor ($timeout, webDevTec, toastr) {
-    'ngInject';
+    constructor($firebaseArray) {
+        'ngInject';
 
-    this.awesomeThings = [];
-    this.classAnimation = '';
-    this.creationDate = 1453195760504;
-    this.toastr = toastr;
-
-    this.activate($timeout, webDevTec);
-  }
-
+        var myDataRef = new Firebase('https://torrid-fire-8763.firebaseio.com/');
+        myDataRef.set({
+            name: "name1",
+            text: "text1"
+        });
+    }
 }
