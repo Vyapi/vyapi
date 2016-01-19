@@ -2,6 +2,7 @@ dependencies:
   override:
     - npm install
     - npm install -g firebase-tools
+    - bower install
 
 deployment:
   production:
