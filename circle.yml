@@ -8,4 +8,4 @@ deployment:
   production:
     branch: develop
     commands:
-      - firebase deploy --token "-K8NQX-IOHSbncOIwSal|9e147380ac9156453ea6fb4b6d1a67f1"
+      - firebase deploy --token "-K8NQX-IOHSbncOIwSal|a19b96123552661ca03db64eb0ff6da0"
