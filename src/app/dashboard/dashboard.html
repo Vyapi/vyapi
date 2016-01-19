@@ -1,5 +1,6 @@
 <div class="container">
-<script type="text/javascript">var userID = "moni"</script>
-{{dashboard.data}}
-
+	{{dashboard.room}}	
+	<ul ng-repeat = "room in dashboard.room">
+		<li> {{room}} </li>
+	</ul>
 </div>
