@@ -4,6 +4,6 @@ machine:
 
 deployment:
   production:
-      branch: master
-          commands:
-	        - firebase deploy --token=$FIREBASE_TOKEN --non-interactive
+    branch: develop
+      commands:
+        - firebase deploy --token=$FIREBASE_TOKEN --non-interactive
