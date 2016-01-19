@@ -1,6 +1,6 @@
 {
   "firebase": "dazzling-inferno-9828",
-  "public": "src",
+  "public": "dist",
   "ignore": [
     "firebase.json",
     "**/.*",

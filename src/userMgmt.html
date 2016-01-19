@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      img {
+        height: 2em;
+        margin: 0.2em;
+      }
+
+      li {
+        display: inline;
+      }
+    </style>
+    <script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
+    <script>
+      var appURL = "https://incandescent-inferno-4532.firebaseio.com/";
+      var onlineUsersRef = new Firebase(appURL + "onlineUsers");
+
+      //get uid from cookie or from wherever the authentication teams decides
+      var uid = Math.floor(Math.random() * 999999999) + 1;
+      uid = "google:110298804653203543045"
+      console.log("My uid is: " + uid);
+
+      //check self connection state
+      var connectedRef = new Firebase(appURL + ".info/connected");
+      connectedRef.on("value", function(snap) {
+        if (snap.val() === true) {
+          console.log("connected :)");
+
+          //register self as online
+          onlineUsersRef.child(uid.toString()).set("1");
+
+          //setup offline mechanism when going offline
+          onlineUsersRef.child(uid.toString()).onDisconnect().remove();
+        } else {
+          console.log("not connected :(");
+        }
+      });
+
+      //user came online
+      onlineUsersRef.on('child_added', function(userId) {
+        console.log("User: " + userId.key() + " came online");
+        push(userId.key());
+      });
+
+      //user came offline
+      onlineUsersRef.on('child_removed', function(userId) {
+        console.log("User: " + userId.key() + " went offline");
+        pop(userId);
+      });
+
+      //adds user to the online list in UI
+      function push(userId) {
+        var listItem = document.createElement("li");
+        var img = document.createElement("img");
+        var userName = (new Firebase(encodeURI(appURL + "userAuthInfo/" + userId + "/google/cachedUserProfile/given_name/"))).once("value", function(value) {
+          userName = value.val();
+        });
+
+        (new Firebase(encodeURI(appURL + "userAuthInfo/" + userId + "/google/profileImageURL/"))).once("value", function(profilePhoto) {
+          img.setAttribute("src", profilePhoto.val());
+          img.setAttribute("title", userName);
+          img.setAttribute("alt", userName);
+          img.setAttribute("id", userId);
+          listItem.appendChild(img);
+          document.getElementById("onlineUserList").appendChild(listItem);
+        });
+      }
+
+      //removes user from the online list in UI
+      function pop(userId) {
+        var elem = document.getElementById(userId);
+        elem.parentNode.removeChild(elem);
+      }
+    </script>
+  </head>
+  <body>
+    <div>
+      <ul id="onlineUserList">
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,8 +1,12 @@
-export class UserController {
-  constructor($firebaseObject)  {
+export class MainController {
+  constructor ($timeout, webDevTec, toastr) {
     'ngInject';
-      var rootRef = new Firebase('https://vyapi.firebaseio.com/');
-      this.data = $firebaseObject(rootRef);
-      console.log(this.data);
+
+    this.awesomeThings = [];
+    this.classAnimation = '';
+    this.creationDate = 1453195760504;
+    this.toastr = toastr;
+
+    this.activate($timeout, webDevTec);
   }
 }
