@@ -6,5 +6,5 @@ dependencies:
 deployment:
   production:
     branch: develop
-    commands:
-      firebase deploy --token "-K8NQX-IOHSbncOIwSal|9e147380ac9156453ea6fb4b6d1a67f1"
+      commands:
+        - firebase deploy --token "-K8NQX-IOHSbncOIwSal|9e147380ac9156453ea6fb4b6d1a67f1"
