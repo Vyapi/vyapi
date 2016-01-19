@@ -1,22 +1,30 @@
 <html>
 <head>
 <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
-   
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
  </head>
   <body>
-     
-i     <button onclick="check()"> Login Check</button>
+   <div onclick="check()" id="login">
+    <a class="btn btn-block btn-social btn-google">
+    <span class="fa fa-google"></span> Sign in with Google</a>
+    </div>
+       <div id="logout">
+
+       </div>
         <script>
 	   function check()
 	     {
-		            var ref = new Firebase("https://vyapi.firebaseio.com");
+		            var ref = new Firebase("https://vyapi-userauth.firebaseio.com/");
 			    ref.authWithOAuthPopup("google", function(error, authData) {
 					     if (error) {
 					        console.log("Login Failed!", error);
 						 } else {
 						    console.log("Authenticated successfully with payload:", authData);
-						    var myDataRef = new Firebase('https://vyapi.firebaseio.com/');
-						    myDataRef.push(authData); 
+						    var myDataRef = new Firebase('https://vyapi-userauth.firebaseio.com/');
+						    myDataRef.push(authData);
 						    }
 						     });
 			         }
