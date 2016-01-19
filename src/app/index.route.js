@@ -5,7 +5,7 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
       url: '/',
       templateUrl: 'app/dashboard/dashboard.html',
       //controller: 'MainController',
-      controller:'dashboardController',
+      controller:'DashboardController',
       controllerAs: 'dashboard'
     });
 
