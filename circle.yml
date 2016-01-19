@@ -1,0 +1,9 @@
+machine:
+  environment:
+    FIREBASE_TOKEN: -K8NQX-IOHSbncOIwSal|bbff741f4ca02bb432a6646a005845d9
+
+deployment:
+  production:
+      branch: master
+          commands:
+	        - firebase deploy --token=$FIREBASE_TOKEN --non-interactive
