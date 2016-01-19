@@ -1,12 +1,12 @@
-export function routerConfig ($routeProvider) {
+export function routerConfig ($stateProvider, $urlRouterProvider) {
   'ngInject';
-  $routeProvider
-    .when('/', {
+  $stateProvider
+    .state('home', {
+      url: '/',
       templateUrl: 'app/main/main.html',
       controller: 'MainController',
       controllerAs: 'main'
-    })
-    .otherwise({
-      redirectTo: '/'
     });
+
+  $urlRouterProvider.otherwise('/');
 }
