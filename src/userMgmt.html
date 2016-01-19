@@ -7,17 +7,23 @@
         margin: 0.2em;
       }
 
-      li {
+      li, ul {
         display: inline;
+      }
+      
+      #showAllUsers {
+        display: none;
       }
     </style>
     <script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script>
       var appURL = "https://incandescent-inferno-4532.firebaseio.com/";
       var onlineUsersRef = new Firebase(appURL + "onlineUsers");
 
       //get uid from cookie or from wherever the authentication teams decides
-      var uid = Math.floor(Math.random() * 999999999) + 1;
+      //var uid = Math.floor(Math.random() * 999999999) + 1;
+      //hard coding right now
       uid = "google:110298804653203543045"
       console.log("My uid is: " + uid);
 
@@ -61,23 +67,52 @@
           img.setAttribute("src", profilePhoto.val());
           img.setAttribute("title", userName);
           img.setAttribute("alt", userName);
-          img.setAttribute("id", userId);
+          //img.setAttribute("id", userId);
           listItem.appendChild(img);
           document.getElementById("onlineUserList").appendChild(listItem);
         });
+        
+        //wait a little to let li append itself, then do work
+        setTimeout(adjustList, 3000);
       }
 
       //removes user from the online list in UI
       function pop(userId) {
         var elem = document.getElementById(userId);
         elem.parentNode.removeChild(elem);
+        
+        //wait a little to let li remove itself, then do work 
+        setTimeout(adjustList, 3000);
       }
+      
+      var adjustList = function() {
+        //todo: get imgSize from css property of img tag
+        var imgSize = 2;
+        var allowedNodes = Math.floor($(this).width()/parseFloat($("body").css("font-size"))/imgSize);
+        var liList = $("#onlineUserList").children();
+        
+        for (i = 0; i < allowedNodes && i < liList.length; i++)
+          liList[i].removeAttribute("style");
+          
+        for (i = allowedNodes; i < liList.length; i++)
+            liList[i].setAttribute("style", "display: none;");
+            
+        if(liList.length < allowedNodes)
+          document.getElementById('showAllUsers').setAttribute("style", "display: none");
+        else
+          document.getElementById('showAllUsers').removeAttribute("style");
+      }
+      
+      $(window).resize(function() {
+        adjustList();
+      });
     </script>
   </head>
   <body>
     <div>
       <ul id="onlineUserList">
       </ul>
+      <a href="#" id="showAllUsers" >...</a>
     </div>
   </body>
 </html>
