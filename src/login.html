@@ -1,0 +1,25 @@
+<html>
+<head>
+<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+   
+ </head>
+  <body>
+     
+i     <button onclick="check()"> Login Check</button>
+        <script>
+	   function check()
+	     {
+		            var ref = new Firebase("https://vyapi.firebaseio.com");
+			    ref.authWithOAuthPopup("google", function(error, authData) {
+					     if (error) {
+					        console.log("Login Failed!", error);
+						 } else {
+						    console.log("Authenticated successfully with payload:", authData);
+						    var myDataRef = new Firebase('https://vyapi.firebaseio.com/');
+						    myDataRef.push(authData); 
+						    }
+						     });
+			         }
+   </script>
+    </body>
+    </html>
