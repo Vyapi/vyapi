@@ -3,7 +3,7 @@ export class UserController {
     'ngInject';
     var appURL = "https://incandescent-inferno-4532.firebaseio.com/";
     var onlineUsersRef = new Firebase(appURL + "onlineUsers");
-    this.onlineUsers = [];
+    this.onlineUsers = {};
     var t = $firebaseArray(onlineUsersRef); //no idea what this line does, but removing this criples whole application
     this.goOnline = function() {
       //get uid from cookie or from wherever the authentication teams decides
@@ -35,12 +35,13 @@ export class UserController {
       //user came online
       onlineUsersRef.on('child_added', (userId) => {
         console.log("User: " + userId.key() + " came online");
-        this.onlineUsers.push(userId.val());
+        this.onlineUsers[userId.key().replace(":", "")] = userId.val();
         console.table(this.onlineUsers);
       });
       //user went offline
-      onlineUsersRef.on('child_removed', function(userId) {
+      onlineUsersRef.on('child_removed', (userId)=> {
         console.log("User: " + userId.key() + " went offline");
+        delete this.onlineUsers[userId.key().replace(":", "")];
       });
     }
     this.goOnline();
