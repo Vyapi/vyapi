@@ -1,4 +1,4 @@
-export class boardController {
+export class BoardController {
   constructor ($firebaseArray) {
     'ngInject';
 
@@ -6,9 +6,9 @@ export class boardController {
 
     this.messages = $firebaseArray(ref);
 
-    this.addMessage = function() {
+    this.addMessage = function(e) {
 
-      if (this.msg) {
+      if (e.keyCode === 13 && this.msg) {
 
         var name = this.name || "anonymous";
 

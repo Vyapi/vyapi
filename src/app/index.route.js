@@ -9,7 +9,7 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
     }).state('board', {
       url: '/board',
       templateUrl: 'app/board/board.html',
-      controller: 'boardController',
+      controller: 'BoardController',
       controllerAs: 'board'
     });
 
