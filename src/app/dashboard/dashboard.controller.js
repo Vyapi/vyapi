@@ -1,36 +1,23 @@
 export class DashboardController {
   constructor () {
     'ngInject';
-    		var userID = "monica";
-    		var rootURL = 'https://mock-vyapi.firebaseio.com';
-		var rootRef = new Firebase(rootURL);
-		var membersRef = new Firebase(rootURL + '/members');
-		var roomsRef = new Firebase(rootURL + '/rooms');
-		var messagesRef = new Firebase(rootURL + '/messages');
-		var roomURLs = [];
-		membersRef.once("value",function(snapshot){
-				if(snapshot.exists()){
-					//console.log("members available");
-					var members = snapshot.val();
-					for(var membersKey in members){
-						var membersVal = members[membersKey];
-						for(var key in membersVal){
-							//console.log(key,userID,membersVal[key])
-							if(key === userID && membersVal[key]){
-								roomURLs.push(membersKey);
-							}
-						}
-						
-					}
-					console.log(roomURLs);
-
-				}
-
-		});
-		function createNewRoom(){
-			for(var i=1;i<=10;i++){
-				membersRef.push({'monica' : 'true', 'ayushi' : 'true'});
-			}
+    	var userID = "monica";
+    	var roomsURL = 'https://mock-vyapi.firebaseio.com/rooms';
+	var roomsRef = new Firebase(roomsURL);
+	this.rooms = [];
+	this.createRoom = function(userID,roomName){
+		console.log(userID,roomName);
+		roomsRef.push({roomName : roomName, ownedBy : userID});
+	};
+	roomsRef.orderByChild("ownedBy").equalTo(userID).on("value",(snapshot)=>{
+		var rooms = Object.keys(snapshot.val());
+		this.rooms = {};
+		for(var key in rooms){
+			var name = snapshot.child(rooms[key] + '/roomName').val();
+			var url = roomsURL + '/' + rooms[key];
+			this.rooms[name] = url;
 		}
+		console.log(this.rooms);
+	});
   }
 }

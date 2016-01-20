@@ -1,6 +1,6 @@
-<div class="container">
-	{{dashboard.room}}	
-	<ul ng-repeat = "room in dashboard.room">
-		<li> {{room}} </li>
+<div class="container"> 
+	<button ng-click="dashboard.createRoom('monica','room5')">Join</button>
+	<ul ng-repeat="(name,url) in dashboard.rooms">
+		<li><a href="{{url}}">{{name}}</a></li>
 	</ul>
 </div>
