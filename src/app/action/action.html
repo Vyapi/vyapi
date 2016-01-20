@@ -9,8 +9,7 @@
     <div>
         <form ng-submit="action.add()">
         <input type="text" ng-model="action.input" >
-        <select ng-model= "person" ng-options="person for person in action.assignee" ng-change='change(person)'>
-        <option value=" ">--select option--</option>
+        <select ng-options="person for person in action.assignee" ng-model="person" ng-change="action.change(person)">
         </select>
         <button type="submit" >Add</button>
         </form>
