@@ -1,1 +1,15 @@
 <h1>Hello</h1>
+<p> Add tems here</p>
+<div>
+    <ul>
+      <li ng-repeat="item in action.items">{{item}}
+      <button ng-click="action.remove($index)">Remove</button>
+      </li>
+    </ul>
+
+    <div>
+        <input type="text" ng-model="input">
+        <button type="submit" ng-click="action.add(input)">Add</button>
+    </div>
+</div>
+
