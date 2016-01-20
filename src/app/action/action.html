@@ -3,7 +3,10 @@
 <div>
   <ul>
     <li ng-repeat="item in action.items">{{item}}
-      <button ng-click="action.remove($index)">Remove</button>
+        <select ng-options="person for person in action.assignee" ng-model="person" ng-change="action.change(person)">
+        <option value="">--please select--</option>
+        </select>
+      <button ng-click="action.remove(this)">Remove</button>
     </li>
   </ul>
     <div>
