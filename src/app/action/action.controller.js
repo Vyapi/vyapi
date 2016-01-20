@@ -26,9 +26,8 @@ export class ActionController {
 
     add()
     {
-      this.items.push({task:this.text,name:this.person,roomid:this.roomID});
+    this.items.push({task:this.text,name:this.person,roomid:this.roomID});
     //console.log(this.roomID);
-    //this.myDataRef.push(this.text+"  "+(this.person==''?'not assigned to anyone':this.person)+" "+this.roomID);
     this.myDataRef.child('action').push({task:this.text,name:this.person,roomid:this.roomID});
     //myDataRef.child("users/"+ authData.uid).set(authData);
     this.text = '';
@@ -42,9 +41,9 @@ export class ActionController {
 
     remove($index)
     {
-      console.log($index);
-      this.myDataRef.child('action/'+this.items[$index].key).remove();
-      this.items.splice($index, 1);
+    console.log($index);
+    this.myDataRef.child('action/'+this.items[$index].key).remove();
+    this.items.splice($index, 1);
     //this.myDataRef.child('action/'+$index)
     }
 
