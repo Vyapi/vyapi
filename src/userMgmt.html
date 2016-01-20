@@ -1,24 +1,16 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <style>
-      img {
-        height: 2em;
-        margin: 0.2em;
-      }
-
-      li {
-        display: inline;
-      }
-    </style>
-    <script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
-    <script>
-      var appURL = "https://incandescent-inferno-4532.firebaseio.com/";
-      var onlineUsersRef = new Firebase(appURL + "onlineUsers");
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+  <link rel="stylesheet" type="text/css" href="userMgmt.css">
+  <script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
+  <script>
+    var appURL = "https://incandescent-inferno-4532.firebaseio.com/";
+    var onlineUsersRef = new Firebase(appURL + "onlineUsers");
 
       //get uid from cookie or from wherever the authentication teams decides
       var uid = Math.floor(Math.random() * 999999999) + 1;
-      uid = "google:110298804653203543045"
+      //uid = "google:110298804653203543045"
       console.log("My uid is: " + uid);
 
       //check self connection state
@@ -76,8 +68,7 @@
   </head>
   <body>
     <div>
-      <ul id="onlineUserList">
-      </ul>
+      <ul id="onlineUserList"></ul>
     </div>
   </body>
-</html>
+  </html>
