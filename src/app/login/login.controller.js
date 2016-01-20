@@ -2,7 +2,7 @@ export class LoginController {
   constructor ($scope,$firebaseObject,$firebaseAuth) {
     'ngInject';
     this.test="Good Morning";
-    this.ref = new Firebase("https://vyapi-userauth.firebaseio.com");
+    this.ref = new Firebase("https://vyapi.firebaseio.com");
 
     this.firebaseAuthLogin = function(){
       $scope.authObj = $firebaseAuth(this.ref);
