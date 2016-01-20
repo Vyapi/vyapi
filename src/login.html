@@ -10,7 +10,7 @@
 
   <body>
     <a class="btn btn-block btn-social btn-google" onclick="login()" id="login">
-    <span class="fa fa-google"></span> Sign in with Google</a>
+      <span class="fa fa-google"></span> Sign in with Google</a>
 
     <button id="check" onclick="check()">Check Status</button>
     <button id="logout" onclick="logout()">logout</button>
@@ -18,44 +18,47 @@
     <script>
       function login()
       {
-
         var ref = new Firebase("https://vyapi-userauth.firebaseio.com/");
         var authData = ref.getAuth();
-
         if (authData) {
           console.log("Already the User " + authData.uid + " is logged in with " + authData.provider);
-        } else {
+        }
+        else {
           ref.authWithOAuthPopup("google", function(error, authData) {
             if (error) {
               console.log("Login Failed!", error);
-            } else {
+            }
+            else {
               console.log("Authenticated successfully with payload:", authData);
               var myDataRef = new Firebase('https://vyapi-userauth.firebaseio.com/');
-              myDataRef.push(authData);
+              myDataRef.child("users/"+ authData.uid).set(authData);
             }
           });
         }
-
       }
 
       function check()
       {
         var ref = new Firebase("https://vyapi-userauth.firebaseio.com/");
-
         var authData = ref.getAuth();
-
         if (authData) {
           console.log("User " + authData.uid + " is logged in with " + authData.provider);
         } else {
           console.log("User is logged out");
         }
-
       }
 
       function logout()
       {
         var ref = new Firebase("https://vyapi-userauth.firebaseio.com/");
-        ref.unauth();
+        var authData = ref.getAuth();
+        if(!authData)
+          console.log("You are already logged out !");
+        else
+        {
+          ref.unauth();
+          console.log("Successfully logged out.");
+        }
       }
     </script>
   </body>
