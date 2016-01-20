@@ -6,7 +6,7 @@
 
       <div class="chat-toolbar">
         <label for="nameInput">Username:</label>
-        <input ng-model="board.username1" type="text" placeholder="enter a username...">
+        <input ng-model="board.userNamePlus" type="text" placeholder="enter a username...">
       </div>
 
       <ul id="chat-messages" class="chat-messages">
@@ -18,7 +18,7 @@
 
 
       <form ng-submit="board.submit('plus')">
-        <input ng-model="board.userMessage1" type="text" placeholder="Type a message..."/>
+        <input ng-model="board.userMessagePlus" type="text" placeholder="Type a message..."/>
         <button id="submitplus" class="btn btn-default btn-xs" type="submit">Send</button>
       </form>
     </div>
@@ -28,7 +28,7 @@
 
       <div class="chat-toolbar">
         <label for="nameInput">Username:</label>
-        <input ng-model="board.username2" type="text" placeholder="enter a username...">
+        <input ng-model="board.userNameMinus" type="text" placeholder="enter a username...">
       </div>
 
       <ul id="chat-messages" class="chat-messages">
@@ -40,7 +40,7 @@
 
 
       <form ng-submit="board.submit('minus')">
-        <input ng-model="board.userMessage2" type="text" placeholder="Type a message..."/>
+        <input ng-model="board.userMessageMinus" type="text" placeholder="Type a message..."/>
         <button id="submitminus" class="btn btn-default btn-xs" type="submit">Send</button>
       </form>
     </div>

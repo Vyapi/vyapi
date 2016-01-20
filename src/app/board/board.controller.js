@@ -8,21 +8,19 @@ export class BoardController {
 
     this.submit = function(id) {
 
-      var username = (id=='plus') ? this.username1 : this.username2;
-      console.log(username);
-      var userMessage = (id=='plus') ? this.userMessage1 : this.userMessage2;
-      console.log(userMessage);
+      var userName = (id=='plus') ? this.userNamePlus : this.userNameMinus;
+      var userMessage = (id=='plus') ? this.userMessagePlus : this.userMessageMinus;
 
       if (userMessage) {
-        if(!username) username = "anonymous";
+        if(!userName) userName = "anonymous";
         this.messages.$add({
-          from: username,
+          from: userName,
           body: userMessage,
           id: id
         });
 
-        this.userMessage1 = '';
-        this.userMessage2 = '';
+        this.userMessagePlus = '';
+        this.userMessageMinus = '';
       }
     };
   }
