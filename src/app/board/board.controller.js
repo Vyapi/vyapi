@@ -4,19 +4,25 @@ export class BoardController {
 
     var ref = new Firebase("flickering-fire-3902.firebaseIO.com");
 
-    this.usertext = '';
     this.messages = $firebaseArray(ref);
 
-    this.submit = function() {
+    this.submit = function(id) {
 
-      if (this.usertext) {
-        var username = this.username || "anonymous";
+      var username = (id=='plus') ? this.username1 : this.username2;
+      console.log(username);
+      var userMessage = (id=='plus') ? this.userMessage1 : this.userMessage2;
+      console.log(userMessage);
+
+      if (userMessage) {
+        if(!username) username = "anonymous";
         this.messages.$add({
           from: username,
-          body: this.usertext
+          body: userMessage,
+          id: id
         });
 
-        this.usertext = '';
+        this.userMessage1 = '';
+        this.userMessage2 = '';
       }
     };
   }

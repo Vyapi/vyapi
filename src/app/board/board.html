@@ -1,30 +1,49 @@
 <div class="container">
 
-  <header>Firebase Chat Demo</header>
+  <div class="row">
+    <div class="col-md-6">
+      <header>Firebase Chat Demo</header>
 
-  <div class="chat-toolbar">
-    <label for="nameInput">Username:</label>
-    <input ng-model="board.username" type="text" placeholder="enter a username...">
+      <div class="chat-toolbar">
+        <label for="nameInput">Username:</label>
+        <input ng-model="board.username1" type="text" placeholder="enter a username...">
+      </div>
+
+      <ul id="chat-messages" class="chat-messages">
+        <li ng-repeat="msg in board.messages | filter:{id:'plus'}">
+          <strong class="chat-username">{{ msg.from }}</strong>
+          {{ msg.body }}
+        </li>
+      </ul>
+
+
+      <form ng-submit="board.submit('plus')">
+        <input ng-model="board.userMessage1" type="text" placeholder="Type a message..."/>
+        <button id="submitplus" class="btn btn-default btn-xs" type="submit">Send</button>
+      </form>
+    </div>
+
+    <div class="col-md-6">
+      <header>Firebase Chat Demo</header>
+
+      <div class="chat-toolbar">
+        <label for="nameInput">Username:</label>
+        <input ng-model="board.username2" type="text" placeholder="enter a username...">
+      </div>
+
+      <ul id="chat-messages" class="chat-messages">
+        <li ng-repeat="msg in board.messages | filter:{id:'minus'}">
+          <strong class="chat-username">{{ msg.from }}</strong>
+          {{ msg.body }}
+        </li>
+      </ul>
+
+
+      <form ng-submit="board.submit('minus')">
+        <input ng-model="board.userMessage2" type="text" placeholder="Type a message..."/>
+        <button id="submitminus" class="btn btn-default btn-xs" type="submit">Send</button>
+      </form>
+    </div>
   </div>
 
-  <ul id="chat-messages" class="chat-messages">
-    <li ng-repeat="msg in board.messages">
-      <strong class="chat-username">{{ msg.from }}</strong>
-      {{ msg.body }}
-    </li>
-  </ul>
-
-  <footer>
-
-  </footer>
-
-  <form ng-submit="board.submit()">
-    <input ng-model="board.usertext" type="text" placeholder="Type a message..."/>
-    <button class="btn btn-default btn-xs" type="submit">Send</button>
-  </form>
-
-  <!-- <div id='messagesDiv'></div>
-  <input type='text' id='nameInput' placeholder='Name'>
-  <input type='text' id='messageInput' placeholder='Message'>
--->
 </div>
