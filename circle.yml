@@ -7,7 +7,7 @@ dependencies:
 test:
   post:
     override:
-     - node canary.js
+      - node canary.js
     
 deployment:
   production:
