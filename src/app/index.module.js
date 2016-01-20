@@ -4,6 +4,7 @@ import { config } from './index.config';
 import { routerConfig } from './index.route';
 import { runBlock } from './index.run';
 import { MainController } from './main/main.controller';
+import { DashboardController } from './dashboard/dashboard.controller.js';
 import { BoardController } from './board/board.controller';
 import { LoginController } from './login/login.controller';
 import { GithubContributorService } from '../app/components/githubContributor/githubContributor.service';
@@ -21,6 +22,7 @@ angular.module('vyapi', ['ui.router', 'toastr','firebase'])
   .service('githubContributor', GithubContributorService)
   .service('webDevTec', WebDevTecService)
   .controller('MainController', MainController)
+  .controller('DashboardController', DashboardController)
   .controller('BoardController', BoardController)
   .controller('LoginController', LoginController)
   .directive('acmeNavbar', NavbarDirective)
