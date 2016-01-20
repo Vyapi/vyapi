@@ -28,11 +28,6 @@ export class ActionController {
       //this.myDataRef.push(this.items);
     }
 
-    change($person){
-
-      console.log($person);
-    }
-
     change($person)
     {
       console.log($person);
