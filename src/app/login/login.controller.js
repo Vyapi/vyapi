@@ -7,12 +7,12 @@ export class LoginController {
     this.firebaseAuthLogin = function(){
       $scope.authObj = $firebaseAuth(this.ref);
       $scope.authObj.$authWithOAuthPopup("google").then(function(authData) {
-      console.log("Logged in as:", authData.uid);
+        console.log("Logged in as:", authData.uid);
       }).catch(function(error) {
         console.error("Authentication failed:", error);
       });
-      }
-
+    }
+    
     this.firebaseAuthStatus = function(){
       $scope.authObj = $firebaseAuth(this.ref);
       var authData = $scope.authObj.$getAuth();
