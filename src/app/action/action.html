@@ -2,18 +2,20 @@
 <p> Add Items here</p>
 <div>
   <ul>
-    <li ng-repeat="item in action.items"> {{item.task}} {{item.name}}
+  <li ng-repeat="item in action.items"> {{item.task}}
+      <select ng-options="a for a in action.assignee" ng-model="item.name" ng-change="action.modify(item)">
+      </select>
       <button ng-click="action.remove($index)">Remove</button>
     </li>
   </ul>
-    <div>
-        <form ng-submit="action.add()">
-        <input type="text" ng-model="action.text" >
-        <select ng-options="person for person in action.assignee" ng-model="person" ng-change="action.change(person)">
+  <div>
+    <form ng-submit="action.add()">
+      <input type="text" ng-model="action.text" >
+      <select ng-options="person for person in action.assignee" ng-model="person" ng-change="action.change(person)">
         <option value="">--please select--</option>
-        </select>
-        <button type="submit">Add</button>
-        </form>
-    </div>
+      </select>
+      <button type="submit">Add</button>
+    </form>
+  </div>
 </div>
 
