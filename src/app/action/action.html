@@ -6,25 +6,14 @@
       <button ng-click="action.remove($index)">Remove</button>
     </li>
   </ul>
-
-<<<<<<< 1293fd472074baf28de180aa4c1156496d77eca1
     <div>
         <form ng-submit="action.add()">
         <input type="text" ng-model="action.input" >
-        <select ng-options="person for person in action.assignee" ng-model="person"></select>
+        <select ng-model= "person" ng-options="person for person in action.assignee" ng-change='change(person)'>
+        <option value=" ">--select option--</option>
+        </select>
         <button type="submit" >Add</button>
         </form>
     </div>
-=======
-  <div>
-  <form ng-submit="action.add()">
-    <input type="text" ng-model="input">
-    <select ng-options="assignee.name for name in Assignee">
-      <options value="">-- choose assignee --</option>
-    </select>
-    <button type="submit" ng-click="action.add(input)">Add</button>
-    </form>
-  </div>
->>>>>>> changes to include action assignee
 </div>
 

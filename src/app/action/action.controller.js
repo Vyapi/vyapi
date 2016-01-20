@@ -3,8 +3,9 @@ export class ActionController {
         'ngInject';
 
       this.items = [ ];
+      this.person='undefined';
       this.input='';
-      this.assignee=['mayurehs','abhi','aish'];
+      this.assignee=['mayuresh','abhi','aish'];
       this.myDataRef = new Firebase('https://torrid-fire-8763.firebaseio.com/');
        /* myDataRef.set('');
         myDataRef.push("himanshu");
@@ -21,10 +22,15 @@ export class ActionController {
     add()
     {
       this.items.push(this.input);
+      //this.items.push($person)
       this.input = '';
-      //console.log(this.input);
+      //console.log(person);
       //this.myDataRef.push(this.items);
+    }
 
+    change($person){
+
+      console.log($person);
     }
 
     remove($input)
