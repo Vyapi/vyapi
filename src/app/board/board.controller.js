@@ -4,22 +4,21 @@ export class BoardController {
 
     var ref = new Firebase("flickering-fire-3902.firebaseIO.com");
 
+    this.usertext = '';
     this.messages = $firebaseArray(ref);
 
-    this.addMessage = function(e) {
+    this.submit = function() {
 
-      if (e.keyCode === 13 && this.msg) {
-
-        var name = this.name || "anonymous";
-
+      if (this.usertext) {
+        var username = this.username || "anonymous";
         this.messages.$add({
-          from: name,
-          body: this.msg
+          from: username,
+          body: this.usertext
         });
 
-        this.msg = "";
+        this.usertext = '';
       }
-    }
+    };
   }
 
 }

@@ -4,19 +4,24 @@
 
   <div class="chat-toolbar">
     <label for="nameInput">Username:</label>
-    <input ng-model="name" type="text" id="nameInput" placeholder="enter a username...">
+    <input ng-model="board.username" type="text" placeholder="enter a username...">
   </div>
 
   <ul id="chat-messages" class="chat-messages">
-    <li ng-repeat="msg in messages">
+    <li ng-repeat="msg in board.messages">
       <strong class="chat-username">{{ msg.from }}</strong>
       {{ msg.body }}
     </li>
   </ul>
 
   <footer>
-    <input ng-model="msg" ng-keydown="addMessage($event)" type="text" id="messageInput"  placeholder="Type a message...">
+
   </footer>
+
+  <form ng-submit="board.submit()">
+    <input ng-model="board.usertext" type="text" placeholder="Type a message..."/>
+    <button class="btn btn-default btn-xs" type="submit">Send</button>
+  </form>
 
   <!-- <div id='messagesDiv'></div>
   <input type='text' id='nameInput' placeholder='Name'>
