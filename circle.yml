@@ -4,6 +4,9 @@ dependencies:
     - npm install -g firebase-tools
     - bower install
 
+test:
+  override:
+    
 deployment:
   production:
     branch: develop
