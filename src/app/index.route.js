@@ -6,7 +6,8 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
     templateUrl: 'app/login/login.html',
     controller: 'LoginController',
     controllerAs: 'login'
-    }).state('dashboard', {
+    })
+  .state('dashboard', {
     url: '/dashboard',
     templateUrl: 'app/dashboard/dashboard.html',
     controller:'DashboardController',
