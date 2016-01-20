@@ -1,5 +1,5 @@
 {
-  "firebase": "dazzling-inferno-9828",
+  "firebase": "vyapi",
   "public": "dist",
   "ignore": [
     "firebase.json",

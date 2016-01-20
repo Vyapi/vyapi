@@ -1,0 +1,49 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-6">
+      <header>Firebase Chat Demo</header>
+
+      <div class="chat-toolbar">
+        <label for="nameInput">Username:</label>
+        <input ng-model="board.userNamePlus" type="text" placeholder="enter a username...">
+      </div>
+
+      <ul id="chat-messages" class="chat-messages">
+        <li ng-repeat="msg in board.messages | filter:{id:'plus'}">
+          <strong class="chat-username">{{ msg.from }}</strong>
+          {{ msg.body }}
+        </li>
+      </ul>
+
+
+      <form ng-submit="board.submit('plus')">
+        <input ng-model="board.userMessagePlus" type="text" placeholder="Type a message..."/>
+        <button id="submitplus" class="btn btn-default btn-xs" type="submit">Send</button>
+      </form>
+    </div>
+
+    <div class="col-md-6">
+      <header>Firebase Chat Demo</header>
+
+      <div class="chat-toolbar">
+        <label for="nameInput">Username:</label>
+        <input ng-model="board.userNameMinus" type="text" placeholder="enter a username...">
+      </div>
+
+      <ul id="chat-messages" class="chat-messages">
+        <li ng-repeat="msg in board.messages | filter:{id:'minus'}">
+          <strong class="chat-username">{{ msg.from }}</strong>
+          {{ msg.body }}
+        </li>
+      </ul>
+
+
+      <form ng-submit="board.submit('minus')">
+        <input ng-model="board.userMessageMinus" type="text" placeholder="Type a message..."/>
+        <button id="submitminus" class="btn btn-default btn-xs" type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+
+</div>
