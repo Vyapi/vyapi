@@ -1,0 +1,11 @@
+dependencies:
+  override:
+    - npm install
+    - npm install -g firebase-tools
+    - bower install
+
+deployment:
+  production:
+    branch: develop
+    commands:
+      - firebase deploy --token "-K8NQX-IOHSbncOIwSal|a19b96123552661ca03db64eb0ff6da0"
