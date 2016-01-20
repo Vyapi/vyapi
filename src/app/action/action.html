@@ -1,12 +1,13 @@
 <h1>Hello</h1>
 <p> Add tems here</p>
 <div>
-    <ul>
-      <li ng-repeat="item in action.items">{{item}}
+  <ul>
+    <li ng-repeat="item in action.items">{{item}}
       <button ng-click="action.remove($index)">Remove</button>
-      </li>
-    </ul>
+    </li>
+  </ul>
 
+<<<<<<< 1293fd472074baf28de180aa4c1156496d77eca1
     <div>
         <form ng-submit="action.add()">
         <input type="text" ng-model="action.input" >
@@ -14,5 +15,16 @@
         <button type="submit" >Add</button>
         </form>
     </div>
+=======
+  <div>
+  <form ng-submit="action.add()">
+    <input type="text" ng-model="input">
+    <select ng-options="assignee.name for name in Assignee">
+      <options value="">-- choose assignee --</option>
+    </select>
+    <button type="submit" ng-click="action.add(input)">Add</button>
+    </form>
+  </div>
+>>>>>>> changes to include action assignee
 </div>
 
