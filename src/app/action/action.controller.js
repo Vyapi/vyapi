@@ -32,7 +32,6 @@ export class ActionController {
     this.myDataRef.child('action').push({task:this.text,name:this.person,roomid:this.roomID});
     //myDataRef.child("users/"+ authData.uid).set(authData);
     this.text = '';
-    this.person='';
     }
 
     change($person)
