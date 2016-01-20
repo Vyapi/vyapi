@@ -7,6 +7,9 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
       //controller: 'MainController',
       controller:'DashboardController',
       controllerAs: 'dashboard'
+      templateUrl: 'app/login/login.html',
+      controller: 'LoginController',
+      controllerAs: 'login'
     });
 
   $urlRouterProvider.otherwise('/');
