@@ -1,5 +1,5 @@
 <h1>Hello</h1>
-<p> Add tems here</p>
+<p> Add Items here</p>
 <div>
     <ul>
       <li ng-repeat="item in action.items">{{item}}
@@ -11,6 +11,7 @@
         <form ng-submit="action.add()">
         <input type="text" ng-model="action.input" >
         <select ng-options="person for person in action.assignee" ng-model="person" ng-change="action.change(person)">
+        <option value="">--please select--</option>
         </select>
         <button type="submit" >Add</button>
         </form>

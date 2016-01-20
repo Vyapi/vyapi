@@ -5,6 +5,7 @@ export class ActionController {
       this.items = [ ];
       this.person='';
       this.input='';
+      this.roomID='101';
       this.assignee=['mayurehs','abhi','aish'];
       this.myDataRef = new Firebase('https://torrid-fire-8763.firebaseio.com/');
        /* myDataRef.set('');
@@ -21,22 +22,23 @@ export class ActionController {
 
     add()
     {
-      this.items.push(this.input+"  "+this.person);
+      this.items.push(this.input+"  "+(this.person==''?'not assigned to anyone':this.person));
+      //console.log(this.roomID);
+      //this.myDataRef.push(this.input+"  "+(this.person==''?'not assigned to anyone':this.person)+" "+this.roomID);
+      this.myDataRef.child('action').push({task:this.input,name:this.person,roomid:this.roomID});
       this.input = '';
-      //console.log(this.input);
-      //this.myDataRef.push(this.items);
-
+      this.person='';
     }
 
     change($person)
     {
-      console.log($person);
+      //console.log($person);
       this.person=$person;
     }
 
-    remove($input)
+    remove($index)
     {
-      this.items.splice($input, 1);
+      this.items.splice($index, 1);
     }
 
   }
