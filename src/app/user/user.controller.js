@@ -24,14 +24,14 @@ export class UserController {
               onlineUsersRef.child(uid).set({name: userName, photo : profileImageURL});
             });
           });
-          
+
           //setup offline mechanism when going offline
           onlineUsersRef.child(uid).onDisconnect().remove();
         } else {
           console.log("not connected");
         }
       });
-      
+
       //user came online
       onlineUsersRef.on('child_added', (userId) => {
         console.log("User: " + userId.key() + " came online");
