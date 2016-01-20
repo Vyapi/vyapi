@@ -3,22 +3,27 @@ export class ActionController {
         'ngInject';
 
       this.items = [ ];
-        var myDataRef = new Firebase('https://torrid-fire-8763.firebaseio.com/');
-        /*myDataRef.push("himanshu");
+      this.input='';
+      this.assignee=['mayurehs','abhi','aish'];
+      this.myDataRef = new Firebase('https://torrid-fire-8763.firebaseio.com/');
+       /* myDataRef.set('');
+        myDataRef.push("himanshu");
         myDataRef.push("mayuresh");
         myDataRef.push("abhimanyu");
         myDataRef.push("prakhar");*/
-        myDataRef.on('child_added',function(snapshot){
+        this.myDataRef.on('child_added',function(snapshot){
         //console.log('sdds');
         var message=snapshot.val();
         //console.log(message);
       });
 }
 
-    add($input)
+    add()
     {
-      this.items.push($input);
-      $input='';//not happenning.
+      this.items.push(this.input);
+      this.input = '';
+      //console.log(this.input);
+      //this.myDataRef.push(this.items);
 
     }
 
