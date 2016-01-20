@@ -3,6 +3,7 @@ export class ActionController {
         'ngInject';
 
       this.items = [ ];
+      this.person='';
       this.input='';
       this.assignee=['mayurehs','abhi','aish'];
       this.myDataRef = new Firebase('https://torrid-fire-8763.firebaseio.com/');
@@ -16,15 +17,21 @@ export class ActionController {
         var message=snapshot.val();
         //console.log(message);
       });
-}
+  }
 
     add()
     {
-      this.items.push(this.input);
+      this.items.push(this.input+"  "+this.person);
       this.input = '';
       //console.log(this.input);
       //this.myDataRef.push(this.items);
 
+    }
+
+    change($person)
+    {
+      console.log($person);
+      this.person=$person;
     }
 
     remove($input)
