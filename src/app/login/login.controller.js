@@ -1,9 +1,33 @@
-var ref = new Firebase("https://vyapi-userauth.firebaseio.com/");
-var authData = ref.getAuth();
-if (authData) {
-  console.log("User " + authData.uid + " is logged in with " + authData.provider);
-}
-else {
-  window.location="https://vyapi.firebaseapp.com";
-}
+export class LoginController {
+  constructor ($scope,$firebaseObject,$firebaseAuth) {
+    'ngInject';
+    this.test="Good Morning";
+    this.ref = new Firebase("https://vyapi-userauth.firebaseio.com");
 
+    this.firebaseAuthLogin = function(){
+      $scope.authObj = $firebaseAuth(this.ref);
+      $scope.authObj.$authWithOAuthPopup("google").then(function(authData) {
+      console.log("Logged in as:", authData.uid);
+      }).catch(function(error) {
+        console.error("Authentication failed:", error);
+      });
+      }
+
+    this.firebaseAuthStatus = function(){
+      $scope.authObj = $firebaseAuth(this.ref);
+      var authData = $scope.authObj.$getAuth();
+      console.log("this works");
+      if (authData) {
+        console.log("Logged in as:", authData.uid);
+      } else {
+        console.log("Logged out");
+      }
+    }
+
+    this.firebaseAuthlogout = function(){
+      $scope.authObj = $firebaseAuth(this.ref);
+      $scope.authObj.$unauth()
+    }
+  }
+
+}

@@ -1,0 +1,9 @@
+<div ng-controller="LoginController as login" class="container">
+  <h1> Vyapi </h1>
+  <a class="btn btn-block btn-social btn-google" ng-click="login.firebaseAuthLogin()" id="login">
+  <span class="fa fa-google"></span> Sign in with Google</a>
+
+  <button id="check" ng-click="login.firebaseAuthStatus()">Check Status</button>
+  <button id="logout" ng-click="login.firebaseAuthlogout()">logout</button>
+
+</div>
