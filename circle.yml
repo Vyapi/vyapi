@@ -5,8 +5,7 @@ dependencies:
     - bower install
 
 test:
-  post:
-    override:
+  override:
     
 deployment:
   production:
