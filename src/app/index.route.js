@@ -7,11 +7,11 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
       controller: 'MainController',
       controllerAs: 'main'
     })*/
-    .state('home', {
-      url: '/',
+    .state('user', {
+      url: '/user',
       templateUrl: 'app/user/user.html',
       controller: 'UserController',
-      controllerAs: 'user'
+      controllerAs: 'users'
     });
 
   $urlRouterProvider.otherwise('/');
