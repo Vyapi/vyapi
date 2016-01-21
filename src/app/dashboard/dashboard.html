@@ -1,5 +1,5 @@
 <div class="container"> 
-	<button ng-click="dashboard.createRoom('monica')">Join</button>
+	<button ng-click="dashboard.createRoom()" class="btn btn-default">Create Room</button>
 	<ul ng-repeat="room in dashboard.rooms">
 		<li><a href="{{room.url}}">{{room.roomName}}</a></li>
 	</ul>

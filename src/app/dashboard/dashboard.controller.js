@@ -1,16 +1,19 @@
 export class DashboardController {
 	constructor ($firebaseArray){
 		'ngInject';
-		let userID = "monica";
-		let roomsURL = 'https://mock-vyapi.firebaseio.com/rooms';
+		let rootURL = 'https://vyapi.firebaseio.com/';
+		let roomsURL = rootURL + 'rooms';
+		let rootRef = new Firebase(rootURL);
 		let roomsRef = new Firebase(roomsURL);
+		let data = $firebaseArray(roomsRef);
+		let authData = rootRef.getAuth();
+		let userID = authData.uid;
 		this.rooms = [];
-		this.createRoom = function(userID){
+		this.createRoom = function(){
 			let roomName=prompt('Room Name','Default');
 			//console.log(userID,roomName);
-			roomsRef.push({roomName : roomName, ownedBy : userID});
+			roomsRef.push({roomName : roomName, ownedBy : userID, members:[userID]});
 		};
-		let data = $firebaseArray(roomsRef);
 		roomsRef.orderByChild("ownedBy").equalTo(userID).on("value",(snapshot)=>{
 			let rooms = snapshot.val();
 			rooms = _.map(rooms,(room,key,url)=>{
@@ -19,7 +22,6 @@ export class DashboardController {
 				return room;
 			});
 			this.rooms = rooms;
-			//console.table(this.rooms);
 		});
 	}
 }
