@@ -3,6 +3,8 @@
 import { config } from './index.config';
 import { routerConfig } from './index.route';
 import { runBlock } from './index.run';
+import { MainController } from './main/main.controller';
+import { UserController } from './user/user.controller';
 import { ActionController } from './action/action.controller';
 import { DashboardController } from './dashboard/dashboard.controller.js';
 import { BoardController } from './board/board.controller';
@@ -13,6 +15,7 @@ import { NavbarDirective } from '../app/components/navbar/navbar.directive';
 import { MalarkeyDirective } from '../app/components/malarkey/malarkey.directive';
 
 angular.module('vyapi', ['ui.router', 'toastr', 'firebase'])
+
   .constant('malarkey', malarkey)
   .constant('moment', moment)
   .config(config)
@@ -20,6 +23,8 @@ angular.module('vyapi', ['ui.router', 'toastr', 'firebase'])
   .run(runBlock)
   .service('githubContributor', GithubContributorService)
   .service('webDevTec', WebDevTecService)
+  .controller('MainController', MainController)
+  .controller('UserController', UserController)
   .controller('ActionController', ActionController)
   .controller('DashboardController', DashboardController)
   .controller('BoardController', BoardController)
