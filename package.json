@@ -1,7 +1,9 @@
 {
   "name": "vyapi",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "bootstrap": "3.3.6"
+  },
   "scripts": {
     "preinstall":"bower install",
     "postinstall": "gulp build && npm cache clear && npm cache ls"
