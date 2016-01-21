@@ -16,14 +16,7 @@ export class DashboardController {
 		this.createRoom=function(){
 			this.create(dashboardService);
 		}
-        //this.createRoom(dashboardService);
-
-		//this.createRoom = function(){
-		//	let roomName=prompt('Room Name','Default');
-			//this.answer = DashboardService.cac();
-			//console.log(userID,roomName);
-		//	roomsRef.push({roomName : roomName, ownedBy : userID, members:[userID]});
-		//};
+       
 		roomsRef.orderByChild("ownedBy").equalTo(userID).on("value",(snapshot)=>{
 			let rooms = snapshot.val();
 			rooms = _.map(rooms,(room,key,url)=>{
@@ -37,8 +30,9 @@ export class DashboardController {
 
 	create(dashboardService)
 	{
+		
 		var k=dashboardService.createRoom();
-		console.log("room created");
+		
 	}
 
 	abc(dashboardService)
