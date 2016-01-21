@@ -48,35 +48,35 @@ export function routerConfig ($stateProvider, $urlRouterProvider,$locationProvid
   })
   .state('room', {
     url: '/room',
-   // templateUrl: 'app/room/room.html',
+    // templateUrl: 'app/room/room.html',
     //controller:'RoomController',
     //controllerAs: 'room',
     views: {
 
-        // the main template will be placed here (relatively named)
-        '': { templateUrl: 'app/room/room.html' },
-        // the child views will be defined here (absolutely named)
-        'board@room': { templateUrl: 'app/board/board.html',
-        controller: 'BoardController',
-        controllerAs: 'board'
-        },
+      // the main template will be placed here (relatively named)
+      '': { templateUrl: 'app/room/room.html' },
+      // the child views will be defined here (absolutely named)
+      'board@room': { templateUrl: 'app/board/board.html',
+      controller: 'BoardController',
+      controllerAs: 'board'
+    },
 
-        //user room view
-        'user@room': {
-          templateUrl: 'app/user/user.html',
-          controller: 'UserController',
-          controllerAs: 'users'
+    //user room view
+    'user@room': {
+      templateUrl: 'app/user/user.html',
+      controller: 'UserController',
+      controllerAs: 'users'
 
-        },
+    },
 
-        //action room view
-        'action@room':{
-          templateUrl: 'app/action/action.html',
-          controller: 'ActionController',
-          controllerAs: 'action'
-        }
-      }
-    });
-  $locationProvider.html5Mode(true);
-  $urlRouterProvider.otherwise('/');
+    //action room view
+    'action@room':{
+      templateUrl: 'app/action/action.html',
+      controller: 'ActionController',
+      controllerAs: 'action'
+    }
+  }
+});
+$locationProvider.html5Mode(true);
+$urlRouterProvider.otherwise('/');
 }
