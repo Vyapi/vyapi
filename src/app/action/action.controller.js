@@ -38,26 +38,26 @@ export class ActionController {
     this.text = '';
   }
 
-  change($person)
+  change(person)
   {
     //console.log($person);
-    this.person=$person;
+    this.person=person;
   }
 
-  modify($person)
+  modify(person)
   {
-    console.log('modify'+$person.name);
+    console.log('modify'+person.name);
     /*this.myDataRef.child('action/'+$person.key).remove();
     this.myDataRef.child('action').push({task:$person.task,name:$person.name,roomid:this.roomID});*/
-    this.myDataRef.child($person.key).set({task:$person.task,name:$person.name,roomid:this.roomID});
-    this.person=$person;
+    this.myDataRef.child(person.key).set({task:person.task,name:person.name,roomid:this.roomID});
+    this.person=person;
   }
 
-  remove($index)
+  remove(index)
   {
-    console.log($index);
-    this.myDataRef.child(this.items[$index].key).remove();
-    this.items.splice($index, 1);
+    console.log(index);
+    this.myDataRef.child(this.items[index].key).remove();
+    this.items.splice(index, 1);
     //this.myDataRef.child('action/'+$index)
   }
 
