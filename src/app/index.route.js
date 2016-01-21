@@ -54,7 +54,9 @@ export function routerConfig ($stateProvider, $urlRouterProvider,$locationProvid
     views: {
 
         // the main template will be placed here (relatively named)
-        '': { templateUrl: 'app/room/room.html' },
+        '': { templateUrl: 'app/room/room.html',
+          controller:'RoomController',
+          controllerAs: 'room'},
         // the child views will be defined here (absolutely named)
         'board@room': { templateUrl: 'app/board/board.html',
         controller: 'BoardController',
