@@ -47,7 +47,7 @@ export function routerConfig ($stateProvider, $urlRouterProvider,$locationProvid
     controllerAs: 'board'
   })
   .state('room', {
-    url: '/room',
+    url: '/room/:roomKey',
    // templateUrl: 'app/room/room.html',
     //controller:'RoomController',
     //controllerAs: 'room',
