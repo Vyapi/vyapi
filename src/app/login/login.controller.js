@@ -4,6 +4,11 @@ export class LoginController {
     this.ref = new Firebase("https://vyapi.firebaseio.com");
     this.fa = $firebaseAuth;
     this.clog = $log;
+        this.authObj = this.fa(this.ref);
+    var authData = this.authObj.$getAuth();
+    if (authData) {
+        window.location.href = 'app/dashboard/dashboard.html';
+    }
   }
   firebaseAuthLogin() {
     this.authObj = this.fa(this.ref);
@@ -15,6 +20,7 @@ export class LoginController {
         var ref = new Firebase("https://vyapi.firebaseio.com");
         ref.child("users/"+ authData.uid).set(authData);
         console.log("Logged in as:", authData.uid);
+        window.location.href = 'app/dashboard/dashboard.html';
       }).catch(function(error) {
         this.clog.error("Authentication failed:", error);
       });
