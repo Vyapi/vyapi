@@ -1,4 +1,4 @@
-export function routerConfig ($stateProvider, $urlRouterProvider) {
+export function routerConfig ($stateProvider, $urlRouterProvider,$locationProvider) {
   'ngInject';
   $stateProvider
   .state('home',{
@@ -11,13 +11,13 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
     url: '/dashboard',
     templateUrl: 'app/dashboard/dashboard.html',
     controller:'DashboardController',
-    controllerAs: 'dashboard'
+    controllerAs: 'dashboard',
   }).state('board', {
     url: '/board',
     templateUrl: 'app/board/board.html',
     controller: 'BoardController',
     controllerAs: 'board'
   });
-
+  $locationProvider.html5Mode(true);
   $urlRouterProvider.otherwise('/');
 }
