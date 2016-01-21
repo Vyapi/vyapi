@@ -22,9 +22,7 @@ export class ActionController {
     //this.myDataRef = new Firebase('https://vyapi.firebaseio.com');
     //console.log(this.items[0].key);
   });
-​
   }
-​
   add()
   {
     this.items.push({task:this.text,name:this.person,roomid:this.roomID});
@@ -33,13 +31,11 @@ export class ActionController {
     //myDataRef.child("users/"+ authData.uid).set(authData);
     this.text = '';
   }
-​
   change($person)
   {
     //console.log($person);
     this.person=$person;
   }
-​
   modify($person)
   {
     console.log('modify'+$person.name);
@@ -48,7 +44,6 @@ export class ActionController {
     this.myDataRef.child($person.key).set({task:$person.task,name:$person.name,roomid:this.roomID});
     this.person=$person;
   }
-​
   remove($index)
   {
     console.log($index);
@@ -56,5 +51,4 @@ export class ActionController {
     this.items.splice($index, 1);
     //this.myDataRef.child('action/'+$index)
   }
-​
 }
