@@ -12,7 +12,6 @@ export class LoginController {
       this.clog.log("Already Logged in as:", authData.uid);
     } else {
       this.authObj.$authWithOAuthPopup("google").then(function(authData) {
-        console.log("111Logged in as:", authData.uid);
         var ref = new Firebase("https://vyapi.firebaseio.com");
         ref.child("users/"+ authData.uid).set(authData);
         console.log("Logged in as:", authData.uid);
