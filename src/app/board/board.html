@@ -2,12 +2,7 @@
 
   <div class="row">
     <div class="col-md-4">
-      <header>Firebase Chat Demo</header>
-
-      <div class="chat-toolbar">
-        <label for="nameInput">Username:</label>
-        <input ng-model="board.userNamePlus" type="text" placeholder="enter a username...">
-      </div>
+      <header>PLUS Reviews</header>
 
       <ul id="chat-messages" class="chat-messages">
         <li ng-repeat="msg in board.messages | filter:{id:'plus'}">
@@ -24,12 +19,7 @@
     </div>
 
     <div class="col-md-4">
-      <header>Firebase Chat Demo</header>
-
-      <div class="chat-toolbar">
-        <label for="nameInput">Username:</label>
-        <input ng-model="board.userNameMinus" type="text" placeholder="enter a username...">
-      </div>
+      <header>MINUS Reviews</header>
 
       <ul id="chat-messages" class="chat-messages">
         <li ng-repeat="msg in board.messages | filter:{id:'minus'}">

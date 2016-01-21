@@ -1,8 +1,19 @@
 export class RoomController {
-  constructor ($firebaseArray) {
+  constructor ($firebaseAuth) {
     'ngInject';
+      console.log("outside room file");
 
-    var ref = new Firebase("flickering-fire-3902.firebaseIO.com");
+    var ref = new Firebase("https://vyapi-userauth.firebaseio.com/");
+    var authData = ref.getAuth();
+    if (authData) {
+      console.log("User " + authData.uid + " is logged in with " + authData.provider);
+      console.log(authData);
+      }
+      else {
+      console.log("User is logged out");
+    }
+
+    /*var ref = new Firebase("flickering-fire-3902.firebaseIO.com");
 
     this.messages = $firebaseArray(ref);
 
@@ -22,7 +33,7 @@ export class RoomController {
         this.userMessagePlus = '';
         this.userMessageMinus = '';
       }
-    };
+    };*/
   }
 
 }
