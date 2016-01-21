@@ -7,28 +7,22 @@ export class ActionController {
     this.roomID='101'; //temporary
     this.assignee=['mayuresh','abhimanyu','aishwarya'];
     this.myDataRef = new Firebase('https://vyapi.firebaseio.com/action');
-
     this.items=$firebaseArray(this.myDataRef);
     this.myDataRef.on('value',(snapshot)=>{
     //console.log('sdds');
     let actions=snapshot.val();
     //console.log(actions.key);
-
     this.items = _.map(actions,(action,key)=>{
       action.key=key;
       //console.log("key "+action.key)
       //console.table(action);
       return action;
     });
-
-
     console.table(this.items);
     //this.myDataRef = new Firebase('https://vyapi.firebaseio.com');
     //console.log(this.items[0].key);
   });
-
   }
-
   add()
   {
     this.items.push({task:this.text,name:this.person,roomid:this.roomID});
@@ -53,12 +47,11 @@ export class ActionController {
     this.person=person;
   }
 
-  remove(index)
+  remove($index)
   {
     console.log(index);
     this.myDataRef.child(this.items[index].key).remove();
     this.items.splice(index, 1);
     //this.myDataRef.child('action/'+$index)
   }
-
 }
