@@ -16,9 +16,9 @@ export class DashboardController {
 		};
 		roomsRef.orderByChild("ownedBy").equalTo(userID).on("value",(snapshot)=>{
 			let rooms = snapshot.val();
-			rooms = _.map(rooms,(room,key,url)=>{
+			rooms = _.map(rooms,(room,key)=>{
 				room.key = key;
-				room.url = roomsRef + '/' + key;
+				room.url = `/room/${key}`;
 				return room;
 			});
 			this.rooms = rooms;
