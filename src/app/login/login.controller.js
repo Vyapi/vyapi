@@ -1,5 +1,5 @@
 export class LoginController {
-  constructor ($firebaseObject,$firebaseAuth) {
+  constructor ($firebaseObject,$firebaseAuth,$log) {
     'ngInject';
     this.ref = new Firebase("https://vyapi.firebaseio.com");
 
@@ -7,14 +7,14 @@ export class LoginController {
       this.authObj = $firebaseAuth(this.ref);
       var authData = this.authObj.$getAuth();
       if (authData) {
-        console.log("Already Logged in as:", authData.uid);
+        $log.log("Already Logged in as:", authData.uid);
       } else {
         this.authObj.$authWithOAuthPopup("google").then(function(authData) {
-          console.log("111Logged in as:", authData.uid);
+          $log.log("111Logged in as:", authData.uid);
           var ref = new Firebase("https://vyapi.firebaseio.com");
-          ref.child("users/"+ authData.uid).set(authData);          console.log("Logged in as:", authData.uid);
+          ref.child("users/"+ authData.uid).set(authData);          $log.log("Logged in as:", authData.uid);
         }).catch(function(error) {
-          console.error("Authentication failed:", error);
+          $log.error("Authentication failed:", error);
         });
       }
     }
@@ -23,9 +23,9 @@ export class LoginController {
       this.authObj = $firebaseAuth(this.ref);
       var authData = this.authObj.$getAuth();
       if (authData) {
-        console.log("Logged in as:", authData.uid);
+        $log.log("Logged in as:", authData.uid);
       } else {
-        console.log("Logged out");
+        $log.log("Logged out");
       }
     }
 
@@ -34,9 +34,9 @@ export class LoginController {
       var authData = this.authObj.$getAuth();
       if (authData) {
         this.authObj.$unauth();
-        console.log("Successfully Logged out");
+        $log.log("Successfully Logged out");
       } else {
-        console.log("Already Logged out");
+        $log.log("Already Logged out");
       }
     }
   }
