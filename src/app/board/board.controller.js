@@ -3,9 +3,9 @@ export class BoardController {
     'ngInject';
 
 
-    var reff = new Firebase("https://vyapi.firebaseio.com/");
+    var userRef = new Firebase("https://vyapi.firebaseio.com/");
     // console.log("outside file");
-    var authData = reff.getAuth();
+    var authData = userRef.getAuth();
 
 
 

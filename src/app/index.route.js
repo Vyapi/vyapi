@@ -1,4 +1,4 @@
-export function routerConfig ($stateProvider, $urlRouterProvider) {
+export function routerConfig ($stateProvider, $urlRouterProvider,$locationProvider) {
   'ngInject';
   $stateProvider
   .state('user', {
@@ -23,7 +23,22 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
     url: '/dashboard',
     templateUrl: 'app/dashboard/dashboard.html',
     controller:'DashboardController',
-    controllerAs: 'dashboard'
+    controllerAs: 'dashboard',
+    resolve: {
+      auth: function($q,$firebaseAuth,$window){
+        var deferred = $q.defer();
+        var ref = new Firebase("https://vyapi.firebaseio.com");
+        var authObj = $firebaseAuth(ref);
+        var authData = authObj.$getAuth();
+        if (authData) {
+          deferred.resolve();
+        } else {
+          $window.location.href='/'
+          deferred.reject('You are not allowed on this page');
+        }
+        return deferred.promise;
+      }
+    }
   })
   .state('board', {
     url: '/board',
@@ -61,14 +76,7 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
           controllerAs: 'action'
         }
       }
-
-    })
-/*.state('room.board', {
-    url: '/board',
-    templateUrl: 'app/board/board.html',
-    controller: 'BoardController',
-    controllerAs: 'board'
-  })*/
-;
-$urlRouterProvider.otherwise('/');
+    });
+  $locationProvider.html5Mode(true);
+  $urlRouterProvider.otherwise('/');
 }
