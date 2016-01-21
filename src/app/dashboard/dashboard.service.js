@@ -26,4 +26,10 @@ export class DashboardService {
 	  });
 	  return this.rooms;
   }
+  createRoom(){
+	let userID="ayushi";
+	let roomName=prompt('Room Name','Default');
+	roomsRef.push({roomName : roomName, ownedBy : userID, members:[userID]});
+	return this.test;
+  }
 }

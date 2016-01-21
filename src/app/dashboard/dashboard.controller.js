@@ -20,5 +20,33 @@ export class DashboardController {
 		this.rooms = dashboardService.getRooms();
 		console.table(this.rooms);
 		console.log(this.userID);
+		this.createRoom=function(){
+			this.create(dashboardService);
+		}
+       
+		roomsRef.orderByChild("ownedBy").equalTo(userID).on("value",(snapshot)=>{
+			let rooms = snapshot.val();
+			rooms = _.map(rooms,(room,key,url)=>{
+				room.key = key;
+				room.url = roomsRef + '/' + key;
+				return room;
+			});
+			this.rooms = rooms;
+		});
 	}
+
+	create(dashboardService)
+	{
+		
+		var k=dashboardService.createRoom();
+		
+	}
+
+	abc(dashboardService)
+	
+		{
+			var t=dashboardService.getsrc();
+			console.log(t);
+		}
+	
 }
