@@ -1,10 +1,10 @@
 export class UserController {
-  constructor($firebaseArray, $firebaseAuth, $log) {
+  constructor($firebaseArray, $firebaseAuth, $log, $location) {
     'ngInject';
     var appURL = "https://vyapi.firebaseio.com/";
     var onlineUsersRef = new Firebase(appURL + "onlineUsers/");
     this.onlineUsers = {};
-    var t = $firebaseArray(onlineUsersRef); //no idea what this line does, but removing this criples whole application
+    var t = $firebaseArray(onlineUsersRef); //no idea what this line does, but removing this cripples whole application
     this.goOnline = function() {
       
       var uid;
@@ -20,6 +20,12 @@ export class UserController {
         return;
       }
       
+      //get roomId from URL eg: http://localhost:3000/room/1235467745678
+      var roomId = $location.path().split("/")[2];
+      //hard coding right now
+      roomId = "-K8Xw1wPvy3FwXathm7o";
+      $log.log("You opened room: " + roomId);
+      
       //check self connection state
       var connectedRef = new Firebase(appURL + ".info/connected");
       connectedRef.on("value", (snap) => {
@@ -30,24 +36,27 @@ export class UserController {
             var userName = value.val();
             (new Firebase(encodeURI(appURL + "users/" + uid + "/google/profileImageURL/"))).once("value", (value) => {
               var profileImageURL = value.val();
-              onlineUsersRef.child(uid).set({name: userName, photo : profileImageURL});
+              onlineUsersRef.child(roomId + "/" + uid).set({name: userName, photo : profileImageURL});
             });
           });
+          
+          //add self to members of the room
+          (new Firebase(appURL + "rooms/" + roomId + "/members/" + uid)).set("0"); //0 is insignificant
 
           //setup offline mechanism when going offline
-          onlineUsersRef.child(uid).onDisconnect().remove();
+          onlineUsersRef.child(roomId + "/" + uid).onDisconnect().remove();
         } else {
           $log.warn("not connected");
         }
       });
 
       //user came online
-      onlineUsersRef.on('child_added', (userId) => {
+      onlineUsersRef.child(roomId).on('child_added', (userId) => {
         $log.log("User: " + userId.key() + " came online");
         this.onlineUsers[userId.key().replace(":", "")] = userId.val();
       });
       //user went offline
-      onlineUsersRef.on('child_removed', (userId)=> {
+      onlineUsersRef.child(roomId).on('child_removed', (userId)=> {
         $log.log("User: " + userId.key() + " went offline");
         delete this.onlineUsers[userId.key().replace(":", "")];
       });
