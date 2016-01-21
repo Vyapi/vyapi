@@ -4,7 +4,7 @@ export class LoginController {
     this.ref = new Firebase("https://vyapi.firebaseio.com");
     this.fa = $firebaseAuth;
     this.clog = $log;
-    this.windo = $window;
+    this.windowVar = $window;
         this.authObj = this.fa(this.ref);
     var authData = this.authObj.$getAuth();
     if (authData) {
@@ -15,7 +15,7 @@ export class LoginController {
   firebaseAuthLogin() {
     this.authObj = this.fa(this.ref);
     var authData = this.authObj.$getAuth();
-    var window2 = this.windo;
+    var window2 = this.windowVar;
     if (authData) {
       this.clog.log("Already Logged in as:", authData.uid);
     } else {
