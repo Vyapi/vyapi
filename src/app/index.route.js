@@ -6,7 +6,7 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
       templateUrl: 'app/user/user.html',
       controller: 'UserController',
       controllerAs: 'users'
-    });
+    })
   .state('home',{
     url:'/',
     templateUrl: 'app/login/login.html',
