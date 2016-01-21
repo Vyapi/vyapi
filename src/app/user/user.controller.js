@@ -1,13 +1,16 @@
 export class UserController {
-  constructor($firebaseArray, $firebaseAuth, $log, $location) {
+  constructor($firebaseArray, $firebaseAuth, $log, $location, $window, $stateParams) {
     'ngInject';
+    
     var appURL = "https://vyapi.firebaseio.com/";
     var onlineUsersRef = new Firebase(appURL + "onlineUsers/");
-    this.onlineUsers = {};
+    this.onlineUsers = {}; //angular is watching this array
     var t = $firebaseArray(onlineUsersRef); //no idea what this line does, but removing this cripples whole application
     this.goOnline = function() {
       
       var uid;
+      
+      //find user ID of self
       this.fa = $firebaseAuth;
       this.ref = new Firebase(appURL);
       this.authObj = this.fa(this.ref);
@@ -16,14 +19,14 @@ export class UserController {
         $log.log("Logged in as:", authData.uid);
         uid = authData.uid;
       } else {
+        alert("Not Logged it. Please login\n Redirecting to login page");
+        $window.location.href = "http://" + $window.location.host + "#/";;
         $log.error("Not Logged it. Please login");
         return;
       }
       
-      //get roomId from URL eg: http://localhost:3000/room/1235467745678
-      var roomId = $location.path().split("/")[2];
-      //hard coding right now
-      roomId = "-K8Xw1wPvy3FwXathm7o";
+      //get roomId from URL
+      var roomId = $stateParams.roomKey;
       $log.log("You opened room: " + roomId);
       
       //check self connection state
@@ -38,6 +41,15 @@ export class UserController {
               var profileImageURL = value.val();
               onlineUsersRef.child(roomId + "/" + uid).set({name: userName, photo : profileImageURL});
             });
+          });
+          
+          //verify the room id existance
+          (new Firebase(appURL + "rooms/")).orderByKey().equalTo(roomId).on("value", (snap)=>{
+            if(snap.exists() == false) {
+              $log.error("Room: " + roomId + " does not exist")
+              alert("Room: " + roomId + " does not exist.\nRedirecting to dashboard");
+              $window.location.href = "http://" + $window.location.host + "#/dashboard";
+            }
           });
           
           //add self to members of the room
@@ -55,6 +67,7 @@ export class UserController {
         $log.log("User: " + userId.key() + " came online");
         this.onlineUsers[userId.key().replace(":", "")] = userId.val();
       });
+      
       //user went offline
       onlineUsersRef.child(roomId).on('child_removed', (userId)=> {
         $log.log("User: " + userId.key() + " went offline");

@@ -2,7 +2,7 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
   'ngInject';
   $stateProvider
     .state('user', {
-      url: '/user',
+      url: '/user/{roomKey}',
       templateUrl: 'app/user/user.html',
       controller: 'UserController',
       controllerAs: 'users'
