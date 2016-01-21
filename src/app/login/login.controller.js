@@ -1,18 +1,21 @@
 export class LoginController {
-  constructor ($firebaseObject,$firebaseAuth,$log) {
+  constructor ($firebaseObject,$firebaseAuth,$log,$window) {
     'ngInject';
     this.ref = new Firebase("https://vyapi.firebaseio.com");
     this.fa = $firebaseAuth;
     this.clog = $log;
+    this.windo = $window;
         this.authObj = this.fa(this.ref);
     var authData = this.authObj.$getAuth();
     if (authData) {
-        window.location.href = 'app/dashboard/dashboard.html';
+        $window.location.href = '/dashboard';
     }
   }
+
   firebaseAuthLogin() {
     this.authObj = this.fa(this.ref);
     var authData = this.authObj.$getAuth();
+    var window2 = this.windo;
     if (authData) {
       this.clog.log("Already Logged in as:", authData.uid);
     } else {
@@ -20,8 +23,8 @@ export class LoginController {
         var ref = new Firebase("https://vyapi.firebaseio.com");
         ref.child("users/"+ authData.uid).set(authData);
         console.log("Logged in as:", authData.uid);
-        window.location.href = 'app/dashboard/dashboard.html';
-      }).catch(function(error) {
+        window2.location.href = '/dashboard';
+      })().catch(function(error) {
         this.clog.error("Authentication failed:", error);
       });
     }
