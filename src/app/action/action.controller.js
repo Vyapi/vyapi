@@ -1,5 +1,5 @@
 export class ActionController {
-  constructor($firebaseArray) {
+  constructor($firebaseArray, $stateParams) {
     'ngInject';
     this.person='';
     this.items='';
@@ -7,7 +7,8 @@ export class ActionController {
     this.assignee=[];
     var self=this.assignee;
 
-    this.roomID='-K8_6ZPDN-p-iXPxwPRs'; //temporary
+    this.roomID=$stateParams.roomKey; //temporary
+    console.log(this.roomID);
     var roomRef = new Firebase('https://vyapi.firebaseio.com/rooms/'+this.roomID);
     var room = roomRef.child("members");
     room.once("value", function(snapshot) {
@@ -30,7 +31,7 @@ export class ActionController {
     //console.log(self);
 
 
-    this.myDataRef = new Firebase('https://vyapi.firebaseio.com/action');
+    this.myDataRef = new Firebase('https://vyapi.firebaseio.com/action/'+this.roomID);
     this.items=$firebaseArray(this.myDataRef);
     this.myDataRef.on('value',(snapshot)=>{
     //console.log(this.items);
@@ -50,9 +51,9 @@ export class ActionController {
 
   add()
   {
-    this.items.push({task:this.text,name:this.person,roomid:this.roomID});
+    this.items.push({task:this.text,name:this.person});
     //console.log(this.roomID);
-    this.myDataRef.push({task:this.text,name:this.person,roomid:this.roomID});
+    this.myDataRef.push({task:this.text,name:this.person});
     //myDataRef.child("users/"+ authData.uid).set(authData);
     this.text = '';
   }
@@ -68,7 +69,7 @@ export class ActionController {
     console.log('modify'+person.name);
     /*this.myDataRef.child('action/'+$person.key).remove();
     this.myDataRef.child('action').push({task:$person.task,name:$person.name,roomid:this.roomID});*/
-    this.myDataRef.child(person.key).set({task:person.task,name:person.name,roomid:this.roomID});
+    this.myDataRef.child(person.key).set({task:person.task,name:person.name});
     this.person=person;
   }
 
