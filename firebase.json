@@ -1,5 +1,5 @@
 {
-  "firebase": "vyapideploy",
+  "firebase": "vyapi",
   "public": "dist",
   "ignore": [
     "firebase.json",
