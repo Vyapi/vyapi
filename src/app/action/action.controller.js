@@ -1,5 +1,6 @@
 export class ActionController {
-  constructor($firebaseArray, $stateParams) {
+    constructor($firebaseArray, $stateParams) {
+
     'ngInject';
     this.person='';
     this.items='';
@@ -8,7 +9,6 @@ export class ActionController {
     var self=this.assignee;
 
     this.roomID=$stateParams.roomKey; //temporary
-    console.log(this.roomID);
     var roomRef = new Firebase('https://vyapi.firebaseio.com/rooms/'+this.roomID);
     var room = roomRef.child("members");
     room.once("value", function(snapshot) {
