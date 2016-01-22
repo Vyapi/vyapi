@@ -43,13 +43,6 @@ export class BoardController {
           lane: id
         });
 
-        msgRef.push({
-          from: userName,
-          uid: authData.uid,
-          text: userMessage,
-          lane: id
-        });
-
         this.userMessagePlus = '';
         this.userMessageMinus = '';
       }

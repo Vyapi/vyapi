@@ -1,19 +1,57 @@
-<div class="container-fluid">
-
-  <div class="row">
-
-    <div class="col-md-10">
-      <!-- <a ui-sref="room.board">Show Board</a> -->
-      <div ui-view="board"></div>
-    </div>
-
-    <div class="col-md-2">
-      <div ui-view="action">Show Action</div>
-    </div>
-  </div>
-
+<div ng-show="getview">
+  <h4>404 ERROR-ROOM NOT AVAILABLE</h4>
 </div>
 
 
-<div ui-view="user"></div>
+  <div class="container-fluid" ng-hide="getview">
 
+  <div class="row">
+    <nav class = "navbar navbar-default" role = "navigation">
+
+      <div class = "navbar-header">
+         <button type = "button" class = "navbar-toggle"
+            data-toggle = "collapse" data-target = "#example-navbar-collapse">
+            <span class = "sr-only">Toggle navigation</span>
+            <span class = "icon-bar"></span>
+            <span class = "icon-bar"></span>
+            <span class = "icon-bar"></span>
+         </button>
+
+         <a class = "navbar-brand" href = "#">VYAPI</a>
+      </div>
+
+      <div class = "collapse navbar-collapse" id = "example-navbar-collapse">
+
+         <ul class = "nav navbar-nav">
+            <li><a href = "#">Home</a></li>
+            <li><a href = "#">About</a></li>
+            <li><a href = "#">Dashboard</a></li>
+            <li class = "active"><a href = "#">Room</a></li>
+            <li><a href = "#" id="logout" ng-click="login.firebaseAuthlogout()">Logout</a></li>
+
+         </ul>
+      </div>
+
+    </nav>
+  </div>
+
+  <div class="row">
+
+    <div class="row">
+
+      <div class="col-md-10">
+        <!-- <a ui-sref="room.board">Show Board</a> -->
+        <div ui-view="board"></div>
+      </div>
+
+      <div class="col-md-2">
+        <div ui-view="action">Show Action</div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div ui-view="user"></div>
+
+</div>

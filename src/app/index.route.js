@@ -49,7 +49,7 @@ export function routerConfig ($stateProvider, $urlRouterProvider,$locationProvid
   .state('room', {
     url: '/room/:roomKey',
     views: {
-        // the main template will be placed here (relatively named)
+
         '': { templateUrl: 'app/room/room.html',
           controller:'RoomController',
           controllerAs: 'room'},
