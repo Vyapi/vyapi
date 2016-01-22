@@ -2,8 +2,8 @@
   <nav class="navbar navbar-default navbar-fixed-bottom">
     <ul class="list-inline">
     <span><strong>User</strong></span>
-      <li ng-repeat = "(uid, user) in users.onlineUsers" style="display: list-inline;">
-        <img class =  "img-rounded animated bounce" title="{{user.name}}" src="{{user.photo}}" style="height: 3em; padding-left: .5em; padding-right: .5em">
+      <li ng-repeat = "(uid, user) in users.onlineUsers" style="display: list-inline;" class="ng-animate ng-enter ng-leave">
+        <img class =  "img-rounded" title="{{user.name}}" src="{{user.photo}}" style="height: 3em; padding-left: .5em; padding-right: .5em">
       </li>
     </ul>
   </div>
