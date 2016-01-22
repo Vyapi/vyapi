@@ -28,4 +28,11 @@ export class DashboardController {
 		let userID = Dashboard.getUserID();
 		let random = Dashboard.createRoom(userID);
 	}
+
+	firebaseAuthlogout() 
+	{
+   let ref = new Firebase("https://vyapi.firebaseio.com");
+   ref.unauth();
+   window.location.href='/';
+ }
 }
