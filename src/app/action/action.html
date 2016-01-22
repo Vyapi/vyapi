@@ -1,20 +1,32 @@
-<h1>Hello</h1>
-<p> Add Items here</p>
-<div>
-  <ul>
-  <li ng-repeat="item in action.items"> {{item.task}}
-      <select ng-options="asn for asn in action.assignee" ng-model="item.name" ng-change="action.modify(item)">
-      </select>
-      <button ng-click="action.remove($index)">Remove</button>
+
+<h1 align = "center">Action Items!</h1>
+<div class="row">
+  <div class="col-md-12">
+    <div class="form-group">
+      <form ng-submit="action.add()">
+       <textarea ng-model="action.text" class="form-control"></textarea>
+       <div>
+        <select ng-options="person for person in action.assignee" ng-model="person" ng-change="action.change(person)">
+            <option value="" text-align = "center">--Assignee--</option>
+        </select>
+        <button type="submit" class = "btn btn-xs btn-success"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add Action</button></div>
+      </form>
+    </div>
+  <ul class="list-unstyled">
+  <li ng-repeat="item in action.items">
+    <div class = "panel panel-default">
+       <div class = "panel-body" style="max-height: 10; min-height: 10; overflow-y: scroll;">
+         {{item.task}}
+         <div>
+        <select ng-options="asn for asn in action.assignee" ng-model="item.name" ng-change="action.modify(item)">
+       </select>
+      <button class = "btn btn-danger btn-xs" data-toggle="tooltip" data-placement="left" title ="Delete!"  ng-click="action.remove($index)"><i class="glyphicon glyphicon-trash"></i></i></button>
+      </div>
+    </div>
+  </div>
     </li>
   </ul>
-  <div>
-    <form ng-submit="action.add()">
-      <input type="text" ng-model="action.text" >
-      <select ng-options="person for person in action.assignee" ng-model="person" ng-change="action.change(person)">
-        <option value="">--please select--</option>
-      </select>
-      <button type="submit">Add</button>
-    </form>
-  </div>
+
+</div>
+</div>
 </div>
