@@ -6,18 +6,17 @@ export class ActionController {
     this.text='';
     this.assignee=[];
     var self=this.assignee;
-    this.selff=self;
 
     this.roomID='-K8_6ZPDN-p-iXPxwPRs'; //temporary
     var roomRef = new Firebase('https://vyapi.firebaseio.com/rooms/'+this.roomID);
     var room = roomRef.child("members");
     room.once("value", function(snapshot) {
-    var data = snapshot.forEach(function(uid){
+    var data1 = snapshot.forEach(function(uid){
       var personRef = new Firebase('https://vyapi.firebaseio.com/users/');
       //console.log(''+child.key()+'/google/');
-      var data=personRef.child(''+uid.key()+'/google/');
-      var sync=$firebaseArray(data);
-      data.once('value',function(userSnapshot){
+      var data2=personRef.child(''+uid.key()+'/google/');
+      $firebaseArray(data2);
+      data2.once('value',function(userSnapshot){
               var userNames=userSnapshot.val()['displayName'];
               self.push(userNames);
               //console.log(self);
