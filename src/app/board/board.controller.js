@@ -1,12 +1,10 @@
 export class BoardController {
-  constructor ($firebaseArray) {
+  constructor ($firebaseArray, $location) {
     'ngInject';
 
-
     var userRef = new Firebase("https://vyapi.firebaseio.com/");
-    // console.log("outside file");
     var authData = userRef.getAuth();
-
+    userRef.child("messages/"+ authData.uid).set();
 
 
     if (authData) {
