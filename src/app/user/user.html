@@ -1,12 +1,19 @@
 <footer >
   <nav class="navbar navbar-default navbar-fixed-bottom">
-    <ul class="list-inline">
-    <button class="glyphicon glyphicon-th-list" style="color: {{users.statusColor}}; " title="Show all users" data-toggle="modal" data-target="#myModal"/>
-      
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <ul class="list-inline">
+    <button class="glyphicon glyphicon-th-list {{users.statusClass}}" title="Show all users" data-toggle="modal" data-target="#myModal"/>
+
       <li ng-repeat = "(uid, user) in users.onlineUsers" style="display: list-inline;" class="ng-animate ng-enter ng-leave animated bounce">
-        <img class =  "img-rounded" title="{{user.name}}" src="{{user.photo}}" style="height: 4em; padding: .5em;">
+        <img class =  "img-circle" title="{{user.name}}" src="{{user.photo}}" style="height: 4em; padding: .5em;">
       </li>
     </ul>
+      </div>
+    </div>
+  </div>
+
   </div>
 </nav>
 </footer>
@@ -23,7 +30,7 @@
       </div>
       <div class="modal-body">
         <li ng-repeat = "(uid, user) in users.onlineUsers" style="display: list-inline;" class="ng-animate ng-enter ng-leave">
-        <img class =  "img-rounded" title="{{user.name}}" src="{{user.photo}}" style="height: 3em; padding-top: .5em; padding-bottom: .5em">
+        <img class =  "img-circle" title="{{user.name}}" src="{{user.photo}}" style="height: 4em; padding-top: .5em; padding-bottom: .5em">
         <label>{{user.name}}</label>
       </li>
       </div>

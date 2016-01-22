@@ -1,8 +1,8 @@
 export class UserController {
   constructor($firebaseArray, $firebaseAuth, $log, $location, $window, $stateParams) {
     'ngInject';
-    
-    this.statusColor = "red";
+
+    this.statusClass = "btn-danger";
 
     var appURL = "https://vyapi.firebaseio.com/";
     var onlineUsersRef = new Firebase(appURL + "onlineUsers/");
@@ -36,8 +36,16 @@ export class UserController {
       connectedRef.on("value", (snap) => {
         if (snap.val() === true) {
           $log.log("connected");
-          this.statusColor = "green";
-          
+          this.statusClass = "btn-success";
+          //register self as online
+          (new Firebase(encodeURI(appURL + "users/" + uid + "/google/cachedUserProfile/given_name/"))).once("value", (value) => {
+            var userName = value.val();
+            (new Firebase(encodeURI(appURL + "users/" + uid + "/google/profileImageURL/"))).once("value", (value) => {
+              var profileImageURL = value.val();
+              onlineUsersRef.child(roomId + "/" + uid).set({name: userName, photo : profileImageURL});
+            });
+          });
+
           //verify the room id existance
           (new Firebase(appURL + "rooms/")).orderByKey().equalTo(roomId).on("value", (snap)=>{
             if(snap.exists() == false) {
@@ -62,7 +70,7 @@ export class UserController {
             }
           });
         } else {
-          this.statusColor = "red";
+          this.statusClass = "btn-danger";
           $log.warn("not connected");
         }
       });
