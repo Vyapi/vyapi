@@ -1,7 +1,9 @@
-<div class="container">
+<div class="container-fluid">
+
+
 
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
       <header>PLUS Reviews</header>
       <ul id="chat-messages" class="chat-messages">
         <li ng-repeat="msg in board.messages | filter:{lane:'plus'}">
@@ -17,7 +19,7 @@
       </form>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-6">
       <header>MINUS Reviews</header>
 
       <ul id="chat-messages" class="chat-messages">
