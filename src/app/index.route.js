@@ -14,7 +14,7 @@ export function routerConfig ($stateProvider, $urlRouterProvider,$locationProvid
         var authData = authObj.$getAuth();
         if (authData) {
           // deferred.resolve();
-          $location.path('/dashboard')
+          $location.path('/user')
         } else {
           $location.path('/');
           // deferred.reject('You are not allowed on this page');
@@ -42,7 +42,7 @@ export function routerConfig ($stateProvider, $urlRouterProvider,$locationProvid
         var authData = authObj.$getAuth();
         if (authData) {
           // deferred.resolve();
-          $location.path('/dashboard')
+          $location.path('/action')
         } else {
           $location.path('/');
           // deferred.reject('You are not allowed on this page');
@@ -86,7 +86,7 @@ export function routerConfig ($stateProvider, $urlRouterProvider,$locationProvid
         var authData = authObj.$getAuth();
         if (authData) {
           // deferred.resolve();
-          $location.path('/dashboard')
+          $location.path('/board')
         } else {
           $location.path('/');
           // deferred.reject('You are not allowed on this page');
@@ -124,7 +124,7 @@ export function routerConfig ($stateProvider, $urlRouterProvider,$locationProvid
       controller: 'ActionController',
       controllerAs: 'action'
     }
-  },
+  }
 });
 $locationProvider.html5Mode(true);
 $urlRouterProvider.otherwise('/');
