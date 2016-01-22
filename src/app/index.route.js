@@ -14,10 +14,10 @@ export function routerConfig ($stateProvider, $urlRouterProvider,$locationProvid
     controllerAs: 'login'
   })
   .state('action', {
-    url: '/action',
-    templateUrl: 'app/action/action.html',
-    controller: 'ActionController',
-    controllerAs: 'action'
+      url: '/action/:roomKey',
+      templateUrl: 'app/action/action.html',
+      controller: 'ActionController',
+      controllerAs: 'action'
   })
   .state('dashboard', {
     url: '/dashboard',
