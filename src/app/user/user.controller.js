@@ -37,29 +37,30 @@ export class UserController {
         if (snap.val() === true) {
           $log.log("connected");
           this.statusColor = "green";
-          //register self as online
-          (new Firebase(encodeURI(appURL + "users/" + uid + "/google/cachedUserProfile/given_name/"))).once("value", (value) => {
-            var userName = value.val();
-            (new Firebase(encodeURI(appURL + "users/" + uid + "/google/profileImageURL/"))).once("value", (value) => {
-              var profileImageURL = value.val();
-              onlineUsersRef.child(roomId + "/" + uid).set({name: userName, photo : profileImageURL});
-            });
-          });
-
+          
           //verify the room id existance
           (new Firebase(appURL + "rooms/")).orderByKey().equalTo(roomId).on("value", (snap)=>{
             if(snap.exists() == false) {
               $log.error("Room: " + roomId + " does not exist")
               alert("Room: " + roomId + " does not exist.\nRedirecting to dashboard");
               $window.location.href = "http://" + $window.location.host + "#/dashboard";
+            }else {
+              //register self as online
+              (new Firebase(encodeURI(appURL + "users/" + uid + "/google/cachedUserProfile/given_name/"))).once("value", (value) => {
+                var userName = value.val();
+                (new Firebase(encodeURI(appURL + "users/" + uid + "/google/profileImageURL/"))).once("value", (value) => {
+                  var profileImageURL = value.val();
+                  onlineUsersRef.child(roomId + "/" + uid).set({name: userName, photo : profileImageURL});
+                });
+              });
+
+              //add self to members of the room
+              (new Firebase(appURL + "rooms/" + roomId + "/members/" + uid)).set("0"); //0 is insignificant
+
+              //setup offline mechanism when going offline
+              onlineUsersRef.child(roomId + "/" + uid).onDisconnect().remove();
             }
           });
-
-          //add self to members of the room
-          (new Firebase(appURL + "rooms/" + roomId + "/members/" + uid)).set("0"); //0 is insignificant
-
-          //setup offline mechanism when going offline
-          onlineUsersRef.child(roomId + "/" + uid).onDisconnect().remove();
         } else {
           this.statusColor = "red";
           $log.warn("not connected");
