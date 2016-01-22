@@ -51,7 +51,10 @@ export class BoardController {
 
       this.delete=function(msg){
         var ide=msg.$id;
+      //  console.log(msg.uid);
+        //console.log(authData.google.id);
        // var roomRef = new Firebase('https://vyapi.firebaseio.com/messages/'+roomID).remove();
+       if(msg.uid === "google:"+authData.google.id)
        this.msgRef.child(ide).remove();
        console.log(msg.$id);
      };
