@@ -1,4 +1,4 @@
-export class DashboardService {
+export class Dashboard{
   constructor ($firebaseArray) {
 	  'ngInject';
 	  this.rootURL = 'https://vyapi.firebaseio.com/';
