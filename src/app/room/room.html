@@ -1,19 +1,19 @@
-<div class="container">
+<div class="container-fluid">
 
   <div class="row">
 
-    <div class="col-md-8">
+    <div class="col-md-10">
       <!-- <a ui-sref="room.board">Show Board</a> -->
       <div ui-view="board"></div>
     </div>
 
-    <div class="col-md-4">
-      <a ui-view="action">Show Action</a>
+    <div class="col-md-2">
+      <div ui-view="action">Show Action</div>
     </div>
   </div>
 
-  <div class="">
-    <div ui-view="user"></div>
-  </div>
-
 </div>
+
+
+<div ui-view="user"></div>
+
