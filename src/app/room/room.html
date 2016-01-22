@@ -1,19 +1,25 @@
-<div class="container-fluid">
-
-  <div class="row">
-
-    <div class="col-md-10">
-      <!-- <a ui-sref="room.board">Show Board</a> -->
-      <div ui-view="board"></div>
-    </div>
-
-    <div class="col-md-2">
-      <div ui-view="action">Show Action</div>
-    </div>
-  </div>
-
+<div ng-show="getview">
+  <h4>404 ERROR-ROOM NOT AVAILABLE</h4>
 </div>
 
+<div ng-hide="getview">
+  <div class="container-fluid" >
 
-<div ui-view="user"></div>
+    <div class="row">
 
+      <div class="col-md-10">
+        <!-- <a ui-sref="room.board">Show Board</a> -->
+        <div ui-view="board"></div>
+      </div>
+
+      <div class="col-md-2">
+        <div ui-view="action">Show Action</div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div ui-view="user"></div>
+
+</div>
