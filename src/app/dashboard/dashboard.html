@@ -1,6 +1,7 @@
 <div class="container"> 
 	<button ng-click="dashboard.createRoom()" class="btn btn-default">Create Room</button>
+
 	<ul ng-repeat="room in dashboard.rooms" class="list-group">
-		<li class="list-group-item"><a href="{{room.url}}">{{room.roomName}}</a></li>
+		<li class="list-group-item"><a href="{{room.url}}">{{room.roomName}}<img src="images.jpg" class="img-circle person" alt="Random Name" width="255" height="255"></a></li>
 	</ul>
 </div>
