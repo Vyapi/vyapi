@@ -1,8 +1,11 @@
-<footer>
-<h1>User</h1>
-<ul>
-    <li ng-repeat = "(uid, user) in users.onlineUsers" style="display: inline;">
-      <img title="{{user.name}}" src="{{user.photo}}" style="height: 2.5em;">
-    </li>
-</ul>
+<footer >
+  <nav class="navbar navbar-default navbar-fixed-bottom">
+    <ul class="list-inline">
+    <span><strong>User</strong></span>
+      <li ng-repeat = "(uid, user) in users.onlineUsers" style="display: list-inline;">
+        <img class =  "img-rounded animated bounce" title="{{user.name}}" src="{{user.photo}}" style="height: 3em; padding-left: .5em; padding-right: .5em">
+      </li>
+    </ul>
+  </div>
+</nav>
 </footer>
