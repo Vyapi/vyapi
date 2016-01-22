@@ -18,10 +18,12 @@ export class BoardController {
       console.log("User is logged out");
     }
 
-    var ref = new Firebase("flickering-fire-3902.firebaseIO.com");
     var random = "https://vyapi.firebaseio.com/messages/" + roomID;
-    var ref2 = new Firebase(random);
-    this.messages = $firebaseArray(ref);
+    // var ref3 = new Firebase("https://vyapi.firebaseio.com/");
+    var msgRef = new Firebase(random);
+    this.messages = $firebaseArray(msgRef);
+    // console.log(roomID);
+    // console.log(this.messages);
 
     // userRef.child("messages/"+ roomID).set({
 
@@ -34,7 +36,14 @@ export class BoardController {
         if(!userName) userName = "anonymous";
         console.log(authData);
 
-        ref2.push({
+        this.messages.$add({
+          from: userName,
+          uid: authData.uid,
+          text: userMessage,
+          lane: id
+        });
+
+        msgRef.push({
           from: userName,
           uid: authData.uid,
           text: userMessage,

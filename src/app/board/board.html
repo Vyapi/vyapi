@@ -3,11 +3,10 @@
   <div class="row">
     <div class="col-md-4">
       <header>PLUS Reviews</header>
-
       <ul id="chat-messages" class="chat-messages">
-        <li ng-repeat="msg in board.messages | filter:{id:'plus'}">
+        <li ng-repeat="msg in board.messages | filter:{lane:'plus'}">
           <strong class="chat-username">{{ msg.from }}</strong>
-          {{ msg.body }}
+          {{ msg.text }}
         </li>
       </ul>
 
@@ -22,9 +21,9 @@
       <header>MINUS Reviews</header>
 
       <ul id="chat-messages" class="chat-messages">
-        <li ng-repeat="msg in board.messages | filter:{id:'minus'}">
+        <li ng-repeat="msg in board.messages | filter:{lane:'minus'}">
           <strong class="chat-username">{{ msg.from }}</strong>
-          {{ msg.body }}
+          {{ msg.text }}
         </li>
       </ul>
 
