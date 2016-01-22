@@ -16,7 +16,7 @@ import { WebDevTecService } from '../app/components/webDevTec/webDevTec.service'
 import { NavbarDirective } from '../app/components/navbar/navbar.directive';
 import { MalarkeyDirective } from '../app/components/malarkey/malarkey.directive';
 
-angular.module('vyapi', ['ui.router', 'toastr', 'firebase'])
+angular.module('vyapi', ['ui.router', 'toastr', 'firebase', 'ngAnimate'])
 
   .constant('malarkey', malarkey)
   .constant('moment', moment)
