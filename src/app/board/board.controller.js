@@ -1,28 +1,29 @@
 export class BoardController {
-  constructor ($firebaseArray) {
+  constructor ($firebaseArray, $location) {
     'ngInject';
 
 
-    var userRef = new Firebase("https://vyapi.firebaseio.com/");
-    // console.log("outside file");
+    var roomID = $location.path().split("/")[2];
+    console.log("roomID is " + roomID);
+
+    var userRef = new Firebase("https://vyapi.firebaseio.com/messages");
     var authData = userRef.getAuth();
-
-
+    // userRef.child("messages/"+ roomID).set(this.messages);
 
     if (authData) {
       console.log("User " + authData.uid + " is logged in with " + authData.provider);
       // console.log(authData);
-      }
-      else {
+    }
+    else {
       console.log("User is logged out");
     }
 
-
-
-
     var ref = new Firebase("flickering-fire-3902.firebaseIO.com");
-
+    var random = "https://vyapi.firebaseio.com/messages/" + roomID;
+    var ref2 = new Firebase(random);
     this.messages = $firebaseArray(ref);
+
+    // userRef.child("messages/"+ roomID).set({
 
     this.submit = function(id) {
 
@@ -31,10 +32,13 @@ export class BoardController {
 
       if (userMessage) {
         if(!userName) userName = "anonymous";
-        this.messages.$add({
+        console.log(authData);
+
+        ref2.push({
           from: userName,
-          body: userMessage,
-          id: id
+          uid: authData.uid,
+          text: userMessage,
+          lane: id
         });
 
         this.userMessagePlus = '';
