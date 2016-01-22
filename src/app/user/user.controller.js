@@ -1,8 +1,8 @@
 export class UserController {
   constructor($firebaseArray, $firebaseAuth, $log, $location, $window, $stateParams) {
     'ngInject';
-    
-    this.statusColor = "red";
+
+    this.statusClass = "btn-danger";
 
     var appURL = "https://vyapi.firebaseio.com/";
     var onlineUsersRef = new Firebase(appURL + "onlineUsers/");
@@ -36,7 +36,7 @@ export class UserController {
       connectedRef.on("value", (snap) => {
         if (snap.val() === true) {
           $log.log("connected");
-          this.statusColor = "green";
+          this.statusClass = "btn-success";
           //register self as online
           (new Firebase(encodeURI(appURL + "users/" + uid + "/google/cachedUserProfile/given_name/"))).once("value", (value) => {
             var userName = value.val();
@@ -61,7 +61,7 @@ export class UserController {
           //setup offline mechanism when going offline
           onlineUsersRef.child(roomId + "/" + uid).onDisconnect().remove();
         } else {
-          this.statusColor = "red";
+          this.statusClass = "btn-danger";
           $log.warn("not connected");
         }
       });
