@@ -35,23 +35,22 @@
     </nav>
   </div>
 
+
   <div class="row">
 
-    <div class="row">
-
-      <div class="col-md-8">
-        <!-- <a ui-sref="room.board">Show Board</a> -->
-        <div ui-view="board"></div>
-      </div>
-
-      <div class="col-md-4">
-        <div ui-view="action">Show Action</div>
-      </div>
+    <div class="col-md-8">
+      <!-- <a ui-sref="room.board">Show Board</a> -->
+      <div ui-view="board"></div>
     </div>
 
+    <div class="col-md-4">
+      <div ui-view="action">Show Action</div>
+    </div>
   </div>
 
 
-  <div ui-view="user"></div>
+  <div class="row">
+    <div ui-view="user"></div>
+  </div>
 
 </div>
