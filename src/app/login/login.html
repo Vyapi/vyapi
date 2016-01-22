@@ -1,9 +1,54 @@
 <div class="container">
-  <h1> Vyapi </h1>
-  <a class="btn btn-block btn-social btn-google" ng-click="login.firebaseAuthLogin()" id="login">
-  <span class="fa fa-google"></span> Sign in with Google</a>
 
-  <button id="check" ng-click="login.firebaseAuthStatus()">Check Status</button>
-  <button id="logout" ng-click="login.firebaseAuthlogout()">logout</button>
+<style>
+ body {
+       background-color: #D2DDE6  ;
+ }
+ html, body, .container {
+   height: 100%;
+}.container {
+   display: table;
+   vertical-align: middle;
+}.vertical-center-row {
+   display: table-cell;
+   vertical-align: middle;
+}  </style>
+<nav class = "navbar navbar-default" role = "navigation">
 
+  <div class = "navbar-header">
+     <button type = "button" class = "navbar-toggle"
+        data-toggle = "collapse" data-target = "#example-navbar-collapse">
+        <span class = "sr-only">Toggle navigation</span>
+        <span class = "icon-bar"></span>
+        <span class = "icon-bar"></span>
+        <span class = "icon-bar"></span>
+     </button>
+
+     <a class = "navbar-brand" href = "#">VYAPI</a>
+  </div>
+
+  <div class = "collapse navbar-collapse" id = "example-navbar-collapse">
+
+     <ul class = "nav navbar-nav">
+        <li class = "active"><a href = "#">Home</a></li>
+        <li><a href = "#">About</a></li>
+        <li><a href = "#">Dashboard</a></li>
+        <li><a href = "#">Room</a></li>
+        <li><a href = "#" id="logout" ng-click="login.firebaseAuthlogout()">Logout</a></li>
+
+     </ul>
+  </div>
+
+</nav>
+<div class="container">
+   <div class="vertical-center-row">
+       <div align="center"><button class="btn btn-primary btn-lg" ng-click="login.firebaseAuthLogin()" id="login">Sign in with Google</button>
+</div>
+   </div>
+</div>
+
+
+<div id="footer">
+     <p class="text-muted">Copyright @Vyapi 2016</p>
+   </div>
 </div>

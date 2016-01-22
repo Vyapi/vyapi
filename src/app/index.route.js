@@ -1,12 +1,28 @@
 export function routerConfig ($stateProvider, $urlRouterProvider,$locationProvider) {
   'ngInject';
   $stateProvider
-    .state('user', {
-      url: '/user/:roomKey',
-      templateUrl: 'app/user/user.html',
-      controller: 'UserController',
-      controllerAs: 'users'
-    })
+  .state('user', {
+    url: '/user',
+    templateUrl: 'app/user/user.html',
+    controller: 'UserController',
+    controllerAs: 'users',
+    resolve: {
+      auth: function($q,$firebaseAuth,$location){
+        // var deferred = $q.defer();
+        var ref = new Firebase("https://vyapi.firebaseio.com");
+        var authObj = $firebaseAuth(ref);
+        var authData = authObj.$getAuth();
+        if (authData) {
+          // deferred.resolve();
+          $location.path('/dashboard')
+        } else {
+          $location.path('/');
+          // deferred.reject('You are not allowed on this page');
+        }
+        return true;
+      }
+    }
+  })
   .state('home',{
     url:'/',
     templateUrl: 'app/login/login.html',
@@ -14,10 +30,26 @@ export function routerConfig ($stateProvider, $urlRouterProvider,$locationProvid
     controllerAs: 'login'
   })
   .state('action', {
-      url: '/action/:roomKey',
-      templateUrl: 'app/action/action.html',
-      controller: 'ActionController',
-      controllerAs: 'action'
+    url: '/action',
+    templateUrl: 'app/action/action.html',
+    controller: 'ActionController',
+    controllerAs: 'action',
+    resolve: {
+      auth: function($q,$firebaseAuth,$location){
+        // var deferred = $q.defer();
+        var ref = new Firebase("https://vyapi.firebaseio.com");
+        var authObj = $firebaseAuth(ref);
+        var authData = authObj.$getAuth();
+        if (authData) {
+          // deferred.resolve();
+          $location.path('/dashboard')
+        } else {
+          $location.path('/');
+          // deferred.reject('You are not allowed on this page');
+        }
+        return true;
+      }
+    }
   })
   .state('dashboard', {
     url: '/dashboard',
@@ -25,18 +57,19 @@ export function routerConfig ($stateProvider, $urlRouterProvider,$locationProvid
     controller:'DashboardController',
     controllerAs: 'dashboard',
     resolve: {
-      auth: function($q,$firebaseAuth,$window){
-        var deferred = $q.defer();
+      auth: function($q,$firebaseAuth,$location){
+        // var deferred = $q.defer();
         var ref = new Firebase("https://vyapi.firebaseio.com");
         var authObj = $firebaseAuth(ref);
         var authData = authObj.$getAuth();
         if (authData) {
-          deferred.resolve();
+          // deferred.resolve();
+          $location.path('/dashboard')
         } else {
-          $window.location.href='/'
-          deferred.reject('You are not allowed on this page');
+          $location.path('/');
+          // deferred.reject('You are not allowed on this page');
         }
-        return deferred.promise;
+        return true;
       }
     }
   })
@@ -44,7 +77,23 @@ export function routerConfig ($stateProvider, $urlRouterProvider,$locationProvid
     url: '/board',
     templateUrl: 'app/board/board.html',
     controller: 'BoardController',
-    controllerAs: 'board'
+    controllerAs: 'board',
+    resolve: {
+      auth: function($q,$firebaseAuth,$location){
+        // var deferred = $q.defer();
+        var ref = new Firebase("https://vyapi.firebaseio.com");
+        var authObj = $firebaseAuth(ref);
+        var authData = authObj.$getAuth();
+        if (authData) {
+          // deferred.resolve();
+          $location.path('/dashboard')
+        } else {
+          $location.path('/');
+          // deferred.reject('You are not allowed on this page');
+        }
+        return true;
+      }
+    }
   })
   .state('room', {
     url: '/room',
@@ -75,7 +124,7 @@ export function routerConfig ($stateProvider, $urlRouterProvider,$locationProvid
       controller: 'ActionController',
       controllerAs: 'action'
     }
-  }
+  },
 });
 $locationProvider.html5Mode(true);
 $urlRouterProvider.otherwise('/');
