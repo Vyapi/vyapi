@@ -1,6 +1,6 @@
 <div class="container"> 
 	<button ng-click="dashboard.createRoom()" class="btn btn-default">Create Room</button>
-	<ul ng-repeat="room in dashboard.rooms">
-		<li><a href="{{room.url}}">{{room.roomName}}</a></li>
+	<ul ng-repeat="room in dashboard.rooms" class="list-group">
+		<li class="list-group-item"><a href="{{room.url}}">{{room.roomName}}</a></li>
 	</ul>
 </div>
