@@ -1,6 +1,8 @@
 export class DashboardController {
-	constructor ($firebaseArray,Dashboard){
+	constructor ($firebaseArray,Dashboard,$location){
 		'ngInject';
+        this.path = $location.absUrl().replace('dashboard', 'room');
+        console.log(this.path);
 		this.set_param(Dashboard);
 		this.rooms = [];
 		this.createRoom = function(){
@@ -12,10 +14,10 @@ export class DashboardController {
 
 		Dashboard.getRooms(userID).on("value",(snapshot)=>{
 			let rooms = snapshot.val();
-			rooms = _.map(rooms,(room,key,url)=>{
+			rooms = _.map(rooms,(room,key)=>{
 				room.key = key;
-				room.url = Dashboard.getBaseURL() + '/' +  key;
-				console.log(room.url);
+				room.url = this.path + '/' +  key;
+				//console.log(room.url);
 				return room;
 			});
 			this.rooms = rooms;
