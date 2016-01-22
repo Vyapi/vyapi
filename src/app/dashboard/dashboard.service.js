@@ -5,7 +5,7 @@ export class Dashboard{
 	  this.rootRef = new Firebase(this.rootURL);
 	  this.roomsURL = this.rootURL + 'rooms';
 	  this.roomsRef = new Firebase(this.rootURL + 'rooms');
-	  this.baseURL = 'https://vyapi.firebaseapp.com/rooms';
+      this.messageRef = new Firebase(this.rootURL + 'messages');
 	  let data = $firebaseArray(this.roomsRef);
   }
   getRooms(userID){
@@ -21,11 +21,9 @@ export class Dashboard{
 		alert('Please enter a valid room name');
 	}
 	else{
-		this.roomsRef.push({roomName : roomName, ownedBy : userID});
+		let newRoom = this.roomsRef.push({roomName : roomName, ownedBy : userID});
+        //this.rootRef.child("messages/"+ newRoom.key()).set(roomName);
 		return;
 	}
-  }
-  getBaseURL(){
-	  return this.baseURL;
   }
 }
