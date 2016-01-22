@@ -125,22 +125,6 @@ export function routerConfig ($stateProvider, $urlRouterProvider,$locationProvid
       controllerAs: 'action'
     }
   },
-  resolve: {
-    auth: function($q,$firebaseAuth,$location){
-      // var deferred = $q.defer();
-      var ref = new Firebase("https://vyapi.firebaseio.com");
-      var authObj = $firebaseAuth(ref);
-      var authData = authObj.$getAuth();
-      if (authData) {
-        // deferred.resolve();
-        $location.path('/dashboard')
-      } else {
-        $location.path('/');
-        // deferred.reject('You are not allowed on this page');
-      }
-      return true;
-    }
-  }
 });
 $locationProvider.html5Mode(true);
 $urlRouterProvider.otherwise('/');
