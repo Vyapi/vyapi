@@ -1,38 +1,62 @@
-<div class="container">
+<div class="container-fluid">
+
+
 
   <div class="row">
-    <div class="col-md-4">
-      <header>PLUS Reviews</header>
-
-      <ul id="chat-messages" class="chat-messages">
-        <li ng-repeat="msg in board.messages | filter:{id:'plus'}">
-          <strong class="chat-username">{{ msg.from }}</strong>
-          {{ msg.body }}
-        </li>
-      </ul>
-
+  <div class="col-md-6">
+      <h2>What we did right!</h2>
 
       <form ng-submit="board.submit('plus')">
-        <input ng-model="board.userMessagePlus" type="text" placeholder="Type a message..."/>
-        <button id="submitplus" class="btn btn-default btn-xs" type="submit">Send</button>
+        <div class="form-group">
+          <input ng-model="board.userMessagePlus" type="text" class="form-control" placeholder="Type a message..."/>
+        </div>
       </form>
-    </div>
 
-    <div class="col-md-4">
-      <header>MINUS Reviews</header>
+      <ul id="chat-messages-plus" class="list-unstyled">
+        <li ng-repeat="msg in board.messages | filter:{lane:'plus'}">
+          <article class="panel panel-default">
+            <div class="panel-heading">
+              {{ msg.from }}
+              <button class="btn btn-default btn-xs pull-right btn-danger glyphicon glyphicon-trash" ng-click="board.delete(msg)"></button>
+            </div>
+            <div class="panel-body" style="max-height: 10; min-height: 10;overflow-y: scroll;">
+              <p>{{ msg.text }}</p>
 
-      <ul id="chat-messages" class="chat-messages">
-        <li ng-repeat="msg in board.messages | filter:{id:'minus'}">
-          <strong class="chat-username">{{ msg.from }}</strong>
-          {{ msg.body }}
+            </div>
+
+          </article>
+
         </li>
       </ul>
 
 
+    </div>
+
+    <div class="col-md-6">
+      <h2>What could improve!</h2>
+
       <form ng-submit="board.submit('minus')">
-        <input ng-model="board.userMessageMinus" type="text" placeholder="Type a message..."/>
-        <button id="submitminus" class="btn btn-default btn-xs" type="submit">Send</button>
+        <div class="form-group">
+          <input ng-model="board.userMessageMinus" type="text" class="form-control" placeholder="Type a message..."/>
+        </div>
       </form>
+
+      <ul id="chat-messages-minus" class="list-unstyled">
+        <li ng-repeat="msg in board.messages | filter:{lane:'minus'}">
+          <article class="panel panel-default">
+            <div class="panel-heading">
+              {{ msg.from }}
+              <button class="btn btn-default btn-xs pull-right btn-danger glyphicon glyphicon-trash" ng-click="board.delete(msg)"></button>
+            </div>
+            <div class="panel-body" style="max-height: 10; min-height: 10; overflow-y: scroll;">
+              {{ msg.text }}
+            </div>
+          </article>
+
+        </li>
+      </ul>
+
+
     </div>
   </div>
 
