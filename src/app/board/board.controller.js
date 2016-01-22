@@ -10,13 +10,13 @@ export class BoardController {
     var authData = userRef.getAuth();
     // userRef.child("messages/"+ roomID).set(this.messages);
 
-    if (authData) {
-      console.log("User " + authData.uid + " is logged in with " + authData.provider);
-      // console.log(authData);
-    }
-    else {
-      console.log("User is logged out");
-    }
+    // if (authData) {
+    //   console.log("User " + authData.uid + " is logged in with " + authData.provider);
+    //   // console.log(authData);
+    // }
+    // else {
+    //   console.log("User is logged out");
+    // }
 
     var random = "https://vyapi.firebaseio.com/messages/" + roomID;
     // var ref3 = new Firebase("https://vyapi.firebaseio.com/");

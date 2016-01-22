@@ -48,7 +48,6 @@ export function routerConfig ($stateProvider, $urlRouterProvider,$locationProvid
   })
   .state('room', {
     url: '/room/:roomKey',
-
     views: {
 
         '': { templateUrl: 'app/room/room.html',
