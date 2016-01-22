@@ -20,7 +20,7 @@
          <div>
         <select ng-options="asn for asn in action.assignee" ng-model="item.name" ng-change="action.modify(item)">
        </select>
-      <button class = "btn btn-danger btn-xs glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="left" title ="Delete!"  ng-click="action.remove($index)"></button>
+      <button class = "btn btn-danger btn-xs" data-toggle="tooltip" data-placement="left" title ="Delete!"  ng-click="action.remove($index)"><i class="glyphicon glyphicon-trash"></i></i></button>
       </div>
     </div>
   </div>
