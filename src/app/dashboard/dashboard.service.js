@@ -5,31 +5,27 @@ export class DashboardService {
 	  this.rootRef = new Firebase(this.rootURL);
 	  this.roomsURL = this.rootURL + 'rooms';
 	  this.roomsRef = new Firebase(this.rootURL + 'rooms');
-	  this.userID = '';
-	  this.rooms = [];
+	  this.baseURL = 'https://vyapi.firebaseapp.com/rooms';
+	  let data = $firebaseArray(this.roomsRef);
+  }
+  getRooms(userID){
+	  return this.roomsRef.orderByChild("ownedBy").equalTo(userID)
   }
   getUserID(){
 	  let authData = this.rootRef.getAuth();
-	  this.userID = authData.uid;
-	  return this.userID;
+	  return authData.uid;
   }
-  getRooms(){
-	  this.roomsRef.orderByChild("ownedBy").equalTo(this.userID).on("value",(snapshot)=>{
-		this.rooms = snapshot.val();
-		//rooms = _.map(rooms,(room,key,url)=>{
-		//	room.key = key;
-		//	room.url = this.roomsURL + '/' + key;
-		//	return room;
-		//});
-		//this.rooms = rooms;
-		//console.table(this.rooms);
-	  });
-	  return this.rooms;
-  }
-  createRoom(){
-	let userID="ayushi";
+  createRoom(userID){
 	let roomName=prompt('Room Name','Default');
-	roomsRef.push({roomName : roomName, ownedBy : userID, members:[userID]});
-	return this.test;
+	if(!roomName){
+		alert('Please enter a valid room name');
+	}
+	else{
+		this.roomsRef.push({roomName : roomName, ownedBy : userID});
+		return;
+	}
+  }
+  getBaseURL(){
+	  return this.baseURL;
   }
 }

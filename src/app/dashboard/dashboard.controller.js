@@ -1,27 +1,29 @@
 export class DashboardController {
-	constructor ($firebaseArray){
+	constructor ($firebaseArray,dashboardService){
 		'ngInject';
-		let rootURL = 'https://vyapi.firebaseio.com/';
-		let roomsURL = rootURL + 'rooms';
-		let rootRef = new Firebase(rootURL);
-		let roomsRef = new Firebase(roomsURL);
-		let data = $firebaseArray(roomsRef);
-		let authData = rootRef.getAuth();
-		let userID = authData.uid;
+		this.set_param(dashboardService);
 		this.rooms = [];
 		this.createRoom = function(){
-			let roomName=prompt('Room Name','Default');
-			//console.log(userID,roomName);
-			roomsRef.push({roomName : roomName, ownedBy : userI});
+			this.create(dashboardService);
 		};
-		roomsRef.orderByChild("ownedBy").equalTo(userID).on("value",(snapshot)=>{
+	}
+	set_param(dashboardService){
+		let userID = dashboardService.getUserID();
+
+		dashboardService.getRooms(userID).on("value",(snapshot)=>{
 			let rooms = snapshot.val();
 			rooms = _.map(rooms,(room,key,url)=>{
 				room.key = key;
-				room.url = roomsRef + '/' + key;
+				room.url = dashboardService.getBaseURL() + '/' +  key;
+				console.log(room.url);
 				return room;
 			});
 			this.rooms = rooms;
+			console.table(this.rooms);
 		});
+	}
+	create(dashboardService){
+		let userID = dashboardService.getUserID();
+		let random = dashboardService.createRoom(userID);
 	}
 }
