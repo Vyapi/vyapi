@@ -1,11 +1,36 @@
 <footer >
   <nav class="navbar navbar-default navbar-fixed-bottom">
     <ul class="list-inline">
-    <span><strong>User</strong></span>
-      <li ng-repeat = "(uid, user) in users.onlineUsers" style="display: list-inline;" class="ng-animate ng-enter ng-leave">
-        <img class =  "img-rounded" title="{{user.name}}" src="{{user.photo}}" style="height: 3em; padding-left: .5em; padding-right: .5em">
+    <button class="glyphicon glyphicon-th-list" style="color: {{users.statusColor}}; " title="Show all users" data-toggle="modal" data-target="#myModal"/>
+      
+      <li ng-repeat = "(uid, user) in users.onlineUsers" style="display: list-inline;" class="ng-animate ng-enter ng-leave animated bounce">
+        <img class =  "img-rounded" title="{{user.name}}" src="{{user.photo}}" style="height: 4em; padding: .5em;">
       </li>
     </ul>
   </div>
 </nav>
 </footer>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Online users</h4>
+      </div>
+      <div class="modal-body">
+        <li ng-repeat = "(uid, user) in users.onlineUsers" style="display: list-inline;" class="ng-animate ng-enter ng-leave">
+        <img class =  "img-rounded" title="{{user.name}}" src="{{user.photo}}" style="height: 3em; padding-top: .5em; padding-bottom: .5em">
+        <label>{{user.name}}</label>
+      </li>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
