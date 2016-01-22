@@ -1,12 +1,12 @@
 export function routerConfig ($stateProvider, $urlRouterProvider,$locationProvider) {
   'ngInject';
   $stateProvider
-  .state('user', {
-    url: '/user',
-    templateUrl: 'app/user/user.html',
-    controller: 'UserController',
-    controllerAs: 'users'
-  })
+    .state('user', {
+      url: '/user/:roomKey',
+      templateUrl: 'app/user/user.html',
+      controller: 'UserController',
+      controllerAs: 'users'
+    })
   .state('home',{
     url:'/',
     templateUrl: 'app/login/login.html',
@@ -52,7 +52,6 @@ export function routerConfig ($stateProvider, $urlRouterProvider,$locationProvid
     //controller:'RoomController',
     //controllerAs: 'room',
     views: {
-
         // the main template will be placed here (relatively named)
         '': { templateUrl: 'app/room/room.html',
           controller:'RoomController',
@@ -63,22 +62,22 @@ export function routerConfig ($stateProvider, $urlRouterProvider,$locationProvid
         controllerAs: 'board'
         },
 
-        //user room view
-        'user@room': {
-          templateUrl: 'app/user/user.html',
-          controller: 'UserController',
-          controllerAs: 'users'
+    //user room view
+    'user@room': {
+      templateUrl: 'app/user/user.html',
+      controller: 'UserController',
+      controllerAs: 'users'
 
-        },
+    },
 
-        //action room view
-        'action@room':{
-          templateUrl: 'app/action/action.html',
-          controller: 'ActionController',
-          controllerAs: 'action'
-        }
-      }
-    });
-  $locationProvider.html5Mode(true);
-  $urlRouterProvider.otherwise('/');
+    //action room view
+    'action@room':{
+      templateUrl: 'app/action/action.html',
+      controller: 'ActionController',
+      controllerAs: 'action'
+    }
+  }
+});
+$locationProvider.html5Mode(true);
+$urlRouterProvider.otherwise('/');
 }
