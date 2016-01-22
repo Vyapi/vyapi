@@ -8,7 +8,7 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
     controllerAs: 'login'
     })
   .state('action', {
-      url: '/action',
+      url: '/action/:roomKey',
       templateUrl: 'app/action/action.html',
       controller: 'ActionController',
       controllerAs: 'action'
