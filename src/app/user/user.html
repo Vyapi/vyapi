@@ -4,17 +4,15 @@
     <div class="row">
       <div class="col-md-12">
         <ul class="list-inline">
-        <li>
-          <button class="{{users.statusClass}}" title="Show all users" data-toggle="modal" data-target="#myModal" ><i class="glyphicon glyphicon-th-list"></i></i></button>
-        </li>
-        <li ng-repeat = "(uid, user) in users.onlineUsers" style="display: list-inline;" class="ng-animate ng-enter ng-leave animated bounce">
-          <img class =  "img-circle" title="{{user.name}}" src="{{user.photo}}" style="height: 4em; padding: .5em;">
-        </li>
-    </ul>
+          <li>
+            <button class="{{users.statusClass}} btn" title="Show all users" data-toggle="modal" data-target="#myModal" ><i class="glyphicon glyphicon-th-list"></i></i></button>
+          </li>
+          <li ng-repeat = "(uid, user) in users.onlineUsers" style="display: list-inline;" class="ng-animate ng-enter ng-leave animated bounce">
+            <img class =  "img-circle" title="{{user.name}}" src="{{user.photo}}" style="height: 4em; padding: .5em;">
+          </li>
+        </ul>
       </div>
     </div>
-  </div>
-
   </div>
 </nav>
 </footer>
