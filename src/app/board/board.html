@@ -27,7 +27,7 @@
         <li ng-repeat="msg in board.messages | filter:{lane:'minus'}">
           <strong class="chat-username">{{ msg.from }}</strong>
           {{ msg.text }}
-          <button class="btn btn-default btn-xs" > DELETE </button>
+          <button class="btn btn-default btn-xs" ng-click="board.delete(msg)"> DELETE </button>
         </li>
       </ul>
 
