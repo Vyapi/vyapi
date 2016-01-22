@@ -7,7 +7,7 @@ export class RoomController {
     var keys = [];
     var key;
     //console.log("hui");
-    var userRef = new Firebase("https://vyapi.firebaseio.com/messages/");
+    var userRef = new Firebase("https://vyapi.firebaseio.com/rooms/");
     // console.log("outside file");
     userRef.on('value',(snap)=>{
      //console.log(snap.val());
@@ -15,7 +15,7 @@ export class RoomController {
         if (snap.val().hasOwnProperty(key)) {
           keys.push(key);
         }
-      }  
+      }
     //console.log(keys[0]);
      var flag=0;
      var roomId =$stateParams.roomKey;
@@ -33,9 +33,9 @@ export class RoomController {
       {
           $scope.getview=true;
       }
-      
+
     });
-  }  
+  }
 }
 
 
