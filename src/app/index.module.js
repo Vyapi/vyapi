@@ -7,6 +7,7 @@ import { MainController } from './main/main.controller';
 import { UserController } from './user/user.controller';
 import { ActionController } from './action/action.controller';
 import { DashboardController } from './dashboard/dashboard.controller.js';
+import { Dashboard } from './dashboard/dashboard.service.js';
 import { BoardController } from './board/board.controller';
 import { RoomController } from './room/room.controller';
 import { LoginController } from './login/login.controller';
@@ -28,6 +29,7 @@ angular.module('vyapi', ['ui.router', 'toastr', 'firebase'])
   .controller('UserController', UserController)
   .controller('ActionController', ActionController)
   .controller('DashboardController', DashboardController)
+  .service('Dashboard',Dashboard)
   .controller('BoardController', BoardController)
   .controller('RoomController', RoomController)
   .controller('LoginController', LoginController)
