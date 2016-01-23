@@ -4,13 +4,13 @@
 
   <div class="row">
     <div class="col-md-6">
-      <h2>What we did right!</h2>
+      <h2 class="paneHeaders">What we did right!</h2>
 
-      <form id="testForm" ng-submit="board.submit('plus')">
+      <form ng-submit="board.submit('plus')">
         <div class="form-group">
           <div class="bg-success center-block" id="anonymousWarn" class="has-success anonymousWarn">Ssshh.. You're anonymous now</div>
           <div class="input-group">
-            <span type="button" id="anonymousToggle" class="input-group-addon btn btn-success anonymousToggle" ng-click="board.anonymous()">
+            <span type="button" id="anonymousTogglePlus" class="input-group-addon btn btn-success anonymousToggle" ng-click="board.toggle()">
               <span class="glyphicon glyphicon-eye-close pull-right"></span>
             </span>
             <input id="userTextPlus" ng-model="board.userMessagePlus" type="text" class="form-control" aria-definedby="anonymousToggle" placeholder="Type a message">
@@ -23,11 +23,13 @@
           <article class="panel panel-default">
             <div class="panel-heading fixed-panel-head">
               {{ msg.from }}
-              <span type="button" class="btn btn-default btn-xs glyphicon glyphicon-thumbs-up pull-right" ng-click=""></span>
               <button class="btn btn-default btn-xs pull-right btn-danger glyphicon glyphicon-trash" ng-click="board.delete(msg)"></button>
             </div>
             <div class="panel-body fixed-panel-body">
               <p class="userText">{{ msg.text }}</p>
+              <span type="button" class="btn btn-default btn-xs glyphicon glyphicon-thumbs-up pull-right pull-bottom" ng-click="">
+                <span class="thumbPlus"></span>
+              </span>
             </div>
           </article>
         </li>
@@ -37,13 +39,13 @@
     </div>
 
     <div class="col-md-6">
-      <h2>What could improve!</h2>
+      <h2 class="paneHeaders">What could improve!</h2>
 
       <form ng-submit="board.submit('minus')">
         <div class="form-group">
-          <div class="bg-success center-block" id="anonymousWarn" class="has-success anonymousWarn">Ssshh.. You're anonymous now</div>
+          <!-- <div class="bg-success center-block" id="anonymousWarnMinus" class="has-success anonymousWarn">Ssshh.. You're anonymous now</div> -->
           <div class="input-group">
-            <span type="button" id="anonymousToggle" class="input-group-addon btn btn-success anonymousToggle">
+            <span type="button" id="anonymousToggleMinus" class="input-group-addon btn btn-success anonymousToggle" ng-click="board.toggle()">
               <span class="glyphicon glyphicon-eye-close success pull-right"></span>
             </span>
             <input id="userTextMinus" ng-model="board.userMessageMinus" type="text" class="form-control userText" placeholder="Type a message..."/>
@@ -56,11 +58,13 @@
           <article class="panel panel-default">
             <div class="panel-heading fixed-panel-head">
               {{ msg.from }}
-              <span type="button" class="btn btn-default btn-xs glyphicon glyphicon-thumbs-up pull-right" ng-click=""></span>
               <button class="btn btn-default btn-xs pull-right btn-danger glyphicon glyphicon-trash" ng-click="board.delete(msg)"></button>
             </div>
             <div class="panel-body fixed-panel-body">
               <p class="userText">{{ msg.text }}</p>
+              <span type="button" class="btn btn-default btn-xs glyphicon glyphicon-thumbs-up pull-right pull-bottom" ng-click="">
+                <span class="thumbMinus"></span>
+              </span>
             </div>
           </article>
 

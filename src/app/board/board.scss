@@ -1,6 +1,13 @@
 .userText {
   display: inline-block;
 }
+body {
+  background-color: #3E474E;
+}
+
+.paneHeaders {
+  color: #E8CA9A;
+}
 
 #anonymousWarn {
   display: none;
@@ -8,23 +15,37 @@
   padding: 10px;
 }
 
+.panel-default {
+  float: left;
+}
+
+.panel-default > .fixed-panel-head {
+  background-color: #CEB18B;
+}
+
 .fixed-panel-head {
   max-height: 30px;
   min-height: 30px;
+  max-width: 200px;
+  min-width: 200px;
   vertical-align: middle;
   padding-bottom: 1px;
   padding-top: 2px;
+  color: #E8CA9A;
 }
 
 .fixed-panel-body {
-  max-height: 60px;
-  min-height: 60px;
+  max-height: 190px;
+  min-height: 190px;
+  max-width: 200px;
+  min-width: 200px;
   overflow-y: auto;
   overflow-x: hidden;
   -ms-hyphens: auto;
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
   word-break: break-all;
+  background-color: #E8CA9A;
   hyphens: auto;
 }
 

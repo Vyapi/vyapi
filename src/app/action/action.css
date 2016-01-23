@@ -12,3 +12,7 @@
   min-height: 60px;
   overflow-y: auto;
 }
+
+.paneHeaders {
+  color: #E8CA9A;
+}
