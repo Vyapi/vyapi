@@ -2,7 +2,7 @@ export class BoardController {
   constructor ($firebaseArray, $location) {
     'ngInject';
 
-
+    var userName = "";
     var roomID = $location.path().split("/")[2];
     console.log("roomID is " + roomID);
 
@@ -13,9 +13,32 @@ export class BoardController {
     this.msgRef = new Firebase(roomURL);
     this.messages = $firebaseArray(this.msgRef);
 
+    // $(this).toggleClass('btn-success').toggleClass('btn-default');
+    // $(this).
+
+    //CODE TO MAKE THE USER ANONYMOUS
+    /*$('#anonymousTogglePlus').toggle(function(){
+        $(this).addClass("active");
+        }, function () {
+        $(this).removeClass("active");
+    });*/
+
+    var anonymous = true;
+
+    this.toggle = function() {
+      anonymous = !anonymous;
+      if(!anonymous){
+        userName = authData.google.displayName;
+        $('.anonymousToggle').css({"background-color":"#eeeeee","color":"black"});
+      } else {
+        userName = "anonymous";
+        $('.anonymousToggle').css({"background-color":"#3c763d","color":"white"});
+      }
+      console.log(userName);
+    };
+
     //CODE TO ENTER THE OBJECT IN FIREBASE DATABASE
     this.submit = function(id) {
-      var userName = authData.google.displayName;
       var userMessage = (id=='plus') ? this.userMessagePlus : this.userMessageMinus;
 
       if (userMessage) {
@@ -46,18 +69,12 @@ export class BoardController {
     };
 
     //CODE TO DISPLAY THE 5 SECOND NOTIFICATION FOR ANONYMITY
-    $('#anonymousWarn').fadeIn().delay(10000).fadeOut();
+    $('#anonymousWarn').fadeIn().delay(5000).fadeOut();
 
     /*//CODE TO ENTER NEW LINE ON PRESSING SHIFT+ENTER
     $('#userTextPlus').on('keydown', function(event) {
       if (event.keyCode == 13)
         if (!event.shiftKey) $('#testForm').submit();
     });*/
-
-    //CODE TO MAKE THE USER ANONYMOUS
-
-    this.anonymous = function() {
-      userName = "anonymous";
-    }
   }
 }
