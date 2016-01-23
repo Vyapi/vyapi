@@ -39,13 +39,13 @@
     <ul id="action-items" class="list-unstyled">
       <li ng-repeat="item in action.items">
         <article class="panel panel-default">
-          <div class="panel-heading">
+          <div class="panel-heading fixed-panel-head">
             {{ item.name }}
+            <span type="button" class="btn btn-default btn-xs glyphicon glyphicon-thumbs-up pull-right"></span>
             <button class="btn btn-default btn-xs pull-right btn-danger glyphicon glyphicon-trash" ng-click="action.remove($index)"></button>
           </div>
-          <div class="panel-body" style="max-height: 10; min-height: 10; overflow-y: scroll;">
+          <div class="panel-body fixed-panel-body" style="max-height: 10; min-height: 10; overflow-y: scroll;">
             <p class="userText">{{ item.task }}</p>
-            <span type="button" class="btn btn-default btn-xs glyphicon glyphicon-thumbs-up pull-right"></span>
           </div>
         </article>
       </li>
