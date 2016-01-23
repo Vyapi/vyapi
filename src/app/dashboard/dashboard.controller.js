@@ -14,7 +14,7 @@ export class DashboardController {
 
 		Dashboard.getRooms(userID).on("value",(snapshot)=>{
 			let rooms = snapshot.val();
-			rooms = _.map(rooms,(room,key,url)=>{
+			rooms = _.map(rooms,(room,key)=>{
 				room.key = key;
 				room.url = this.path + '/' +  key;
 				//console.log(room.url);
