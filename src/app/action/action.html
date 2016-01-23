@@ -1,32 +1,70 @@
 
-<h1 align = "center">Action Items!</h1>
+<h2>Action Items!</h2>
 <div class="row">
   <div class="col-md-12">
-    <div class="form-group">
-      <form ng-submit="action.add()">
-       <textarea ng-model="action.text" class="form-control"></textarea>
-       <div>
-        <select ng-options="person for person in action.assignee" ng-model="person" ng-change="action.change(person)">
-            <option value="" text-align = "center">--Assignee--</option>
-        </select>
-        <button type="submit" class = "btn btn-xs btn-success"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add Action</button></div>
-      </form>
-    </div>
-  <ul class="list-unstyled">
-  <li ng-repeat="item in action.items">
-    <div class = "panel panel-default">
-       <div class = "panel-body" style="max-height: 10; min-height: 10; overflow-y: scroll;">
-         {{item.task}}
-         <div>
-        <select ng-options="asn for asn in action.assignee" ng-model="item.name" ng-change="action.modify(item)">
-       </select>
-      <button class = "btn btn-danger btn-xs" data-toggle="tooltip" data-placement="left" title ="Delete!"  ng-click="action.remove($index)"><i class="glyphicon glyphicon-trash"></i></i></button>
-      </div>
-    </div>
-  </div>
-    </li>
-  </ul>
 
-</div>
-</div>
+    <form ng-submit="action.add()">
+      <div class="form-group">
+        <div class="input-group">
+          <input ng-model="action.text" class="form-control" placeholder="Type an action..."  aria-label="..."/>
+          <!-- <input type="text" class="form-control" aria-label="..."> -->
+          <div class="input-group-btn">
+            <span class="form-control">
+              <select type="button" class="btn btn-default dropdown-toggle" ng-options="person for person in action.assignee" ng-model="person" ng-change="action.change(person)" style="">
+                <option value="" class="dropdown-menu dropdown-menu-right">Assignee</option>
+                <span class="caret"></span>
+              </select>
+            </span>
+          </div><!-- /btn-group -->
+        </div>
+      </div>
+    </form>
+
+
+    <!-- <div class="input-group">
+      <form ng-submit="action.add()">
+        <input ng-model="action.text" class="form-control"  placeholder="Type an action..."  aria-label="..."/>
+        <div class="input-group-btn">
+          <span type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action
+            <select ng-options="person for person in action.assignee" ng-model="person" ng-change="action.change(person)" class="dropdown-menu dropdown-menu-right">
+              <option value="" text-align = "center">Assignee</option>
+            </select>
+            <span class="caret"></span>
+          </span>
+        </div>
+      </form>
+    </div> -->
+
+
+    <ul id="action-items" class="list-unstyled">
+      <li ng-repeat="item in action.items">
+        <article class="panel panel-default">
+          <div class="panel-heading fixed-panel-head">
+            {{ item.name }}
+            <span type="button" class="btn btn-default btn-xs glyphicon glyphicon-thumbs-up pull-right"></span>
+            <button class="btn btn-default btn-xs pull-right btn-danger glyphicon glyphicon-trash" ng-click="action.remove($index)"></button>
+          </div>
+          <div class="panel-body fixed-panel-body" style="max-height: 10; min-height: 10; overflow-y: scroll;">
+            <p class="userText">{{ item.task }}</p>
+          </div>
+        </article>
+      </li>
+    </ul>
+
+
+    <!-- <ul class="list-unstyled">
+      <li ng-repeat="item in action.items">
+        <div class = "panel panel-default">
+          <div class = "panel-body" style="max-height: 10; min-height: 10; overflow-y: scroll;">
+            {{item.task}}
+            <div>
+              <select ng-options="asn for asn in action.assignee" ng-model="item.name" ng-change="action.modify(item)">
+              </select>
+              <button class = "btn btn-danger btn-xs" data-toggle="tooltip" data-placement="left" title ="Delete!"  ng-click="action.remove($index)"><i class="glyphicon glyphicon-trash"></i></button>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul> -->
+  </div>
 </div>

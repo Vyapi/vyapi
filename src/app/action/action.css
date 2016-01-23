@@ -1,0 +1,14 @@
+
+.fixed-panel-head {
+  max-height: 30px;
+  min-height: 30px;
+  vertical-align: middle;
+  padding-bottom: 1px;
+  padding-top: 2px;
+}
+
+.fixed-panel-body {
+  max-height: 60px;
+  min-height: 60px;
+  overflow-y: auto;
+}
