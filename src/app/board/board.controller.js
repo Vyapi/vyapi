@@ -51,9 +51,13 @@ export class BoardController {
 
       this.delete=function(msg){
         var ide=msg.$id;
-       // var roomRef = new Firebase('https://vyapi.firebaseio.com/messages/'+roomID).remove();
-       this.msgRef.child(ide).remove();
-       console.log(msg.$id);
-     };
-   }
- }
+        // var roomRef = new Firebase('https://vyapi.firebaseio.com/messages/'+roomID).remove();
+        this.msgRef.child(ide).remove();
+        console.log(msg.$id);
+      };
+
+      $('#anonymousWarn').fadeIn().delay(5000).fadeOut();
+
+
+    }
+  }

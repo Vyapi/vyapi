@@ -1,3 +1,14 @@
-.chat-messages {
+.userText {
+  display: inline-block;
+}
 
+#anonymousWarn {
+  display: none;
+  margin:10px;
+  padding: 10px;
+}
+
+.anonymousToggle {
+  background-color: #3c763d;
+  color: white;
 }

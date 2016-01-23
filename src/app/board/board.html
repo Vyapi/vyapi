@@ -3,12 +3,18 @@
 
 
   <div class="row">
-  <div class="col-md-6">
+    <div class="col-md-6">
       <h2>What we did right!</h2>
 
       <form ng-submit="board.submit('plus')">
         <div class="form-group">
-          <input ng-model="board.userMessagePlus" type="text" class="form-control" placeholder="Type a message..."/>
+          <div class="bg-success center-block" id="anonymousWarn" class="has-success">Ssshh.. You're anonymous now</div>
+          <div class="input-group">
+            <span type="button" id="anonymousToggle" class="input-group-addon btn btn-success anonymousToggle">
+              <span class="glyphicon glyphicon-eye-close pull-right"></span>
+            </span>
+            <input ng-model="board.userMessagePlus" type="text" class="form-control" aria-definedby="anonymousToggle" placeholder="Type a message...">
+          </div>
         </div>
       </form>
 
@@ -19,13 +25,11 @@
               {{ msg.from }}
               <button class="btn btn-default btn-xs pull-right btn-danger glyphicon glyphicon-trash" ng-click="board.delete(msg)"></button>
             </div>
-            <div class="panel-body" style="max-height: 10; min-height: 10;overflow-y: scroll;">
-              <p>{{ msg.text }}</p>
-
+            <div class="panel-body" style="max-height: 10; min-height: 10; overflow-y: scroll;">
+              <p class="userText">{{ msg.text }}</p>
+              <span type="button" class="btn btn-default btn-xs glyphicon glyphicon-thumbs-up pull-right" ng-click=""></span>
             </div>
-
           </article>
-
         </li>
       </ul>
 
@@ -37,7 +41,12 @@
 
       <form ng-submit="board.submit('minus')">
         <div class="form-group">
-          <input ng-model="board.userMessageMinus" type="text" class="form-control" placeholder="Type a message..."/>
+          <div class="input-group">
+            <span type="button" id="anonymousToggle" class="input-group-addon btn btn-success anonymousToggle">
+              <span class="glyphicon glyphicon-eye-close success pull-right"></span>
+            </span>
+            <input ng-model="board.userMessageMinus" type="text" class="form-control" placeholder="Type a message..."/>
+          </div>
         </div>
       </form>
 
@@ -49,7 +58,8 @@
               <button class="btn btn-default btn-xs pull-right btn-danger glyphicon glyphicon-trash" ng-click="board.delete(msg)"></button>
             </div>
             <div class="panel-body" style="max-height: 10; min-height: 10; overflow-y: scroll;">
-              {{ msg.text }}
+              <p class="userText">{{ msg.text }}</p>
+              <span type="button" class="btn btn-default btn-xs glyphicon glyphicon-thumbs-up pull-right" ng-click=""></span>
             </div>
           </article>
 
