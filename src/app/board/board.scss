@@ -21,11 +21,14 @@ body {
   float: left;
   margin-left: 0.8em;
   margin-bottom: 0.8em;
-  border-radius: 20px;
+  border-radius: 7px;
+  border: 0.2em solid #E34B2A;
 }
 
 .sticky > .sticky__head {
   background-color: #6D6A68;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 
 .sticky__head {
@@ -42,8 +45,8 @@ body {
 }
 
 .sticky__body {
-  max-height: 190px;
-  min-height: 190px;
+  max-height: 150px;
+  min-height: 150px;
   max-width: 200px;
   min-width: 200px;
   padding: 0.5em;
@@ -53,12 +56,17 @@ body {
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
   word-break: break-all;
-  background-color: #C4B5A5;
   color: #5D5A58;
   hyphens: auto;
 }
 
-.anonymousToggle {
+.anonymous-toggle {
   background-color: #6D6A68;
   color: white;
+}
+
+.glyphicon-remove-circle {
+  border: none;
+  background-color: transparent;
+  color: #E34B2A;
 }

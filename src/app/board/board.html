@@ -10,7 +10,7 @@
         <div class="form-group">
           <div class="bg-success center-block" id="anonymousWarn" class="has-success anonymousWarn">Ssshh.. You're anonymous now</div>
           <div class="input-group">
-            <span type="button" id="anonymousTogglePlus" class="input-group-addon btn btn-success anonymousToggle" ng-click="board.toggle()">
+            <span type="button" id="anonymousTogglePlus" class="input-group-addon btn anonymous-toggle" ng-click="board.toggle()">
               <span class="glyphicon glyphicon-eye-close pull-right"></span>
             </span>
             <input id="userTextPlus" ng-model="board.userMessagePlus" type="text" class="form-control" aria-definedby="anonymousToggle" placeholder="Type a message">
@@ -21,14 +21,16 @@
       <ul id="chat-messages-plus" class="list-unstyled">
         <li ng-repeat="msg in board.messages | filter:{lane:'plus'}">
           <div class="sticky">
-            <div class="sticky__head">
-              {{ msg.from }}
-              <button class="btn btn-default btn-xs pull-right btn-danger glyphicon glyphicon-trash" ng-click="board.delete(msg)"></button>
+            <div>
+              <button class="btn btn-default btn-xs pull-right btn-danger glyphicon glyphicon-remove-circle" ng-click="board.delete(msg)"></button>
             </div>
             <div class="sticky__body">
-              <p class="userText">{{ msg.text }}</p>
-              <span type="button" class="btn btn-default btn-xs glyphicon glyphicon-thumbs-up pull-right" ng-click="">
-                <span class="thumbPlus"></span>
+              <div><p class="userText">{{ msg.text }}</p></div>
+            </div>
+            <div class="sticky__head">
+              {{ msg.from }}
+              <span type="button" class="btn btn-default btn-xs glyphicon glyphicon-thumbs-up pull-right pull-bottom" ng-click="">
+                <span class="thumb__plus"></span>
               </span>
             </div>
           </div>
@@ -38,12 +40,11 @@
 
     <div class="col-md-6">
       <h2 class="group-header">What could improve!</h2>
-
       <form ng-submit="board.submit('minus')">
         <div class="form-group">
           <!-- <div class="bg-success center-block" id="anonymousWarnMinus" class="has-success anonymousWarn">Ssshh.. You're anonymous now</div> -->
           <div class="input-group">
-            <span type="button" id="anonymousToggleMinus" class="input-group-addon btn btn-success anonymousToggle" ng-click="board.toggle()">
+            <span type="button" id="anonymousToggleMinus" class="input-group-addon btn anonymous-toggle" ng-click="board.toggle()">
               <span class="glyphicon glyphicon-eye-close success pull-right"></span>
             </span>
             <input id="userTextMinus" ng-model="board.userMessageMinus" type="text" class="form-control userText" placeholder="Type a message..."/>
@@ -54,18 +55,19 @@
       <ul id="chat-messages-minus" class="list-unstyled">
         <li ng-repeat="msg in board.messages | filter:{lane:'minus'}">
           <div class="sticky">
-            <div class="sticky__head">
-              {{ msg.from }}
-              <button class="btn btn-default btn-xs pull-right btn-danger glyphicon glyphicon-trash" ng-click="board.delete(msg)"></button>
+            <div>
+              <button class="btn btn-default btn-xs pull-right btn-danger glyphicon glyphicon-remove-circle" ng-click="board.delete(msg)"></button>
             </div>
             <div class="sticky__body">
-              <p class="userText">{{ msg.text }}</p>
+              <div><p class="userText">{{ msg.text }}</p></div>
+            </div>
+            <div class="sticky__head">
+              {{ msg.from }}
               <span type="button" class="btn btn-default btn-xs glyphicon glyphicon-thumbs-up pull-right pull-bottom" ng-click="">
-                <span class="thumbMinus"></span>
+                <span class="thumb__minus"></span>
               </span>
             </div>
           </div>
-
         </li>
       </ul>
 

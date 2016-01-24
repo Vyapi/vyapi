@@ -3,6 +3,7 @@ export class BoardController {
     'ngInject';
 
     var userName = "";
+    var appURL = "https://vyapi.firebaseio.com/";
     var roomID = $location.path().split("/")[2];
     console.log("roomID is " + roomID);
 
@@ -17,22 +18,16 @@ export class BoardController {
     // $(this).
 
     //CODE TO MAKE THE USER ANONYMOUS
-    /*$('#anonymousTogglePlus').toggle(function(){
-        $(this).addClass("active");
-        }, function () {
-        $(this).removeClass("active");
-    });*/
-
     var anonymous = true;
 
     this.toggle = function() {
       anonymous = !anonymous;
       if(!anonymous){
         userName = authData.google.displayName;
-        $('.anonymousToggle').css({"background-color":"#eeeeee","color":"black"});
+        $('.anonymous-toggle').css({"background-color":"#eeeeee","color":"black"});
       } else {
         userName = "anonymous";
-        $('.anonymousToggle').css({"background-color":"#6D6A68","color":"white"});
+        $('.anonymous-toggle').css({"background-color":"#6D6A68","color":"white"});
       }
       console.log(userName);
     };
@@ -52,13 +47,22 @@ export class BoardController {
           lane: id
         });
 
+        //CODE TO GET USER PHOTO FOR DISPLAY ON BOTTOM OF STICKY
+        (new Firebase(encodeURI(appURL + "users/" + authData.uid + "/google/profileImageURL/"))).once("value", (value) => {
+          var profileImageURL = value.val();
+          console.log("USER PHOTO");
+          return profileImageURL;
+        });
+
+        var roomURL= "https://vyapi.firebaseio.com/users/google%3A" + authData.uid + "/google/profileImageURL";
+
         this.userMessagePlus = '';
         this.userMessageMinus = '';
       }
     };
 
     //CODE TO DELETE THE MESSAGE POSTED
-    this.delete=function(msg){
+    this.delete = function(msg){
       var ide=msg.$id;
       //  console.log(msg.uid);
       //console.log(authData.google.id);
@@ -76,5 +80,11 @@ export class BoardController {
       if (event.keyCode == 13)
         if (!event.shiftKey) $('#testForm').submit();
     });*/
+
+    this.imageSrc = function(profId) {
+    var roomURL= "https://vyapi.firebaseio.com/users/google%3A" + profId.uid + "/google/profileImageURL";
+    return roomURL;
+    }
+
   }
 }

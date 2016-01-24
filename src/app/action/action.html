@@ -21,50 +21,22 @@
     </form>
 
 
-    <!-- <div class="input-group">
-      <form ng-submit="action.add()">
-        <input ng-model="action.text" class="form-control"  placeholder="Type an action..."  aria-label="..."/>
-        <div class="input-group-btn">
-          <span type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action
-            <select ng-options="person for person in action.assignee" ng-model="person" ng-change="action.change(person)" class="dropdown-menu dropdown-menu-right">
-              <option value="" text-align = "center">Assignee</option>
-            </select>
-            <span class="caret"></span>
-          </span>
-        </div>
-      </form>
-    </div> -->
-
-
     <ul id="action-items" class="list-unstyled">
       <li ng-repeat="item in action.items">
         <article class="sticky">
-          <div class="sticky__head">
-            {{ item.name }}
-            <button class="btn btn-default btn-xs pull-right btn-danger glyphicon glyphicon-trash" ng-click="action.remove($index)"></button>
-          </div>
-          <div class="sticky__body" style="max-height: 10; min-height: 10; overflow-y: scroll;">
-            <p class="userText">{{ item.task }}</p>
-            <span type="button" class="btn btn-default btn-xs glyphicon glyphicon-thumbs-up pull-right"></span>
-          </div>
-        </article>
-      </li>
-    </ul>
-
-
-    <!-- <ul class="list-unstyled">
-      <li ng-repeat="item in action.items">
-        <div class = "panel panel-default">
-          <div class = "panel-body" style="max-height: 10; min-height: 10; overflow-y: scroll;">
-            {{item.task}}
-            <div>
-              <select ng-options="asn for asn in action.assignee" ng-model="item.name" ng-change="action.modify(item)">
-              </select>
-              <button class = "btn btn-danger btn-xs" data-toggle="tooltip" data-placement="left" title ="Delete!"  ng-click="action.remove($index)"><i class="glyphicon glyphicon-trash"></i></button>
+          <div>
+            <button class="btn btn-default btn-xs pull-right btn-danger glyphicon glyphicon-remove-circle" ng-click="action.remove($index)"></button></div>
+            <div class="sticky__body" style="max-height: 10; min-height: 10; overflow-y: scroll;">
+              <p class="userText">{{ item.task }}</p>
             </div>
-          </div>
-        </div>
-      </li>
-    </ul> -->
+            <div class="sticky__head">
+              {{ item.name }}
+              <span type="button" class="btn btn-default btn-xs glyphicon glyphicon-thumbs-up pull-right"></span>
+            </div>
+          </article>
+        </li>
+      </ul>
+
+
+    </div>
   </div>
-</div>
