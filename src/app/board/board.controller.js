@@ -32,7 +32,7 @@ export class BoardController {
         $('.anonymousToggle').css({"background-color":"#eeeeee","color":"black"});
       } else {
         userName = "anonymous";
-        $('.anonymousToggle').css({"background-color":"#3c763d","color":"white"});
+        $('.anonymousToggle').css({"background-color":"#6D6A68","color":"white"});
       }
       console.log(userName);
     };

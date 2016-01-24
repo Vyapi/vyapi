@@ -2,11 +2,13 @@
   display: inline-block;
 }
 body {
-  background-color: #3E474E;
+  background-color: #f4f1e8;
+  background-image: url("http://www.transparenttextures.com/patterns/diamond-eyes.png");
+  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
 
-.paneHeaders {
-  color: #E8CA9A;
+.group-header {
+  color: #6D6A68;
 }
 
 #anonymousWarn {
@@ -15,15 +17,18 @@ body {
   padding: 10px;
 }
 
-.panel-default {
+.sticky {
   float: left;
+  margin-left: 0.8em;
+  margin-bottom: 0.8em;
+  border-radius: 20px;
 }
 
-.panel-default > .fixed-panel-head {
-  background-color: #CEB18B;
+.sticky > .sticky__head {
+  background-color: #6D6A68;
 }
 
-.fixed-panel-head {
+.sticky__head {
   max-height: 30px;
   min-height: 30px;
   max-width: 200px;
@@ -31,25 +36,29 @@ body {
   vertical-align: middle;
   padding-bottom: 1px;
   padding-top: 2px;
-  color: #E8CA9A;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  color: white;
 }
 
-.fixed-panel-body {
+.sticky__body {
   max-height: 190px;
   min-height: 190px;
   max-width: 200px;
   min-width: 200px;
+  padding: 0.5em;
   overflow-y: auto;
   overflow-x: hidden;
   -ms-hyphens: auto;
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
   word-break: break-all;
-  background-color: #E8CA9A;
+  background-color: #C4B5A5;
+  color: #5D5A58;
   hyphens: auto;
 }
 
 .anonymousToggle {
-  background-color: #3c763d;
+  background-color: #6D6A68;
   color: white;
 }

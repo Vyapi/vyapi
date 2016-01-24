@@ -1,5 +1,7 @@
 body {
-  background-color: #3E474E;
+  background-color: #F4F1E8;
+  background-image: url("http://www.transparenttextures.com/patterns/concrete-wall.png");
+  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
 
 .paneHeaders {
@@ -12,4 +14,8 @@ body {
 
 .navbar-header {
   color: #CEB18B;
+}
+
+.navbar--transparent{
+  background: transparent;
 }
