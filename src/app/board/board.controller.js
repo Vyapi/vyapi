@@ -5,6 +5,7 @@ export class BoardController {
     var userName = "";
     var roomID = $location.path().split("/")[2];
     console.log("roomID is " + roomID);
+    this.likes = [];
 
     var userRef = new Firebase("https://vyapi.firebaseio.com/messages");
     var authData = userRef.getAuth();
@@ -76,5 +77,29 @@ export class BoardController {
       if (event.keyCode == 13)
         if (!event.shiftKey) $('#testForm').submit();
     });*/
+    
+    //if message added, add a listener for the number of likes
+    //todo: optimization. the listeners still live even if the corresponding messsage is deleted
+    (new Firebase(roomURL)).on('value', (messagesObj) => {
+      for (var messageId in messagesObj.val()) {
+        (new Firebase(roomURL + "/" + messageId + "/like/")).on("value", (userId) => {
+          if(userId.val() != null) {
+            console.log("user: " + Object.keys(userId.val()) + " liked " + messageId);
+            if(this.likes[messageId] == undefined)
+              this.likes[messageId] = 0;
+            this.likes[messageId] += 1;
+          }
+        });
+      }
+    });
+    
+    //handle like button click for a message
+    this.like = function(index) { //index is the index in this.messages array
+      console.table("like: " + this.messages[index].$id);
+      (new Firebase(roomURL)).child(this.messages[index].$id + "/like/" +authData.uid).set(1);
+    }
+    
+    
+    
   }
 }
