@@ -3,14 +3,7 @@
   "version": "0.0.0",
   "dependencies": {
     "bower": "~1.7.2",
-    "bootstrap": "3.3.6"
-  },
-  "scripts": {
-    "preinstall": "bower install",
-    "postinstall": "gulp build && npm cache clear && npm cache ls"
-  },
-  "devDependencies": {
-    "estraverse": "~4.1.0",
+    "bootstrap": "3.3.6",
     "gulp": "~3.9.0",
     "gulp-autoprefixer": "~3.0.2",
     "gulp-angular-templatecache": "~1.8.0",
@@ -56,6 +49,13 @@
     "chalk": "~1.1.1",
     "uglify-save-license": "~0.4.1",
     "wrench": "~1.5.8"
+  },
+  "scripts": {
+    "preinstall": "bower install",
+    "postinstall": "gulp build && npm cache clear && npm cache ls"
+  },
+  "devDependencies": {
+    "estraverse": "~4.1.0"
   },
   "engines": {
     "node": ">=0.10.0"
