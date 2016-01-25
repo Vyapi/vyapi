@@ -43,7 +43,6 @@ export class LoginController {
   }
 
   firebaseAuthlogout() {
-    console.log('from logout method');
     this.authObj = this.fa(this.ref);
     var authData = this.authObj.$getAuth();
     if (authData) {
