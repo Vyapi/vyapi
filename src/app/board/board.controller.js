@@ -6,6 +6,7 @@ export class BoardController {
     var appURL = "https://vyapi.firebaseio.com/";
     var roomID = $location.path().split("/")[2];
     console.log("roomID is " + roomID);
+    this.likes = [];
 
     var userRef = new Firebase("https://vyapi.firebaseio.com/messages");
     var authData = userRef.getAuth();
@@ -81,10 +82,51 @@ export class BoardController {
         if (!event.shiftKey) $('#testForm').submit();
     });*/
 
-    this.imageSrc = function(profId) {
-    var roomURL= "https://vyapi.firebaseio.com/users/google%3A" + profId.uid + "/google/profileImageURL";
-    return roomURL;
+    //if message added, add a listener for the number of likes
+    //todo: optimization. the listeners still live even if the corresponding messsage is deleted
+    (new Firebase(roomURL)).on('value', (messagesObj) => {
+      for (var messageId in messagesObj.val()) {
+        (new Firebase(roomURL + "/" + messageId + "/like/")).on("value", (userId) => {
+          if(userId.val() != null) {
+            console.log("user: " + Object.keys(userId.val()) + " liked " + messageId);
+            if(this.likes[messageId] == undefined)
+              this.likes[messageId] = 0;
+            this.likes[messageId] = this.likes[messageId] +1;
+          }
+        });
+      }
+    });
+
+    //handle like button click for a message
+    this.like = function(msg) { //index is the index in this.messages array
+      var text = msg.$id;
+      console.table("like: " + msg.$id);
+      (new Firebase(roomURL)).child(text + "/like/" +authData.uid).set(1);
     }
 
+    //Function to retrieve likes for a sticky
+    this.getLikeCount = function (msg){
+      console.log(this.likes);
+      return this.likes[msg.$id];
+    }
+
+    //CODE TO ENABLE DRAG AND DROP OF STICKYs
+    $(function() {
+      $("#chat-messages-plus").sortable();
+      $("#chat-messages-minus").sortable();
+      $("#chat-messages-plus").disableSelection();
+      $("#chat-messages-minus").disableSelection();
+    });
+
+    //CODE TO SHOW DELETE/LIKE ETC ON HOVER
+    this.hover = function(){
+      $('.delete-btn').css({'display' : 'inline-block'});
+      $('.like-btn').css({'display' : 'inline-block'});
+    };
+
+    this.show = function(){
+      $('.delete-btn').css({'display' : 'none'});
+      $('.like-btn').css({'display' : 'none'});
+    };
   }
 }

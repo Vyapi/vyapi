@@ -21,17 +21,17 @@
       <ul id="chat-messages-plus" class="list-unstyled">
         <li ng-repeat="msg in board.messages | filter:{lane:'plus'}">
           <div class="sticky">
-            <div>
-              <button class="btn btn-default btn-xs pull-right btn-danger glyphicon glyphicon-remove-circle" ng-click="board.delete(msg)"></button>
-            </div>
-            <div class="sticky__body">
-              <div><p class="userText">{{ msg.text }}</p></div>
-            </div>
-            <div class="sticky__head">
-              {{ msg.from }}
-              <span type="button" class="btn btn-default btn-xs glyphicon glyphicon-thumbs-up pull-right pull-bottom" ng-click="">
-                <span class="thumb__plus"></span>
-              </span>
+          <div class="sticky-note" ng-mouseover="board.hover()" ng-mouseout="board.show()">
+              <button class="btn btn-default btn-xs pull-right btn-danger glyphicon glyphicon-remove-circle delete-btn" ng-click="board.delete(msg)"></button>
+              <div class="sticky__body">
+                <div><p class="userText">{{ msg.text }}</p></div>
+              </div>
+              <div class="sticky__head">
+                <!-- {{ msg.from }} -->
+                <span type="button" class="btn btn-default btn-xs glyphicon glyphicon-thumbs-up pull-right pull-bottom like-btn" ng-click="board.like(msg);">
+                  <!-- {{ board.getLikeCount(msg) }} -->
+                </span>
+              </div>
             </div>
           </div>
         </li>
@@ -55,17 +55,18 @@
       <ul id="chat-messages-minus" class="list-unstyled">
         <li ng-repeat="msg in board.messages | filter:{lane:'minus'}">
           <div class="sticky">
-            <div>
-              <button class="btn btn-default btn-xs pull-right btn-danger glyphicon glyphicon-remove-circle" ng-click="board.delete(msg)"></button>
-            </div>
-            <div class="sticky__body">
-              <div><p class="userText">{{ msg.text }}</p></div>
-            </div>
-            <div class="sticky__head">
-              {{ msg.from }}
-              <span type="button" class="btn btn-default btn-xs glyphicon glyphicon-thumbs-up pull-right pull-bottom" ng-click="">
-                <span class="thumb__minus"></span>
-              </span>
+            <div class="sticky-note" ng-mouseover="board.hover()" ng-mouseout="board.show()">
+              <div>
+                <button class="btn btn-default btn-xs pull-right btn-danger glyphicon glyphicon-remove-circle delete-btn" ng-click="board.delete(msg)"></button>
+              </div>
+              <div class="sticky__body">
+                <div><p class="userText">{{ msg.text }}</p></div>
+              </div>
+              <div class="sticky__head">
+                <!-- {{ msg.from }} -->
+                <span type="button" class="btn btn-default btn-xs glyphicon glyphicon-thumbs-up pull-right pull-bottom like-btn" ng-click="">
+                </span>
+              </div>
             </div>
           </div>
         </li>
