@@ -5,7 +5,7 @@
     "bootstrap": "3.3.6"
   },
   "scripts": {
-    "postinstall": "bower install && gulp build && npm cache clear && npm cache ls"
+    "postinstall": "gulp build && npm cache clear && npm cache ls && bower install"
   },
   "devDependencies": {
     "bower": "~1.7.2",
