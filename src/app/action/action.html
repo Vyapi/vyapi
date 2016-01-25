@@ -1,4 +1,3 @@
-
 <h2>Action Items!</h2>
 <div class="row">
   <div class="col-md-12">
@@ -11,8 +10,8 @@
           <div class="input-group-btn">
             <span class="form-control">
               <select type="button" class="btn btn-default dropdown-toggle" ng-options="person for person in action.assignee" ng-model="person" ng-change="action.change(person)" style="">
-                <option value="" class="dropdown-menu dropdown-menu-right">Assignee</option>
-                <span class="caret"></span>
+              <option value="" class="dropdown-menu dropdown-menu-right">Assignee</option>
+              <span class="caret"></span>
               </select>
             </span>
           </div><!-- /btn-group -->
@@ -40,8 +39,9 @@
       <li ng-repeat="item in action.items">
         <article class="panel panel-default">
           <div class="panel-heading fixed-panel-head">
-            {{ item.name }}
             <span type="button" class="btn btn-default btn-xs glyphicon glyphicon-thumbs-up pull-right"></span>
+            <select ng-options="asn for asn in action.assignee" ng-model="item.name" ng-change="action.modify(item)" class="form-control">
+            </select>
             <button class="btn btn-default btn-xs pull-right btn-danger glyphicon glyphicon-trash" ng-click="action.remove($index)"></button>
           </div>
           <div class="panel-body fixed-panel-body" style="max-height: 10; min-height: 10; overflow-y: scroll;">
