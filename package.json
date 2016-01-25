@@ -1,9 +1,12 @@
 {
   "name": "vyapi",
   "version": "0.0.0",
+  "main": "server.js",
   "dependencies": {
     "bower": "~1.7.2",
     "bootstrap": "3.3.6",
+    "ejs": "~1.0.0",
+    "express": "~4.9.8",
     "gulp": "~3.9.0",
     "gulp-autoprefixer": "~3.0.2",
     "gulp-angular-templatecache": "~1.8.0",
@@ -52,7 +55,8 @@
   },
   "scripts": {
     "preinstall": "bower install",
-    "postinstall": "gulp build && npm cache clear && npm cache ls"
+    "postinstall": "gulp build && npm cache clear && npm cache ls",
+    "start": "node server.js"
   },
   "devDependencies": {
     "estraverse": "~4.1.0"
