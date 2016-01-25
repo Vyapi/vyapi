@@ -1,14 +1,14 @@
-<footer >
-  <nav class="navbar navbar-default navbar-fixed-bottom">
+<footer>
+  <nav class="navbar-bottom navbar-default navbar-fixed-bottom">
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
         <ul class="list-inline">
         <li>
-          <button class="{{users.statusClass}}" title="Show all users" data-toggle="modal" data-target="#myModal" ><i class="glyphicon glyphicon-th-list"></i></i></button>
+          <button class="{{users.statusClass}} btn btn-default" title="Show all users" data-toggle="modal" data-target="userModal" ><i class="glyphicon glyphicon-option-vertical" style="text-align: left"></i></button>
         </li>
         <li ng-repeat = "(uid, user) in users.onlineUsers" style="display: list-inline;" class="ng-animate ng-enter ng-leave animated bounce">
-          <img class =  "img-circle" title="{{user.name}}" src="{{user.photo}}" style="height: 4em; padding: .5em;">
+          <a href="#" style=" display: block;"data-toggle="tooltip" title="{{user.name}}"><img class =  "img-circle" title="{{user.name}}" src="{{user.photo}}"></img><span class="user-badge">2</span></a>
         </li>
     </ul>
       </div>
