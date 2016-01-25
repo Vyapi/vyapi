@@ -20,7 +20,8 @@ export class ActionController {
       data2.once('value',(userSnapshot)=>{
               var userNames=userSnapshot.val()['displayName'];
               this.assignee.push(userNames);
-              //console.log(self);
+              // console.log(this.assignee);
+              // console.log(typeof this.assignee);
       });
     });
     // data === "hello"
