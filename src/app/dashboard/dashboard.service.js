@@ -5,7 +5,7 @@ export class Dashboard{
 	  this.rootRef = new Firebase(this.rootURL);
 	  this.roomsURL = this.rootURL + 'rooms';
 	  this.roomsRef = new Firebase(this.rootURL + 'rooms');
-      this.messageRef = new Firebase(this.rootURL + 'messages');
+		this.messageRef = new Firebase(this.rootURL + 'messages');
 	  let data = $firebaseArray(this.roomsRef);
   }
   getRooms(userID){
@@ -14,7 +14,14 @@ export class Dashboard{
   getUserID(){
 	  let authData = this.rootRef.getAuth();
 	  return authData.uid;
-  }
+		}
+	remove(roomKey){
+		let roomDbRef = new Firebase(this.roomsURL + '/' + roomKey);
+		roomDbRef.remove();
+		let messageDbRef = new Firebase(this.messageRef + '/' + roomKey);
+		messageDbRef.remove();
+		return;
+	}
   createRoom(userID){
 	let roomName=prompt('Room Name','Default');
 	if(!roomName){
