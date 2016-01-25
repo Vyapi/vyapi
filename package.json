@@ -6,7 +6,8 @@
     "bootstrap": "3.3.6"
   },
   "scripts": {
-    "postinstall": "gulp build && npm cache clear && npm cache ls && bower install"
+    "preinstall": "bower install",
+    "postinstall": "gulp build && npm cache clear && npm cache ls"
   },
   "devDependencies": {
     "estraverse": "~4.1.0",
