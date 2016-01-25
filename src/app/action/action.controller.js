@@ -11,14 +11,15 @@ export class ActionController {
     //this.roomID='-K8rJxJaWp5N6v91fP2M';
     var roomRef = new Firebase('https://vyapi.firebaseio.com/rooms/'+this.roomID);
     var room = roomRef.child("members");
-    room.once("value", (snapshot) => {
+    room.on("value", (snapshot) => {
     snapshot.forEach((uid)=>{
       var personRef = new Firebase('https://vyapi.firebaseio.com/users/');
       //console.log(''+child.key()+'/google/');
       var data2=personRef.child(''+uid.key()+'/google/');
       $firebaseArray(data2);
-      data2.once('value',(userSnapshot)=>{
+      data2.on('value',(userSnapshot)=>{
               var userNames=userSnapshot.val()['displayName'];
+              console.log('pushed', userNames);
               this.assignee.push(userNames);
               // console.log(this.assignee);
               // console.log(typeof this.assignee);

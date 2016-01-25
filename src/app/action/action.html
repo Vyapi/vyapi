@@ -40,7 +40,7 @@
         <article class="panel panel-default">
           <div class="panel-heading fixed-panel-head">
             <span type="button" class="btn btn-default btn-xs glyphicon glyphicon-thumbs-up pull-right"></span>
-            <select ng-options="asn for asn in action.assignee" ng-model="item.name" ng-change="action.modify(item)" class="selectpicker">
+            <select ng-options="asn for asn in action.assignee" ng-model="item.name" ng-change="action.modify(item)" class="form-control">
             </select>
             <button class="btn btn-default btn-xs pull-right btn-danger glyphicon glyphicon-trash" ng-click="action.remove($index)"></button>
           </div>
