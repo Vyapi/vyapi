@@ -1,6 +1,8 @@
 {
   "extends": "eslint:recommended",
-  "plugins": ["angular"],
+  "plugins": [
+    "angular"
+  ],
   "env": {
     "es6": true,
     "browser": true,
@@ -12,6 +14,8 @@
   "globals": {
     "angular": true,
     "module": true,
-    "inject": true
+    "inject": true,
+    "Firebase": true,
+    "_": true
   }
 }

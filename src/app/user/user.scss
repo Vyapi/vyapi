@@ -1,0 +1,34 @@
+footer {
+  margin-top: 60px;
+  position: relative;
+  bottom: 0;
+}
+
+img {
+  height: 3em;
+  padding-left: .25em;
+  padding-right: .25em;
+  border: .5em;
+}
+
+span {
+  padding-left: .5em;
+}
+
+li.ng-enter.ng-enter-active,
+li.ng-leave {
+    opacity: 1;
+    -webkit-transition: opacity 300ms linear;
+    -moz-transition: opacity 300ms linear;
+    transition: opacity 300ms linear;
+}
+
+
+
+li.ng-leave.ng-leave-active,
+li.ng-enter {
+    opacity: 0;
+    -webkit-transition: opacity 300ms linear;
+    -moz-transition: opacity 300ms linear;
+    transition: opacity 300ms linear;
+}
