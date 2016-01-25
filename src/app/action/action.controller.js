@@ -8,6 +8,7 @@ export class ActionController {
     this.assignee=[];
 //
     this.roomID=$stateParams.roomKey; //temporary
+    //this.roomID='-K8rJxJaWp5N6v91fP2M';
     var roomRef = new Firebase('https://vyapi.firebaseio.com/rooms/'+this.roomID);
     var room = roomRef.child("members");
     room.once("value", (snapshot) => {
