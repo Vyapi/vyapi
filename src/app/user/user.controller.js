@@ -69,11 +69,11 @@ export class UserController {
               onlineUsersRef.child(roomId + "/" + uid).onDisconnect().remove();
             }
           });
-        } else {
-          this.statusClass = "btn-default";
-          $log.warn("not connected");
-        }
-      });
+} else {
+  this.statusClass = "btn-default";
+  $log.warn("not connected");
+}
+});
 
       //user came online
       onlineUsersRef.child(roomId).on('child_added', (userId) => {
