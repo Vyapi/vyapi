@@ -1,18 +1,8 @@
-export class FireAuth{
-  constructor($firebaseAuth,$log){
+export class FireData{
+  constructor(FireConnect,$log){
     'ngInject';
-    this.firebaseURL = "https://vyapi.firebaseio.com";
-    this.ref = new Firebase("https://vyapi.firebaseio.com");
-    this.authObj = $firebaseAuth(this.ref);
-    this.authData = this.authObj.$getAuth();
-    this.clog = $log;
+    this.fc = FireConnect;
   }
+  
 
-  connect(){
-    return this.authObj
-  }
-
-  getRef(){
-    return this.ref;
-  }
 }
