@@ -9,6 +9,7 @@
     "postinstall": "gulp build && npm cache clear && npm cache ls"
   },
   "devDependencies": {
+    "bower": "~1.7.2",
     "estraverse": "~4.1.0",
     "gulp": "~3.9.0",
     "gulp-autoprefixer": "~3.0.2",
