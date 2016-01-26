@@ -6,7 +6,8 @@ export class Dashboard{
     this.roomsURL = this.rootURL + 'rooms';
     this.roomsRef = new Firebase(this.rootURL + 'rooms');
     this.messageRef = new Firebase(this.rootURL + 'messages');
-    let data = $firebaseArray(this.roomsRef);
+    // let data = $firebaseArray(this.roomsRef);
+    $firebaseArray(this.roomsRef);
   }
   getRooms(userID){
     return this.roomsRef.orderByChild("ownedBy").equalTo(userID)
@@ -23,7 +24,7 @@ export class Dashboard{
     else{
       let newRoom = this.roomsRef.push({roomName : roomName, ownedBy : userID});
       //this.rootRef.child("messages/"+ newRoom.key()).set(roomName);
-      return;
+      return newRoom;
     }
   }
 }
