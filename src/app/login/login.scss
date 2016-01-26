@@ -1,18 +1,22 @@
-h1 {
-  font-family:  cursive;
-}
-h2 {
-    font-family: times new roman;
-}
-a:hover, a:visited{
-  text-decoration: none;
-}
-
+@import url(https://fonts.googleapis.com/css?family=Atomic+Age);
 #divCenter {
   padding-bottom: 3%;
 }
 
 img.screenShot {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
+}
+.developersBottom {
+  background-color: transparent;
+  border-color: transparent;
+}
+.listCenter {
+  text-align: center;
+}
+body,h1 {
+  font-family: 'Atomic Age', cursive;
+}
+body {
+  background-image: url(http://s3.amazonaws.com/agile_designer_uploads/images/165/large.jpg);
 }
