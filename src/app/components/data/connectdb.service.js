@@ -10,19 +10,19 @@ export class FireConnect{
   }
 
   connect(path='/'){
-    this.ref = new Firebase("https://vyapi.firebaseio.com"+path);
+    this.ref = new Firebase(`https://vyapi.firebaseio.com${path}`);
     this.authObj = this.fa(this.ref);
-    this.clog.log("authObject returned, connection made to "+path);
+    this.clog.info(`authObject returned, connection made to ${path}`);
     return this.authObj;
   }
 
   getRef(){
-    this.clog.log("reference to the firebase auth returned");
+    this.clog.info("reference to the firebase auth returned");
     return this.ref;
   }
 
   getUserAuth(){
-    this.clog.log("auth status of user returned");
+    this.clog.info("auth status of user returned");
     return this.authData;
   }
 }

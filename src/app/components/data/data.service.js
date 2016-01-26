@@ -1,5 +1,5 @@
 export class FireData{
-  constructor(FireConnect,$log){
+  constructor(FireConnect){
     'ngInject';
     this.fc = FireConnect;
     this.authObj = null;
@@ -7,6 +7,11 @@ export class FireData{
     // for rooms
     this.roomPath = '/rooms';
     this.messagesPath = '/messages';
+  }
+
+  getAuthData(){
+    var authObjLocal = this.fc.connect('/')
+    return authObjLocal.$getAuth();
   }
 
   authExist(path='/'){
@@ -22,27 +27,7 @@ export class FireData{
   }
 
   getUid(){
-    var authDataLocal = authExist();
+    var authDataLocal = this.authExist();
     return authDataLocal.uid;
   }
-
-  getRooms(userID){
-    var ref = this.fc.connect(this.roomPath);
-    return ref.orderByChild("ownedBy").equalTo(userID);
-  }
-
-  createRoom(userID){
-    var ref = this.fc.connect(this.roomPath);
-    let roomName=prompt('Room Name','Default');
-    if(!roomName){
-      alert('Please enter a valid room name');
-    }
-    else{
-      let newRoom = ref.push({roomName : roomName, ownedBy : userID});
-      return newRoom;
-    }
-  }
-
-
-
 }
