@@ -64,11 +64,13 @@ export class UserController {
         $log.log("User: " + userId.key() + " came online");
         
         //fetch details of the user that just came online
-        (new Firebase(encodeURI(appURL + "users/" + uid + "/google/cachedUserProfile/given_name/"))).once("value", (value) => {
+        (new Firebase(encodeURI(appURL + "users/" + userId.key() + "/google/cachedUserProfile/given_name/"))).once("value", (value) => {
           var userName = value.val();
-          (new Firebase(encodeURI(appURL + "users/" + uid + "/google/profileImageURL/"))).once("value", (value) => {
+          (new Firebase(encodeURI(appURL + "users/" + userId.key() + "/google/profileImageURL/"))).once("value", (value) => {
             var profileImageURL = value.val();
             this.onlineUsers[userId.key()] = {name: userName, photo : profileImageURL};
+            for(var u in this.onlineUsers)
+              $log.log(u);
           });
         });
       });
