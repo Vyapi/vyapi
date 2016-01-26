@@ -5,7 +5,7 @@ var path = require('path');
 app.set('port', (process.env.PORT || 5000));
 
 app.get('/', function (req, res) {
-    res.sendFile('index.html', { root: path.join(__dirname, '/dist') });
+    res.sendFile('index.html', { root: path.join(__dirname, '/dist/') });
 });
 
 app.listen(app.get('port'), function () {
