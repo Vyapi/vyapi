@@ -37,7 +37,7 @@
 
 
     <ul id="action-items" class="list-unstyled">
-      <li ng-repeat="item in action.items">
+      <li data-ng-repeat="item in action.items.slice().reverse()">
         <article class="panel panel-default">
           <div class="panel-heading fixed-panel-head">
             {{ item.name }}
