@@ -28,33 +28,15 @@
             </div>
             <div class="sticky__body">
               <div ng-if="board.isOwner(msg)" >
-              <p class="userText"  >{{ msg.text }}</p>
-              <span type="button" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-xs glyphicon  glyphicon-thumbs-down pull-right" ng-click="board.edit(msg)"></span>
-              <!-- Modal -->
-              <div id="myModal" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-
-                  <!-- Modal content-->
-                  <div class="modal-content">
-                    <div class="modal-body">
-                      <textarea ng-model="board.currentMessageText"></textarea>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal" ng-click= "board.saveEdit()">Done</button>
-                    </div>
-                  </div>
-
-                </div>
+                <textarea class="userText" ng-model="msg.text" >{{ msg.text }}</textarea>
+                <span type="button" class="btn btn-default btn-xs glyphicon glyphicon-thumbs-down pull-right" ng-click="board.saveEdit(msg)">
+                  <span class="Done"></span>
+                </span>
               </div>
-
-
-
-            </div>
-            <div ng-if="!board.isOwner(msg)" >
-              <p class="userText"  >{{ msg.text }}</p>
-            </div>
+              <div ng-if="!board.isOwner(msg)" >
+                <p class="userText"  >{{ msg.text }}</p>
+              </div>
               <span type="button" class="btn btn-default btn-xs glyphicon glyphicon-thumbs-up pull-right" ng-click="board.like(msg)">
-              
                 <span class="thumbPlus"></span>
               </span>
               
@@ -91,42 +73,42 @@
             </div>
             <div class="sticky__body">
               <div class="sticky__body">
-              <div ng-if="board.isOwner(msg)">
-              <p class="userText" >{{ msg.text }}</p>
-              <span type="button" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-xs glyphicon  glyphicon-thumbs-down pull-right" ng-click="board.edit(msg)"></span>
-              <!-- Modal -->
-              <div id="myModal" class="modal fade" role="dialog">
-                <div class="modal-dialog">
+                <div ng-if="board.isOwner(msg)">
+                  <p class="userText" >{{ msg.text }}</p>
+                  <span type="button" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-xs glyphicon  glyphicon-thumbs-down pull-right" ng-click="board.edit(msg)"></span>
+                  <!-- Modal -->
+                  <div id="myModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
 
-                  <!-- Modal content-->
-                  <div class="modal-content">
-                    <div class="modal-body">
-                      <textarea ng-model="board.currentMessageText"></textarea>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal" ng-click= "board.saveEdit()">Done</button>
+                      <!-- Modal content-->
+                      <div class="modal-content">
+                        <div class="modal-body">
+                          <textarea ng-model="board.currentMessageText"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal" ng-click= "board.saveEdit()">Done</button>
+                        </div>
+                      </div>
+
                     </div>
                   </div>
 
                 </div>
+                <div ng-if="!board.isOwner(msg)">
+                  <p class="userText" >{{ msg.text }}</p>
+                </div>
+
+                <span type="button" class="btn btn-default btn-xs glyphicon glyphicon-thumbs-up pull-right pull-bottom" ng-click="">
+                  <span class="thumbMinus"></span>
+                </span>
               </div>
-
             </div>
-            <div ng-if="!board.isOwner(msg)">
-              <p class="userText" >{{ msg.text }}</p>
-            </div>
-              
-              <span type="button" class="btn btn-default btn-xs glyphicon glyphicon-thumbs-up pull-right pull-bottom" ng-click="">
-                <span class="thumbMinus"></span>
-              </span>
-            </div>
-          </div>
 
-        </li>
-      </ul>
+          </li>
+        </ul>
 
 
+      </div>
     </div>
-  </div>
 
-</div>
+  </div>

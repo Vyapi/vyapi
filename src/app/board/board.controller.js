@@ -109,10 +109,11 @@ export class BoardController {
       this.currentMessageText= msg.text;
       this.currentMessage = msg;
     }
-    this.saveEdit = function ()
+    this.saveEdit = function (msg)
     {
-      (new Firebase(roomURL + "/" + this.currentMessage.$id+"/text")).set( this.currentMessageText);
-      console.log( this.currentMessageText + "TT") ;
+      console.log( msg.text + "TT") ;
+      (new Firebase(roomURL + "/" + msg.$id+"/text")).set( msg.text);
+      
     }
   }
   
