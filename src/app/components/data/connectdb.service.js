@@ -5,7 +5,6 @@ export class FireConnect{
     this.firebaseURL = "https://vyapi.firebaseio.com";
     this.ref = null
     this.authObj = null
-    this.authData = this.authObj.$getAuth();
     this.clog = $log;
   }
 
