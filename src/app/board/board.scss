@@ -17,7 +17,7 @@ body {
   padding: 10px;
 }
 
-#chat-messages-plus li { margin: 0 3px 3em 3px; padding: 0.4em; height: 220px; }
+#chat-messages-plus li { margin: 0 3px 3em 3px; padding: 0.4em; height: 220px; width: 40%}
 #chat-messages-minus li { margin: 0 3px 3em 3px; padding: 0.4em; height: 220px; }
 /*#chat-messages-plus li span { position: absolute; margin-left: -1.3em; }*/
 
@@ -50,8 +50,8 @@ body {
   max-height: 30px;
   min-height: 30px;
   vertical-align: middle;
-  padding-bottom: 1px;
-  padding-top: 2px;
+  /*padding-bottom: 1px;*/
+  padding-top: 0.5em;
   padding-left: 0.5em;
   /*padding-right: 0.5em;*/
   color: white;
@@ -87,3 +87,10 @@ body {
   color: #E34B2A;
 }
 
+.delete-btn:hover {
+  display: inline;
+}
+
+.fa-thumbs-up {
+  color: black;
+}
