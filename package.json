@@ -61,7 +61,6 @@
     "start": "node server.js"
   },
   "devDependencies": {
-
   },
   "engines": {
     "node": ">=0.10.0"
