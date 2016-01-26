@@ -5,7 +5,7 @@ var path = require('path');
 app.set('port', (process.env.PORT || 5000));
 
 app.get('/', function (req, res) {
-    res.sendFile('index.html', { root: path.join(__dirname, '../vyapi/dist') });
+    res.sendFile('index.html', { root: path.join(__dirname, '../vyapi/dist/') });
 });
 
 app.listen(app.get('port'), function () {
