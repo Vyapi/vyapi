@@ -15,9 +15,9 @@ export class ActionController {
     snapshot.forEach((uid)=>{
       var personRef = new Firebase('https://vyapi.firebaseio.com/users/');
       //console.log(''+child.key()+'/google/');
-      var data2=personRef.child(''+uid.key()+'/google/');
-      $firebaseArray(data2);
-      data2.on('value',(userSnapshot)=>{
+      var googleData=personRef.child(''+uid.key()+'/google/');
+      $firebaseArray(googleData);
+      googleData.on('value',(userSnapshot)=>{
               var userNames=userSnapshot.val()['displayName'];
               console.log('pushed', userNames);
               this.assignee.push(userNames);
