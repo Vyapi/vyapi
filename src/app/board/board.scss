@@ -7,6 +7,11 @@ body {
   /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
 
+@font-face {
+    font-family: myFirstFont;
+    src: url("https://fonts.googleapis.com/css?family=Average+Sans");
+}
+
 .group-header {
   color: #E1E0DE;
 }
@@ -17,7 +22,7 @@ body {
   padding: 10px;
 }
 
-#chat-messages-plus li { margin: 0 3px 3em 3px; padding: 0.4em; height: 220px; width: 40%}
+#chat-messages-plus li { margin: 0 3px 3em 3px; padding: 0.4em; height: 220px; width: 180px}
 #chat-messages-minus li { margin: 0 3px 3em 3px; padding: 0.4em; height: 220px; }
 /*#chat-messages-plus li span { position: absolute; margin-left: -1.3em; }*/
 
@@ -37,6 +42,8 @@ body {
   flex-wrap: wrap;
   justify-content: space-around;
   box-shadow: 8px 8px 20px;
+  font-family: myFirstFont;
+  font-size: 1.1em;
 }
 
 .sticky-note {
@@ -72,8 +79,9 @@ body {
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
   word-break: break-all;
-  color: #5D5A58;
+  color: black;
   hyphens: auto;
+  /*font-family: myFirstFont;*/
 }
 
 .anonymous-toggle {
