@@ -16,10 +16,10 @@ export class Dashboard{
 		return authData.uid;
 	}
 	remove(roomKey){
-		let roomDbRef = new Firebase(this.roomsURL + '/' + roomKey);
-		roomDbRef.remove();
 		let messageDbRef = new Firebase(this.messageRef + '/' + roomKey);
 		messageDbRef.remove();
+		let roomDbRef = new Firebase(this.roomsURL + '/' + roomKey);
+		roomDbRef.remove();
 		return;
 	}
 	createRoom(userID){
@@ -29,8 +29,8 @@ export class Dashboard{
 		}
 		else{
 			let newRoom = this.roomsRef.push({roomName : roomName, ownedBy : userID});
-        //this.rootRef.child("messages/"+ newRoom.key()).set(roomName);
-        	return;
-    	}
-    }
+			//this.rootRef.child("messages/"+ newRoom.key()).set(roomName);
+			return;
+		}
+	}
 }
