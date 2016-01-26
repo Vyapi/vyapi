@@ -5,7 +5,6 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="group-header">What we did right!</h2>
-
       <form ng-submit="board.submit('plus')">
         <div class="form-group">
           <div class="bg-success center-block" id="anonymousWarn" class="has-success anonymousWarn">Ssshh.. You're anonymous now</div>
@@ -19,30 +18,23 @@
       </form>
       
       <ul id="chat-messages-plus" class="list-unstyled">
-        <li ng-repeat="msg in board.messages | filter:{lane:'plus'}" >
+        <li data-ng-repeat="msg in board.messages.slice().reverse() | filter:{lane:'plus'}">
           <div class="sticky">
-            <div class="sticky__head">
-              {{ msg.from }}
-
-              <button class="btn btn-default btn-xs pull-right btn-danger glyphicon glyphicon-trash" ng-click="board.delete(msg)"></button>
-            </div>
-            <div class="sticky__body">
-              <div ng-if="board.isOwner(msg)" >
-                <textarea class="userText" ng-model="msg.text" >{{ msg.text }}</textarea>
-                <span type="button" class="btn btn-default btn-xs glyphicon glyphicon-thumbs-down pull-right" ng-click="board.saveEdit(msg)">
-                  <span class="Done"></span>
-                </span>
+            <div class="sticky-note" ng-mouseover="board.hover()" ng-mouseout="board.show()">
+              <i class="fa fa-times fa-lg pull-right delete-btn"  ng-click="board.delete(msg)"></i>
+              <div class="sticky__body">
+                <div ng-if="board.isOwner(msg)" >
+                  <textarea class="userText" ng-model="msg.text" >{{ msg.text }}</textarea>
+                  <!-- <div><p class="userText">{{ msg.text }}</p></div> -->
+                  <i class="fa fa-pencil fa-lg pull-right" ng-click="board.saveEdit(msg)"><span class="Done"></span></i>
+                </div>
+                <div ng-if="!board.isOwner(msg)" >
+                  <p class="userText">{{ msg.text }}</p>
+                </div>
               </div>
-              <div ng-if="!board.isOwner(msg)" >
-                <p class="userText"  >{{ msg.text }}</p>
+              <div class="sticky__head">
+                <i class="fa fa-thumbs-up fa-lg pull-right like-btn" ng-click="board.like(msg);">{{ msg.dl }}</i>
               </div>
-              <span type="button" class="btn btn-default btn-xs glyphicon glyphicon-thumbs-up pull-right" ng-click="board.like(msg)">
-                <span class="thumbPlus"></span>
-              </span>
-              
-
-              
-
             </div>
           </div>
         </li>
@@ -51,10 +43,8 @@
 
     <div class="col-md-6">
       <h2 class="group-header">What could improve!</h2>
-
       <form ng-submit="board.submit('minus')">
         <div class="form-group">
-          <!-- <div class="bg-success center-block" id="anonymousWarnMinus" class="has-success anonymousWarn">Ssshh.. You're anonymous now</div> -->
           <div class="input-group">
             <span type="button" id="anonymousToggleMinus" class="input-group-addon btn btn-success anonymousToggle" ng-click="board.toggle()">
               <span class="glyphicon glyphicon-eye-close success pull-right"></span>
@@ -65,50 +55,27 @@
       </form>
 
       <ul id="chat-messages-minus" class="list-unstyled">
-        <li ng-repeat="msg in board.messages | filter:{lane:'minus'}">
+        <li data-ng-repeat="msg in board.messages.slice().reverse() | filter:{lane:'minus'}">
           <div class="sticky">
-            <div class="sticky__head">
-              {{ msg.from }}
-              <button class="btn btn-default btn-xs pull-right btn-danger glyphicon glyphicon-trash" ng-click="board.delete(msg)"></button>
-            </div>
-            <div class="sticky__body">
+            <div class="sticky-note" ng-mouseover="board.hover()" ng-mouseout="board.show()">
+              <i class="fa fa-times fa-lg pull-right delete-btn"  ng-click="board.delete(msg)"></i>
               <div class="sticky__body">
-                <div ng-if="board.isOwner(msg)">
-                  <p class="userText" >{{ msg.text }}</p>
-                  <span type="button" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-xs glyphicon  glyphicon-thumbs-down pull-right" ng-click="board.edit(msg)"></span>
-                  <!-- Modal -->
-                  <div id="myModal" class="modal fade" role="dialog">
-                    <div class="modal-dialog">
-
-                      <!-- Modal content-->
-                      <div class="modal-content">
-                        <div class="modal-body">
-                          <textarea ng-model="board.currentMessageText"></textarea>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-default" data-dismiss="modal" ng-click= "board.saveEdit()">Done</button>
-                        </div>
-                      </div>
-
-                    </div>
-                  </div>
-
+                <div ng-if="board.isOwner(msg)" >
+                  <textarea class="userText" ng-model="msg.text" >{{ msg.text }}</textarea>
+                  <!-- <div><p class="userText">{{ msg.text }}</p></div> -->
+                  <i class="fa fa-pencil fa-lg pull-right" ng-click="board.saveEdit(msg)"><span class="Done"></span></i>
                 </div>
-                <div ng-if="!board.isOwner(msg)">
-                  <p class="userText" >{{ msg.text }}</p>
+                <div ng-if="!board.isOwner(msg)" >
+                  <p class="userText"  >{{ msg.text }}</p>
                 </div>
-
-                <span type="button" class="btn btn-default btn-xs glyphicon glyphicon-thumbs-up pull-right pull-bottom" ng-click="">
-                  <span class="thumbMinus"></span>
-                </span>
+              </div>
+              <div class="sticky__head">
+                <i class="fa fa-thumbs-up fa-lg pull-right like-btn" ng-click="board.like(msg);">{{ msg.dl }}</i>
               </div>
             </div>
-
-          </li>
-        </ul>
-
-
-      </div>
+          </div>
+        </li>
+      </ul>
     </div>
-
   </div>
+</div>
