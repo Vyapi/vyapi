@@ -57,7 +57,8 @@
   },
   "scripts": {
     "preinstall": "bower install",
-    "postinstall": "gulp build && npm cache clear && npm cache ls"
+    "postinstall": "gulp build && npm cache clear && npm cache ls",
+    "start": "node server.js"
   },
   "devDependencies": {
 
