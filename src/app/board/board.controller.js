@@ -99,7 +99,7 @@ export class BoardController {
           fredNameRef.update({ dl: userId.numChildren() });
         }
       });
-});
+    });
 
     //handle like button click for a message
     this.like = function(msg) {
