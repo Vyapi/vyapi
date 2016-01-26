@@ -3,17 +3,21 @@ export class DashboardController {
 		'ngInject';
 		this.path = $location.absUrl().replace('dashboard', 'room');
 		$log.log(this.path);
-		this.set_param(Dashboard);
+		// this.set_param(Dashboard);
+		this.setParam(Dashboard);
 		this.rooms = [];
 		this.clog = $log;
 		this.windowLoc = $window;
 		this.createRoom = function(){
 			this.create(Dashboard);
 		};
+		this.removeRoom = function(roomKey){
+			console.log(roomKey);
+			this.remove(Dashboard,roomKey);
+		};
 	}
-	set_param(Dashboard){
+	setParam(Dashboard){
 		let userID = Dashboard.getUserID();
-
 		Dashboard.getRooms(userID).on("value",(snapshot)=>{
 			let rooms = snapshot.val();
 			rooms = _.map(rooms,(room,key)=>{
@@ -30,11 +34,13 @@ export class DashboardController {
 		let userID = Dashboard.getUserID();
 		return Dashboard.createRoom(userID);
 	}
-
 	firebaseAuthlogout()
 	{
 		let ref = new Firebase("https://vyapi.firebaseio.com");
 		ref.unauth();
 		this.windowLoc.location.href='/';
+	}
+	remove(Dashboard,roomKey){
+		Dashboard.remove(roomKey);
 	}
 }
