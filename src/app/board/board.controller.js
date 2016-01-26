@@ -1,8 +1,8 @@
 export class BoardController {
-  constructor ($firebaseArray, $location) {
+  constructor ($scope, $firebaseArray, $location) {
     'ngInject';
+    
     var userName = "";
-
 
     var appURL = "https://vyapi.firebaseio.com/";
     var roomID = $location.path().split("/")[2];
@@ -18,16 +18,22 @@ export class BoardController {
     this.messages = $firebaseArray(this.msgRef);
 
     //CODE TO MAKE THE USER ANONYMOUS
-    var anonymous = true;
+    /*$('#anonymousTogglePlus').toggle(function(){
+        $(this).addClass("active");
+        }, function () {
+        $(this).removeClass("active");
+    });*/
 
+    var anonymous = true;
+   
     this.toggle = function() {
       anonymous = !anonymous;
       if(!anonymous){
         userName = authData.google.displayName;
-        $('.anonymous-toggle').css({"background-color":"#eeeeee","color":"black"});
+        $('.anonymousToggle').css({"background-color":"#eeeeee","color":"black"});
       } else {
         userName = "anonymous";
-        $('.anonymous-toggle').css({"background-color":"#6D6A68","color":"white"});
+        $('.anonymousToggle').css({"background-color":"#6D6A68","color":"white"});
       }
       console.log(userName);
     };
@@ -48,22 +54,13 @@ export class BoardController {
           dl: 0
         });
 
-        //CODE TO GET USER PHOTO FOR DISPLAY ON BOTTOM OF STICKY
-        (new Firebase(encodeURI(appURL + "users/" + authData.uid + "/google/profileImageURL/"))).once("value", (value) => {
-          var profileImageURL = value.val();
-          console.log("USER PHOTO");
-          return profileImageURL;
-        });
-
-        var roomURL= "https://vyapi.firebaseio.com/users/google%3A" + authData.uid + "/google/profileImageURL";
-
         this.userMessagePlus = '';
         this.userMessageMinus = '';
       }
     };
 
     //CODE TO DELETE THE MESSAGE POSTED
-    this.delete = function(msg){
+    this.delete=function(msg){
       var ide=msg.$id;
       console.log(msg);
       //console.log(authData.google.id);
@@ -75,8 +72,8 @@ export class BoardController {
 
     //CODE TO DISPLAY THE 5 SECOND NOTIFICATION FOR ANONYMITY
     $('#anonymousWarn').fadeIn().delay(5000).fadeOut();
-
     
+    //
     (new Firebase(roomURL)).on('child_added', (messagesObj) => {
       (new Firebase(encodeURI(roomURL + "/" + messagesObj.key() + "/like"))).on('value', (userId) => {
         if(userId.val() != null && messagesObj.key()) { //likes are there for this message
@@ -132,16 +129,28 @@ export class BoardController {
       $("#chat-messages-minus").disableSelection();
     });
 
-    //CODE TO SHOW DELETE/LIKE ETC ON HOVER
-    this.hover = function(){
-      $('.delete-btn').css({'display' : 'inline-block'});
-      $('.like-btn').css({'display' : 'inline-block'});
-    };
+    this.isOwner=function(msg)
+    {
+       var ide=msg.$id;
+      if(msg.uid=== "google:"+authData.google.id)
+         return true;
+       else
+        return false;
 
-    this.show = function(){
-      $('.delete-btn').css({'display' : 'none'});
-      $('.like-btn').css({'display' : 'none'});
-    };
+    }
+    
+    this.currentMessageText= "hello";
+    this.currentMessage;
+    this.edit = function(msg) {
+      console.log("edit hererere");
+      this.currentMessageText= msg.text;
+      this.currentMessage = msg;
+    }
+    this.saveEdit = function (msg)
+    {
+      console.log( msg.text + "TT") ;
+      (new Firebase(roomURL + "/" + msg.$id+"/text")).set( msg.text);
+    }
   }
 }
 }
