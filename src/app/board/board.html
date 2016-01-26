@@ -57,7 +57,7 @@
       <ul id="chat-messages-minus" class="list-unstyled">
         <li data-ng-repeat="msg in board.messages.slice().reverse() | filter:{lane:'minus'}">
           <div class="sticky">
-            <div class="sticky-note" ng-mouseover="board.hover()" ng-mouseout="board.show()">
+            <div class="sticky-note" ng-mouseover="board.hover(msg)" ng-mouseout="board.show(msg)">
               <i class="fa fa-times fa-lg pull-right delete-btn"  ng-click="board.delete(msg)"></i>
               <!-- <button class="btn btn-default btn-xs pull-right btn-danger glyphicon glyphicon-remove-circle delete-btn" ng-click="board.delete(msg)"></button> -->
               <div class="sticky__body">
