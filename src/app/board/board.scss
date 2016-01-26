@@ -87,12 +87,3 @@ body {
   color: #E34B2A;
 }
 
-.sticky::before > .like-btn {
-  display: none;
-}
-
-
-.sticky:hover::before > .like-btn {
-  display: block;
-}
-
