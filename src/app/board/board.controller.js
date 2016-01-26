@@ -1,7 +1,7 @@
 export class BoardController {
   constructor ($scope, $firebaseArray, $location) {
     'ngInject';
-    
+
     var userName = "";
 
     var appURL = "https://vyapi.firebaseio.com/";
@@ -22,21 +22,21 @@ export class BoardController {
         $(this).addClass("active");
         }, function () {
         $(this).removeClass("active");
-    });*/
+      });*/
 
-    var anonymous = true;
-   
-    this.toggle = function() {
-      anonymous = !anonymous;
-      if(!anonymous){
-        userName = authData.google.displayName;
-        $('.anonymousToggle').css({"background-color":"#eeeeee","color":"black"});
-      } else {
-        userName = "anonymous";
-        $('.anonymousToggle').css({"background-color":"#6D6A68","color":"white"});
-      }
-      console.log(userName);
-    };
+var anonymous = true;
+
+this.toggle = function() {
+  anonymous = !anonymous;
+  if(!anonymous){
+    userName = authData.google.displayName;
+    $('.anonymousToggle').css({"background-color":"#eeeeee","color":"black"});
+  } else {
+    userName = "anonymous";
+    $('.anonymousToggle').css({"background-color":"#6D6A68","color":"white"});
+  }
+  console.log(userName);
+};
 
     //CODE TO ENTER THE OBJECT IN FIREBASE DATABASE
     this.submit = function(id) {
@@ -72,7 +72,7 @@ export class BoardController {
 
     //CODE TO DISPLAY THE 5 SECOND NOTIFICATION FOR ANONYMITY
     $('#anonymousWarn').fadeIn().delay(5000).fadeOut();
-    
+
     //
     (new Firebase(roomURL)).on('child_added', (messagesObj) => {
       (new Firebase(encodeURI(roomURL + "/" + messagesObj.key() + "/like"))).on('value', (userId) => {
@@ -86,7 +86,7 @@ export class BoardController {
           //console.log(Object.keys(userId.val()) + " liked " + messagesObj.key());
           // console.log(this.likes);
         }
-        else 
+        else
         {
           console.log(userId.numChildren());
           console.log(messagesObj.val().text);
@@ -96,7 +96,7 @@ export class BoardController {
           fredNameRef.update({ dl: userId.numChildren() });
         }
       });
-    });
+});
 
     //handle like button click for a message
     this.like = function(msg) {
@@ -116,29 +116,56 @@ export class BoardController {
 
       var ta = (new Firebase(roomURL)).child(msg.$id + "/like/");
       ta.once('value', function(snapshot) {
-        msg.noOfLikes=snapshot.numChildren(); 
+        msg.noOfLikes=snapshot.numChildren();
       });
+    }
 
     //CODE TO ENABLE DRAG AND DROP OF STICKYs
     $(function() {
-      $('.delete-btn').css({'display' : 'none'});
-      $('.like-btn').css({'display' : 'none'});
+      $('.delete-btn').css({'visibility' : 'hidden'});
+      $('.like-btn').css({'visibility' : 'hidden'});
       $("#chat-messages-plus").sortable();
       $("#chat-messages-minus").sortable();
       $("#chat-messages-plus").disableSelection();
       $("#chat-messages-minus").disableSelection();
     });
 
+    //CODE TO DELETE THE MESSAGE POSTED
+    this.delete=function(msg){
+      var ide=msg.$id;
+      console.log(msg);
+      //console.log(authData.google.id);
+      // var roomRef = new Firebase('https://vyapi.firebaseio.com/messages/'+roomID).remove();
+      if(msg.uid === "google:"+authData.google.id)
+        this.msgRef.child(ide).remove();
+      console.log("delete: " + msg.$id);
+    };
+
+    //CODE TO SHOW DELETE/LIKE ETC ON HOVER
+    this.hover = function(msg){
+      var ide=msg.$id;
+      if(msg.uid === "google:"+authData.google.id) {
+
+      }
+      $('.delete-btn').css({'visibility' : 'visible'});
+      $('.like-btn').css({'visibility' : 'visible'});
+    };
+
+    this.show = function(msg){
+      $('.delete-btn').css({'visibility' : 'hidden'});
+      $('.like-btn').css({'visibility' : 'hidden'});
+    };
+
+    //CODE TO EDIT THE STICKY NOTES
     this.isOwner=function(msg)
     {
-       var ide=msg.$id;
+      var ide=msg.$id;
       if(msg.uid=== "google:"+authData.google.id)
-         return true;
-       else
+        return true;
+      else
         return false;
-
     }
-    
+
     this.currentMessageText= "hello";
     this.currentMessage;
     this.edit = function(msg) {
@@ -152,7 +179,6 @@ export class BoardController {
       (new Firebase(roomURL + "/" + msg.$id+"/text")).set( msg.text);
     }
   }
-}
 }
 
 
