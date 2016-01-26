@@ -112,6 +112,8 @@ export class BoardController {
 
     //CODE TO ENABLE DRAG AND DROP OF STICKYs
     $(function() {
+      $('.delete-btn').css({'display' : 'none'});
+      $('.like-btn').css({'display' : 'none'});
       $("#chat-messages-plus").sortable();
       $("#chat-messages-minus").sortable();
       $("#chat-messages-plus").disableSelection();
