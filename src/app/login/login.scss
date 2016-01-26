@@ -1,19 +1,18 @@
 @import url(https://fonts.googleapis.com/css?family=Atomic+Age);
 
-img.screenShot {
+img.screenshot--shadow {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+img.screenshot--margin {
   margin-top: 3%;
 }
-.developersBottom {
+.footer--transparent {
   background-color: transparent;
   border-color: transparent;
-}
-.listCenter {
-  text-align: center;
 }
 body,h1 {
   font-family: 'Atomic Age', cursive;
 }
 body {
-  background-image: url(http://s3.amazonaws.com/agile_designer_uploads/images/165/large.jpg);
+  background-image: url(/app/login/background.jpg);
 }
