@@ -1,34 +1,66 @@
-footer {
+.user-footer {
   margin-top: 60px;
   position: relative;
   bottom: 0;
 }
 
-img {
+.user-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: green;
+  border-radius: 20px;
+  width: 1.5em;
+  height: 1.5em;
+  color: white;
+  font-weight: bold;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+  border: 1px solid rgba(255, 255, 255,0.8);
+  line-height: 1.5em;
+}
+
+.navbar-bottom {
+  text-align: center;
+  display: inline-block;
+  background-color: rgba(239,236,228, 0.5);
+}
+
+.user-image {
   height: 3em;
   padding-left: .25em;
   padding-right: .25em;
   border: .5em;
 }
 
-span {
-  padding-left: .5em;
+.user-list {
+  width: 2.5em;
+  height: 2.5em;
+  background: white;
+  padding: 3px;
+  border-radius: 100%;
+  color: black;
+  text-align:center;
 }
 
 li.ng-enter.ng-enter-active,
 li.ng-leave {
-    opacity: 1;
-    -webkit-transition: opacity 300ms linear;
-    -moz-transition: opacity 300ms linear;
-    transition: opacity 300ms linear;
+  opacity: 1;
+  -webkit-transition: opacity 300ms linear;
+  -moz-transition: opacity 300ms linear;
+  transition: opacity 300ms linear;
 }
-
-
 
 li.ng-leave.ng-leave-active,
 li.ng-enter {
-    opacity: 0;
-    -webkit-transition: opacity 300ms linear;
-    -moz-transition: opacity 300ms linear;
-    transition: opacity 300ms linear;
+  opacity: 0;
+  -webkit-transition: opacity 300ms linear;
+  -moz-transition: opacity 300ms linear;
+  transition: opacity 300ms linear;
+}
+
+.user-image {
+  height: 4em;
+  padding-right: .25em;
+  padding-left: .25em;
+  border: .5em;
 }

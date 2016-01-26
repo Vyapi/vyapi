@@ -4,8 +4,7 @@
 
   <div class="row">
     <div class="col-md-6">
-      <h2 class="paneHeaders">What we did right!</h2>
-
+      <h2 class="group-header">What we did right!</h2>
       <form ng-submit="board.submit('plus')">
         <div class="form-group">
           <div class="bg-success center-block" id="anonymousWarn" class="has-success anonymousWarn">Ssshh.. You're anonymous now</div>
@@ -19,31 +18,33 @@
       </form>
 
       <ul id="chat-messages-plus" class="list-unstyled">
-        <li ng-repeat="msg in board.messages | filter:{lane:'plus'}">
-          <article class="panel panel-default">
-            <div class="panel-heading fixed-panel-head">
-              {{ msg.from }}
-              <button class="btn btn-default btn-xs pull-right btn-danger glyphicon glyphicon-trash" ng-click="board.delete(msg)"></button>
+        <li data-ng-repeat="msg in board.messages.slice().reverse() | filter:{lane:'plus'}">
+          <div class="sticky">
+            <div class="sticky-note" ng-mouseover="board.hover(msg)" ng-mouseout="board.show(msg)">
+              <i class="fa fa-times fa-lg pull-right delete-btn"  ng-click="board.delete(msg)"></i>
+              <div class="sticky__body">
+                <div ng-if="board.isOwner(msg)" >
+                  <p class="userText" ng-model="msg.text" >{{ msg.text }}</p>
+                  <!-- <div><p class="userText">{{ msg.text }}</p></div> -->
+                  <i class="fa fa-pencil fa-lg pull-right" ng-click="board.saveEdit(msg)"><span class="Done"></span></i>
+                </div>
+                <div ng-if="!board.isOwner(msg)" >
+                  <p class="userText">{{ msg.text }}</p>
+                </div>
+              </div>
+              <div class="sticky__head">
+                <i class="fa fa-thumbs-up fa-lg pull-right like-btn" ng-click="board.like(msg);">{{ msg.dl }}</i>
+              </div>
             </div>
-            <div class="panel-body fixed-panel-body">
-              <p class="userText">{{ msg.text }}</p>
-              <span type="button" class="btn btn-default btn-xs glyphicon glyphicon-thumbs-up pull-right pull-bottom" ng-click="">
-                <span class="thumbPlus"></span>
-              </span>
-            </div>
-          </article>
+          </div>
         </li>
       </ul>
-
-
     </div>
 
     <div class="col-md-6">
-      <h2 class="paneHeaders">What could improve!</h2>
-
+      <h2 class="group-header">What could improve!</h2>
       <form ng-submit="board.submit('minus')">
         <div class="form-group">
-          <!-- <div class="bg-success center-block" id="anonymousWarnMinus" class="has-success anonymousWarn">Ssshh.. You're anonymous now</div> -->
           <div class="input-group">
             <span type="button" id="anonymousToggleMinus" class="input-group-addon btn btn-success anonymousToggle" ng-click="board.toggle()">
               <span class="glyphicon glyphicon-eye-close success pull-right"></span>
@@ -54,25 +55,29 @@
       </form>
 
       <ul id="chat-messages-minus" class="list-unstyled">
-        <li ng-repeat="msg in board.messages | filter:{lane:'minus'}">
-          <article class="panel panel-default">
-            <div class="panel-heading fixed-panel-head">
-              {{ msg.from }}
-              <button class="btn btn-default btn-xs pull-right btn-danger glyphicon glyphicon-trash" ng-click="board.delete(msg)"></button>
+        <li data-ng-repeat="msg in board.messages.slice().reverse() | filter:{lane:'minus'}">
+          <div class="sticky">
+            <div class="sticky-note" ng-mouseover="board.hover(msg)" ng-mouseout="board.show(msg)">
+              <i class="fa fa-times fa-lg pull-right delete-btn"  ng-click="board.delete(msg)"></i>
+              <!-- <button class="btn btn-default btn-xs pull-right btn-danger glyphicon glyphicon-remove-circle delete-btn" ng-click="board.delete(msg)"></button> -->
+              <div class="sticky__body">
+                <div ng-if="board.isOwner(msg)" >
+                  <p class="userText" ng-model="msg.text" >{{ msg.text }}</p>
+                  <!-- <div><p class="userText">{{ msg.text }}</p></div> -->
+                  <i class="fa fa-pencil fa-lg pull-right" ng-click="board.saveEdit(msg)"><span class="Done"></span></i>
+                </div>
+                <div ng-if="!board.isOwner(msg)" >
+                  <p class="userText"  >{{ msg.text }}</p>
+                </div>
+              </div>
+              <div class="sticky__head">
+                <!-- {{ msg.from }} -->
+                <!-- <span type="button" class="btn btn-default btn-xs glyphicon glyphicon-thumbs-up pull-right pull-bottom like-btn" ng-click=""></span> -->      <i class="fa fa-thumbs-up fa-lg pull-right like-btn" ng-click="board.like(msg);">{{ msg.dl }}</i>
+              </div>
             </div>
-            <div class="panel-body fixed-panel-body">
-              <p class="userText">{{ msg.text }}</p>
-              <span type="button" class="btn btn-default btn-xs glyphicon glyphicon-thumbs-up pull-right pull-bottom" ng-click="">
-                <span class="thumbMinus"></span>
-              </span>
-            </div>
-          </article>
-
+          </div>
         </li>
       </ul>
-
-
     </div>
   </div>
-
 </div>
