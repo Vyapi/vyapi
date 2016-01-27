@@ -9,7 +9,10 @@ body {
 }
 
 .group-header {
-  color: #EED;
+  color: rgba(255, 255, 255, 0.8);
+  text-shadow: -1px -1px 0 rgba(0,0,0,0.8);
+  font-weight:100;
+  letter-spacing: 2px;
 }
 
 #anonymousWarn {
@@ -34,13 +37,13 @@ body {
   border-radius: 4px;
   /*position: absolute;*/
   background-color: #FFF;
-  background-image: url("http://www.transparenttextures.com/patterns/cream-pixels.png");
+  //background-image: url("http://www.transparenttextures.com/patterns/cream-pixels.png");
   /*border: 0.2em solid #6D6A68;*/
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-around;
-  box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.6);
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
   font-family: myFirstFont;
   font-size: 1.1em;
 }
