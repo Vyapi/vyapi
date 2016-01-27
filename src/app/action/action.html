@@ -21,16 +21,15 @@
 ​
 ​
    <ul id="action-items" class="list-unstyled">
-     <li data-ng-repeat="item in action.items.slice().reverse()">
-       <article class="sticky">
+     <li data-ng-repeat="item in action.items.slice().reverse()" ng-mouseover="action.hover()" ng-mouseout="action.show()">
+       <article class="sticky" >
          <div class="sticky__head">
            <select type="buttpn" ng-options="asn for asn in action.assignee" ng-model="item.name" ng-change="action.modify(item)" class="btn btn-default dropdown-toggle">
            </select>
-           <button class="btn btn-default btn-xs pull-right glyphicon glyphicon-remove" ng-click="action.remove(item)"></button>
+           <i class="btn-default fa fa-times fa-lg button-id" ng-click="action.remove(item)"><span class="Done"></span></i>
          </div>
          <div class="sticky__body" style="max-height: 10; min-height: 10; overflow-y: scroll;">
            <p class="userText">{{ item.task }}</p>
-           <!--<span type="button" class="btn btn-default btn-xs glyphicon glyphicon-thumbs-up pull-right"></span>-->
          </div>
        </article>
      </li>
