@@ -47,13 +47,11 @@ export class ActionController {
   hover()
   {
     $('.button-id').css({'visibility' : 'visible'});
-    console.log('hover');
   }
 
   show()
   {
     $('.button-id').css({'visibility' : 'hidden'});
-    console.log('show');
   };
 
 
