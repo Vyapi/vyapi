@@ -8,9 +8,11 @@ test:
   override:
 
 deployment:
-  production:
+  staging:
     branch: feature/herokudeployment
     heroku:
       appname: vyapi
+  production:
+    branch: develop
     commands:
       - firebase deploy --token "-K8NQX-IOHSbncOIwSal|a19b96123552661ca03db64eb0ff6da0"
