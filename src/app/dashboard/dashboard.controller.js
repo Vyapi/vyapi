@@ -18,6 +18,8 @@ export class DashboardController {
 		};
 	}
 	setParam(Dashboard){
+		if(!Dashboard)
+			return;
 		let userID = Dashboard.getUserID();
 		if(!userID){
 			this.rooms = ["mock data"];

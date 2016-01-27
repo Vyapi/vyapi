@@ -1,14 +1,16 @@
 describe('controllers', () => {
-	let dashboard;
+	var dashboard;
 
 	beforeEach(angular.mock.module('vyapi'));
 
 	beforeEach(inject(($controller) => {
 		dashboard = $controller('DashboardController');
+		console.log(dashboard);
 	}));
 
 	it('to be defined	',function(){
-		expect(dashboard.createRoom()).toBe("room created");
+		spyOn(dashboard,"setParam");
+		expect(dashboard.setParam()).toHaveBeenCalled;
 		expect(dashboard.path).toBeDefined();
 		expect(dashboard.rooms).toBeDefined();
 	});
