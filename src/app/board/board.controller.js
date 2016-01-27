@@ -88,20 +88,20 @@ export class BoardController {
 
     //handle like button click for a message
     this.like = function(msg) {
-      let t = (new Firebase(roomURL)).child(msg.$id + "/like/" +authData.uid);
-      t.once("value" , function(value){
+      let msgLike = (new Firebase(roomURL)).child(msg.$id + "/like/" +authData.uid);
+      msgLike.once("value" , function(value){
         //console.log('triggring event');
         if(value.exists()){
-          t.remove();
+          msgLike.remove();
         }
         else{
-          t.set(1);
-          t.off();
+          msgLike.set(1);
+          msgLike.off();
         }
       });
 
-      let ta = (new Firebase(roomURL)).child(msg.$id + "/like/");
-      ta.once('value', function(snapshot) {
+      let msgLikes = (new Firebase(roomURL)).child(msg.$id + "/like/");
+      msgLikes.once('value', function(snapshot) {
         msg.noOfLikes=snapshot.numChildren();
       });
     }
@@ -126,17 +126,6 @@ export class BoardController {
     this.show = function(msg){
       $('.delete-btn').css({'visibility' : 'hidden'});
       $('.like-btn').css({'visibility' : 'hidden'});
-    };
-
-    //CODE TO DELETE THE MESSAGE POSTED
-    this.delete=function(msg){
-      var ide=msg.$id;
-      console.log(msg);
-      //console.log(authData.google.id);
-      // var roomRef = new Firebase('https://vyapi.firebaseio.com/messages/'+roomID).remove();
-      if(msg.uid === "google:"+authData.google.id)
-        this.msgRef.child(ide).remove();
-      console.log("delete: " + msg.$id);
     };
 
 
