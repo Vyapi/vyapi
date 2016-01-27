@@ -3,26 +3,54 @@ body {
   background-image: url("http://www.ashtangabutterfly.com/images/wood-grain-background-2.jpg");
   /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
+@font-face {
+  font-family: myFirstFont;
+  src: url("https://fonts.googleapis.com/css?family=Average+Sans");
+}
 
-li { margin: 0 3px 3em 3px; padding: 0.4em; height: 220px; width: 180px}
+.group-header {
+  color: #EED;
+}
 
+@font-face {
+    font-family: myFirstFont;
+    src: url("https://fonts.googleapis.com/css?family=Average+Sans");
+}
+
+.group-header {
+  color: #E1E0DE;
+}
+
+#anonymousWarn {
+  display: none;
+  margin:10px;
+  padding: 10px;
+}
+
+li { float: left; }
+
+.create{
+text-align: center;  
+}
+
+.roomName {
+  width: 100%;
+  text-align: center;
+  bottom: 0;
+  position: absolute;
+}
 
 .sticky {
   float: left;
-  margin-left: 0.5em;
-  margin-bottom: 0.8em;
-  margin-right: 0.8em;
-  margin-top: 0.5em;
-  border-radius: 7px;
-  position: absolute;
-  background-color: #FDFDFD;
+  margin: 0.5em 0.8em 0.8em 0.5em;
+  border-radius: 4px;
+  background-color: #FFF;
   background-image: url("http://www.transparenttextures.com/patterns/cream-pixels.png");
-  /*border: 0.2em solid #6D6A68;*/
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-around;
-  box-shadow: 8px 8px 20px;
+  box-shadow: 8px 8px 20px rgba(0,0,0,0.6);
   font-family: myFirstFont;
   font-size: 1.1em;
 }
@@ -32,14 +60,26 @@ li { margin: 0 3px 3em 3px; padding: 0.4em; height: 220px; width: 180px}
   align-self: auto;
   max-width: 160px;
   min-width: 160px;
-  }
+}
 
-  .sticky__body {
+.sticky__head {
+  max-height: 30px;
+  min-height: 30px;
+  vertical-align: middle;
+  /*padding-bottom: 1px;*/
+  padding-top: 0.5em;
+  padding-left: 0.5em;
+  /*padding-right: 0.5em;*/
+  color: white;
+}
+
+.sticky__body {
   max-height: 190px;
   min-height: 190px;
   width: 100%;
   height: 100%;
   padding: 0.5em;
+  position: relative;
   overflow-y: auto;
   overflow-x: hidden;
   -ms-hyphens: auto;
@@ -49,4 +89,36 @@ li { margin: 0 3px 3em 3px; padding: 0.4em; height: 220px; width: 180px}
   color: black;
   hyphens: auto;
   /*font-family: myFirstFont;*/
+}
+
+.sticky__body::-webkit-scrollbar {
+ display: none;
+}
+
+.sticky-textarea {
+  width: 100%;
+  border: none;
+  background: transparent;
+}
+
+.anonymous-toggle {
+  background-color: #666;
+  color: white;
+}
+
+.sticky__body::-webkit-scrollbar {
+ display: none;
+}
+
+.anonymous-toggle {
+  background-color: #6D6A68;
+  color: white;
+}
+
+.delete-btn:hover {
+  display: inline;
+}
+
+.fa-thumbs-up {
+  color: black;
 }
