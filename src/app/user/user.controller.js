@@ -1,12 +1,12 @@
 export class UserController {
-  constructor($firebaseArray, $firebaseAuth, $log, $location, $window, $stateParams) {
+  constructor($firebaseArray, $firebaseAuth, $log, $location, $window, $stateParams,$cookies) {
     'ngInject';
 
     var appURL = "https://vyapi.firebaseio.com/";
     var onlineUsersRef = new Firebase(appURL + "onlineUsers/");
     this.messageContributions = [];
     this.onlineUsers = {}; //angular is watching this array
-
+    this.cookies = $cookies;
     $firebaseArray(onlineUsersRef); //no idea what this line does, but removing this cripples whole application
 
     this.goOnline = function() {
@@ -22,6 +22,8 @@ export class UserController {
         $log.log("Logged in as:", authData.uid);
         uid = authData.uid;
       } else {
+        var path = $location.path();
+        this.cookies.put('path',path);
         alert("Not Logged in. Please login\n Redirecting to login page");
         $window.location.href = "http://" + $window.location.host + "#/";
         $log.error("Not Logged in. Please login");
@@ -43,7 +45,7 @@ export class UserController {
           //verify the room id existance
           (new Firebase(appURL + "rooms/")).orderByKey().equalTo(roomId).on("value", (snap)=>{
             if(snap.exists() == false) {
-              $log.error("Room: " + roomId + " does not exist")
+              $log.error("Room: " + roomId + " does not exist");
               alert("Room: " + roomId + " does not exist.\nRedirecting to dashboard");
               $window.location.href = "http://" + $window.location.host + "#/dashboard";
               return;
