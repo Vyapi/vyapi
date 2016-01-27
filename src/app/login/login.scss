@@ -9,9 +9,8 @@ img.screenshot--margin {
   background-color: transparent;
   border-color: transparent;
 }
-body {
-  font-family: $font-family-sans-serif;
-}
-body {
+.block--login {
   background-image: url(/app/login/background.jpg);
+  margin: 0%;
+  width: 100%;
 }
