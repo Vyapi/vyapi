@@ -17,11 +17,22 @@ export class BoardController {
     var anonymous = true;
 
     var roomURL= "https://vyapi.firebaseio.com/messages/" + roomID;
-    console.log(roomURL);
+    var roomRef= new Firebase("https://vyapi.firebaseio.com/rooms/" + roomID);
     this.msgRef = new Firebase(roomURL);
     this.messages = $firebaseArray(this.msgRef);
-    
-    
+
+    this.plusLabel='';
+    this.minusLabel='';
+    roomRef.on("value",(snapshot)=>{
+      console.log(snapshot.val());
+      let labelData = snapshot.val();
+      this.plusLabel = labelData.plusLabel;
+      this.minusLabel = labelData.minusLabel;
+      console.log(this.plusLabel);
+    console.log(this.minusLabel);
+    });
+    console.log("hi",this.plusLabel);
+    console.log(this.minusLabel);
 
     //CODE TO MAKE THE USER ANONYMOUS
     var anonymous = true;
@@ -49,7 +60,7 @@ export class BoardController {
         dashboard=new Firebase(ref+"/pos");
       else
         dashboard=new Firebase(ref+"/neg");
-      
+
         dashboard.once("value",(snapshot)=>{
         num = parseInt(snapshot.val());
          num++;
@@ -58,11 +69,11 @@ export class BoardController {
         else
            ref.update({neg : num});
          console.log(num);
-        
+
       });
-        
-       
-      
+
+
+
       if (userMessage) {
         if(!userName) userName = "anonymous";
         // $log.log(authData);
@@ -80,7 +91,7 @@ export class BoardController {
       }
     };
 
-    
+
 
     //CODE TO DISPLAY THE 5 SECOND NOTIFICATION FOR ANONYMITY
     $('#anonymousWarn').fadeIn().delay(5000).fadeOut();
@@ -167,17 +178,17 @@ export class BoardController {
         refe.update({neg : number});
         console.log("deletong",number);
       });
-        
-      
+
+
       let messageId=msg.$id;
       if(msg.uid === userId)
         this.msgRef.child(messageId).remove();
-      
-      
+
+
       if(msg.uid === "google:"+authData.google.id)
         this.msgRef.child(ide).remove();
       //console.log("delete: " + msg.$id);
-      
+
     };
 
 
