@@ -1,5 +1,5 @@
 export class RoomController {
-  constructor ($firebaseAuth, $stateParams, $scope,$log) {
+  constructor ($firebaseAuth, $stateParams, $scope,$log,Dashboard) {
     'ngInject';
     $scope.getview=null;
     $log.info(`in room controller in room ${$stateParams.roomKey }`);
@@ -9,7 +9,12 @@ export class RoomController {
     this.messages= {}; // pr
     this.action={};// pr
     this.finalArray=[]; // pr
-
+		this.userPic = '';
+		let userPromise = Dashboard.getUserPic(Dashboard.getUserID());
+		userPromise.on("value",(snapshot)=>{
+			this.userPic = snapshot.val().google.profileImageURL;
+			//console.log("hi",this.userPic);
+		});
     var userRef = new Firebase("https://vyapi.firebaseio.com/rooms/");
     userRef.on('value',(snap)=>{
 
