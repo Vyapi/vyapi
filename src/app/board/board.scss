@@ -12,6 +12,15 @@ body {
   color: #EED;
 }
 
+@font-face {
+    font-family: myFirstFont;
+    src: url("https://fonts.googleapis.com/css?family=Average+Sans");
+}
+
+.group-header {
+  color: #E1E0DE;
+}
+
 #anonymousWarn {
   display: none;
   margin:10px;
@@ -55,9 +64,6 @@ body {
   padding-left: 0.5em;
   /*padding-right: 0.5em;*/
   color: white;
-  /*background-color: #6D6A68;
-  border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px;*/
 }
 
 .sticky__body {
@@ -93,6 +99,19 @@ body {
   color: white;
 }
 
-.like-btn {
+.sticky__body::-webkit-scrollbar {
+ display: none;
+}
+
+.anonymous-toggle {
+  background-color: #6D6A68;
+  color: white;
+}
+
+.delete-btn:hover {
+  display: inline;
+}
+
+.fa-thumbs-up {
   color: black;
 }

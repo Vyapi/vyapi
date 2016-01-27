@@ -1,11 +1,14 @@
 export class BoardController {
   constructor ($firebaseArray, $location,$log) {
+
     'ngInject';
 
     var userName = "";
     var appURL = "https://vyapi.firebaseio.com/";
     var roomID = $location.path().split("/")[2];
+    var anonymous = true;
     $log.log("roomID is " + roomID);
+
 
     var userRef = new Firebase("https://vyapi.firebaseio.com/messages");
     var authData = userRef.getAuth();
@@ -19,6 +22,8 @@ export class BoardController {
     this.messages = $firebaseArray(this.msgRef);
 
     //CODE TO MAKE THE USER ANONYMOUS
+    var anonymous = true;
+
     this.toggle = function() {
       anonymous = !anonymous;
       if(!anonymous){
@@ -28,6 +33,7 @@ export class BoardController {
         userName = "anonymous";
         $('.anonymousToggle').css({"background-color":"#6D6A68","color":"white"});
       }
+      console.log(userName);
     };
 
     //CODE TO ENTER THE OBJECT IN FIREBASE DATABASE
@@ -84,6 +90,7 @@ export class BoardController {
     this.like = function(msg) {
       let t = (new Firebase(roomURL)).child(msg.$id + "/like/" +authData.uid);
       t.once("value" , function(value){
+        //console.log('triggring event');
         if(value.exists()){
           t.remove();
         }
@@ -121,6 +128,18 @@ export class BoardController {
       $('.like-btn').css({'visibility' : 'hidden'});
     };
 
+    //CODE TO DELETE THE MESSAGE POSTED
+    this.delete=function(msg){
+      var ide=msg.$id;
+      console.log(msg);
+      //console.log(authData.google.id);
+      // var roomRef = new Firebase('https://vyapi.firebaseio.com/messages/'+roomID).remove();
+      if(msg.uid === "google:"+authData.google.id)
+        this.msgRef.child(ide).remove();
+      console.log("delete: " + msg.$id);
+    };
+
+
     //CODE TO EDIT THE STICKY NOTES
     this.isOwner=function(msgId)
     {
@@ -145,49 +164,3 @@ export class BoardController {
 }
 
 
-    // //CODE TO ENTER NEW LINE ON PRESSING SHIFT+ENTER
-    //#############################################
-    // $('#userTextPlus').on('keydown', function(event) {
-    //   if (event.keyCode == 13)
-    //     if (!event.shiftKey) $('#testForm').submit();
-    // });
-
-
-    // function pasteIntoInput(el, text) {
-    //   el.focus();
-    //   if (typeof el.selectionStart == "number"
-    //         && typeof el.selectionEnd == "number") {
-    //     let val = el.value;
-    //     let selStart = el.selectionStart;
-    //     el.value = val.slice(0, selStart) + text + val.slice(el.selectionEnd);
-    //     el.selectionEnd = el.selectionStart = selStart + text.length;
-    //   } else if (typeof document.selection != "undefined") {
-    //     let textRange = document.selection.createRange();
-    //     textRange.text = text;
-    //     textRange.collapse(false);
-    //     textRange.select();
-    //   }
-    // }
-
-    // function handleEnter(evt) {
-    //   if (evt.keyCode == 13 && evt.shiftKey) {
-    //     if (evt.type == "keypress") {
-    //         pasteIntoInput(this, "\n");
-    //     }
-    //   evt.preventDefault();
-    //   }
-    // }
-
-    // // Handle both keydown and keypress for Opera, which only allows default
-    // // key action to be suppressed in keypress
-    // //$("#your_textarea_id").keydown(handleEnter).keypress(handleEnter);
-    // $('#userTextPlus').keydown(handleEnter).keypress(handleEnter);
-
-    // $("userTextPlus").keydown(function(e){
-    // // Enter was pressed without shift key
-    //   if (e.keyCode == 13 && !e.shiftKey)
-    //   {
-    //     // prevent default behavior
-    //     e.preventDefault();
-    //   }
-    // });
