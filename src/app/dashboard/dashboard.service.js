@@ -32,9 +32,8 @@ export class Dashboard{
     roomDbRef.remove();
     return;
   }
-  createRoom(userID,roomName, plusName,minusName,actionName,d){
-    console.log(userID);
-    console.log("service");
+  createRoom(userID,roomName, plusName,minusName,actionName,d)
+  {
     this.roomsRef.push({roomName : roomName, ownedBy : userID, plusLabel : plusName, minusLabel : minusName, actionLabel : actionName,date: d, pos:0, neg:0});
     $('#myModal').modal('hide');
     return;
@@ -44,9 +43,8 @@ export class Dashboard{
   }
 
 
-  saveValues(roomKey,rName, pName, mName, aName){
-    console.log("hello service");
-    console.log(roomKey);
+  saveValues(roomKey,rName, pName, mName, aName)
+  {
     let roomDbRef = new Firebase(this.roomsURL + '/' + roomKey);
     roomDbRef.update({
       roomName : rName, plusLabel : pName, minusLabel : mName, actionLabel : aName
