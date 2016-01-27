@@ -5,7 +5,7 @@
 
   <div class="row">
     <div class="col-md-6">
-      <h2 class="group-header">What we did right!</h2>
+      <h2 class="group-header">{{ board.plusLabel }}</h2>
       <form ng-submit="board.submit('plus')">
         <div class="form-group">
           <div class="input-group">
@@ -20,20 +20,20 @@
       <ul id="chat-messages-plus" class="list-unstyled">
         <li data-ng-repeat="msg in board.messages.slice().reverse() | filter:{lane:'plus'}">
           <div class="sticky">
-            <div class="sticky-note" ng-mouseover="board.hover(msg)" ng-mouseout="board.show(msg)">
-              <i class="fa fa-times fa-lg pull-right delete-btn"  ng-click="board.delete(msg)"></i>
+            <div class="sticky-note" ng-mouseover="board.hover(msg.uid)" ng-mouseout="board.show(msg.uid)">
+              <i class="fa fa-times fa pull-right delete-btn"  ng-click="board.delete(msg,5)"></i>
+              <i class="fa fa-pencil fa pull-right edit-btn" ng-click="board.edit(msg.uid)"></i>
+              <i class="fa fa-check fa pull-right save-btn" ng-click="board.saveEdit(msg)"></i>
               <div class="sticky__body">
                 <div ng-if="board.isOwner(msg.uid)" >
-                <textarea class="sticky-textarea" ng-model="msg.text" >{{ msg.text }}</textarea>
-                  <!-- <div><p class="userText">{{ msg.text }}</p></div> -->
-                  <i class="fa fa-pencil fa-lg pull-right" ng-click="board.saveEdit(msg)"></i>
+                  <textarea class="sticky-textarea" id="stickyTextarea" ng-model="msg.text">{{ msg.text }}</textarea>
                 </div>
                 <div ng-if="!board.isOwner(msg.uid)" >
                   <p class="sticky-text">{{ msg.text }}</p>
                 </div>
               </div>
               <div class="sticky__head">
-                <i class="fa fa-thumbs-up fa-lg pull-right like-btn" ng-click="board.like(msg);">{{ msg.dl }}</i>
+                <i class="fa fa-thumbs-up pull-right like-btn" ng-click="board.like(msg);">{{ msg.dl }}</i>
               </div>
             </div>
           </div>
@@ -42,7 +42,7 @@
     </div>
 
     <div class="col-md-6">
-      <h2 class="group-header">What could improve!</h2>
+      <h2 class="group-header">{{ board.minusLabel }}</h2>
       <form ng-submit="board.submit('minus')">
         <div class="form-group">
           <div class="input-group">
@@ -55,24 +55,22 @@
       </form>
 
       <ul id="chat-messages-minus" class="list-unstyled">
-        <li data-ng-repeat="msg in board.messages.slice().reverse() | filter:{lane:'minus'}">
+        <li data-ng-repeat="msg in board.messages.slice().reverse() | filter:{lane:'minus'}" id="board.getListId(msg.$id)">
           <div class="sticky">
-            <div class="sticky-note" ng-mouseover="board.hover(msg)" ng-mouseout="board.show(msg)">
-              <i class="fa fa-times fa-lg pull-right delete-btn"  ng-click="board.delete(msg)"></i>
-              <!-- <button class="btn btn-default btn-xs pull-right btn-danger glyphicon glyphicon-remove-circle delete-btn" ng-click="board.delete(msg)"></button> -->
+            <div class="sticky-note" ng-mouseover="board.hover(msg.uid)" ng-mouseout="board.show(msg.uid)">
+              <i class="fa fa-times fa pull-right delete-btn"  ng-click="board.delete(msg,6)"></i>
+              <i class="fa fa-pencil fa pull-right edit-btn" ng-click="board.edit(msg.uid)"></i>
+              <i class="fa fa-check fa pull-right save-btn" ng-click="board.saveEdit(msg)"></i>
               <div class="sticky__body">
-                <div ng-if="board.isOwner(msg)" >
-                  <p class="userText" ng-model="msg.text" >{{ msg.text }}</p>
-                  <!-- <div><p class="userText">{{ msg.text }}</p></div> -->
-                  <i class="fa fa-pencil fa-lg pull-right" ng-click="board.saveEdit(msg)"><span class="Done"></span></i>
+                <div ng-if="board.isOwner(msg.uid)" >
+                  <textarea class="sticky-textarea" id="stickyTextarea"ng-model="msg.text">{{ msg.text }}</textarea>
                 </div>
-                <div ng-if="!board.isOwner(msg)" >
-                  <p class="userText"  >{{ msg.text }}</p>
+                <div ng-if="!board.isOwner(msg.uid)" >
+                  <p class="sticky-text">{{ msg.text }}</p>
                 </div>
               </div>
               <div class="sticky__head">
-                <!-- {{ msg.from }} -->
-                <!-- <span type="button" class="btn btn-default btn-xs glyphicon glyphicon-thumbs-up pull-right pull-bottom like-btn" ng-click=""></span> -->      <i class="fa fa-thumbs-up fa-lg pull-right like-btn" ng-click="board.like(msg);">{{ msg.dl }}</i>
+                <i class="fa fa-thumbs-up pull-right like-btn" ng-click="board.like(msg);">{{ msg.dl }}</i>
               </div>
             </div>
           </div>

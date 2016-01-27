@@ -1,52 +1,97 @@
-<nav class = "navbar navbar-default" role = "navigation">
-
-  <div class = "navbar-header">
-   <button type = "button" class = "navbar-toggle"
-   data-toggle = "collapse" data-target = "#example-navbar-collapse">
-   <span class = "sr-only">Toggle navigation</span>
-   <span class = "icon-bar"></span>
-   <span class = "icon-bar"></span>
-   <span class = "icon-bar"></span>
- </button>
-
- <a class = "navbar-brand" href = "#">VYAPI</a>
-</div>
-
-<div class = "collapse navbar-collapse" id = "example-navbar-collapse">
-
- <ul class = "nav navbar-nav">
-  <li><a href = "/">Home</a></li>
-  <li><a href = "#">About</a></li>
-  <li  class = "active"><a href = "/dashboard">Dashboard</a></li>
-  <li><a href = "/room">Room</a></li>
-  <li><a href = "/board">Plus Minus Board</a></li>
-  <li><a href = "/action">Action Items</a></li>
-  <li><a id="logout" ng-click="dashboard.firebaseAuthlogout()">Logout</a></li>
-
-</ul>
-</div>
-
-</nav>
-
-
 <div class="container-fluid">
+	{{dashboard.userPic}}
+	<ul class="list-unstyled list-inline">
+		<li>
+		<div class="sticky sticky-note sticky__body">
+			<div class="create">
+				<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-plus"></i></button>
+			</div>
+		</div>
+		<li ng-repeat="room in dashboard.rooms">
+		<div class="sticky">
+			<div class="sticky-note">
+				<div class="sticky__body">
+					<i class="fa fa-times fa-lg pull-right delete-btn" ng-click="dashboard.removeRoom(room.key)"></i>
+          <i class="glyphicon glyphicon-pencil btn-lg" ng-click="dashboard.editRoom(room.key)"></i>
+					<div><a href="{{room.url}}">
+							<p class="sticky-textarea">Members:{{room.mem}}</p>
+							<p class="sticky-textarea">Date:{{room.date}}</p>
+							<div class="roomName">
+								<i class="sticky-textarea" >{{room.roomName}}</i>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		</li>
+	</ul>
+</div>
 
-  <div class="col-md-12">
-    <ul class="list-unstyled list-inline">
-      <li>
-        <button class="btn btn-primary btn-lg" ng-click="dashboard.createRoom()"><i class="glyphicon glyphicon-plus"></i>&nbsp;Create Room</button>
-      </li>
-      <li ng-repeat="room in dashboard.rooms">
-        <button class="btn btn-default btn-lg" ><a href="{{room.url}}">{{room.roomName}}</a>
-        </button>
-        <button class="btn btn-default btn-xs pull-right btn-danger glyphicon glyphicon-trash" ng-click="dashboard.removeRoom(room.key)"</button>
-        </li>
+<div class="modal fade" id="myModal" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Room Name</h4>
+			</div>
+			<div class="modal-body">
+				<form role ="form" ng-submit="dashboard.createRoom()" name="form">
+					<div class="form-group">
+						<label>Room Name</label>
+						<input type="text" class="form-control" id="roomName" name="roomName" placeholder="Room Name" ng-model="dashboard.roomName" required>
+						<br>
+						<label>Label for section one</label>
+						<input type="text" class="form-control" id="plusLabel" name="plusLabel" placeholder="What we did right!"  ng-model="dashboard.plusName" ng-init="dashboard.plusName = 'What we did right!' ">
+						<br>
+						<label>Label for section two</label>
+						<input type="text" class="form-control" id="plusLabel" name="plusLabel" placeholder="What should improve!" ng-model="dashboard.minusName" ng-init="dashboard.minusName = 'What should improve!' ">
+						<br>
+						<label>Label for section three</label>
+						<input type="text" class="form-control" id="plusLabel" name="plusLabel" placeholder="Action Items!" ng-model="dashboard.actionName" ng-init="dashboard.actionName ='Action Items!'">
+						<br>
+						<input  class="btn btn-default btn-lg"  type="submit" value="add" name="add">
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
 
-      </ul>
+			</div>
+		</div>
+	</div>
+</div>
 
-    </div>
+<div class="modal fade" id="editModal" role="dialog">
+	<div class="modal-dialog">
 
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Room Name</h4>
+			</div>
+			<div class="modal-body">
+				<form role ="form" ng-submit="dashboard.saveValues()" name="form">
+					<div class="form-group">
+						<label>Room Name</label>
+						<input type="text" class="form-control" id="roomName" name="roomName" placeholder="" ng-model="dashboard.rName" required>
+						<br>
+						<label>Label for section one</label>
+						<input type="text" class="form-control" id="plusLabel" name="plusLabel" placeholder="What we did right!" ng-model="dashboard.pName">
+						<br>
+						<label>Label for section two</label>
+						<input type="text" class="form-control" id="minusLabel" name="minusLabel" placeholder="What should improve!" ng-model="dashboard.mName">
+						<br>
+						<label>Label for section three</label>
+						<input type="text" class="form-control" id="actionLabel" name="actionLabel" placeholder="Action Items!" ng-model="dashboard.aName">
+						<br>
+						<input  class="btn btn-default btn-lg"  type="submit" value="save" name="save">
+						<input class="btn btn-default btn-lg" type="button" value="cancel" class="close" data-dismiss="modal">
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
 
-
-
-  </div>
+			</div>
+		</div>
+	</div>
+</div>

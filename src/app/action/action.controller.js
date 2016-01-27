@@ -11,6 +11,12 @@ export class ActionController {
     this.roomID=$stateParams.roomKey;
 
     var roomRef = new Firebase('https://vyapi.firebaseio.com/rooms/'+this.roomID);
+    this.actionLabel='';
+    roomRef.once("value",(snapshot)=>{
+      let labelData = snapshot.val();
+      this.actionLabel = labelData.actionLabel;
+      console.log(actionLabel);
+    });
     var room = roomRef.child("members");
     room.on("value", (snapshot) => {
       snapshot.forEach((uid)=>{
