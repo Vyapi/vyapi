@@ -16,10 +16,29 @@ export class BoardController {
     var userId = "google:" + googleId;
     var anonymous = true;
 
+
+    var roomURL= "https://vyapi.firebaseio.com/messages/" + roomID;
+    var roomRef= new Firebase("https://vyapi.firebaseio.com/rooms/" + roomID);
+    this.msgRef = new Firebase(roomURL);
+    this.messages = $firebaseArray(this.msgRef);
+
+    this.plusLabel='';
+    this.minusLabel='';
+    roomRef.on("value",(snapshot)=>{
+      console.log(snapshot.val());
+      let labelData = snapshot.val();
+      this.plusLabel = labelData.plusLabel;
+      this.minusLabel = labelData.minusLabel;
+      //console.log(this.plusLabel);
+    //console.log(this.minusLabel);
+    });
+
+
     var roomURL = "https://vyapi.firebaseio.com/messages/" + roomID;
     console.log(roomURL);
     this.msgRef = new Firebase(roomURL);
     this.messages = $firebaseArray(this.msgRef);
+
 
 
     //CODE TO MAKE THE USER ANONYMOUS
@@ -46,16 +65,17 @@ export class BoardController {
       if (id == 'plus')
         dashboard = new Firebase(ref + "/pos");
       else
-        dashboard = new Firebase(ref + "/neg");
+        dashboard=new Firebase(ref+"/neg");
 
-      dashboard.once("value", (snapshot)=> {
+        dashboard.once("value",(snapshot)=>{
+
         num = parseInt(snapshot.val());
         num++;
         if (id == 'plus')
           ref.update({pos: num});
         else
-          ref.update({neg: num});
-        console.log(num);
+           ref.update({neg : num});
+         console.log(num);
 
       });
 
@@ -147,33 +167,39 @@ export class BoardController {
       // $('.like-btn').css({'visibility' : 'hidden'});
       // $('.edit-btn').css({'visibility' : 'hidden'});
 
-      //CODE TO DELETE THE MESSAGE POSTED
-      this.delete = function (msg, temp) {
-        console.log("in delete function");
-        var ide = msg.$id;
-        //console.log(msg);
-        var refe = new Firebase("https://vyapi.firebaseio.com/rooms/" + roomID);
-        var dash;
-        var number;
-        if (temp === 5)
-          dash = new Firebase(refe + "/pos");
-        else
-          dash = new Firebase(refe + "/neg");
-        dash.once("value", (snapshot)=> {
-          number = parseInt(snapshot.val());
-          number = number - 1;
-          if (temp === 5)
-            refe.update({pos: number});
-          else
-            refe.update({neg: number});
-          console.log("deletong", number);
-        });
+    //CODE TO DELETE THE MESSAGE POSTED
+    this.delete=function(msg,temp){
+      console.log("in delete function");
+      var ide=msg.$id;
+      //console.log(msg);
+      var refe = new Firebase("https://vyapi.firebaseio.com/rooms/"+roomID);
+      var dash;
+      var number;
+      if(temp === 5)
+        dash=new Firebase(refe+"/pos");
+      else
+        dash=new Firebase(refe+"/neg");
+        dash.once("value",(snapshot)=>{
+        number = parseInt(snapshot.val());
+        number=number-1;
+        if(temp === 5)
+        refe.update({pos : number});
+      else
+        refe.update({neg : number});
+        console.log("deletong",number);
+      });
 
 
-        let messageId = msg.$id;
-        if (msg.uid === userId)
-          this.msgRef.child(messageId).remove();
-      };
+      let messageId=msg.$id;
+      if(msg.uid === userId)
+        this.msgRef.child(messageId).remove();
+
+
+      if(msg.uid === "google:"+authData.google.id)
+        this.msgRef.child(ide).remove();
+      //console.log("delete: " + msg.$id);
+
+    };
 
       //CODE TO SHOW THE EDIT BUTTON ONLY ON SELF STICKYs
       this.getListId = function (msgId) {
