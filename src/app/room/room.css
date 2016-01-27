@@ -1,0 +1,20 @@
+body {
+  background-color: #F4F1E8;
+  background-image: url("wood-background.jpg");
+  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+}
+
+
+.navbarItems {
+  color: #6D6A68;
+}
+
+.navbar-header {
+  color: #6D6A68;
+}
+
+.navbar {
+  color: #6D6A68;
+  background: rgba(255, 255, 255, 0.3);
+  border: 5px solid black;
+}

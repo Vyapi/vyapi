@@ -1,11 +1,12 @@
 export class BoardController {
-  constructor ($firebaseArray, $location,$log) {
+  constructor ($firebaseArray, $location,$log, $stateParams) {
 
     'ngInject';
 
     var userName = "";
     var appURL = "https://vyapi.firebaseio.com/";
     var roomID = $location.path().split("/")[2];
+    var roomId = $stateParams.roomKey;
     var anonymous = true;
     $log.log("roomID is " + roomID);
 
@@ -235,6 +236,23 @@ export class BoardController {
       }
       }*/
     }
+
+    //sticku user image
+    //user came online
+    onlineUsersRef.child(roomId).on("child_added", (userId) => {
+      $log.log("User: " + userId.key() + " came online");
+
+      //fetch details of the user that just came online
+      (new Firebase(encodeURI(appURL + "users/" + userId.key() + "/google/cachedUserProfile/given_name/"))).once("value", (value) => {
+        var userName = value.val();
+        (new Firebase(encodeURI(appURL + "users/" + userId.key() + "/google/profileImageURL/"))).once("value", (value) => {
+          var profileImageURL = value.val();
+          this.onlineUsers[userId.key()] = {name: userName, photo : profileImageURL};
+          for(var u in this.onlineUsers)
+            $log.log(u);
+        });
+      });
+    });
   }
 }
 

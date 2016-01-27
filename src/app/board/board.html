@@ -37,7 +37,7 @@
              </div>
              <div class="sticky__head">
                <button class="btn btn-default btn-xs" ng-click="board.like(msg);"><i class="fa fa-thumbs-up like-btn"></i> {{ msg.dl }} likes</button>
-               <img class = "sticky-user-image img-circle" title="{{user.name}}" ng-src="{{user.photo}}">
+               <span ng-repeat="(uid, user) in users.onlineUsers">hi<img class = "sticky-user-image img-circle" title="{{user.name}}" ng-src="{{user.photo}}"></span>
              </div>
            </div>
          </div>
