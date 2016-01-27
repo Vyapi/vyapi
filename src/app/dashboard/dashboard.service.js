@@ -15,15 +15,11 @@ export class Dashboard{
 	  let authData = this.rootRef.getAuth();
 	  return authData.uid;
   }
-  createRoom(userID){
-	let roomName=prompt('Room Name','Default');
-	if(!roomName){
-		alert('Please enter a valid room name');
-	}
-	else{
+  createRoom(userID,roomName){
+  	
 		let newRoom = this.roomsRef.push({roomName : roomName, ownedBy : userID});
-        //this.rootRef.child("messages/"+ newRoom.key()).set(roomName);
+        this.rootRef.child("messages/"+ newRoom.key()).set(roomName);
 		return;
-	}
+	
   }
 }
