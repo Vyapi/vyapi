@@ -1,7 +1,8 @@
 .user-footer {
-  margin-top: 60px;
   position: relative;
   bottom: 0;
+  overflow: hidden;
+  margin-top: 4em;
 }
 
 .user-badge {
@@ -22,7 +23,7 @@
 .navbar-bottom {
   text-align: center;
   display: inline-block;
-  background-color: rgba(239,236,228, 0.5);
+  background-color: rgba(239,236,228,0);
 }
 
 .user-list {
@@ -33,6 +34,9 @@
   border-radius: 100%;
   color: black;
   text-align:center;
+  position: fixed;
+  bottom: 1.25em;
+  right: .5em;
 }
 
 li.ng-enter.ng-enter-active,
@@ -52,8 +56,11 @@ li.ng-enter {
 }
 
 .user-image {
-  height: 3.5em;
-  padding-right: .25em;
-  padding-left: .25em;
-  border: .5em;
+ height: 4em;
+ padding-right: .25em;
+ padding-left: .25em;
+ padding-top: .25em;
+ padding-bottom: .25em;
+ border: .5em;
 }
+
