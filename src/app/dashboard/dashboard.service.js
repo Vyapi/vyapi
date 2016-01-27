@@ -41,8 +41,8 @@ export class Dashboard{
   }
   editRoom(){
     $('#editModal').modal('show');
-
   }
+
 
   saveValues(roomKey,rName, pName, mName, aName){
     console.log("hello service");
