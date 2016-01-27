@@ -1,6 +1,9 @@
 export class RoomController {
-  constructor ($firebaseAuth, $stateParams, $scope,$log,Dashboard) {
+  constructor ($firebaseAuth, $stateParams, $scope,$log,Auth,$location,Dashboard) {
     'ngInject';
+    this.auth = Auth;
+    this.location = $location;
+    this.clog = $log;
     $scope.getview=null;
     $log.info(`in room controller in room ${$stateParams.roomKey }`);
     $log.log($stateParams.roomKey);
@@ -103,7 +106,7 @@ export class RoomController {
         }
       });
     });
-    
+
     this.header = ["Positive","PositiveName","improve","improveName","action","owner"];
 
     //CodeforExport
@@ -143,5 +146,11 @@ export class RoomController {
       this.header = ["Positive","PositiveName","improve","improveName","action","owner"];
       console.table(this.finalArray);
     }
+  }
+
+  firebaseAuthlogout(){
+    this.auth.logout()
+    this.clog.log("Logged out");
+    this.location.path('/');
   }
 }
