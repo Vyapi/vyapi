@@ -7,7 +7,7 @@ export class UserController {
     var appURL = "https://vyapi.firebaseio.com/";
     var onlineUsersRef = new Firebase(appURL + "onlineUsers/");
     this.onlineUsers = {}; //angular is watching this array
-    var t = $firebaseArray(onlineUsersRef); //no idea what this line does, but removing this cripples whole application
+    $firebaseArray(onlineUsersRef); //no idea what this line does, but removing this cripples whole application
     this.goOnline = function() {
 
       var uid;
