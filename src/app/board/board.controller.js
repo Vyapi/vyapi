@@ -118,18 +118,20 @@ export class BoardController {
     //CODE TO SHOW DELETE/LIKE ETC ON HOVER
     this.hover = function(msgId){
       if(msgId === userId) {
+        $('.edit-btn').css({'visibility' : 'visible'});
       }
-      $('.delete-btn').css({'visibility' : 'visible'});
-      $('.like-btn').css({'visibility' : 'visible'});
-      $('.edit-btn').css({'visibility' : 'visible'});
+      // $('.delete-btn').css({'visibility' : 'visible'});
+      // $('.like-btn').css({'visibility' : 'visible'});
+      // $('.edit-btn').css({'visibility' : 'visible'});
     };
 
     this.show = function(msgId){
       if(msgId === userId) {
+        $('.edit-btn').css({'visibility' : 'hidden'});
       }
-      $('.delete-btn').css({'visibility' : 'hidden'});
-      $('.like-btn').css({'visibility' : 'hidden'});
-      $('.edit-btn').css({'visibility' : 'hidden'});
+      // $('.delete-btn').css({'visibility' : 'hidden'});
+      // $('.like-btn').css({'visibility' : 'hidden'});
+      // $('.edit-btn').css({'visibility' : 'hidden'});
     };
 
 

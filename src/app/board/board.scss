@@ -12,15 +12,6 @@ body {
   color: #EED;
 }
 
-@font-face {
-    font-family: myFirstFont;
-    src: url("https://fonts.googleapis.com/css?family=Average+Sans");
-}
-
-.group-header {
-  color: #E1E0DE;
-}
-
 #anonymousWarn {
   display: none;
   margin:10px;
@@ -55,6 +46,16 @@ body {
   min-width: 160px;
 }
 
+.sticky:hover .delete-btn {
+  visibility: visible;
+}
+.sticky:hover .edit-btn {
+  display: inline-block;
+}
+.sticky:hover .like-btn {
+  visibility: visible;
+}
+
 .sticky__head {
   max-height: 30px;
   min-height: 30px;
@@ -67,8 +68,8 @@ body {
 }
 
 .sticky__body {
-  max-height: 190px;
-  min-height: 190px;
+  max-height: 140px;
+  min-height: 140px;
   width: 100%;
   height: 100%;
   padding: 0.5em;
@@ -100,17 +101,17 @@ body {
   color: white;
 }
 
-.sticky__body::-webkit-scrollbar {
- display: none;
-}
-
 .anonymous-toggle {
   background-color: #6D6A68;
   color: white;
 }
 
-.delete-btn:hover {
-  display: inline;
+.delete-btn, .like-btn {
+  visibility: hidden;
+}
+
+.edit-btn {
+  visibility: hidden;
 }
 
 .save-btn {
