@@ -1,26 +1,27 @@
-<footer >
-  <nav class="navbar navbar-default navbar-fixed-bottom">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-12">
-        <ul class="list-inline">
-        <li>
-          <button class="{{users.statusClass}}" title="Show all users" data-toggle="modal" data-target="#myModal" ><i class="glyphicon glyphicon-th-list"></i></i></button>
-        </li>
-        <li ng-repeat = "(uid, user) in users.onlineUsers" style="display: list-inline;" class="ng-animate ng-enter ng-leave animated bounce">
-          <img class =  "img-circle" title="{{user.name}}" src="{{user.photo}}" style="height: 4em; padding: .5em;">
-        </li>
-    </ul>
+<footer class="user-footer">
+  <nav class="navbar-bottom navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12" style="display: flex; display: -webkit-flex;">
+          <div>
+            <ul class="list-inline" style="width: 1000px">
+              <li ng-repeat = "(uid, user) in users.onlineUsers" style="float:right" class="ng-animate ng-enter ng-leave animated bounce">
+              <a href="#" style=" display: inline-block;" title="{{user.name}}"><img class =  "user-image img-circle" title="{{user.name}}" ng-src="{{user.photo}}"></img><span class="user-badge">{{users.getMessageContributions(uid)}}</span></a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <button class="user-list btn btn-default" title="Show all users" data-toggle="modal" data-target="#userModal" ><i class="glyphicon glyphicon-option-vertical" style="text-align: left"></i></button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-
   </div>
 </nav>
 </footer>
 
 <!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
+<div id="userModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
@@ -30,10 +31,10 @@
         <h4 class="modal-title">Online users</h4>
       </div>
       <div class="modal-body">
-        <li ng-repeat = "(uid, user) in users.onlineUsers" style="display: list-inline;" class="ng-animate ng-enter ng-leave">
-        <img class =  "img-circle" title="{{user.name}}" src="{{user.photo}}" style="height: 4em; padding-top: .5em; padding-bottom: .5em">
-        <label>{{user.name}}</label>
-      </li>
+        <ul ng-repeat = "(uid, user) in users.onlineUsers" style="display: list-inline;" class="ng-animate ng-enter ng-leave">
+          <img class =  "img-circle" title="{{user.name}}" src="{{user.photo}}" style="height: 4em; padding-top: .5em; padding-bottom: .5em">
+          <label>{{user.name}}</label>
+        </ul>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
