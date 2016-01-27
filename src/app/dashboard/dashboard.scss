@@ -1,0 +1,52 @@
+body {
+  background-color: #f4f1e8;
+  background-image: url("http://www.ashtangabutterfly.com/images/wood-grain-background-2.jpg");
+  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+}
+
+li { margin: 0 3px 3em 3px; padding: 0.4em; height: 220px; width: 180px}
+
+
+.sticky {
+  float: left;
+  margin-left: 0.5em;
+  margin-bottom: 0.8em;
+  margin-right: 0.8em;
+  margin-top: 0.5em;
+  border-radius: 7px;
+  position: absolute;
+  background-color: #FDFDFD;
+  background-image: url("http://www.transparenttextures.com/patterns/cream-pixels.png");
+  /*border: 0.2em solid #6D6A68;*/
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  box-shadow: 8px 8px 20px;
+  font-family: myFirstFont;
+  font-size: 1.1em;
+}
+
+.sticky-note {
+  flex: 0 1 auto;
+  align-self: auto;
+  max-width: 160px;
+  min-width: 160px;
+  }
+
+  .sticky__body {
+  max-height: 190px;
+  min-height: 190px;
+  width: 100%;
+  height: 100%;
+  padding: 0.5em;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  word-break: break-all;
+  color: black;
+  hyphens: auto;
+  /*font-family: myFirstFont;*/
+}
