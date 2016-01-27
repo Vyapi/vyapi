@@ -18,3 +18,6 @@ body {
   background: rgba(255, 255, 255, 0.3);
   border: 5px solid black;
 }
+.icon--white {
+  color: white;
+}
