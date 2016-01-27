@@ -1,11 +1,12 @@
 export class ActionController {
-    constructor($firebaseArray, $stateParams) {
+    constructor($firebaseArray, $stateParams,$log) {
 
     'ngInject';
     this.person='';
     this.items='';
     this.text='';
     this.assignee=[];
+    this.clog = $log;
 //
     this.roomID=$stateParams.roomKey; //temporary
     //this.roomID='-K8rJxJaWp5N6v91fP2M';
@@ -68,7 +69,7 @@ export class ActionController {
 
   modify(person)
   {
-    console.log('modify'+person.name);
+    this.clog.log('modify'+person.name);
     /*this.myDataRef.child('action/'+$person.key).remove();
     this.myDataRef.child('action').push({task:$person.task,name:$person.name,roomid:this.roomID});*/
     this.myDataRef.child(person.key).set({task:person.task,name:person.name});
@@ -77,7 +78,7 @@ export class ActionController {
 
   remove(index)
   {
-    console.log(index);
+    this.clog.log(index);
     this.myDataRef.child(this.items[index].key).remove();
     //console.log(this.items);
     //this.items.splice(index, 1);
