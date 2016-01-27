@@ -1,13 +1,15 @@
 export class DashboardController {
-	constructor ($firebaseArray,Dashboard,$location,$log,$window){
+	constructor ($firebaseArray,Dashboard,$location,Auth,$log){
+
 		'ngInject';
 		this.path = $location.absUrl().replace('dashboard', 'room');
 		$log.log(this.path);
 		// this.set_param(Dashboard);
 		this.setParam(Dashboard);
 		this.rooms = [];
+		this.location = $location;
+		this.auth = Auth;
 		this.clog = $log;
-		this.windowLoc = $window;
 		this.createRoom = function(){
 			this.create(Dashboard);
 		};
@@ -34,13 +36,12 @@ export class DashboardController {
 		let userID = Dashboard.getUserID();
 		return Dashboard.createRoom(userID);
 	}
-	firebaseAuthlogout()
-	{
-		let ref = new Firebase("https://vyapi.firebaseio.com");
-		ref.unauth();
-		this.windowLoc.location.href='/';
-	}
 	remove(Dashboard,roomKey){
 		Dashboard.remove(roomKey);
 	}
+	firebaseAuthlogout(){
+    this.auth.logout()
+    this.clog.log("Logged out");
+    this.location.path('/');
+  }
 }
