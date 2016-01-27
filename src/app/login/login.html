@@ -1,54 +1,36 @@
 <div class="container">
 
-<style>
- body {
-       background-color: #D2DDE6  ;
- }
- html, body, .container {
-   height: 100%;
-}.container {
-   display: table;
-   vertical-align: middle;
-}.vertical-center-row {
-   display: table-cell;
-   vertical-align: middle;
-}  </style>
-<nav class = "navbar navbar-default" role = "navigation">
-
-  <div class = "navbar-header">
-     <button type = "button" class = "navbar-toggle"
-        data-toggle = "collapse" data-target = "#example-navbar-collapse">
-        <span class = "sr-only">Toggle navigation</span>
-        <span class = "icon-bar"></span>
-        <span class = "icon-bar"></span>
-        <span class = "icon-bar"></span>
-     </button>
-
-     <a class = "navbar-brand" href = "#">VYAPI</a>
+  <div class="text-center">
+    <img src="/app/login/logo.png" class="img-responsive center-block" alt="LOGO" />
+    <h1>Vyapi - Speak Out <br>and Review It</h1>
+    <button class="btn btn-danger btn-lg" ng-click="login.firebaseAuthLogin()" id="login"><span class="fa fa-google"></span> Sign in with Google</button>
   </div>
 
-  <div class = "collapse navbar-collapse" id = "example-navbar-collapse">
+  <img src="./app/login/ScreenShot.png" class="img-responsive screenshot--shadow screenshot--margin" alt="Screen Shot">
 
-     <ul class = "nav navbar-nav">
-        <li class = "active"><a href = "#">Home</a></li>
-        <li><a href = "#">About</a></li>
-        <li><a href = "#">Dashboard</a></li>
-        <li><a href = "#">Room</a></li>
-        <li><a href = "#" id="logout" ng-click="login.firebaseAuthlogout()">Logout</a></li>
-
-     </ul>
-  </div>
-
-</nav>
-<div class="container">
-   <div class="vertical-center-row">
-       <div align="center"><button class="btn btn-primary btn-lg" ng-click="login.firebaseAuthLogin()" id="login">Sign in with Google</button>
-</div>
-   </div>
-</div>
-
-
-<div id="footer">
-     <p class="text-muted">Copyright @Vyapi 2016</p>
-   </div>
+  <footer class="footer footer--transparent">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <ul class="list-inline text-center">
+            <li>Developers:</li>
+            <li><a href="https://github.com/skeep">Suman</a></li>
+            <li><a href="https://github.com/himanshusingh2407">Himanshu</a></li>
+            <li><a href="https://github.com/Mnw2212">Mayur</a></li>
+            <li><a href="https://github.com/vatsalya25">Vatsalya</a></li>
+            <li><a href="https://github.com/goswamipronnoy">Pronnoy</a></li>
+            <li><a href="https://github.com/diwakar-s-maurya">Diwakar</a></li>
+            <li><a href="https://github.com/monicagangwar">Monica</a></li>
+            <li><a href="https://github.com/rahuljain1311">Rahul</a></li>
+            <li><a href="https://github.com/prakharrustagi">Prakhar</a></li>
+            <li><a href="https://github.com/aish-anand">Aishwarya</a></li>
+            <li><a href="https://github.com/ayushinigam">Ayushi</a></li>
+            <li><a href="https://github.com/srishti31">Srishti</a></li>
+            <li><a href="https://github.com/EROIN">Asheesh</a></li>
+            <li><a href="https://github.com/akahal">Abhimanyu</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
 </div>
