@@ -7,18 +7,9 @@ body {
   src: url("https://fonts.googleapis.com/css?family=Average+Sans");
 }
 
-.group-header {
-  color: #EED;
-}
-
-a
+a:hover
 {
   text-decoration: none;
-}
-#anonymousWarn {
-  display: none;
-  margin:10px;
-  padding: 10px;
 }
 
 li { float: left; }
@@ -95,24 +86,4 @@ text-align: center;
   background: transparent;
 }
 
-.anonymous-toggle {
-  background-color: #666;
-  color: white;
-}
 
-.sticky__body::-webkit-scrollbar {
- display: none;
-}
-
-.anonymous-toggle {
-  background-color: #6D6A68;
-  color: white;
-}
-
-.delete-btn:hover {
-  display: inline;
-}
-
-.fa-thumbs-up {
-  color: black;
-}
