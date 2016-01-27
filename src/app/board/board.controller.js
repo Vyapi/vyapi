@@ -20,6 +20,8 @@ export class BoardController {
     console.log(roomURL);
     this.msgRef = new Firebase(roomURL);
     this.messages = $firebaseArray(this.msgRef);
+    
+    
 
     //CODE TO MAKE THE USER ANONYMOUS
     var anonymous = true;
@@ -38,8 +40,29 @@ export class BoardController {
 
     //CODE TO ENTER THE OBJECT IN FIREBASE DATABASE
     this.submit = function(id) {
+      //console.log("in adding message");
       let userMessage = (id=='plus') ? this.userMessagePlus : this.userMessageMinus;
-
+      var ref=new Firebase("https://vyapi.firebaseio.com/rooms/"+roomID);
+      var dashboard;
+      var num;
+      if(id == 'plus')
+        dashboard=new Firebase(ref+"/pos");
+      else
+        dashboard=new Firebase(ref+"/neg");
+      
+        dashboard.once("value",(snapshot)=>{
+        num = parseInt(snapshot.val());
+         num++;
+         if(id =='plus')
+           ref.update({pos : num});
+        else
+           ref.update({neg : num});
+         console.log(num);
+        
+      });
+        
+       
+      
       if (userMessage) {
         if(!userName) userName = "anonymous";
         // $log.log(authData);
@@ -57,12 +80,7 @@ export class BoardController {
       }
     };
 
-    //CODE TO DELETE THE MESSAGE POSTED
-    this.delete=function(msg){
-      let messageId=msg.$id;
-      if(msg.uid === userId)
-        this.msgRef.child(messageId).remove();
-    };
+    
 
     //CODE TO DISPLAY THE 5 SECOND NOTIFICATION FOR ANONYMITY
     $('#anonymousWarn').fadeIn().delay(5000).fadeOut();
@@ -129,14 +147,37 @@ export class BoardController {
     };
 
     //CODE TO DELETE THE MESSAGE POSTED
-    this.delete=function(msg){
+    this.delete=function(msg,temp){
+      console.log("in delete function");
       var ide=msg.$id;
-      console.log(msg);
-      //console.log(authData.google.id);
-      // var roomRef = new Firebase('https://vyapi.firebaseio.com/messages/'+roomID).remove();
+      //console.log(msg);
+      var refe = new Firebase("https://vyapi.firebaseio.com/rooms/"+roomID);
+      var dash;
+      var number;
+      if(temp === 5)
+        dash=new Firebase(refe+"/pos");
+      else
+        dash=new Firebase(refe+"/neg");
+        dash.once("value",(snapshot)=>{
+        number = parseInt(snapshot.val());
+        number=number-1;
+        if(temp === 5)
+        refe.update({pos : number});
+      else
+        refe.update({neg : number});
+        console.log("deletong",number);
+      });
+        
+      
+      let messageId=msg.$id;
+      if(msg.uid === userId)
+        this.msgRef.child(messageId).remove();
+      
+      
       if(msg.uid === "google:"+authData.google.id)
         this.msgRef.child(ide).remove();
-      console.log("delete: " + msg.$id);
+      //console.log("delete: " + msg.$id);
+      
     };
 
 

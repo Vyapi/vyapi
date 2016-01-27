@@ -21,7 +21,7 @@
         <li data-ng-repeat="msg in board.messages.slice().reverse() | filter:{lane:'plus'}">
           <div class="sticky">
             <div class="sticky-note" ng-mouseover="board.hover(msg)" ng-mouseout="board.show(msg)">
-              <i class="fa fa-times fa-lg pull-right delete-btn"  ng-click="board.delete(msg)"></i>
+              <i class="fa fa-times fa-lg pull-right delete-btn"  ng-click="board.delete(msg,5)"></i>
               <div class="sticky__body">
                 <div ng-if="board.isOwner(msg.uid)" >
                 <textarea class="sticky-textarea" ng-model="msg.text" >{{ msg.text }}</textarea>
@@ -58,7 +58,7 @@
         <li data-ng-repeat="msg in board.messages.slice().reverse() | filter:{lane:'minus'}">
           <div class="sticky">
             <div class="sticky-note" ng-mouseover="board.hover(msg)" ng-mouseout="board.show(msg)">
-              <i class="fa fa-times fa-lg pull-right delete-btn"  ng-click="board.delete(msg)"></i>
+              <i class="fa fa-times fa-lg pull-right delete-btn"  ng-click="board.delete(msg,6)"></i>
               <!-- <button class="btn btn-default btn-xs pull-right btn-danger glyphicon glyphicon-remove-circle delete-btn" ng-click="board.delete(msg)"></button> -->
               <div class="sticky__body">
                 <div ng-if="board.isOwner(msg)" >
