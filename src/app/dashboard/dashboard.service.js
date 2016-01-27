@@ -28,10 +28,11 @@ export class Dashboard{
 		roomDbRef.remove();
 		return;
 	}
+
 	createRoom(userID,roomName,d){
 		this.roomsRef.push({roomName : roomName, ownedBy : userID, date: d, pos:0, neg:0});
 		return;
-	
-  }
+
+	}
 
 }

@@ -1,7 +1,6 @@
 body {
-  background-color: #f4f1e8;
-  background-image: url("http://www.ashtangabutterfly.com/images/wood-grain-background-2.jpg");
-  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+	background-image: url("http://www.ashtangabutterfly.com/images/wood-grain-background-2.jpg");
+	/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
 @font-face {
   font-family: myFirstFont;
@@ -12,14 +11,6 @@ body {
   color: #EED;
 }
 
-@font-face {
-    font-family: myFirstFont;
-    src: url("https://fonts.googleapis.com/css?family=Average+Sans");
-}
-
-.group-header {
-  color: #E1E0DE;
-}
 
 #anonymousWarn {
   display: none;

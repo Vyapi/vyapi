@@ -1,6 +1,4 @@
 
-
-
 <div class="container-fluid">
  <ul class="list-unstyled list-inline">
   <li>
@@ -26,24 +24,32 @@
 </ul>
 
 
-<div class="modal fade" id="myModal" role="dialog">
-  <div class="modal-dialog">
-   <div class="modal-content">
-     <div class="modal-header">
-       <button type="button" class="close" data-dismiss="modal">&times;</button>
-       <h4 class="modal-title">Room Name</h4>
-     </div>
-     <div class="modal-body">
-      <form role ="form" ng-submit="dashboard.createRoom()" name="form">
-       <div class="form-group">
-         <label>Room Name</label>
-         <input type="text" class="form-control" id="roomName" name="roomName" placeholder="Room Name" ng-model="dashboard.roomName" required>
-         <br>
-         <input  class="btn btn-default btn-lg"  type="submit" value="add" name="add">
-       </div>
-     </form>
-   </div>
- </div>
+
+
+	</div>
 </div>
+<div class="modal fade" id="myModal" role="dialog">
+	<div class="modal-dialog">
+
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Room Name</h4>
+			</div>
+			<div class="modal-body">
+				<form role ="form" ng-submit="dashboard.createRoom()" name="form">
+					<div class="form-group">
+						<label>Room Name</label>
+						<input type="text" class="form-control" id="roomName" name="roomName" placeholder="Room Name" ng-model="dashboard.roomName" required>
+						<br>
+						<input  class="btn btn-default btn-lg"  type="submit" value="add" name="add">
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+
+			</div>
+		</div>
+	</div>
 </div>
 
