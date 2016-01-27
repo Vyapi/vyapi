@@ -53,6 +53,7 @@ export class BoardController {
 
         this.userMessagePlus = '';
         this.userMessageMinus = '';
+        
       }
     };
 
@@ -68,6 +69,8 @@ export class BoardController {
 
     //CODE TO COUNT THE NO. OF LIKES ON A MESSAGE
     (new Firebase(roomURL)).on('child_added', (messagesObj) => {
+      
+      
       (new Firebase(encodeURI(roomURL + "/" + messagesObj.key() + "/like"))).on('value', (userId) => {
         if(userId.val() != null && messagesObj.key()) { //likes are there for this message
           //this.noOfLikes [messagesObj.val().uid] =userId.numChildren();
@@ -110,26 +113,68 @@ export class BoardController {
     $('.like-btn').css({'visibility' : 'hidden'});
     $('.edit-btn').css({'visibility' : 'hidden'});
     $('.save-btn').css({'display' : 'hidden'});
-    $("#chat-messages-plus").sortable();
-    $("#chat-messages-minus").sortable();
+
+    $("#chat-messages-plus").sortable({
+      //console.log("Drag working 1");
+        start: function(event, ui) {
+          // console.log("Drag working 2");
+        },
+        change: function(event, ui) {
+          // console.log("Drag working 3");
+        },
+        update: function(event, ui) {
+          let currPriority = 1;
+          let children = document.getElementById('chat-messages-plus').childNodes;
+          for(let c in children) {
+            if(children[c].childNodes[1] != undefined) {
+              let uniqueMsgID = children[c].childNodes[1].getAttribute('id');
+              (new Firebase(roomURL + "/" + uniqueMsgID)).setPriority(currPriority);
+              currPriority++;
+            }
+          }
+        }
+    });
+
+    $("#chat-messages-minus").sortable({
+      //console.log("Drag working 1");
+        start: function(event, ui) {
+          // console.log("Drag working 2");
+        },
+        change: function(event, ui) {
+          // console.log("Drag working 3");
+        },
+        update: function(event, ui) {
+          let currPriority = 1;
+          let children = document.getElementById('chat-messages-minus').childNodes;
+          for(let c in children) {
+            if(children[c].childNodes[1] != undefined) {
+              let uniqueMsgID = children[c].childNodes[1].getAttribute('id');
+              (new Firebase(roomURL + "/" + uniqueMsgID)).setPriority(currPriority);
+              currPriority++;
+            }
+          }
+        }
+    });
     $("#chat-messages-plus").disableSelection();
     $("#chat-messages-minus").disableSelection();
 
     //CODE TO SHOW DELETE/LIKE ETC ON HOVER
     this.hover = function(msgId){
       if(msgId === userId) {
+        $('.edit-btn').css({'visibility' : 'visible'});
       }
-      $('.delete-btn').css({'visibility' : 'visible'});
-      $('.like-btn').css({'visibility' : 'visible'});
-      $('.edit-btn').css({'visibility' : 'visible'});
+      // $('.delete-btn').css({'visibility' : 'visible'});
+      // $('.like-btn').css({'visibility' : 'visible'});
+      // $('.edit-btn').css({'visibility' : 'visible'});
     };
 
     this.show = function(msgId){
       if(msgId === userId) {
+        $('.edit-btn').css({'visibility' : 'hidden'});
       }
-      $('.delete-btn').css({'visibility' : 'hidden'});
-      $('.like-btn').css({'visibility' : 'hidden'});
-      $('.edit-btn').css({'visibility' : 'hidden'});
+      // $('.delete-btn').css({'visibility' : 'hidden'});
+      // $('.like-btn').css({'visibility' : 'hidden'});
+      // $('.edit-btn').css({'visibility' : 'hidden'});
     };
 
 
@@ -166,5 +211,3 @@ export class BoardController {
     }
   }
 }
-
-
