@@ -51,6 +51,14 @@ body {
 }
 .sticky:hover .edit-btn {
   display: inline-block;
+  visibility: visible;
+}
+.sticky:hover .grab-handle {
+  visibility: visible;
+}
+
+.sticky__top {
+  padding-top: 0.2em;
 }
 
 .sticky__head {
@@ -69,7 +77,6 @@ body {
   min-height: 140px;
   width: 100%;
   height: 100%;
-  padding: 0.5em;
   overflow-y: auto;
   overflow-x: hidden;
   -ms-hyphens: auto;
@@ -87,7 +94,9 @@ body {
 
 .sticky-textarea {
   width: 100%;
-  height: 100px;
+  height: 135px;
+  resize: none;
+  box-sizing: border-box;
   border: none;
   outline: none;
   background: transparent;
@@ -101,6 +110,11 @@ body {
 .anonymous-toggle {
   background-color: #6D6A68;
   color: white;
+}
+
+.grab-handle {
+  color: black;
+  visibility: hidden;
 }
 
 .delete-btn, {

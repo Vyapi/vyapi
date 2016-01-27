@@ -21,7 +21,8 @@ export class BoardController {
     this.msgRef = new Firebase(roomURL);
     this.messages = $firebaseArray(this.msgRef);
 
-
+    var onlineUsersRef = new Firebase(appURL + "onlineUsers/");
+    this.onlineUsers = {};
 
     //CODE TO MAKE THE USER ANONYMOUS
     var anonymous = true;
@@ -49,16 +50,16 @@ export class BoardController {
       else
         dashboard=new Firebase(ref+"/neg");
 
-        dashboard.once("value",(snapshot)=>{
+      dashboard.once("value",(snapshot)=>{
         num = parseInt(snapshot.val());
-         num++;
-         if(id =='plus')
-           ref.update({pos : num});
-        else
-           ref.update({neg : num});
-         console.log(num);
+        num++;
+        if(id =='plus')
+         ref.update({pos : num});
+       else
+         ref.update({neg : num});
+       console.log(num);
 
-      });
+     });
 
 
 
@@ -78,8 +79,6 @@ export class BoardController {
         this.userMessageMinus = '';
       }
     };
-
-
 
     //CODE TO DISPLAY THE 5 SECOND NOTIFICATION FOR ANONYMITY
     $('#anonymousWarn').fadeIn().delay(5000).fadeOut();
@@ -124,32 +123,10 @@ export class BoardController {
     }
 
     //CODE TO ENABLE DRAG AND DROP OF STICKYs
-    $('.delete-btn').css({'visibility' : 'hidden'});
-    $('.like-btn').css({'visibility' : 'hidden'});
-    $('.edit-btn').css({'visibility' : 'hidden'});
-    $('.save-btn').css({'display' : 'hidden'});
     $("#chat-messages-plus").sortable();
     $("#chat-messages-minus").sortable();
     $("#chat-messages-plus").disableSelection();
     $("#chat-messages-minus").disableSelection();
-
-    //CODE TO SHOW DELETE/LIKE ETC ON HOVER
-    this.hover = function(msgId){
-      if(msgId === userId) {
-        $('.edit-btn').css({'visibility' : 'visible'});
-      }
-      // $('.delete-btn').css({'visibility' : 'visible'});
-      // $('.like-btn').css({'visibility' : 'visible'});
-      // $('.edit-btn').css({'visibility' : 'visible'});
-    };
-
-    this.show = function(msgId){
-      if(msgId === userId) {
-        $('.edit-btn').css({'visibility' : 'hidden'});
-      }
-      // $('.delete-btn').css({'visibility' : 'hidden'});
-      // $('.like-btn').css({'visibility' : 'hidden'});
-      // $('.edit-btn').css({'visibility' : 'hidden'});
 
     //CODE TO DELETE THE MESSAGE POSTED
     this.delete=function(msg,temp){
@@ -163,13 +140,13 @@ export class BoardController {
         dash=new Firebase(refe+"/pos");
       else
         dash=new Firebase(refe+"/neg");
-        dash.once("value",(snapshot)=>{
+      dash.once("value",(snapshot)=>{
         number = parseInt(snapshot.val());
         number=number-1;
         if(temp === 5)
-        refe.update({pos : number});
-      else
-        refe.update({neg : number});
+          refe.update({pos : number});
+        else
+          refe.update({neg : number});
         console.log("deletong",number);
       });
 
@@ -201,20 +178,20 @@ export class BoardController {
       this.currentMessageText= msg.text;
       this.currentMessage = msg;
       // $('#stickyTextarea').setAttribute("disabled","disabled");
-      $('#stickyTextarea').focus();
+      /*$('#stickyTextarea').focus();
       $('.edit-btn').css({'display' : 'none'});
-      $('.save-btn').css({'display' : 'inline-block'});
+      $('.save-btn').css({'display' : 'inline-block'});*/
     }
 
     this.saveEdit = function (msg)
     {
       (new Firebase(roomURL + "/" + msg.$id+"/text")).set(msg.text);
-      if(msg.uid == userId) {
+      /*if(msg.uid == userId) {
         $('.edit-btn').css({'display' : 'inline-block'});
         $('.save-btn').css({'display' : 'none'});
         $('#stickyTextarea').blur();
         // $('#stickyTextarea').removeAttribute("disabled");
-      }
+      }*/
     }
   }
 }

@@ -21,9 +21,12 @@
         <li data-ng-repeat="msg in board.messages.slice().reverse() | filter:{lane:'plus'}">
           <div class="sticky">
             <div class="sticky-note" ng-mouseover="board.hover(msg.uid)" ng-mouseout="board.show(msg.uid)">
-              <i class="fa fa-times fa pull-right delete-btn"  ng-click="board.delete(msg,5)"></i>
-              <i class="fa fa-pencil fa pull-right edit-btn" ng-click="board.edit(msg.uid)"></i>
-              <i class="fa fa-check fa pull-right save-btn" ng-click="board.saveEdit(msg)"></i>
+              <div class="sticky__top">
+                <i class="fa fa-hand-rock-o pull-left grab-handle"></i>
+                <i class="fa fa-times pull-right delete-btn"  ng-click="board.delete(msg,5)"></i>
+                <span ng-if="board.isOwner(msg.uid)"><i class="fa fa-floppy-o pull-right edit-btn" ng-click="board.saveEdit(msg)"></i></span>
+                <!-- <span ng-if="board.isOwner(msg.uid)"><i class="fa fa-check pull-right save-btn" ng-click="board.saveEdit(msg)"></i></span> -->
+              </div>
               <div class="sticky__body">
                 <div ng-if="board.isOwner(msg.uid)" >
                   <textarea class="sticky-textarea" id="stickyTextarea" ng-model="msg.text">{{ msg.text }}</textarea>
@@ -34,6 +37,7 @@
               </div>
               <div class="sticky__head">
                 <i class="fa fa-thumbs-up pull-right like-btn" ng-click="board.like(msg);">{{ msg.dl }}</i>
+                <img class = "sticky-user-image img-circle" title="{{user.name}}" ng-src="{{user.photo}}"></img>
               </div>
             </div>
           </div>
@@ -55,15 +59,18 @@
       </form>
 
       <ul id="chat-messages-minus" class="list-unstyled">
-        <li data-ng-repeat="msg in board.messages.slice().reverse() | filter:{lane:'minus'}" id="board.getListId(msg.$id)">
+        <li data-ng-repeat="msg in board.messages.slice().reverse() | filter:{lane:'minus'}">
           <div class="sticky">
             <div class="sticky-note" ng-mouseover="board.hover(msg.uid)" ng-mouseout="board.show(msg.uid)">
-              <i class="fa fa-times fa pull-right delete-btn"  ng-click="board.delete(msg,6)"></i>
-              <i class="fa fa-pencil fa pull-right edit-btn" ng-click="board.edit(msg.uid)"></i>
-              <i class="fa fa-check fa pull-right save-btn" ng-click="board.saveEdit(msg)"></i>
+              <div class="sticky__top">
+                <i class="fa fa-hand-rock-o pull-left grab-handle"></i>
+                <i class="fa fa-times pull-right delete-btn"  ng-click="board.delete(msg,6)"></i>
+                <span ng-if="board.isOwner(msg.uid)"><i class="fa fa-floppy-o pull-right edit-btn" ng-click="board.saveEdit(msg)"></i></span>
+                <!-- <span ng-if="board.isOwner(msg.uid)"><i class="fa fa-check pull-right save-btn" ng-click="board.saveEdit(msg)"></i></span> -->
+              </div>
               <div class="sticky__body">
                 <div ng-if="board.isOwner(msg.uid)" >
-                  <textarea class="sticky-textarea" id="stickyTextarea"ng-model="msg.text">{{ msg.text }}</textarea>
+                  <textarea class="sticky-textarea" id="stickyTextarea" ng-model="msg.text">{{ msg.text }}</textarea>
                 </div>
                 <div ng-if="!board.isOwner(msg.uid)" >
                   <p class="sticky-text">{{ msg.text }}</p>
@@ -71,6 +78,7 @@
               </div>
               <div class="sticky__head">
                 <i class="fa fa-thumbs-up pull-right like-btn" ng-click="board.like(msg);">{{ msg.dl }}</i>
+                <img class = "sticky-user-image img-circle" title="{{user.name}}" ng-src="{{user.photo}}"></img>
               </div>
             </div>
           </div>
