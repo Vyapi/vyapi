@@ -9,8 +9,8 @@ test:
 
 deployment:
   production:
-    branch: master
+    branch: feature/herokudeployment
     heroku:
-    appname: vyapi
+      appname: vyapi
     commands:
       - firebase deploy --token "-K8NQX-IOHSbncOIwSal|a19b96123552661ca03db64eb0ff6da0"
