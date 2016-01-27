@@ -29,10 +29,10 @@ export class Dashboard{
 		return;
 	}
 	createRoom(userID,roomName){
-  	
+
 		this.roomsRef.push({roomName : roomName, ownedBy : userID});
 		return;
-	
-  }
+
+	}
 
 }
