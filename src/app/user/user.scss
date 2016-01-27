@@ -52,6 +52,14 @@ li.ng-enter {
 }
 
 .user-image {
+  height: 4em;
+  padding-right: .25em;
+  padding-left: .25em;
+  border: .5em;
+  transition: opacity 300ms linear;
+}
+
+.user-image {
  height: 4em;
  padding-right: .25em;
  padding-left: .25em;
