@@ -1,5 +1,7 @@
 export class Dashboard{
+
 	constructor ($firebaseArray) {
+
 		'ngInject';
 		this.rootURL = 'https://vyapi.firebaseio.com/';
 		this.rootRef = new Firebase(this.rootURL);
@@ -26,14 +28,11 @@ export class Dashboard{
 		roomDbRef.remove();
 		return;
 	}
-	createRoom(userID){
-		let roomName=prompt('Room Name','Default');
-		if(!roomName){
-			alert('Please enter a valid room name');
-		}
-		else{
-			this.roomsRef.push({roomName : roomName, ownedBy : userID});
-			return;
-		}
-	}
+	createRoom(userID,roomName){
+  	
+		this.roomsRef.push({roomName : roomName, ownedBy : userID});
+		return;
+	
+  }
+
 }

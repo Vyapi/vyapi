@@ -1,11 +1,11 @@
 export class DashboardController {
 	constructor ($firebaseArray,Dashboard,$location){
 		'ngInject';
+
 		this.path = $location.absUrl().replace('dashboard', 'room');
 		this.setParam(Dashboard);
 		this.cards(Dashboard);
 		this.setParam(Dashboard);
-		
 		this.rooms = [];
 		this.car= [];
 		this.roomName='';
@@ -17,7 +17,7 @@ export class DashboardController {
 			}
 			else{
 				this.create(Dashboard);
-				$.modal.close();
+				
 			}
 		};
 		this.removeRoom = function(roomKey){
@@ -28,17 +28,21 @@ export class DashboardController {
 	cards(Dashboard)
 	{
 		let i=0;
-		let userID = Dashboard.getUserID();
 		let car = [];
+		let userID = Dashboard.getUserID();
 		Dashboard.getRooms(userID).on("value",(snapshot)=>{
+
 			snapshot.forEach(function(childSnapshot){
 				var n = childSnapshot.child("members").numChildren();
 				car[i]=parseInt(n);
 				i++;
 			});
+			this.car= car;
+			console.table(this.car);
+			return car;
+
 		});
-		this.car= car;
-		console.table("in car",this.car);
+		
 	}
 
 	setParam(Dashboard){
@@ -47,20 +51,22 @@ export class DashboardController {
 		if(!roomsPromise)
 			return;
 		roomsPromise.on("value",(snapshot)=>{
-
+            let i=0;
 			let rooms = snapshot.val();
-			rooms = _.map(rooms,(room,key,url,no_of_mem,test)=>{
+			rooms = _.map(rooms,(room,key,url,mem)=>{
 				room.key = key;
 				room.url = this.path + '/' +  key;
-				snapshot.forEach(function(childSnapshot){
-					var n = childSnapshot.child("members").numChildren();
-					room.no_of_mem=n;
-				});
+				room.mem = this.car[i];
+				i++;
 				return room;
+            });
+                this.rooms = rooms;
+               console.table(this.rooms);
+				
 			});
-			console.table(this.rooms);
-			this.rooms = rooms;
-		});
+			
+			
+
 	}
 	create(Dashboard){
 		let userID = Dashboard.getUserID();
