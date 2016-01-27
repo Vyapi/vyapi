@@ -1,7 +1,7 @@
 export class LoginController{
-  constructor($log,$location,LoginServ,FireData){
+  constructor($log,$location,Auth,FireData){
     'ngInject';
-    this.fa = LoginServ;
+    this.auth = Auth;
     this.clog = $log;
     this.locate = $location;
     this.fd = FireData;
@@ -14,8 +14,8 @@ export class LoginController{
 
   }
   firebaseAuthLogin(){
-    var status = this.fa.login();
-    console.log(status);
+    var status = this.auth.login();
+    this.clog.log(status);
     if(status){
       this.clog.log("Logged in");
       this.locate.path('/dashboard');
@@ -25,12 +25,8 @@ export class LoginController{
   }
 
   firebaseAuthLogout(){
-    if(this.fa.logout()){
-      this.clog.log("Logged out");
-      this.locate('/');
-    }
-    else{
-      this.clog.log("Already logged out");
-    }
+    this.auth.logout()
+    this.clog.log("Logged out");
+    this.locate.path('/');
   }
 }
