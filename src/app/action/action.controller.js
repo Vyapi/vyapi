@@ -76,10 +76,10 @@ export class ActionController {
     this.person=person;
   }
 
-  remove(index)
+  remove(item)
   {
-    this.clog.log(index);
-    this.myDataRef.child(this.items[index].key).remove();
+    //this.clog.log(index);
+    this.myDataRef.child(item.key).remove();
     //console.log(this.items);
     //this.items.splice(index, 1);
     //console.log(this.items);
