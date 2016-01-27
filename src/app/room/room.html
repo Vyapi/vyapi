@@ -12,12 +12,12 @@
     <div id="navbar" class="navbar-collapse collapse">
 
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="./"><i class="fa fa-home fa-2x"></i></a></li>
+        <li><a href="./"><i class="fa fa-home fa-2x icon--white"></i></a></li>
         <li><a class="btn btn-link ng-isolate-scope" data-toggle="tooltip" title="Export as CSV" filename="roomdata.csv"
                     field-separator="," csv-header="room.header" ng-click="room.exportSheetCreator()" ng-csv="room.finalArray"
-                    lazy-load="true"><span class="glyphicon glyphicon-floppy-disk"> Export</span></a></li>
+                    lazy-load="true"><i class="fa fa-floppy-o fa-2x icon--white"> Export</i></a></li>
         <li><a href=""><img ng-src="{{room.userPic}}" class="img-circle" height="30em" width="35em"/></a></li>
-        <li><a ng-click="room.firebaseAuthlogout()"><i class="fa fa-power-off fa-2x"></i></a></li>
+        <li><a ng-click="room.firebaseAuthlogout()"><i class="fa fa-power-off fa-2x icon--white"></i></a></li>
       </ul>
     </div>
   </div>
@@ -29,7 +29,6 @@
 
 
 <div class="container-fluid" ng-hide="getview">
-</div>
 
 <div class="row">
 
