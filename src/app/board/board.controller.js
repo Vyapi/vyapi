@@ -1,5 +1,5 @@
 export class BoardController {
-  constructor($firebaseArray, $location, $log) {
+  constructor ($firebaseArray, $location,$log) {
 
     'ngInject';
 
@@ -13,28 +13,10 @@ export class BoardController {
     var userRef = new Firebase("https://vyapi.firebaseio.com/messages");
     var authData = userRef.getAuth();
     var googleId = authData.google.id;
-    var userId = "google:" + googleId;
+    var userId = "google:"+googleId;
     var anonymous = true;
 
-
     var roomURL= "https://vyapi.firebaseio.com/messages/" + roomID;
-    var roomRef= new Firebase("https://vyapi.firebaseio.com/rooms/" + roomID);
-    this.msgRef = new Firebase(roomURL);
-    this.messages = $firebaseArray(this.msgRef);
-
-    this.plusLabel='';
-    this.minusLabel='';
-    roomRef.on("value",(snapshot)=>{
-      console.log(snapshot.val());
-      let labelData = snapshot.val();
-      this.plusLabel = labelData.plusLabel;
-      this.minusLabel = labelData.minusLabel;
-      //console.log(this.plusLabel);
-    //console.log(this.minusLabel);
-    });
-
-
-    var roomURL = "https://vyapi.firebaseio.com/messages/" + roomID;
     console.log(roomURL);
     this.msgRef = new Firebase(roomURL);
     this.messages = $firebaseArray(this.msgRef);
@@ -44,14 +26,14 @@ export class BoardController {
 
     //CODE TO MAKE THE USER ANONYMOUS
     var anonymous = true;
-    this.toggle = function () {
+    this.toggle = function() {
       anonymous = !anonymous;
-      if (!anonymous) {
+      if(!anonymous){
         userName = authData.google.displayName;
-        $('.anonymousToggle').css({"background-color": "#eeeeee", "color": "black"});
+        $('.anonymousToggle').css({"background-color":"#eeeeee","color":"black"});
       } else {
         userName = "anonymous";
-        $('.anonymousToggle').css({"background-color": "#6D6A68", "color": "white"});
+        $('.anonymousToggle').css({"background-color":"#6D6A68","color":"white"});
       }
       console.log(userName);
     };
@@ -79,9 +61,8 @@ export class BoardController {
 
      });
 
-
       if (userMessage) {
-        if (!userName) userName = "anonymous";
+        if(!userName) userName = "anonymous";
         // $log.log(authData);
 
         this.messages.$add({
@@ -106,38 +87,39 @@ export class BoardController {
 
 
       (new Firebase(encodeURI(roomURL + "/" + messagesObj.key() + "/like"))).on('value', (userId) => {
-        if (userId.val() != null && messagesObj.key()) { //likes are there for this message
+        if(userId.val() != null && messagesObj.key()) { //likes are there for this message
           //this.noOfLikes [messagesObj.val().uid] =userId.numChildren();
           let fredNameRef = new Firebase(roomURL + "/" + messagesObj.key());
           // Modify the 'first' and 'last' children, but leave other data at fredNameRef unchanged
-          fredNameRef.update({dl: userId.numChildren()});
+          fredNameRef.update({ dl: userId.numChildren() });
         }
-        else {
+        else
+        {
           //this.noOfLikes [messagesObj.val().text] =userId.numChildren();
           let fredNameRef = new Firebase(roomURL + "/" + messagesObj.key());
           // Modify the 'first' and 'last' children, but leave other data at fredNameRef unchanged
-          fredNameRef.update({dl: userId.numChildren()});
+          fredNameRef.update({ dl: userId.numChildren() });
         }
       });
     });
 
     //handle like button click for a message
-    this.like = function (msg) {
-      let msgLike = (new Firebase(roomURL)).child(msg.$id + "/like/" + authData.uid);
-      msgLike.once("value", function (value) {
+    this.like = function(msg) {
+      let msgLike = (new Firebase(roomURL)).child(msg.$id + "/like/" +authData.uid);
+      msgLike.once("value" , function(value){
         //console.log('triggring event');
-        if (value.exists()) {
+        if(value.exists()){
           msgLike.remove();
         }
-        else {
+        else{
           msgLike.set(1);
           msgLike.off();
         }
       });
 
       let msgLikes = (new Firebase(roomURL)).child(msg.$id + "/like/");
-      msgLikes.once('value', function (snapshot) {
-        msg.noOfLikes = snapshot.numChildren();
+      msgLikes.once('value', function(snapshot) {
+        msg.noOfLikes=snapshot.numChildren();
       });
     }
 
@@ -153,11 +135,11 @@ export class BoardController {
           // console.log("Drag working 3");
         },
         update: function(event, ui) {
-          let currPriority = 1;
-          let children = document.getElementById('chat-messages-plus').childNodes;
-          for(let c in children) {
+          var currPriority = 1;
+          var children = document.getElementById("chat-messages-plus").childNodes;
+          for(var c in children) {
             if(children[c].childNodes[1] != undefined) {
-              let uniqueMsgID = children[c].childNodes[1].getAttribute('id');
+              var uniqueMsgID = children[c].childNodes[1].getAttribute('id');
               (new Firebase(roomURL + "/" + uniqueMsgID)).setPriority(currPriority);
               currPriority++;
             }
@@ -174,11 +156,11 @@ export class BoardController {
           // console.log("Drag working 3");
         },
         update: function(event, ui) {
-          let currPriority = 1;
-          let children = document.getElementById('chat-messages-minus').childNodes;
-          for(let c in children) {
+          var currPriority = 1;
+          var children = document.getElementById("chat-messages-minus").childNodes;
+          for(var c in children) {
             if(children[c].childNodes[1] != undefined) {
-              let uniqueMsgID = children[c].childNodes[1].getAttribute('id');
+              var uniqueMsgID = children[c].childNodes[1].getAttribute('id');
               (new Firebase(roomURL + "/" + uniqueMsgID)).setPriority(currPriority);
               currPriority++;
             }
@@ -237,10 +219,10 @@ export class BoardController {
     this.edit = function(msg) {
       this.currentMessageText= msg.text;
       this.currentMessage = msg;
-      // $('#stickyTextarea').setAttribute("disabled","disabled");
-      /*$('#stickyTextarea').focus();
-      $('.edit-btn').css({'display' : 'none'});
-      $('.save-btn').css({'display' : 'inline-block'});*/
+      // // $('#stickyTextarea').setAttribute("disabled","disabled");
+      // $('#stickyTextarea').focus();
+      // $('.edit-btn').css({'display' : 'none'});
+      // $('.save-btn').css({'display' : 'inline-block'});
     }
 
     this.saveEdit = function (msg) {
@@ -250,6 +232,7 @@ export class BoardController {
         $('.save-btn').css({'display' : 'none'});
         $('#stickyTextarea').blur();
         // $('#stickyTextarea').removeAttribute("disabled");
+      }
       }*/
     }
   }
