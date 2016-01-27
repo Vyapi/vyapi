@@ -1,5 +1,5 @@
 body {
-	background-image: url("http://www.ashtangabutterfly.com/images/wood-grain-background-2.jpg");
+	background-image: url("/app/dashboard/wood.jpg");
 	/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
 @font-face {
@@ -25,7 +25,7 @@ text-align: center;
   position: absolute;
 }
 
-.sticky {
+.card {
   float: left;
   margin: 0.5em 0.8em 0.8em 0.5em;
   border-radius: 4px;
@@ -40,14 +40,14 @@ text-align: center;
   font-size: 1.1em;
 }
 
-.sticky-note {
+.card-note {
   flex: 0 1 auto;
   align-self: auto;
   max-width: 160px;
   min-width: 160px;
 }
 
-.sticky__head {
+.card__head {
   max-height: 30px;
   min-height: 30px;
   vertical-align: middle;
@@ -58,9 +58,15 @@ text-align: center;
   color: white;
 }
 
+<<<<<<< HEAD
 .sticky__body {
   max-height: 140px;
   min-height: 140px;
+=======
+.card__body {
+  max-height: 190px;
+  min-height: 190px;
+>>>>>>> 50f0763e647b3f87fb7a79ee2dba6acc3ce62949
   width: 100%;
   height: 100%;
   padding: 0.5em;
@@ -76,14 +82,16 @@ text-align: center;
   /*font-family: myFirstFont;*/
 }
 
-.sticky__body::-webkit-scrollbar {
+.card__body::-webkit-scrollbar {
  display: none;
 }
 
-.sticky-textarea {
+.card-textarea {
   width: 100%;
   border: none;
   background: transparent;
 }
-
-
+#navbar--background {
+  background-color: transparent;
+  border-color: transparent;
+}

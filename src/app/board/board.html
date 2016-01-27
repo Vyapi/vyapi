@@ -24,12 +24,12 @@
               <div class="sticky__top">
                 <i class="fa fa-hand-rock-o pull-left grab-handle"></i>
                 <i class="fa fa-times pull-right delete-btn"  ng-click="board.delete(msg,5)"></i>
-                <span ng-if="board.isOwner(msg.uid)"><i class="fa fa-floppy-o pull-right edit-btn" ng-click="board.saveEdit(msg)"></i></span>
+                <!-- <span ng-if="board.isOwner(msg.uid)"><i class="fa fa-floppy-o pull-right edit-btn" ng-click="board.saveEdit(msg)" ></i></span> -->
                 <!-- <span ng-if="board.isOwner(msg.uid)"><i class="fa fa-check pull-right save-btn" ng-click="board.saveEdit(msg)"></i></span> -->
               </div>
               <div class="sticky__body">
                 <div ng-if="board.isOwner(msg.uid)" >
-                  <textarea class="sticky-textarea" id="stickyTextarea" ng-model="msg.text">{{ msg.text }}</textarea>
+                  <textarea class="sticky-textarea" id="stickyTextarea" ng-model="msg.text" ng-change="board.saveEdit(msg)" ng-model-options='{ debounce: 1000 }'>{{ msg.text }}</textarea>
                 </div>
                 <div ng-if="!board.isOwner(msg.uid)" >
                   <p class="sticky-text">{{ msg.text }}</p>
@@ -65,12 +65,12 @@
               <div class="sticky__top">
                 <i class="fa fa-hand-rock-o pull-left grab-handle"></i>
                 <i class="fa fa-times pull-right delete-btn"  ng-click="board.delete(msg,6)"></i>
-                <span ng-if="board.isOwner(msg.uid)"><i class="fa fa-floppy-o pull-right edit-btn" ng-click="board.saveEdit(msg)"></i></span>
+                <!-- <span ng-if="board.isOwner(msg.uid)"><i class="fa fa-floppy-o pull-right edit-btn" ng-click="board.saveEdit(msg)"></i></span> -->
                 <!-- <span ng-if="board.isOwner(msg.uid)"><i class="fa fa-check pull-right save-btn" ng-click="board.saveEdit(msg)"></i></span> -->
               </div>
               <div class="sticky__body">
                 <div ng-if="board.isOwner(msg.uid)" >
-                  <textarea class="sticky-textarea" id="stickyTextarea" ng-model="msg.text">{{ msg.text }}</textarea>
+                  <textarea class="sticky-textarea" id="stickyTextarea" ng-model="msg.text" ng-change="board.saveEdit(msg)" ng-model-options='{ debounce: 1000 }'>{{ msg.text }}</textarea>
                 </div>
                 <div ng-if="!board.isOwner(msg.uid)" >
                   <p class="sticky-text">{{ msg.text }}</p>
