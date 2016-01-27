@@ -9,10 +9,14 @@ export class Dashboard{
 		let data = $firebaseArray(this.roomsRef);
 	}
 	getRooms(userID){
+		if(!userID)
+			return;
 		return this.roomsRef.orderByChild("ownedBy").equalTo(userID)
 	}
 	getUserID(){
 		let authData = this.rootRef.getAuth();
+		if(!authData)
+			return;
 		return authData.uid;
 	}
 	remove(roomKey){
@@ -23,6 +27,8 @@ export class Dashboard{
 		return;
 	}
 	createRoom(userID){
+		if(!userID)
+			return;
 		let roomName=prompt('Room Name','Default');
 		if(!roomName){
 			alert('Please enter a valid room name');

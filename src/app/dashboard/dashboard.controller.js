@@ -10,6 +10,7 @@ export class DashboardController {
 		this.windowLoc = $window;
 		this.createRoom = function(){
 			this.create(Dashboard);
+			return "room created";
 		};
 		this.removeRoom = function(roomKey){
 			console.log(roomKey);
@@ -18,6 +19,10 @@ export class DashboardController {
 	}
 	setParam(Dashboard){
 		let userID = Dashboard.getUserID();
+		if(!userID){
+			this.rooms = ["mock data"];
+			return "set param is being called";
+		}
 		Dashboard.getRooms(userID).on("value",(snapshot)=>{
 			let rooms = snapshot.val();
 			rooms = _.map(rooms,(room,key)=>{
@@ -32,6 +37,8 @@ export class DashboardController {
 	}
 	create(Dashboard){
 		let userID = Dashboard.getUserID();
+		if(!userID)
+			return;
 		return Dashboard.createRoom(userID);
 	}
 	firebaseAuthlogout()
