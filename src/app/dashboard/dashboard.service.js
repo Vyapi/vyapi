@@ -9,11 +9,19 @@ export class Dashboard{
 		let data = $firebaseArray(this.roomsRef);
 	}
 	getRooms(userID){
+		if(!userID)
+			return;
 		return this.roomsRef.orderByChild("ownedBy").equalTo(userID)
 	}
 	getUserID(){
 		let authData = this.rootRef.getAuth();
+		if(!authData)
+			return;
 		return authData.uid;
+	}
+	getUserPic(userID){
+		let userRef = new Firebase(this.rootURL + 'users/' + userID);
+		return userRef;
 	}
 	remove(roomKey){
 		let messageDbRef = new Firebase(this.messageRef + '/' + roomKey);
@@ -22,15 +30,22 @@ export class Dashboard{
 		roomDbRef.remove();
 		return;
 	}
-	createRoom(userID){
-		let roomName=prompt('Room Name','Default');
-		if(!roomName){
-			alert('Please enter a valid room name');
-		}
-		else{
-			let newRoom = this.roomsRef.push({roomName : roomName, ownedBy : userID});
-			//this.rootRef.child("messages/"+ newRoom.key()).set(roomName);
-			return;
-		}
+	createRoom(userID,roomName, plusName,minusName,actionName,d)
+	{
+		this.roomsRef.push({roomName : roomName, ownedBy : userID, plusLabel : plusName, minusLabel : minusName, actionLabel : actionName,date: d, pos:0, neg:0});
+		$('#myModal').modal('hide');
+		return;
+	}
+	editRoom(){
+		$('#editModal').modal('show');
+	}
+	saveValues(roomKey,rName, pName, mName, aName)
+	{
+		let roomDbRef = new Firebase(this.roomsURL + '/' + roomKey);
+		roomDbRef.update({
+			roomName : rName, plusLabel : pName, minusLabel : mName, actionLabel : aName
+		});
+		$('#editModal').modal('hide');
+		return;
 	}
 }

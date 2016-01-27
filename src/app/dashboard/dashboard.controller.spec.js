@@ -1,16 +1,17 @@
 describe('controllers', () => {
-  let vm;
+	var dashboard;
 
-  //beforeEach(angular.mock.module('vyapi'));
+	beforeEach(angular.mock.module('vyapi'));
 
-  //beforeEach(inject(($controller, webDevTec, toastr) => {
-  //  spyOn(webDevTec, 'getTec').and.returnValue([{}, {}, {}, {}, {}]);
-  //  spyOn(toastr, 'info').and.callThrough();
+	beforeEach(inject(($controller) => {
+		dashboard = $controller('DashboardController');
+		console.log(dashboard);
+	}));
 
-  //  vm = $controller('DashboardController');
- // }));
-
-	it('whatever',function(){
-		expect(true).toEqual(true);
+	it('to be defined	',function(){
+		spyOn(dashboard,"setParam");
+		expect(dashboard.setParam()).toHaveBeenCalled;
+		expect(dashboard.path).toBeDefined();
+		expect(dashboard.rooms).toBeDefined();
 	});
 });
