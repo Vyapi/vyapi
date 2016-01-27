@@ -14,7 +14,10 @@ export class DashboardController {
 	}
 	setParam(Dashboard){
 		let userID = Dashboard.getUserID();
-		Dashboard.getRooms(userID).on("value",(snapshot)=>{
+		let roomsPromise = Dashboard.getRooms(userID);
+		if(!roomsPromise)
+			return;
+		roomsPromise.on("value",(snapshot)=>{
 			let rooms = snapshot.val();
 			rooms = _.map(rooms,(room,key)=>{
 				room.key = key;
