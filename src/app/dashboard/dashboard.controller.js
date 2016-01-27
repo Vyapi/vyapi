@@ -8,6 +8,7 @@ export class DashboardController {
     this.cards(Dashboard);
     this.setParam(Dashboard);
     this.rooms = [];
+		this.userPic = '';
     this.car= [];
     this.roomName='';
     this.plusName='';
@@ -58,6 +59,10 @@ export class DashboardController {
 
   setParam(Dashboard){
     let userID = Dashboard.getUserID();
+		let userPromise = Dashboard.getUserPic(userID);
+		userPromise.on("value",(snapshot)=>{
+			this.userPic= snapshot.val().google.profileImageURL;
+		});
     let roomsPromise = Dashboard.getRooms(userID);
     if(!roomsPromise)
       return;
