@@ -7,9 +7,15 @@ export class ActionController {
     this.text='';
     this.assignee=[];
     this.clog = $log;
-//
+
     this.roomID=$stateParams.roomKey; //temporary
     var roomRef = new Firebase('https://vyapi.firebaseio.com/rooms/'+this.roomID);
+    this.actionLabel='';
+    roomRef.once("value",(snapshot)=>{
+      let labelData = snapshot.val();
+      this.actionLabel = labelData.actionLabel;
+      console.log(actionLabel);
+    });
     var room = roomRef.child("members");
     room.once("value", (snapshot) => {
     snapshot.forEach((uid)=>{

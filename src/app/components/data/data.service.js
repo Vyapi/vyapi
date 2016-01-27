@@ -3,7 +3,7 @@ export class FireData{
     'ngInject';
     this.fc = FireConnect;
     this.authObj = null;
-    this.authData = this.authObj.$getAuth();
+    this.authData = null;
     // for rooms
     this.roomPath = '/rooms';
     this.messagesPath = '/messages';
@@ -11,7 +11,8 @@ export class FireData{
 
   getAuthData(){
     var authObjLocal = this.fc.connect('/')
-    return authObjLocal.$getAuth();
+    var auth = authObjLocal.$getAuth();
+    return auth;
   }
 
   authExist(path='/'){
@@ -24,6 +25,7 @@ export class FireData{
     {
       return false;
     }
+    return;
   }
 
   getUid(){
