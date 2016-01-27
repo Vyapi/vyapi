@@ -1,13 +1,13 @@
-<div class="container-fluid">
+<div class="container-fluid board-container">
 
 
+  <div class="bg-success center-block" id="anonymousWarn" class="has-success anonymousWarn">Ssshh.. You're anonymous now</div>
 
   <div class="row">
     <div class="col-md-6">
       <h2 class="group-header">What we did right!</h2>
       <form ng-submit="board.submit('plus')">
         <div class="form-group">
-          <div class="bg-success center-block" id="anonymousWarn" class="has-success anonymousWarn">Ssshh.. You're anonymous now</div>
           <div class="input-group">
             <span type="button" id="anonymousTogglePlus" class="input-group-addon btn btn-success anonymousToggle" ng-click="board.toggle()">
               <span class="glyphicon glyphicon-eye-close pull-right"></span>
@@ -23,13 +23,13 @@
             <div class="sticky-note" ng-mouseover="board.hover(msg)" ng-mouseout="board.show(msg)">
               <i class="fa fa-times fa-lg pull-right delete-btn"  ng-click="board.delete(msg)"></i>
               <div class="sticky__body">
-                <div ng-if="board.isOwner(msg)" >
-                  <p class="userText" ng-model="msg.text" >{{ msg.text }}</p>
+                <div ng-if="board.isOwner(msg.uid)" >
+                <textarea class="sticky-textarea" ng-model="msg.text" >{{ msg.text }}</textarea>
                   <!-- <div><p class="userText">{{ msg.text }}</p></div> -->
-                  <i class="fa fa-pencil fa-lg pull-right" ng-click="board.saveEdit(msg)"><span class="Done"></span></i>
+                  <i class="fa fa-pencil fa-lg pull-right" ng-click="board.saveEdit(msg)"></i>
                 </div>
-                <div ng-if="!board.isOwner(msg)" >
-                  <p class="userText">{{ msg.text }}</p>
+                <div ng-if="!board.isOwner(msg.uid)" >
+                  <p class="sticky-text">{{ msg.text }}</p>
                 </div>
               </div>
               <div class="sticky__head">
