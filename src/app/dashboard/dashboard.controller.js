@@ -16,7 +16,6 @@ export class DashboardController {
 		this.mName='';
 		this.pName='';
 		this.editKey='';
-
 		this.createRoom = function(){
 			if(!this.roomName)
 			{
@@ -86,7 +85,6 @@ export class DashboardController {
 			this.rooms = rooms;
 		});
 	}
-
 	create(Dashboard)
 	{
 		let userID = Dashboard.getUserID();
@@ -107,7 +105,6 @@ export class DashboardController {
 		ref.unauth();
 		this.windowLoc.location.href='/';
 	}
-
 
 	edit(Dashboard,roomKey){
 		this.editKey = roomKey;
