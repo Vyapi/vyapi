@@ -3,11 +3,11 @@
   <nav class="navbar-bottom navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-12" style="display: flex; display: -webkit-flex;">
+        <div class="col-md-12 user-column">
           <div>
             <ul class="list-inline" style="width: 1000px">
               <li ng-repeat = "(uid, user) in users.onlineUsers" style="float:right" class="ng-animate ng-enter ng-leave animated bounce">
-              <a href="#" style=" display: inline-block;" title="{{user.name}}"><img class =  "user-image img-circle" title="{{user.name}}" ng-src="{{user.photo}}"></img><span class="user-badge">{{users.getMessageContributions(uid)}}</span></a>
+              <a class="user-anchor" href="#" title="{{user.name}}"><img class =  "user-image img-circle" title="{{user.name}}" ng-src="{{user.photo}}"></img><span class="user-badge">{{users.getMessageContributions(uid)}}</span></a>
               </li>
             </ul>
           </div>
@@ -33,7 +33,7 @@
       </div>
       <div class="modal-body">
         <ul ng-repeat = "(uid, user) in users.onlineUsers" style="display: list-inline;" class="ng-animate ng-enter ng-leave">
-          <img class =  "img-circle" title="{{user.name}}" src="{{user.photo}}" style="height: 4em; padding-top: .5em; padding-bottom: .5em">
+          <img class =  "img-circle modal-image" title="{{user.name}}" src="{{user.photo}}">
           <label>{{user.name}}</label>
         </ul>
       </div>
