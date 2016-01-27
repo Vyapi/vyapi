@@ -3,7 +3,7 @@ export class LoginController{
     'ngInject';
     this.auth = Auth;
     this.clog = $log;
-    this.locate = $location;
+    this.location = $location;
     this.fd = FireData;
 
     //check if user is logged in, and redirect accordingly
@@ -18,7 +18,7 @@ export class LoginController{
     this.clog.log(status);
     if(status){
       this.clog.log("Logged in");
-      this.locate.path('/dashboard');
+      this.location.path('/dashboard');
     }else{
       this.clog.log("Not logged in, error");
     }
@@ -27,6 +27,6 @@ export class LoginController{
   firebaseAuthLogout(){
     this.auth.logout()
     this.clog.log("Logged out");
-    this.locate.path('/');
+    this.location.path('/');
   }
 }
