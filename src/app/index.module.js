@@ -19,7 +19,7 @@ import { FireData } from '../app/components/data/data.service';
 import { NavbarDirective } from '../app/components/navbar/navbar.directive';
 import { MalarkeyDirective } from '../app/components/malarkey/malarkey.directive';
 
-angular.module('vyapi', ['ui.router', 'toastr', 'firebase', 'ngAnimate','ngCookies'])
+angular.module('vyapi', ['ui.router', 'toastr', 'firebase', 'ngAnimate','ngCookies','ngCsv'])
 
   .constant('malarkey', malarkey)
   .constant('moment', moment)
