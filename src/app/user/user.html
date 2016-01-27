@@ -2,15 +2,17 @@
   <nav class="navbar-bottom navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-12" >
-        <ul class="list-inline " style="width: 1000px">
-            <li ng-repeat = "(uid, user) in users.onlineUsers" style="float:right" class="ng-animate ng-enter ng-leave animated bounce">
-              <a href="#" style=" display: block;" title="{{user.name}}"><img class =  "user-image img-circle" title="{{user.name}}" ng-src="{{user.photo}}"></img><span class="user-badge">{{users.getMessageContributions(uid)}}</span></a>
-            </li>
-            <li>
-              <button class="user-list btn btn-default" title="Show all users" data-toggle="modal" data-target="#userModal" ><i class="glyphicon glyphicon-option-vertical" style="text-align: left"></i></button>
-            </li>
-          </ul>
+        <div class="col-md-12" style="display: flex; display: -webkit-flex;">
+          <div>
+            <ul class="list-inline" style="width: 1000px">
+              <li ng-repeat = "(uid, user) in users.onlineUsers" style="float:right" class="ng-animate ng-enter ng-leave animated bounce">
+              <a href="#" style=" display: inline-block;" title="{{user.name}}"><img class =  "user-image img-circle" title="{{user.name}}" ng-src="{{user.photo}}"></img><span class="user-badge">{{users.getMessageContributions(uid)}}</span></a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <button class="user-list btn btn-default" title="Show all users" data-toggle="modal" data-target="#userModal" ><i class="glyphicon glyphicon-option-vertical" style="text-align: left"></i></button>
+          </div>
         </div>
       </div>
     </div>
