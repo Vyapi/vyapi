@@ -1,6 +1,35 @@
+<div class="container-fluid">
+	<ul class="list-unstyled list-inline">
+		<div class="sticky">
+			<div class="sticky__body">
+				<li>
+				<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-plus"></i>&nbsp;Create Room</button>
+				</li>
+			</div>
+		</div>
+		<li ng-repeat="room in dashboard.rooms">
+		<div class="sticky">
+			<div class="sticky__body">
+				<button class="btn btn-default btn-lg" ng-click="dashboard.removeRoom(room.key)">delete</button>
+				<button class="btn btn-default btn-lg" ><a href="{{room.url}}">{{room.roomName}}</a><p>Members:{{room.mem}}</p></button>
 
+			</div>
+		</div>
+		</li>
+	</ul>
 
+	<div class="col-md-12">
+		<!--<ul class="list-unstyled list-inline">
+			<li>
+			<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-plus"></i>&nbsp;Create Room</button>
+			</li>
+			<li ng-repeat="room in dashboard.rooms">
+			<button class="btn btn-default btn-lg" ><a href="{{room.url}}">{{room.roomName}}</a>
+			</button>
+			<button class="btn btn-default btn-xs pull-right btn-danger glyphicon glyphicon-trash" ng-click="dashboard.removeRoom(room.key)"</button>
+			</li>
 
+<<<<<<< HEAD
 <div class="container-fluid">
  <ul class="list-unstyled list-inline">
    <div class="sticky">
@@ -73,6 +102,7 @@
 
     </div>
   </div>
+
 </div>
 </div>
 

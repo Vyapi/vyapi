@@ -9,7 +9,7 @@ export class DashboardController {
 		this.rooms = [];
 		this.car= [];
 		this.roomName='';
-		
+
 		this.createRoom = function(){
 			if(!this.roomName)
 			{ 
@@ -17,7 +17,7 @@ export class DashboardController {
 			}
 			else{
 				this.create(Dashboard);
-				
+
 			}
 		};
 		this.removeRoom = function(roomKey){
@@ -42,7 +42,7 @@ export class DashboardController {
 			return car;
 
 		});
-		
+
 	}
 
 	setParam(Dashboard){
@@ -51,7 +51,7 @@ export class DashboardController {
 		if(!roomsPromise)
 			return;
 		roomsPromise.on("value",(snapshot)=>{
-            let i=0;
+			let i=0;
 			let rooms = snapshot.val();
 			rooms = _.map(rooms,(room,key,url,mem)=>{
 				room.key = key;
@@ -59,13 +59,13 @@ export class DashboardController {
 				room.mem = this.car[i];
 				i++;
 				return room;
-            });
-                this.rooms = rooms;
-               console.table(this.rooms);
-				
 			});
-			
-			
+			this.rooms = rooms;
+			console.table(this.rooms);
+
+		});
+
+
 
 	}
 	create(Dashboard){

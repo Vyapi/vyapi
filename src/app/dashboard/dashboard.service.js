@@ -32,7 +32,6 @@ export class Dashboard{
 
 		this.roomsRef.push({roomName : roomName, ownedBy : userID});
 		return;
-
   }
 
 }
