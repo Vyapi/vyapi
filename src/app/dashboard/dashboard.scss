@@ -15,7 +15,7 @@ a:hover
 li { float: left; }
 
 .create{
-text-align: center;  
+text-align: center;
 }
 
 .roomName {
@@ -85,5 +85,7 @@ text-align: center;
   border: none;
   background: transparent;
 }
-
-
+#navbar--background {
+  background-color: transparent;
+  border-color: transparent;
+}

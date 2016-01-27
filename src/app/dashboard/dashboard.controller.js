@@ -8,6 +8,7 @@ export class DashboardController {
     this.cards(Dashboard);
     this.setParam(Dashboard);
     this.rooms = [];
+    this.userPic = '';
     this.car= [];
     this.roomName='';
     this.plusName='';
@@ -58,6 +59,10 @@ export class DashboardController {
 
   setParam(Dashboard){
     let userID = Dashboard.getUserID();
+    let userPromise = Dashboard.getUserPic(userID);
+    userPromise.on("value",(snapshot)=>{
+      this.userPic= snapshot.val().google.profileImageURL;
+    });
     let roomsPromise = Dashboard.getRooms(userID);
     if(!roomsPromise)
       return;
@@ -79,39 +84,39 @@ export class DashboardController {
   }
 
   create(Dashboard){
-  //console.log("controller");
-  let userID = Dashboard.getUserID();
-  let d=new Date();
-  let p= d.toDateString();
-  Dashboard.createRoom(userID,this.roomName,this.plusName,this.minusName,this.actionName,p);
-}
+    //console.log("controller");
+    let userID = Dashboard.getUserID();
+    let d=new Date();
+    let p= d.toDateString();
+    Dashboard.createRoom(userID,this.roomName,this.plusName,this.minusName,this.actionName,p);
+  }
 
-remove(Dashboard,roomKey){
-  Dashboard.remove(roomKey);
-}
+  remove(Dashboard,roomKey){
+    Dashboard.remove(roomKey);
+  }
 
-firebaseAuthlogout()
-{
-  let ref = new Firebase("https://vyapi.firebaseio.com");
-  ref.unauth();
-  this.windowLoc.location.href='/';
-}
+  firebaseAuthlogout()
+  {
+    let ref = new Firebase("https://vyapi.firebaseio.com");
+    ref.unauth();
+    this.windowLoc.location.href='/';
+  }
 
 
-edit(Dashboard,roomKey){
-  this.editKey = roomKey;
-  let currentRoom = _.find(this.rooms,{key : roomKey});
-  console.log(currentRoom);
-  this.rName = currentRoom.roomName;
-  this.pName = currentRoom.plusLabel;
-  this.mName = currentRoom.minusLabel;
-  this.aName = currentRoom.actionLabel;
-  Dashboard.editRoom();
-//console.log(rName,pName,mName,aName);
-}
+  edit(Dashboard,roomKey){
+    this.editKey = roomKey;
+    let currentRoom = _.find(this.rooms,{key : roomKey});
+    console.log(currentRoom);
+    this.rName = currentRoom.roomName;
+    this.pName = currentRoom.plusLabel;
+    this.mName = currentRoom.minusLabel;
+    this.aName = currentRoom.actionLabel;
+    Dashboard.editRoom();
+    //console.log(rName,pName,mName,aName);
+  }
 
-save(Dashboard){
-  console.log("hello controller");
-  Dashboard.saveValues(this.editKey,this.rName,this.pName,this.mName,this.aName);
-}
+  save(Dashboard){
+    console.log("hello controller");
+    Dashboard.saveValues(this.editKey,this.rName,this.pName,this.mName,this.aName);
+  }
 }
