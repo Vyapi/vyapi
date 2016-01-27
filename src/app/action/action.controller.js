@@ -9,16 +9,18 @@ export class ActionController {
     this.clog = $log;
 //
     this.roomID=$stateParams.roomKey; //temporary
+    //this.roomID='-K8rJxJaWp5N6v91fP2M';
     var roomRef = new Firebase('https://vyapi.firebaseio.com/rooms/'+this.roomID);
     var room = roomRef.child("members");
-    room.once("value", (snapshot) => {
+    room.on("value", (snapshot) => {
     snapshot.forEach((uid)=>{
       var personRef = new Firebase('https://vyapi.firebaseio.com/users/');
       //console.log(''+child.key()+'/google/');
-      var data2=personRef.child(''+uid.key()+'/google/');
-      $firebaseArray(data2);
-      data2.once('value',(userSnapshot)=>{
+      var googleData=personRef.child(''+uid.key()+'/google/');
+      $firebaseArray(googleData);
+      googleData.on('value',(userSnapshot)=>{
               var userNames=userSnapshot.val()['displayName'];
+              console.log('pushed', userNames);
               this.assignee.push(userNames);
               // console.log(this.assignee);
               // console.log(typeof this.assignee);
@@ -53,7 +55,7 @@ export class ActionController {
   add()
   {
     this.items.push({task:this.text,name:this.person});
-    //console.log(this.roomID);
+    console.log(this.roomID);
     this.myDataRef.push({task:this.text,name:this.person});
     //myDataRef.child("users/"+ authData.uid).set(authData);
     this.text = '';
@@ -74,10 +76,10 @@ export class ActionController {
     this.person=person;
   }
 
-  remove(index)
+  remove(item)
   {
-    this.clog.log(index);
-    this.myDataRef.child(this.items[index].key).remove();
+    //this.clog.log(index);
+    this.myDataRef.child(item.key).remove();
     //console.log(this.items);
     //this.items.splice(index, 1);
     //console.log(this.items);
