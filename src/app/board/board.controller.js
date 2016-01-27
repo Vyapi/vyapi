@@ -23,7 +23,6 @@ export class BoardController {
 
     //CODE TO MAKE THE USER ANONYMOUS
     var anonymous = true;
-
     this.toggle = function() {
       anonymous = !anonymous;
       if(!anonymous){
@@ -109,23 +108,28 @@ export class BoardController {
     //CODE TO ENABLE DRAG AND DROP OF STICKYs
     $('.delete-btn').css({'visibility' : 'hidden'});
     $('.like-btn').css({'visibility' : 'hidden'});
+    $('.edit-btn').css({'visibility' : 'hidden'});
+    $('.save-btn').css({'display' : 'hidden'});
     $("#chat-messages-plus").sortable();
     $("#chat-messages-minus").sortable();
     $("#chat-messages-plus").disableSelection();
     $("#chat-messages-minus").disableSelection();
 
     //CODE TO SHOW DELETE/LIKE ETC ON HOVER
-    this.hover = function(msg){
-      if(msg.uid === userId) {
-
+    this.hover = function(msgId){
+      if(msgId === userId) {
       }
       $('.delete-btn').css({'visibility' : 'visible'});
       $('.like-btn').css({'visibility' : 'visible'});
+      $('.edit-btn').css({'visibility' : 'visible'});
     };
 
-    this.show = function(msg){
+    this.show = function(msgId){
+      if(msgId === userId) {
+      }
       $('.delete-btn').css({'visibility' : 'hidden'});
       $('.like-btn').css({'visibility' : 'hidden'});
+      $('.edit-btn').css({'visibility' : 'hidden'});
     };
 
 
@@ -140,14 +144,25 @@ export class BoardController {
 
     this.currentMessageText= "hello";
     this.currentMessage;
+
     this.edit = function(msg) {
-      console.log("edit hererere");
       this.currentMessageText= msg.text;
       this.currentMessage = msg;
+      // $('#stickyTextarea').setAttribute("disabled","disabled");
+      $('#stickyTextarea').focus();
+      $('.edit-btn').css({'display' : 'none'});
+      $('.save-btn').css({'display' : 'inline-block'});
     }
+
     this.saveEdit = function (msg)
     {
-      (new Firebase(roomURL + "/" + msg.$id+"/text")).set( msg.text);
+      (new Firebase(roomURL + "/" + msg.$id+"/text")).set(msg.text);
+      if(msg.uid == userId) {
+        $('.edit-btn').css({'display' : 'inline-block'});
+        $('.save-btn').css({'display' : 'none'});
+        $('#stickyTextarea').blur();
+        // $('#stickyTextarea').removeAttribute("disabled");
+      }
     }
   }
 }
