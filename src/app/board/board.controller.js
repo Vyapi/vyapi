@@ -134,6 +134,11 @@ export class BoardController {
       // $('.edit-btn').css({'visibility' : 'hidden'});
     };
 
+    //CODE TO SHOW THE EDIT BUTTON ONLY ON SELF STICKYs
+    this.getListId = function(msgId){
+      console.log(msgId);
+      return msgId;
+    }
 
     //CODE TO EDIT THE STICKY NOTES
     this.isOwner=function(msgId)

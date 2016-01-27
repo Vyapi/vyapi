@@ -52,9 +52,6 @@ body {
 .sticky:hover .edit-btn {
   display: inline-block;
 }
-.sticky:hover .like-btn {
-  visibility: visible;
-}
 
 .sticky__head {
   max-height: 30px;
@@ -106,7 +103,7 @@ body {
   color: white;
 }
 
-.delete-btn, .like-btn {
+.delete-btn, {
   visibility: hidden;
 }
 
