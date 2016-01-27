@@ -21,7 +21,7 @@
         <li data-ng-repeat="msg in board.messages.slice().reverse() | filter:{lane:'plus'}">
           <div class="sticky">
             <div class="sticky-note" ng-mouseover="board.hover(msg.uid)" ng-mouseout="board.show(msg.uid)">
-              <i class="fa fa-times fa pull-right delete-btn"  ng-click="board.delete(msg.uid)"></i>
+              <i class="fa fa-times fa pull-right delete-btn"  ng-click="board.delete(msg,5)"></i>
               <i class="fa fa-pencil fa pull-right edit-btn" ng-click="board.edit(msg.uid)"></i>
               <i class="fa fa-check fa pull-right save-btn" ng-click="board.saveEdit(msg)"></i>
               <div class="sticky__body">
@@ -58,7 +58,7 @@
         <li data-ng-repeat="msg in board.messages.slice().reverse() | filter:{lane:'minus'}" id="board.getListId(msg.$id)">
           <div class="sticky">
             <div class="sticky-note" ng-mouseover="board.hover(msg.uid)" ng-mouseout="board.show(msg.uid)">
-              <i class="fa fa-times fa pull-right delete-btn"  ng-click="board.delete(msg.uid)"></i>
+              <i class="fa fa-times fa pull-right delete-btn"  ng-click="board.delete(msg,6)"></i>
               <i class="fa fa-pencil fa pull-right edit-btn" ng-click="board.edit(msg.uid)"></i>
               <i class="fa fa-check fa pull-right save-btn" ng-click="board.saveEdit(msg)"></i>
               <div class="sticky__body">
