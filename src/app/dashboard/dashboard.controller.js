@@ -1,10 +1,15 @@
 export class DashboardController {
 	constructor ($firebaseArray,Dashboard,$location){
 		'ngInject';
+
         this.path = $location.absUrl().replace('dashboard', 'room');
         console.log(this.path);
 		this.set_param(Dashboard);
 		this.cards(Dashboard);
+
+		this.path = $location.absUrl().replace('dashboard', 'room');
+		this.setParam(Dashboard);
+
 		this.rooms = [];
 		this.car= [];
 		this.roomname='';
@@ -18,7 +23,12 @@ export class DashboardController {
 			$.modal.close();
 		}
 		};
+		this.removeRoom = function(roomKey){
+			console.log(roomKey);
+			this.remove(Dashboard,roomKey);
+		};
 	}
+
 	cards(Dashboard)
 	{
 		let i=0;
@@ -35,9 +45,14 @@ export class DashboardController {
 		this.car= car;
 		console.table("in car",this.car);
 	}
+
 	set_param(Dashboard){
 		let userID = Dashboard.getUserID();
-		Dashboard.getRooms(userID).on("value",(snapshot)=>{
+		let roomsPromise = Dashboard.getRooms(userID);
+		if(!roomsPromise)
+			return;
+		roomsPromise.on("value",(snapshot)=>{
+
 			let rooms = snapshot.val();
 			rooms = _.map(rooms,(room,key,url,no_of_mem,test)=>{
 				room.key = key;
@@ -57,11 +72,12 @@ export class DashboardController {
 		let userID = Dashboard.getUserID();
 		let random = Dashboard.createRoom(userID,this.roomname);
 	}
-
-	firebaseAuthlogout() 
-	{
-   let ref = new Firebase("https://vyapi.firebaseio.com");
-   ref.unauth();
-   window.location.href='/';
- }
+	remove(Dashboard,roomKey){
+		Dashboard.remove(roomKey);
+	}
+	firebaseAuthlogout(){
+		let ref = new Firebase("https://vyapi.firebaseio.com");
+		ref.unauth();
+		window.location.href='/';
+	}
 }
