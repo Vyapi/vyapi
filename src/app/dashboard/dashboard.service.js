@@ -21,6 +21,10 @@ export class Dashboard{
       return;
     return authData.uid;
   }
+	getUserPic(userID){
+		let userRef = new Firebase(this.rootURL + 'users/' + userID);
+		return userRef;
+	}
   remove(roomKey){
     let messageDbRef = new Firebase(this.messageRef + '/' + roomKey);
     messageDbRef.remove();
