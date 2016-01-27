@@ -2,12 +2,13 @@
   "name": "vyapi",
   "version": "0.0.0",
   "dependencies": {
-    "bootstrap": "3.3.6"
+    "bootstrap": "3.3.6",
+    "underscore": "^1.8.3"
   },
   "scripts": {
-    "preinstall":"bower install",
+    "preinstall": "bower install",
     "postinstall": "gulp build &&  npm cache clear && npm cache ls",
-		"test" : "gulp test"
+    "test": "gulp test"
   },
   "devDependencies": {
     "estraverse": "~4.1.0",
