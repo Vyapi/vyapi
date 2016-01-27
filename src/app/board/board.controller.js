@@ -1,14 +1,15 @@
 export class BoardController {
-  constructor ($scope, $firebaseArray, $location) {
+  constructor ($firebaseArray, $location,$log) {
+
     'ngInject';
 
     var userName = "";
 
     var appURL = "https://vyapi.firebaseio.com/";
     var roomID = $location.path().split("/")[2];
-    console.log("roomID is " + roomID);
-    //this.likes = [];
-    var noOfLikes = [];
+
+    $log.log("roomID is " + roomID);
+
 
     var userRef = new Firebase("https://vyapi.firebaseio.com/messages");
     var authData = userRef.getAuth();
@@ -44,7 +45,7 @@ this.toggle = function() {
 
       if (userMessage) {
         if(!userName) userName = "anonymous";
-        // console.log(authData);
+        // $log.log(authData);
 
         this.messages.$add({
           from: userName,
@@ -62,12 +63,14 @@ this.toggle = function() {
     //CODE TO DELETE THE MESSAGE POSTED
     this.delete=function(msg){
       var ide=msg.$id;
-      console.log(msg);
-      //console.log(authData.google.id);
+
+      //  $log.log(msg.uid);
+      //$log.log(authData.google.id);
       // var roomRef = new Firebase('https://vyapi.firebaseio.com/messages/'+roomID).remove();
       if(msg.uid === "google:"+authData.google.id)
         this.msgRef.child(ide).remove();
-      console.log("delete: " + msg.$id);
+      $log.log(msg.$id);
+
     };
 
     //CODE TO DISPLAY THE 5 SECOND NOTIFICATION FOR ANONYMITY
