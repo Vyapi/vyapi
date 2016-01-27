@@ -8,11 +8,14 @@ import { UserController } from './user/user.controller';
 import { ActionController } from './action/action.controller';
 import { DashboardController } from './dashboard/dashboard.controller.js';
 import { Dashboard } from './dashboard/dashboard.service.js';
+import { Auth } from './login/auth.service';
 import { BoardController } from './board/board.controller';
 import { RoomController } from './room/room.controller';
 import { LoginController } from './login/login.controller';
 import { GithubContributorService } from '../app/components/githubContributor/githubContributor.service';
 import { WebDevTecService } from '../app/components/webDevTec/webDevTec.service';
+import { FireConnect } from '../app/components/data/connectdb.service';
+import { FireData } from '../app/components/data/data.service';
 import { NavbarDirective } from '../app/components/navbar/navbar.directive';
 import { MalarkeyDirective } from '../app/components/malarkey/malarkey.directive';
 
@@ -25,11 +28,14 @@ angular.module('vyapi', ['ui.router', 'toastr', 'firebase', 'ngAnimate','ngCsv']
   .run(runBlock)
   .service('githubContributor', GithubContributorService)
   .service('webDevTec', WebDevTecService)
+  .service('Dashboard',Dashboard)
+  .service('FireConnect',FireConnect)
+  .service('FireData',FireData)
+  .service('Auth',Auth)
   .controller('MainController', MainController)
   .controller('UserController', UserController)
   .controller('ActionController', ActionController)
   .controller('DashboardController', DashboardController)
-  .service('Dashboard',Dashboard)
   .controller('BoardController', BoardController)
   .controller('RoomController', RoomController)
   .controller('LoginController', LoginController)
