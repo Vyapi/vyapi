@@ -20,12 +20,11 @@ export class BoardController {
     console.log(roomURL);
     this.msgRef = new Firebase(roomURL);
     this.messages = $firebaseArray(this.msgRef);
-    
-    
+
+
 
     //CODE TO MAKE THE USER ANONYMOUS
     var anonymous = true;
-
     this.toggle = function() {
       anonymous = !anonymous;
       if(!anonymous){
@@ -49,7 +48,7 @@ export class BoardController {
         dashboard=new Firebase(ref+"/pos");
       else
         dashboard=new Firebase(ref+"/neg");
-      
+
         dashboard.once("value",(snapshot)=>{
         num = parseInt(snapshot.val());
          num++;
@@ -58,11 +57,11 @@ export class BoardController {
         else
            ref.update({neg : num});
          console.log(num);
-        
+
       });
-        
-       
-      
+
+
+
       if (userMessage) {
         if(!userName) userName = "anonymous";
         // $log.log(authData);
@@ -80,7 +79,7 @@ export class BoardController {
       }
     };
 
-    
+
 
     //CODE TO DISPLAY THE 5 SECOND NOTIFICATION FOR ANONYMITY
     $('#anonymousWarn').fadeIn().delay(5000).fadeOut();
@@ -106,20 +105,20 @@ export class BoardController {
 
     //handle like button click for a message
     this.like = function(msg) {
-      let t = (new Firebase(roomURL)).child(msg.$id + "/like/" +authData.uid);
-      t.once("value" , function(value){
+      let msgLike = (new Firebase(roomURL)).child(msg.$id + "/like/" +authData.uid);
+      msgLike.once("value" , function(value){
         //console.log('triggring event');
         if(value.exists()){
-          t.remove();
+          msgLike.remove();
         }
         else{
-          t.set(1);
-          t.off();
+          msgLike.set(1);
+          msgLike.off();
         }
       });
 
-      let ta = (new Firebase(roomURL)).child(msg.$id + "/like/");
-      ta.once('value', function(snapshot) {
+      let msgLikes = (new Firebase(roomURL)).child(msg.$id + "/like/");
+      msgLikes.once('value', function(snapshot) {
         msg.noOfLikes=snapshot.numChildren();
       });
     }
@@ -127,24 +126,30 @@ export class BoardController {
     //CODE TO ENABLE DRAG AND DROP OF STICKYs
     $('.delete-btn').css({'visibility' : 'hidden'});
     $('.like-btn').css({'visibility' : 'hidden'});
+    $('.edit-btn').css({'visibility' : 'hidden'});
+    $('.save-btn').css({'display' : 'hidden'});
     $("#chat-messages-plus").sortable();
     $("#chat-messages-minus").sortable();
     $("#chat-messages-plus").disableSelection();
     $("#chat-messages-minus").disableSelection();
 
     //CODE TO SHOW DELETE/LIKE ETC ON HOVER
-    this.hover = function(msg){
-      if(msg.uid === userId) {
-
+    this.hover = function(msgId){
+      if(msgId === userId) {
+        $('.edit-btn').css({'visibility' : 'visible'});
       }
-      $('.delete-btn').css({'visibility' : 'visible'});
-      $('.like-btn').css({'visibility' : 'visible'});
+      // $('.delete-btn').css({'visibility' : 'visible'});
+      // $('.like-btn').css({'visibility' : 'visible'});
+      // $('.edit-btn').css({'visibility' : 'visible'});
     };
 
-    this.show = function(msg){
-      $('.delete-btn').css({'visibility' : 'hidden'});
-      $('.like-btn').css({'visibility' : 'hidden'});
-    };
+    this.show = function(msgId){
+      if(msgId === userId) {
+        $('.edit-btn').css({'visibility' : 'hidden'});
+      }
+      // $('.delete-btn').css({'visibility' : 'hidden'});
+      // $('.like-btn').css({'visibility' : 'hidden'});
+      // $('.edit-btn').css({'visibility' : 'hidden'});
 
     //CODE TO DELETE THE MESSAGE POSTED
     this.delete=function(msg,temp){
@@ -167,19 +172,18 @@ export class BoardController {
         refe.update({neg : number});
         console.log("deletong",number);
       });
-        
-      
+
+
       let messageId=msg.$id;
       if(msg.uid === userId)
         this.msgRef.child(messageId).remove();
-      
-      
-      if(msg.uid === "google:"+authData.google.id)
-        this.msgRef.child(ide).remove();
-      //console.log("delete: " + msg.$id);
-      
     };
 
+    //CODE TO SHOW THE EDIT BUTTON ONLY ON SELF STICKYs
+    this.getListId = function(msgId){
+      console.log(msgId);
+      return msgId;
+    }
 
     //CODE TO EDIT THE STICKY NOTES
     this.isOwner=function(msgId)
@@ -192,14 +196,25 @@ export class BoardController {
 
     this.currentMessageText= "hello";
     this.currentMessage;
+
     this.edit = function(msg) {
-      console.log("edit hererere");
       this.currentMessageText= msg.text;
       this.currentMessage = msg;
+      // $('#stickyTextarea').setAttribute("disabled","disabled");
+      $('#stickyTextarea').focus();
+      $('.edit-btn').css({'display' : 'none'});
+      $('.save-btn').css({'display' : 'inline-block'});
     }
+
     this.saveEdit = function (msg)
     {
-      (new Firebase(roomURL + "/" + msg.$id+"/text")).set( msg.text);
+      (new Firebase(roomURL + "/" + msg.$id+"/text")).set(msg.text);
+      if(msg.uid == userId) {
+        $('.edit-btn').css({'display' : 'inline-block'});
+        $('.save-btn').css({'display' : 'none'});
+        $('#stickyTextarea').blur();
+        // $('#stickyTextarea').removeAttribute("disabled");
+      }
     }
   }
 }
