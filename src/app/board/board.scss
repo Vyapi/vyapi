@@ -14,12 +14,18 @@ body {
 
 #anonymousWarn {
   display: none;
-  margin:10px;
+  margin: 10px;
   padding: 10px;
 }
 
-#chat-messages-plus li { float: left; }
-#chat-messages-minus li { float: left; }
+#chat-messages-plus li {
+  float: left;
+}
+
+#chat-messages-minus li {
+  float: left;
+}
+
 /*#chat-messages-plus li span { position: absolute; margin-left: -1.3em; }*/
 
 .sticky {
@@ -34,7 +40,7 @@ body {
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-around;
-  box-shadow: 8px 8px 20px rgba(0,0,0,0.6);
+  box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.6);
   font-family: myFirstFont;
   font-size: 1.1em;
 }
@@ -50,14 +56,15 @@ body {
 .sticky:hover .delete-btn {
   visibility: visible;
 }
+
 .sticky:hover .edit-btn {
   display: inline-block;
   visibility: visible;
 }
+
 .sticky:hover .grab-handle {
   visibility: visible;
 }
-
 
 .sticky__head {
   max-height: 30px;
@@ -86,7 +93,7 @@ body {
 }
 
 .sticky__body::-webkit-scrollbar {
- display: none;
+  display: none;
 }
 
 .sticky-textarea {
@@ -112,14 +119,12 @@ body {
 .grab-handle {
   color: black;
   visibility: hidden;
+  cursor: move;
 }
 
-.delete-btn, {
+.delete-btn, .edit-btn {
   visibility: hidden;
-}
-
-.edit-btn {
-  visibility: hidden;
+  cursor: pointer;
 }
 
 .save-btn {
