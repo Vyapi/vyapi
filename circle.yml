@@ -6,9 +6,11 @@ dependencies:
 
 test:
   override:
-    
+
 deployment:
   production:
     branch: master
+    heroku:
+    appname: vyapi
     commands:
       - firebase deploy --token "-K8NQX-IOHSbncOIwSal|a19b96123552661ca03db64eb0ff6da0"
