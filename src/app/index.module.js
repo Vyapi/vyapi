@@ -8,7 +8,7 @@ import { UserController } from './user/user.controller';
 import { ActionController } from './action/action.controller';
 import { DashboardController } from './dashboard/dashboard.controller.js';
 import { Dashboard } from './dashboard/dashboard.service.js';
-import { Auth } from './login/login.service';
+import { Auth } from './login/auth.service';
 import { BoardController } from './board/board.controller';
 import { RoomController } from './room/room.controller';
 import { LoginController } from './login/login.controller';
