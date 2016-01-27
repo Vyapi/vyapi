@@ -14,10 +14,12 @@
        <div class="sticky__body">
         <i class="fa fa-times fa-lg pull-right delete-btn" ng-click="dashboard.removeRoom(room.key)"></i>
         <div><a href="{{room.url}}">
-        <p class="sticky-textarea">Members:{{room.mem}}</p>
-        <p class="sticky-textarea">Date:{{room.date}}</p>
+        <p>Members:{{room.mem}}</p>
+        <p>Date:{{room.date}}</p>
+         <p>Positive Message:{{room.pos}}</p>
+          <p>Negative Message:{{room.neg}}</p>
       <div class="roomName">
-        <i class="sticky-textarea" >{{room.roomName}}</i>
+       <b> <i class="sticky-textarea" >{{room.roomName}}</i></b>
       </div>
     </a>
     </div>

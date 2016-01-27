@@ -30,7 +30,8 @@ export class Dashboard{
 	}
 
 	createRoom(userID,roomName,d){
-		this.roomsRef.push({roomName : roomName, ownedBy : userID, date: d, pos:0, neg:0});
+    let zero=parseInt(0);
+		this.roomsRef.push({roomName : roomName, ownedBy : userID, date: d, pos:zero, neg:zero});
 		return;
 
 	}
