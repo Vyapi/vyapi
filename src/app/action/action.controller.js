@@ -55,7 +55,7 @@ export class ActionController {
   add()
   {
     this.items.push({task:this.text,name:this.person});
-    //console.log(this.roomID);
+    console.log(this.roomID);
     this.myDataRef.push({task:this.text,name:this.person});
     //myDataRef.child("users/"+ authData.uid).set(authData);
     this.text = '';
