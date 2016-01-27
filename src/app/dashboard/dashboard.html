@@ -10,14 +10,16 @@
    <li ng-repeat="room in dashboard.rooms">
      <div class="sticky">
       <div class="sticky-note">
+        <a href="{{room.url}}">
        <div class="sticky__body">
         <i class="fa fa-times fa-lg pull-right delete-btn" ng-click="dashboard.removeRoom(room.key)"></i>
         <p class="sticky-textarea">Members:{{room.mem}}</p>
         <p class="sticky-textarea">Date:{{room.date}}</p>
       <div class="roomName">
-        <button class="btn btn-default btn-lg" ><a href="{{room.url}}">{{room.roomName}}</a></button>
+        <i class="sticky-textarea" >{{room.roomName}}</i>
       </div>
     </div>
+  </a>
     </div>
   </div>
 </li>
