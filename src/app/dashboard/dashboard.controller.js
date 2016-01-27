@@ -21,12 +21,12 @@ export class DashboardController {
     this.editKey='';
 
     this.createRoom = function(){
-      //console.log("function call");
       if(!this.roomName)
       {
         return false;
       }
-      else{
+      else
+      {
         this.create(Dashboard);
       }
     };
@@ -78,18 +78,16 @@ export class DashboardController {
         return room;
       });
       this.rooms = rooms;
-      console.table(this.rooms);
-
     });
   }
 
-  create(Dashboard){
-  //console.log("controller");
+  create(Dashboard)
+  {
   let userID = Dashboard.getUserID();
   let d=new Date();
   let p= d.toDateString();
   Dashboard.createRoom(userID,this.roomName,this.plusName,this.minusName,this.actionName,p);
-}
+ }
 
 remove(Dashboard,roomKey){
   Dashboard.remove(roomKey);
@@ -106,17 +104,14 @@ firebaseAuthlogout()
 edit(Dashboard,roomKey){
   this.editKey = roomKey;
   let currentRoom = _.find(this.rooms,{key : roomKey});
-  console.log(currentRoom);
   this.rName = currentRoom.roomName;
   this.pName = currentRoom.plusLabel;
   this.mName = currentRoom.minusLabel;
   this.aName = currentRoom.actionLabel;
   Dashboard.editRoom();
-//console.log(rName,pName,mName,aName);
 }
 
 save(Dashboard){
-  console.log("hello controller");
   Dashboard.saveValues(this.editKey,this.rName,this.pName,this.mName,this.aName);
 }
 }
