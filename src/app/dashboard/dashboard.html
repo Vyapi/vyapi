@@ -13,13 +13,15 @@
   <li ng-repeat="room in dashboard.rooms">
     <div class="sticky">
       <div class="sticky__body">
-       <p>text here</p>
-       <button class="btn btn-default btn-lg" ><a href="{{room.url}}">{{room.roomName}}</a><p>Members:{{room.no_of_mem}}</p></button>
+        <button class="btn btn-default btn-lg" ng-click="dashboard.removeRoom(room.key)">delete</button>
 
-     </div>
-   </div>
- </li>
+        <button class="btn btn-default btn-lg" ><a href="{{room.url}}">{{room.roomName}}</a><p>Members:{{room.mem}}</p></button>
+
+      </div>
+    </div>
+  </li>
 </ul>
+
 
 <div class="col-md-12">
     <!--<ul class="list-unstyled list-inline">
@@ -39,7 +41,6 @@
 </div>
 <div class="modal fade" id="myModal" role="dialog">
   <div class="modal-dialog">
-
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>

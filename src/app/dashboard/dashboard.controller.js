@@ -2,29 +2,25 @@ export class DashboardController {
 	constructor ($firebaseArray,Dashboard,$location){
 		'ngInject';
 
-        this.path = $location.absUrl().replace('dashboard', 'room');
-        console.log(this.path);
-		this.set_param(Dashboard);
-		this.cards(Dashboard);
-
 		this.path = $location.absUrl().replace('dashboard', 'room');
 		this.setParam(Dashboard);
-
+		this.cards(Dashboard);
+		this.setParam(Dashboard);
 		this.rooms = [];
 		this.car= [];
-		this.roomname='';
+		this.roomName='';
+		
 		this.createRoom = function(){
-			if(this.roomname === '')
+			if(!this.roomName)
 			{ 
-              return false;
+				return false;
 			}
-            else{
-			this.create(Dashboard);
-			$.modal.close();
-		}
+			else{
+				this.create(Dashboard);
+				
+			}
 		};
 		this.removeRoom = function(roomKey){
-			console.log(roomKey);
 			this.remove(Dashboard,roomKey);
 		};
 	}
@@ -32,52 +28,51 @@ export class DashboardController {
 	cards(Dashboard)
 	{
 		let i=0;
+		let car = [];
 		let userID = Dashboard.getUserID();
 		Dashboard.getRooms(userID).on("value",(snapshot)=>{
-			let car =[];
+
 			snapshot.forEach(function(childSnapshot){
-                var n = childSnapshot.child("members").numChildren();
-			    car[i]=parseInt(n);
-			    i++;
+				var n = childSnapshot.child("members").numChildren();
+				car[i]=parseInt(n);
+				i++;
 			});
+			this.car= car;
+			console.table(this.car);
 			return car;
+
 		});
-		this.car= car;
-		console.table("in car",this.car);
+		
 	}
 
-	set_param(Dashboard){
+	setParam(Dashboard){
 		let userID = Dashboard.getUserID();
 		let roomsPromise = Dashboard.getRooms(userID);
 		if(!roomsPromise)
 			return;
 		roomsPromise.on("value",(snapshot)=>{
-
+            let i=0;
 			let rooms = snapshot.val();
-			rooms = _.map(rooms,(room,key,url,no_of_mem,test)=>{
+			rooms = _.map(rooms,(room,key,url,mem)=>{
 				room.key = key;
 				room.url = this.path + '/' +  key;
-				snapshot.forEach(function(childSnapshot){
-                var n = childSnapshot.child("members").numChildren();
-                room.no_of_mem=n;
-                //console.log()
-            });
+				room.mem = this.car[i];
+				i++;
 				return room;
+            });
+                this.rooms = rooms;
+               console.table(this.rooms);
+				
 			});
-			this.rooms = rooms;
-			//console.table(this.rooms);
-		});
+			
+			
+
 	}
 	create(Dashboard){
 		let userID = Dashboard.getUserID();
-		let random = Dashboard.createRoom(userID,this.roomname);
+		let random = Dashboard.createRoom(userID,this.roomName);
 	}
 	remove(Dashboard,roomKey){
 		Dashboard.remove(roomKey);
-	}
-	firebaseAuthlogout(){
-		let ref = new Firebase("https://vyapi.firebaseio.com");
-		ref.unauth();
-		window.location.href='/';
 	}
 }
