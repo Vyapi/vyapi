@@ -28,9 +28,9 @@ export class Dashboard{
 		return;
 	}
 
-	createRoom(userID,roomName){
 
-		this.roomsRef.push({roomName : roomName, ownedBy : userID});
+	createRoom(userID,roomName,d){
+		this.roomsRef.push({roomName : roomName, ownedBy : userID, date: d, pos:0, neg:0});
 		return;
   }
 
