@@ -137,13 +137,10 @@ export class BoardController {
     $("#chat-messages-plus").disableSelection();
     $("#chat-messages-minus").disableSelection();
     $("#chat-messages-plus").sortable({
-<<<<<<< HEAD
+
       //console.log("Drag working 1");
       start: function(event, ui) {
           // console.log("Drag working 2");
-=======
-        start: function(event, ui) {
->>>>>>> origin/develop
         },
         change: function(event, ui) {
         },
@@ -266,6 +263,6 @@ export class BoardController {
 
   }
 }
-}
+
 
 
