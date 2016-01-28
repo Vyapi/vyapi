@@ -1,11 +1,12 @@
 export class BoardController {
-  constructor ($firebaseArray, $location,$log, Dashboard) {
+  constructor ($firebaseArray, $location,$log, $stateParams, Dashboard) {
 
     'ngInject';
 
     var userName = "";
     var appURL = "https://vyapi.firebaseio.com/";
     var roomID = $location.path().split("/")[2];
+    var roomId = $stateParams.roomKey;
     var anonymous = true;
     $log.log("roomID is " + roomID);
 
@@ -223,14 +224,9 @@ export class BoardController {
     
     this.userPic = [];
     this.anonymousImage = function(msg){
-      //new Firebase ("https://vyapi.firebaseio.com/users/" + msg.uid + "/google/profileImageURL");
-      // let userPromise = Dashboard.getUserPic(Dashboard.getUserID());
-      // userPromise.on("value",(snapshot)=>{
-      // this.userPic = snapshot.val().google.profileImageURL;
-      // });
       if(msg.from != "anonymous")
         return false;
-      else 
+      else
         return true;
     }
     this.getUserPic = function(userId){
@@ -243,8 +239,6 @@ export class BoardController {
       return this.userPic[userId];
     
     }
-    
-    
   }
 }
 
