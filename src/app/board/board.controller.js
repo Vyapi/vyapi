@@ -30,10 +30,10 @@ export class BoardController {
       anonymous = !anonymous;
       if(!anonymous){
         userName = authData.google.displayName;
-        $('.anonymousToggle').css({"background-color":"#eeeeee","color":"black"});
+        $('.anonymous-toggle').css({"background-color":"#eeeeee","color":"black"});
       } else {
         userName = "anonymous";
-        $('.anonymousToggle').css({"background-color":"#6D6A68","color":"white"});
+        $('.anonymous-toggle').css({"background-color":"#6D6A68","color":"white"});
       }
     };
 
@@ -246,7 +246,7 @@ export class BoardController {
       }
       }*/
     }
-    
+
     this.userPic = [];
     this.anonymousImage = function(msg){
       if(msg.from != "anonymous")
@@ -262,7 +262,7 @@ export class BoardController {
         });
       }
       return this.userPic[userId];
-    
+
     }
   }
 }
