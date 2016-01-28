@@ -17,6 +17,20 @@ export class BoardController {
     var userId = "google:"+googleId;
     var anonymous = true;
 
+    this.plusLabel='';
+    this.minusLabel='';
+    this.roomName='';
+    var roomRef= new Firebase("https://vyapi.firebaseio.com/rooms/" + roomID);
+    roomRef.on("value",(snapshot)=>{
+      console.log(snapshot.val());
+      let labelData = snapshot.val();
+      this.roomName = labelData.roomName;
+      this.plusLabel = labelData.plusLabel;
+      this.minusLabel = labelData.minusLabel;
+      console.log(this.plusLabel);
+      console.log(this.minusLabel);
+    });
+
     var roomURL= "https://vyapi.firebaseio.com/messages/" + roomID;
     this.msgRef = new Firebase(roomURL);
     this.messages = $firebaseArray(this.msgRef);
@@ -30,10 +44,10 @@ export class BoardController {
       anonymous = !anonymous;
       if(!anonymous){
         userName = authData.google.displayName;
-        $('.anonymousToggle').css({"background-color":"#eeeeee","color":"black"});
+        $('.anonymous-toggle').css({"background-color":"#eeeeee","color":"black"});
       } else {
         userName = "anonymous";
-        $('.anonymousToggle').css({"background-color":"#6D6A68","color":"white"});
+        $('.anonymous-toggle').css({"background-color":"#6D6A68","color":"white"});
       }
     };
 
@@ -123,7 +137,10 @@ export class BoardController {
     $("#chat-messages-plus").disableSelection();
     $("#chat-messages-minus").disableSelection();
     $("#chat-messages-plus").sortable({
-        start: function(event, ui) {
+
+      //console.log("Drag working 1");
+      start: function(event, ui) {
+          // console.log("Drag working 2");
         },
         change: function(event, ui) {
         },
@@ -138,10 +155,14 @@ export class BoardController {
             }
           }
         }
-    });
+      });
 
     $("#chat-messages-minus").sortable({
-        start: function(event, ui) {
+
+      //console.log("Drag working 1");
+      start: function(event, ui) {
+          // console.log("Drag working 2");
+
         },
         change: function(event, ui) {
         },
@@ -156,7 +177,7 @@ export class BoardController {
             }
           }
         }
-    });
+      });
     $("#chat-messages-plus").disableSelection();
     $("#chat-messages-minus").disableSelection();
 
@@ -219,27 +240,30 @@ export class BoardController {
         $('#stickyTextarea').blur();
         // $('#stickyTextarea').removeAttribute("disabled");
       }
-      }*/
-    }
-    
-    this.userPic = [];
-    this.anonymousImage = function(msg){
-      if(msg.from != "anonymous")
-        return false;
-      else
-        return true;
-    }
-    this.getUserPic = function(userId){
-      if(this.userPic[userId] === undefined)
-      {
-        (new Firebase ("https://vyapi.firebaseio.com/users/" + userId+ "/google/profileImageURL")).once("value",(snapshot)=>{
-          this.userPic[userId] = snapshot.val();
-        });
-      }
-      return this.userPic[userId];
-    
-    }
+    }*/
   }
+
+  this.userPic = [];
+  this.anonymousImage = function(msg){
+    if(msg.from != "anonymous")
+      return false;
+    else
+      return true;
+  }
+  this.getUserPic = function(userId){
+    if(this.userPic[userId] === undefined)
+    {
+      (new Firebase ("https://vyapi.firebaseio.com/users/" + userId+ "/google/profileImageURL")).once("value",(snapshot)=>{
+        this.userPic[userId] = snapshot.val();
+      });
+    }
+    return this.userPic[userId];
+  }
+  return this.userPic[userId];
+
 }
+}
+
+
 
 
