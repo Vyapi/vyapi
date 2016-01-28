@@ -11,7 +11,7 @@ export class ActionController {
     this.roomID=$stateParams.roomKey;
 
     var roomRef = new Firebase('https://vyapi.firebaseio.com/rooms/'+this.roomID);
-    this.actionLabel='';
+    this.actionLabel='Action Items';
     roomRef.on("value",(snapshot)=>{
       let labelData = snapshot.val();
       console.log(snapshot.val());
@@ -45,14 +45,16 @@ export class ActionController {
     });
   }
 
-  hover()
+  hover(key)
   {
-    $('.button-id').css({'visibility' : 'visible'});
+    //console.log(''+key);
+    $('#'+key).css({'visibility' : 'visible'});
   }
 
-  show()
+  show(key)
   {
-    $('.button-id').css({'visibility' : 'hidden'});
+    //console.log(''+key);
+    $('#'+key).css({'visibility' : 'hidden'});
   };
 
 
@@ -78,6 +80,14 @@ export class ActionController {
 
   remove(item)
   {
-    this.myDataRef.child(item.key).remove();
+    console.log(item.key);
+    // this.myDataRef.child(item.key).remove();
+    let messageId=item.key;
+    this.myDataRef.child(messageId).remove();
+    // var found = this.items.indexOf(item);
+    // console.log(found);
+    /*while (found !== -1) {
+    this.items.splice(found, 1);
+    found = this.items.indexOf(item);*/
   }
 }

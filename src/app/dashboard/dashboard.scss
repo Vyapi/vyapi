@@ -1,44 +1,111 @@
-body {
+body
+{
 	background-image: url("/app/dashboard/wood.jpg");
   background-size: cover;
-	/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
-}
-@font-face {
-  font-family: myFirstFont;
-  src: url("https://fonts.googleapis.com/css?family=Average+Sans");
 }
 
-a:hover
-{
-  text-decoration: none;
+.card__body:hover .top_icon {
+   visibility: visible;
+}
+.top_icon{
+  padding:0.2em;
+  color: #808080;
+  visibility: hidden;
 }
 
-li { float: left; }
 
-.create{
+#div_hover:hover .plus_icon {
+   color:rgba(255, 255, 255, 0.99);
+}
+.plus_icon{
+  color:rgba(255, 255, 255, 0.5);
+}
+#div_hover:hover {
+background-color: rgba(222, 184, 135, 0.85)
+}
+#div_hover{
 text-align: center;
+background-color: rgba(222, 184, 135, 0.5);
+box-shadow: 0px 0px 12px 2px rgba(0, 0, 0, 0.6) inset;
 }
 
-.roomName {
-  width: 100%;
+.btn-circle {
+  width: 25px;
+  height: 25px;
   text-align: center;
-  bottom: 0;
-  position: absolute;
+  font-size: 12px;
+  padding: 0.4em;
+  line-height: 1.428571429;
+  border-radius: 15px;
+  margin:0em 1em 0em 1em;
 }
+.white, .white a {
+  color: #FFFFFF;
+}
+.card_top
+{
+  height: 10%;
+}
+#card_text{
+  height: 70%;
+  padding: 0.5em 0em 0em 0em;
+}
+
+
+
+.card_link
+{
+  color:rgba(0,0,0,0.6);
+  display: block;
+}
+.card_link:hover
+{
+    text-decoration: none;
+    color: rgba(0,0,0,1);
+}
+.card_list
+{
+  float: left;
+}
+
+
+
+
 
 .card {
   float: left;
   margin: 0.5em 0.8em 0.8em 0.5em;
   border-radius: 4px;
-  background-color: #FFF;
-  background-image: url("http://www.transparenttextures.com/patterns/cream-pixels.png");
+  background-color: rgba(253,249,243,1);
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-around;
-  box-shadow: 8px 8px 20px rgba(0,0,0,0.6);
-  font-family: myFirstFont;
-  font-size: 1.1em;
+  box-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+  font-size: 0.9em;
+  &__body {
+    max-height: 190px;
+    min-height: 190px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    word-break: break-all;
+    color: black;
+    hyphens: auto;
+  }
+  &__roomname {
+    width: 100%;
+    text-align: center;
+    bottom: 0;
+    position: absolute;
+    background-color: rgba(222, 184, 135, 0.52);
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+  }
 }
 
 .card-note {
@@ -52,39 +119,30 @@ text-align: center;
   max-height: 30px;
   min-height: 30px;
   vertical-align: middle;
-  /*padding-bottom: 1px;*/
   padding-top: 0.5em;
   padding-left: 0.5em;
-  /*padding-right: 0.5em;*/
   color: white;
 }
 
-.card__body {
-  max-height: 190px;
-  min-height: 190px;
-  width: 100%;
-  height: 100%;
-  padding: 0.5em;
-  position: relative;
-  overflow-y: auto;
-  overflow-x: hidden;
-  -ms-hyphens: auto;
-  -moz-hyphens: auto;
-  -webkit-hyphens: auto;
-  word-break: break-all;
-  color: black;
-  hyphens: auto;
-  /*font-family: myFirstFont;*/
-}
 
 .card__body::-webkit-scrollbar {
  display: none;
+}
+.roomName_center
+{
+vertical-align: middle;
+}
+.card__roomname p{
+  vertical-align: middle;
+  display: inline-block;
 }
 
 .card-textarea {
   width: 100%;
   border: none;
   background: transparent;
+  color: black;
+
 }
 #navbar--background {
   background-color: transparent;

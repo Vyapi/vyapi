@@ -38,6 +38,6 @@
   },
   "resolutions": {
     "jquery": "~2.1.4",
-    "angular": "1.4.8"
+    "angular": "~1.4.2"
   }
 }

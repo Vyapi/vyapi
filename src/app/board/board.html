@@ -9,16 +9,16 @@
       <form ng-submit="board.submit('plus')">
         <div class="form-group">
           <div class="input-group">
-            <span type="button" id="anonymousTogglePlus" class="input-group-addon btn btn-success anonymous-toggle" ng-click="board.toggle()">
+            <span type="button" id="anonymousTogglePlus" class="input-group-addon btn anonymous-toggle" ng-click="board.toggle()">
               <span class="glyphicon glyphicon-eye-close pull-right"></span>
             </span>
-            <input id="userTextPlus" ng-model="board.userMessagePlus" type="text" class="form-control form-control-inverted" aria-definedby="anonymousToggle" placeholder="Type a message">
+            <input id="userTextPlus" ng-model="board.userMessagePlus" type="text" class="form-control form-control-inverted" aria-definedby="anonymousToggle" placeholder="Type a message" maxlength="135">
           </div>
         </div>
       </form>
 
       <ul id="chat-messages-plus" class="list-unstyled">
-        <li data-ng-repeat="msg in board.messages | filter:{lane:'plus'}">
+        <li class = "ng-animate ng-enter animated bounceIn" data-ng-repeat="msg in board.messages | filter:{lane:'plus'}">
           <div class="sticky" id="{{msg.$id}}">
             <div class="sticky-note" ng-mouseover="board.hover(msg.uid)" ng-mouseout="board.show(msg.uid)">
               <div class="sticky__top">
@@ -29,7 +29,7 @@
               </div>
               <div class="sticky__body">
                 <div ng-if="board.isOwner(msg.uid)" >
-                  <textarea class="sticky-textarea" id="stickyTextarea" ng-model="msg.text" ng-change="board.saveEdit(msg)" ng-model-options='{ debounce: 1000 }'>{{ msg.text }}</textarea>
+                  <textarea class="sticky-textarea" id="stickyTextarea" ng-model="msg.text" ng-change="board.saveEdit(msg)" ng-model-options='{ debounce: 1000 }' maxlength="135">{{ msg.text }}</textarea>
                 </div>
                 <div ng-if="!board.isOwner(msg.uid)" >
                   <p class="sticky-text">{{ msg.text }}</p>
@@ -53,10 +53,10 @@
       <form ng-submit="board.submit('minus')">
         <div class="form-group">
           <div class="input-group">
-            <span type="button" id="anonymousToggleMinus" class="input-group-addon btn btn-success anonymous-toggle" ng-click="board.toggle()">
+            <span type="button" id="anonymousToggleMinus" class="input-group-addon btn anonymous-toggle" ng-click="board.toggle()">
               <span class="glyphicon glyphicon-eye-close success pull-right"></span>
             </span>
-            <input id="userTextMinus" ng-model="board.userMessageMinus" type="text" class="form-control userText form-control-inverted" placeholder="Type a message..."/>
+            <input id="userTextMinus" ng-model="board.userMessageMinus" type="text" class="form-control userText form-control-inverted" placeholder="Type a message..." maxlength="135" />
           </div>
         </div>
       </form>
@@ -73,12 +73,13 @@
               </div>
               <div class="sticky__body">
                 <div ng-if="board.isOwner(msg.uid)" >
-                  <textarea class="sticky-textarea" id="stickyTextarea" ng-model="msg.text" ng-change="board.saveEdit(msg)" ng-model-options='{ debounce: 1000 }'>{{ msg.text }}</textarea>
+                  <textarea class="sticky-textarea" id="stickyTextarea" ng-model="msg.text" ng-change="board.saveEdit(msg)" ng-model-options='{ debounce: 1000 }' maxlength="135" >{{ msg.text }}</textarea>
                 </div>
                 <div ng-if="!board.isOwner(msg.uid)" >
                   <p class="sticky-text">{{ msg.text }}</p>
                 </div>
               </div>
+
               <div class="sticky__head">
                 <button class="btn btn-default btn-xs" ng-click="board.like(msg);"><i class="fa fa-thumbs-up like-btn"></i> {{ msg.dl }} likes</button>
                 <img ng-if=" !board.anonymousImage(msg) " class = "sticky-user-image pull-right" title="{{msg.from}}" height="25em" width="25em" ng-src="{{ board.getUserPic(msg.uid) }}">
