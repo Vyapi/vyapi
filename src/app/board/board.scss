@@ -51,8 +51,8 @@ body {
   flex-wrap: wrap;
   justify-content: space-around;
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
-  /*font-family: myFirstFont;*/
-  font-size: 0.9em;
+  font-family: myFirstFont;
+  font-size: 1.1em;
 }
 
 .sticky-note {
@@ -87,8 +87,8 @@ body {
 }
 
 .sticky__body {
-  max-height: 120px;
-  min-height: 120px;
+  max-height: 140px;
+  min-height: 140px;
   width: 100%;
   height: 100%;
   padding: 0.1em 0 0 0;
@@ -109,14 +109,14 @@ body {
 
 .sticky-textarea {
   width: 100%;
-  height: 115px;
+  height: 135px;
   resize: none;
   box-sizing: border-box;
   border: none;
   outline: none;
   background: transparent;
   font-family: $font-family-sans-serif
-  ;
+;
 }
 
 .sticky__head--anonymous-sticky {

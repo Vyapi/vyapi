@@ -1,0 +1,88 @@
+body {
+  background-image: url("/app/board/wood-background.jpg");
+  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+}
+
+
+.group-header {
+  color: #EED;
+}
+
+#action-items .stickyAction
+{
+  background: #ffc578; /* Old browsers */
+  background: linear-gradient(135deg,  #63b3ff 0%,#63b3ff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+
+}
+
+.stickyAction {
+  width:95%;
+  min-height: 50px;
+  max-height: 193px;
+  margin: 0.5em 0.8em 0.8em 0.5em;
+  border-radius: 4px;
+  display: flex;
+  flex-direction:row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+  font-family: myFirstFont;
+  font-size: 1.1em;
+}
+.stickyAction-note {
+  flex: 0 1 auto;
+  align-self: auto;
+  max-width: 160px;
+  min-width: 160px;
+  padding: 0.5em 0.2em 0 0.3em;
+}
+
+.stickyAction__head {
+  max-height: 50px;
+  min-height: 50px;
+  min-width:95%;
+  vertical-align: middle;
+  /*padding-bottom: 1px;*/
+  padding-top: 0.5em;
+  padding-left: 0.5em;
+  /*padding-right: 0.5em;*/
+  color: white;
+}
+
+.stickyAction__body { //changed
+  max-height: 190px;
+  min-height: 50px;
+  width: 95%;
+  height: 100%;
+  padding: 0.1em 0.5em 0.5em 0.5em;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  word-break: break-all;
+  color: black;
+  hyphens: auto;
+  flex-wrap: wrap;
+  word-wrap: break-word;
+  /*font-family: myFirstFont;*/
+}
+
+.stickyAction__body::-webkit-scrollbar {
+ display: none;
+}
+
+.usertext { //changed
+  width: 95%;
+  height: 50px;
+  border: none;
+  resize: none;
+  box-sizing: border-box;
+  outline: none;
+  font-family: $font-family-sans-serif;
+  background: transparent;
+}
+
+.button-id{
+  visibility:hidden;
+}
