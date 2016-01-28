@@ -79,15 +79,13 @@
                   <p class="sticky-text">{{ msg.text }}</p>
                 </div>
               </div>
-<<<<<<< HEAD
-=======
+
               <div class="sticky__head">
                 <button class="btn btn-default btn-xs" ng-click="board.like(msg);"><i class="fa fa-thumbs-up like-btn"></i> {{ msg.dl }} likes</button>
                 <img ng-if=" !board.anonymousImage(msg) " class = "sticky-user-image pull-right" title="{{msg.from}}" height="25em" width="25em" ng-src="{{ board.getUserPic(msg.uid) }}">
                 <!-- <i ng-if= " board.anonymousImage(msg) " title= " Anonymous " class="fa fa-odnoklassniki"></i>  -->
                 <button class="btn btn-default btn-xs pull-right sticky__head--anonymous-sticky" ng-if="board.anonymousImage(msg)" ><i class="fa fa-user-secret fa-lg"></i></button>
               </div>
->>>>>>> origin/develop
             </div>
           </li>
         </ul>

@@ -7,6 +7,20 @@ export class RoomController {
     $scope.getview=null;
     $log.info(`in room controller in room ${$stateParams.roomKey }`);
     $log.log($stateParams.roomKey);
+
+    //console.log("my code!");
+    this.roomLabel = '';
+    let roomK = $stateParams.roomKey;
+    console.log(roomK);
+    let roomRef = new Firebase("https://vyapi.firebaseio.com/rooms/"+roomK);
+    roomRef.on("value",(snapshot)=>{
+      console.log(snapshot.val());
+      let labelData = snapshot.val();
+      this.roomLabel = labelData.roomName;
+      console.log(this.roomLabel);
+    });
+    //console.log("my code ends!" + roomRef);
+
     var keys = [];
     var key;
     this.messages= {}; // pr
