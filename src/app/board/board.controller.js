@@ -262,9 +262,8 @@ export class BoardController {
   return this.userPic[userId];
 
 }
+}
 
-}
-}
 
 
 
