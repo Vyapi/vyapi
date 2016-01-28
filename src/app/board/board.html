@@ -62,7 +62,7 @@
       </form>
 
       <ul id="chat-messages-minus" class="list-unstyled">
-        <li data-ng-repeat="msg in board.messages | filter:{lane:'minus'}">
+        <li class = "ng-animate ng-enter animated bounceIn" data-ng-repeat="msg in board.messages | filter:{lane:'minus'}">
           <div class="sticky" id="{{msg.$id}}">
             <div class="sticky-note" ng-mouseover="board.hover(msg.uid)" ng-mouseout="board.show(msg.uid)">
               <div class="sticky__top">
