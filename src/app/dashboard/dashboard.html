@@ -1,3 +1,4 @@
+
 <nav class="navbar navbar-default navbarTop" id="navbar--background">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -21,33 +22,39 @@
 
 <div class="container-fluid">
 	<ul class="list-unstyled list-inline">
-		<li>
-      <div class="card card-note card__body">
-       <div class="create">
-        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-plus"></i></button>
-      </div>
-    </div>
-    <li ng-repeat="room in dashboard.rooms">
-      <div class="card">
-       <div class="card-note">
-        <div class="card__body">
-         <i class="glyphicon glyphicon-remove pull-right" ng-click="dashboard.removeRoom(room.key)"></i>
-         <i class="glyphicon glyphicon-pencil pull-right " ng-click="dashboard.editRoom(room.key)"></i><br>
-         <div><a href="{{room.url}}">
-          <p>Members:{{room.mem}}</p>
-          <p>Date:{{room.date}}</p>
-          <p>Positive Message:{{room.pos}}</p>
-          <p>Negative Message:{{room.neg}}</p>
-          <div class="roomName">
-            <b> <i class="card-textarea" >{{room.roomName}}</i></b>
+		<li class="card_list">
+		<div class="card card-note card__body" id="div_hover">
+			<div class="create">
+				<a data-toggle="modal" data-target="#myModal" href="#"><i class="glyphicon glyphicon-plus fa-5x plus_icon"></i></a>
+			</div>
+		</div>
+  </li>
+		<li class="card_list" ng-repeat="room in dashboard.rooms">
+		<div class="card">
+			<div class="card-note">
+       		<div class="card__body">
+          <div class="card_top">
+					<i class="glyphicon glyphicon-remove pull-right top_icon" ng-click="dashboard.removeRoom(room.key)"></i>
+          <i class="glyphicon glyphicon-pencil pull-right top_icon" ng-click="dashboard.editRoom(room.key)"></i>
           </div>
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
-</li>
-</ul>
+
+            <a class="card_link" href="{{room.url}}">
+              <div id="card_text">
+  							<p><p class="btn btn-info btn-circle btn-xs"><i class="fa fa-users white"></i></p>{{room.mem}}</p>
+                <p><p class="btn btn-warning btn-circle btn-xs"><i class="glyphicon glyphicon-calendar white"></i></p>{{room.date}}</p>
+                <p><p class="btn btn-success btn-circle btn-xs"><i class="glyphicon glyphicon-ok"></i></p>{{room.pos}}</p>
+                <p><p class="btn btn-danger btn-circle btn-xs"><i class="glyphicon glyphicon-remove"></i></p>{{room.neg}}</p>
+              </div>
+							<div class="card__roomname">
+								<h5>{{room.roomName}}</h5>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		</li>
+	</ul>
 </div>
 
 <div class="modal fade" id="myModal" role="dialog">
