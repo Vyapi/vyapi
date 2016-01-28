@@ -1,5 +1,5 @@
 export class BoardController {
-  constructor ($firebaseArray, $location,$log, $stateParams) {
+  constructor ($firebaseArray, $location,$log, $stateParams, Dashboard) {
 
     'ngInject';
 
@@ -236,22 +236,18 @@ export class BoardController {
       }
       }*/
     }
+    this.userPic = '';
+    this.anonymousImage = function(msg){
+      if(msg.from != "anonymous")
+        return false;
+      else
+        return true;
+    }
 
-    //sticku user image
-    //user came online
-    onlineUsersRef.child(roomId).on("child_added", (userId) => {
-      $log.log("User: " + userId.key() + " came online");
-
-      //fetch details of the user that just came online
-      (new Firebase(encodeURI(appURL + "users/" + userId.key() + "/google/cachedUserProfile/given_name/"))).once("value", (value) => {
-        var userName = value.val();
-        (new Firebase(encodeURI(appURL + "users/" + userId.key() + "/google/profileImageURL/"))).once("value", (value) => {
-          var profileImageURL = value.val();
-          this.onlineUsers[userId.key()] = {name: userName, photo : profileImageURL};
-          for(var u in this.onlineUsers)
-            $log.log(u);
-        });
-      });
+    let userPromise = Dashboard.getUserPic(Dashboard.getUserID());
+    userPromise.on("value",(snapshot)=>{
+      this.userPic = snapshot.val().google.profileImageURL;
+      //console.log("hi",this.userPic);
     });
   }
 }
