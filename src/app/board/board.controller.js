@@ -69,7 +69,32 @@ export class BoardController {
           lane: id,
           dl: 0
         });
-
+         (new Firebase("https://vyapi.firebaseio.com/messages/" + roomID)).endAt().limit(1).on('child_added',(snapshot)=>{
+          let lastchildadded=snapshot.val();
+          (new Firebase(roomURL + "/" + lastchildadded.key)).setPriority(1);
+          let currPriority = 2;
+          let children = document.getElementById("chat-messages-plus").childNodes;
+          for(var c in children) {
+            if(children[c].childNodes[1] != undefined) {
+              var uniqueMsgID = children[c].childNodes[1].getAttribute('id');
+              (new Firebase(roomURL + "/" + uniqueMsgID)).setPriority(currPriority);
+              currPriority++;
+            }
+          }
+         });
+                  (new Firebase("https://vyapi.firebaseio.com/messages/" + roomID)).endAt().limit(1).on('child_added',(snapshot)=>{
+          let lastchildadded=snapshot.val();
+          (new Firebase(roomURL + "/" + lastchildadded.key)).setPriority(1);
+          let currPriority = 2;
+          let children = document.getElementById("chat-messages-minus").childNodes;
+          for(var c in children) {
+            if(children[c].childNodes[1] != undefined) {
+              var uniqueMsgID = children[c].childNodes[1].getAttribute('id');
+              (new Firebase(roomURL + "/" + uniqueMsgID)).setPriority(currPriority);
+              currPriority++;
+            }
+          }
+         });
         this.userMessagePlus = '';
         this.userMessageMinus = '';
 
