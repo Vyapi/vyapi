@@ -114,7 +114,8 @@ body {
   border: none;
   outline: none;
   background: transparent;
-  font-family: $font-family-sans-serif;
+  font-family: $font-family-sans-serif
+;
 }
 
 .anonymous-toggle {
@@ -144,4 +145,10 @@ body {
 
 .fa-thumbs-up {
   color: black;
+}
+
+.form-control-inverted {
+  background: rgba(0,0,0,0.5);
+  border-color: rgba(0,0,0,0.7);
+  color: #fff;
 }
