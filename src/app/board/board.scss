@@ -4,10 +4,6 @@ body {
   /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
 
-@font-face {
-  font-family: myFirstFont;
-  src: url("https://fonts.googleapis.com/css?family=Average+Sans");
-}
 
 .group-header {
   color: rgba(255, 255, 255, 0.8);
@@ -31,16 +27,22 @@ body {
   float: left;
 }
 
-/*#chat-messages-plus li span { position: absolute; margin-left: -1.3em; }*/
+#chat-messages-plus .sticky{
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#cdeb8b+0,cdeb8b+100;Green+Flat+%235 */
+  background: #cdeb8b; /* Old browsers */
+  background: linear-gradient(135deg,  #cdeb8b 0%,#cdeb8b 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+
+#chat-messages-minus .sticky{
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffc578+0,fb9d23+100;Orange+3D+%233 */
+  background: #ffc578; /* Old browsers */
+  background: linear-gradient(135deg,  #ffc578 0%,#fb9d23 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
 
 .sticky {
   float: left;
   margin: 0.5em 0.8em 0.8em 0.5em;
   border-radius: 4px;
-  /*position: absolute;*/
-  background-color: #FFF;
-  //background-image: url("http://www.transparenttextures.com/patterns/cream-pixels.png");
-  /*border: 0.2em solid #6D6A68;*/
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -110,6 +112,8 @@ body {
   border: none;
   outline: none;
   background: transparent;
+  font-family: $font-family-sans-serif
+;
 }
 
 .sticky__head--anonymous-sticky {
@@ -150,4 +154,10 @@ body {
 
 .fa-thumbs-up {
   color: black;
+}
+
+.form-control-inverted {
+  background: rgba(0,0,0,0.5);
+  border-color: rgba(0,0,0,0.7);
+  color: #fff;
 }
