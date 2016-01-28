@@ -16,7 +16,7 @@ body {
 }
 
 .stickyAction {
-  width:85%;
+  width:95%;
   min-height: 50px;
   max-height: 193px;
   margin: 0.5em 0.8em 0.8em 0.5em;
@@ -40,7 +40,7 @@ body {
 .stickyAction__head {
   max-height: 50px;
   min-height: 50px;
-  min-width:85%;
+  min-width:95%;
   vertical-align: middle;
   /*padding-bottom: 1px;*/
   padding-top: 0.5em;
@@ -52,7 +52,7 @@ body {
 .stickyAction__body { //changed
   max-height: 190px;
   min-height: 50px;
-  width: 85%;
+  width: 95%;
   height: 100%;
   padding: 0.1em 0.5em 0.5em 0.5em;
   overflow-y: auto;
@@ -73,7 +73,7 @@ body {
 }
 
 .usertext { //changed
-  width: 85%;
+  width: 95%;
   height: 50px;
   border: none;
   resize: none;
