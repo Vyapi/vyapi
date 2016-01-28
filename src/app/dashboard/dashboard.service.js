@@ -15,8 +15,10 @@ export class Dashboard{
 	}
 	getUserID(){
 		let authData = this.rootRef.getAuth();
-		if(!authData)
-			return "success";
+		if(!authData){
+			authData = {};
+			authData.uid = "success";
+		};
 		return authData.uid;
 	}
 	getUserPic(userID){
@@ -26,13 +28,11 @@ export class Dashboard{
 		return userRef;
 	}
 	remove(roomKey){
-		if(!roomKey)
-			return "success";
 		let messageDbRef = new Firebase(this.messageRef + '/' + roomKey);
 		messageDbRef.remove();
 		let roomDbRef = new Firebase(this.roomsURL + '/' + roomKey);
 		roomDbRef.remove();
-		return;
+		return "success";
 	}
 	createRoom(userID,roomName, plusName,minusName,actionName,d)
 	{
@@ -48,9 +48,9 @@ export class Dashboard{
 	}
 	saveValues(roomKey,rName, pName, mName, aName)
 	{
-		if(!roomKey)
-			return "success";
 		let roomDbRef = new Firebase(this.roomsURL + '/' + roomKey);
+		if(!rName)
+			return "success";
 		roomDbRef.update({
 			roomName : rName, plusLabel : pName, minusLabel : mName, actionLabel : aName
 		});

@@ -5,7 +5,6 @@ describe('controllers', () => {
 
 	beforeEach(inject(($controller) => {
 		dashboard = $controller('DashboardController');
-		console.log(dashboard);
 	}));
 
 	it('to be defined	',function(){

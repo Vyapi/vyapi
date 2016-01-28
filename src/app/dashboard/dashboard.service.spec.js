@@ -39,6 +39,7 @@ describe('service Dashboard', () => {
 		it('saveValues should exist', inject(Dashboard => {
 			expect(Dashboard.saveValues).not.toBeNull();
 			var data = Dashboard.saveValues();
+			console.log(data);
 			expect(data).toEqual("success");
 		}));
 	});
