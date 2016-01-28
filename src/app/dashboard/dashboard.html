@@ -1,53 +1,53 @@
 <nav class="navbar navbar-default navbarTop" id="navbar--background">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-          </div>
-          <div id="navbar" class="navbar-collapse collapse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
 
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="./"><i class="fa fa-home fa-2x icon--white"></i></a></li>
-              <li><a href=""><img ng-src="{{dashboard.userPic}}" class="img-circle" height="30em" width="35em"/></a></li>
-              <li><a ng-click="dashboard.firebaseAuthlogout()"><i class="fa fa-power-off fa-2x icon--white"></i></a></li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="./"><i class="fa fa-home fa-2x icon--white"></i></a></li>
+        <li><a href=""><img ng-src="{{dashboard.userPic}}" class="img-circle" height="30em" width="35em"/></a></li>
+        <li><a ng-click="dashboard.firebaseAuthlogout()"><i class="fa fa-power-off fa-2x icon--white"></i></a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
 <div class="container-fluid">
 	<ul class="list-unstyled list-inline">
 		<li>
-		<div class="card card-note card__body">
-			<div class="create">
-				<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-plus"></i></button>
-			</div>
-		</div>
-		<li ng-repeat="room in dashboard.rooms">
-		<div class="card">
-			<div class="card-note">
-				<div class="card__body">
-					<i class="glyphicon glyphicon-remove pull-right" ng-click="dashboard.removeRoom(room.key)"></i>
-          <i class="glyphicon glyphicon-pencil pull-right " ng-click="dashboard.editRoom(room.key)"></i><br>
-					<div><a href="{{room.url}}">
-							 <p>Members:{{room.mem}}</p>
-              <p>Date:{{room.date}}</p>
-              <p>Positive Message:{{room.pos}}</p>
-              <p>Negative Message:{{room.neg}}</p>
-							<div class="roomName">
-								<b> <i class="card-textarea" >{{room.roomName}}</i></b>
-							</div>
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-		</li>
-	</ul>
+      <div class="card card-note card__body">
+       <div class="create">
+        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-plus"></i></button>
+      </div>
+    </div>
+    <li ng-repeat="room in dashboard.rooms">
+      <div class="card">
+       <div class="card-note">
+        <div class="card__body">
+         <i class="glyphicon glyphicon-remove pull-right" ng-click="dashboard.removeRoom(room.key)"></i>
+         <i class="glyphicon glyphicon-pencil pull-right " ng-click="dashboard.editRoom(room.key)"></i><br>
+         <div><a href="{{room.url}}">
+          <p>Members:{{room.mem}}</p>
+          <p>Date:{{room.date}}</p>
+          <p>Positive Message:{{room.pos}}</p>
+          <p>Negative Message:{{room.neg}}</p>
+          <div class="roomName">
+            <b> <i class="card-textarea" >{{room.roomName}}</i></b>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+</li>
+</ul>
 </div>
 
 <div class="modal fade" id="myModal" role="dialog">
@@ -57,8 +57,8 @@
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title">Room Name</h4>
 			</div>
+      <form role ="form" ng-submit="dashboard.createRoom()" name="form">
 			<div class="modal-body">
-				<form role ="form" ng-submit="dashboard.createRoom()" name="form">
 					<div class="form-group">
 						<label>Room Name</label>
 						<input type="text" class="form-control" id="roomName" name="roomName" placeholder="Room Name" ng-model="dashboard.roomName" required>
@@ -71,13 +71,15 @@
 						<br>
 						<label>Label for section three</label>
 						<input type="text" class="form-control" id="plusLabel" name="plusLabel" placeholder="Action Items!" ng-model="dashboard.actionName" ng-init="dashboard.actionName ='Action Items!'">
-						<br>
-						<input  class="btn btn-default"  type="submit" value="Add" name="add">
 					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+        </div>
+        <div class="modal-footer">
+          <input  class="btn btn-default"  type="submit" value="Add" name="add">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 </div>
 
 <div class="modal fade" id="editModal" role="dialog">
@@ -103,11 +105,13 @@
 						<label>Label for section three</label>
 						<input type="text" class="form-control" id="actionLabel" name="actionLabel" placeholder="Action Items!" ng-model="dashboard.aName">
 						<br>
-						<input  class="btn btn-default"  type="submit" value="Save" name="save">
-						<input class="btn btn-default" type="button" value="Cancel" class="close" data-dismiss="modal">
 					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+          <div class="modal-footer">
+            <input  class="btn btn-default"  type="submit" value="Save" name="save">
+            <input class="btn btn-default" type="button" value="Cancel" class="close" data-dismiss="modal">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
