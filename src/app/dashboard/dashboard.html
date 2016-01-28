@@ -1,23 +1,45 @@
+<nav class="navbar navbar-default navbarTop" id="navbar--background">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="./"><i class="fa fa-home fa-2x icon--white"></i></a></li>
+              <li><a href=""><img ng-src="{{dashboard.userPic}}" class="img-circle" height="30em" width="35em"/></a></li>
+              <li><a ng-click="dashboard.firebaseAuthlogout()"><i class="fa fa-power-off fa-2x icon--white"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
 <div class="container-fluid">
-	{{dashboard.userPic}}
 	<ul class="list-unstyled list-inline">
 		<li>
-		<div class="sticky sticky-note sticky__body">
+		<div class="card card-note card__body">
 			<div class="create">
 				<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-plus"></i></button>
 			</div>
 		</div>
 		<li ng-repeat="room in dashboard.rooms">
-		<div class="sticky">
-			<div class="sticky-note">
-				<div class="sticky__body">
-					<i class="fa fa-times fa-lg pull-right delete-btn" ng-click="dashboard.removeRoom(room.key)"></i>
-          <i class="glyphicon glyphicon-pencil btn-lg" ng-click="dashboard.editRoom(room.key)"></i>
+		<div class="card">
+			<div class="card-note">
+				<div class="card__body">
+					<i class="glyphicon glyphicon-remove pull-right" ng-click="dashboard.removeRoom(room.key)"></i>
+          <i class="glyphicon glyphicon-pencil pull-right " ng-click="dashboard.editRoom(room.key)"></i><br>
 					<div><a href="{{room.url}}">
-							<p class="sticky-textarea">Members:{{room.mem}}</p>
-							<p class="sticky-textarea">Date:{{room.date}}</p>
+							 <p>Members:{{room.mem}}</p>
+              <p>Date:{{room.date}}</p>
+              <p>Positive Message:{{room.pos}}</p>
+              <p>Negative Message:{{room.neg}}</p>
 							<div class="roomName">
-								<i class="sticky-textarea" >{{room.roomName}}</i>
+								<b> <i class="card-textarea" >{{room.roomName}}</i></b>
 							</div>
 						</a>
 					</div>
