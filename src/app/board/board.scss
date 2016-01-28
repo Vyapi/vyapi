@@ -80,6 +80,7 @@ body {
   max-height: 30px;
   min-height: 30px;
   vertical-align: middle;
+  padding: 0 0 0 0;
   /*padding-bottom: 1px;*/
   /*padding-right: 0.5em;*/
   color: white;
@@ -116,6 +117,17 @@ body {
   background: transparent;
   font-family: $font-family-sans-serif
 ;
+}
+
+.sticky__head--anonymous-sticky {
+  background: transparent;
+  border: none;
+}
+
+.sticky__head--anonymous-sticky:hover {
+  background: transparent;
+  border: none;
+  cursor: default;
 }
 
 .anonymous-toggle {
