@@ -1,23 +1,24 @@
 <div class="container-fluid board-container">
+<h1 class="group-header room-title">{{board.roomName}}</h1>
 
-  <h1 class="group-header room-title">{{board.roomName}}</h1>
   <div class="bg-success center-block" id="anonymousWarn" class="has-success anonymousWarn">Ssshh.. You're anonymous now</div>
+
   <div class="row">
     <div class="col-md-6">
-      <h2 class="group-header">{{ board.plusLabel }}</h2>
+      <h2 class="group-header">{{board.plusLabel}}</h2>
       <form ng-submit="board.submit('plus')">
         <div class="form-group">
           <div class="input-group">
-            <span type="button" id="anonymousTogglePlus" class="input-group-addon btn btn-success anonymous-toggle" ng-click="board.toggle()">
+            <span type="button" id="anonymousTogglePlus" class="input-group-addon btn anonymous-toggle" ng-click="board.toggle()">
               <span class="glyphicon glyphicon-eye-close pull-right"></span>
             </span>
-            <input id="userTextPlus" ng-model="board.userMessagePlus" type="text" class="form-control form-control-inverted" aria-definedby="anonymousToggle" placeholder="Type a message">
+            <input id="userTextPlus" ng-model="board.userMessagePlus" type="text" class="form-control form-control-inverted" aria-definedby="anonymousToggle" placeholder="Type a message" maxlength="135">
           </div>
         </div>
       </form>
 
       <ul id="chat-messages-plus" class="list-unstyled">
-        <li data-ng-repeat="msg in board.messages | filter:{lane:'plus'}">
+        <li class = "ng-animate ng-enter animated bounceIn" data-ng-repeat="msg in board.messages | filter:{lane:'plus'}">
           <div class="sticky" id="{{msg.$id}}">
             <div class="sticky-note" ng-mouseover="board.hover(msg.uid)" ng-mouseout="board.show(msg.uid)">
               <div class="sticky__top">
@@ -28,7 +29,7 @@
               </div>
               <div class="sticky__body">
                 <div ng-if="board.isOwner(msg.uid)" >
-                  <textarea class="sticky-textarea" id="stickyTextarea" ng-model="msg.text" ng-change="board.saveEdit(msg)" ng-model-options='{ debounce: 1000 }'>{{ msg.text }}</textarea>
+                  <textarea class="sticky-textarea" id="stickyTextarea" ng-model="msg.text" ng-change="board.saveEdit(msg)" ng-model-options='{ debounce: 1000 }' maxlength="135">{{ msg.text }}</textarea>
                 </div>
                 <div ng-if="!board.isOwner(msg.uid)" >
                   <p class="sticky-text">{{ msg.text }}</p>
@@ -48,44 +49,48 @@
     </div>
 
     <div class="col-md-6">
-      <h2 class="group-header">{{ board.minusLabel }}</h2>
+      <h2 class="group-header">{{board.minusLabel}}</h2>
       <form ng-submit="board.submit('minus')">
         <div class="form-group">
           <div class="input-group">
-            <span type="button" id="anonymousToggleMinus" class="input-group-addon btn btn-success anonymous-toggle" ng-click="board.toggle()">
+            <span type="button" id="anonymousToggleMinus" class="input-group-addon btn anonymous-toggle" ng-click="board.toggle()">
               <span class="glyphicon glyphicon-eye-close success pull-right"></span>
             </span>
-            <input id="userTextMinus" ng-model="board.userMessageMinus" type="text" class="form-control userText form-control-inverted" placeholder="Type a message..."/>
+            <input id="userTextMinus" ng-model="board.userMessageMinus" type="text" class="form-control userText form-control-inverted" placeholder="Type a message..." maxlength="135" />
           </div>
-        </form>
+        </div>
+      </form>
 
-        <ul id="chat-messages-minus" class="list-unstyled">
-          <li data-ng-repeat="msg in board.messages | filter:{lane:'minus'}">
-            <div class="sticky" id="{{msg.$id}}">
-              <div class="sticky-note" ng-mouseover="board.hover(msg.uid)" ng-mouseout="board.show(msg.uid)">
-                <div class="sticky__top">
-                  <i class="fa fa-hand-rock-o pull-left grab-handle"></i>
-                  <i class="fa fa-times pull-right delete-btn"  ng-click="board.delete(msg,6)"></i>
-                  <!-- <span ng-if="board.isOwner(msg.uid)"><i class="fa fa-floppy-o pull-right edit-btn" ng-click="board.saveEdit(msg)"></i></span> -->
-                  <!-- <span ng-if="board.isOwner(msg.uid)"><i class="fa fa-check pull-right save-btn" ng-click="board.saveEdit(msg)"></i></span> -->
+      <ul id="chat-messages-minus" class="list-unstyled">
+        <li data-ng-repeat="msg in board.messages | filter:{lane:'minus'}">
+          <div class="sticky" id="{{msg.$id}}">
+            <div class="sticky-note" ng-mouseover="board.hover(msg.uid)" ng-mouseout="board.show(msg.uid)">
+              <div class="sticky__top">
+                <i class="fa fa-hand-rock-o pull-left grab-handle"></i>
+                <i class="fa fa-times pull-right delete-btn"  ng-click="board.delete(msg,6)"></i>
+                <!-- <span ng-if="board.isOwner(msg.uid)"><i class="fa fa-floppy-o pull-right edit-btn" ng-click="board.saveEdit(msg)"></i></span> -->
+                <!-- <span ng-if="board.isOwner(msg.uid)"><i class="fa fa-check pull-right save-btn" ng-click="board.saveEdit(msg)"></i></span> -->
+              </div>
+              <div class="sticky__body">
+                <div ng-if="board.isOwner(msg.uid)" >
+                  <textarea class="sticky-textarea" id="stickyTextarea" ng-model="msg.text" ng-change="board.saveEdit(msg)" ng-model-options='{ debounce: 1000 }' maxlength="135" >{{ msg.text }}</textarea>
                 </div>
-                <div class="sticky__body">
-                  <div ng-if="board.isOwner(msg.uid)" >
-                    <textarea class="sticky-textarea" id="stickyTextarea" ng-model="msg.text" ng-change="board.saveEdit(msg)" ng-model-options='{ debounce: 1000 }'>{{ msg.text }}</textarea>
-                  </div>
-                  <div ng-if="!board.isOwner(msg.uid)" >
-                    <p class="sticky-text">{{ msg.text }}</p>
-                  </div>
-                </div>
-                <div class="sticky__head">
-                  <button class="btn btn-default btn-xs" ng-click="board.like(msg);"><i class="fa fa-thumbs-up like-btn"></i> {{ msg.dl }} likes</button>
-                  <img ng-if=" !board.anonymousImage(msg) " class = "sticky-user-image img-circle pull-right" title="{{msg.from}}" height="25em" width="25em" ng-src="{{ board.getUserPic(msg.uid) }}">
-                  <!-- <i ng-if= " board.anonymousImage(msg) " title= " Anonymous " class="fa fa-odnoklassniki"></i>  -->
-                  <button class="btn btn-default btn-xs pull-right sticky__head--anonymous-sticky" ng-if="board.anonymousImage(msg)" ><i class="fa fa-user-secret fa-lg"></i></button>
+                <div ng-if="!board.isOwner(msg.uid)" >
+                  <p class="sticky-text">{{ msg.text }}</p>
                 </div>
               </div>
+<<<<<<< HEAD
+=======
+              <div class="sticky__head">
+                <button class="btn btn-default btn-xs" ng-click="board.like(msg);"><i class="fa fa-thumbs-up like-btn"></i> {{ msg.dl }} likes</button>
+                <img ng-if=" !board.anonymousImage(msg) " class = "sticky-user-image pull-right" title="{{msg.from}}" height="25em" width="25em" ng-src="{{ board.getUserPic(msg.uid) }}">
+                <!-- <i ng-if= " board.anonymousImage(msg) " title= " Anonymous " class="fa fa-odnoklassniki"></i>  -->
+                <button class="btn btn-default btn-xs pull-right sticky__head--anonymous-sticky" ng-if="board.anonymousImage(msg)" ><i class="fa fa-user-secret fa-lg"></i></button>
+              </div>
+>>>>>>> origin/develop
             </div>
           </li>
         </ul>
       </div>
     </div>
+  </div>
