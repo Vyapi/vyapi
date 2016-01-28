@@ -51,8 +51,8 @@ body {
   flex-wrap: wrap;
   justify-content: space-around;
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
-  font-family: myFirstFont;
-  font-size: 1.1em;
+  /*font-family: myFirstFont;*/
+  font-size: 0.9em;
 }
 
 .sticky-note {
@@ -87,8 +87,8 @@ body {
 }
 
 .sticky__body {
-  max-height: 140px;
-  min-height: 140px;
+  max-height: 120px;
+  min-height: 120px;
   width: 100%;
   height: 100%;
   padding: 0.1em 0 0 0;
@@ -109,7 +109,7 @@ body {
 
 .sticky-textarea {
   width: 100%;
-  height: 135px;
+  height: 115px;
   resize: none;
   box-sizing: border-box;
   border: none;
