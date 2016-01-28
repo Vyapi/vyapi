@@ -17,7 +17,7 @@
       </form>
 
       <ul id="chat-messages-plus" class="list-unstyled">
-        <li data-ng-repeat="msg in board.messages | filter:{lane:'plus'}">
+        <li class = "ng-animate ng-enter animated bounceIn" data-ng-repeat="msg in board.messages | filter:{lane:'plus'}">
           <div class="sticky" id="{{msg.$id}}">
             <div class="sticky-note" ng-mouseover="board.hover(msg.uid)" ng-mouseout="board.show(msg.uid)">
               <div class="sticky__top">
