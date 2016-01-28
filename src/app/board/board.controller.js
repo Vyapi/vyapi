@@ -237,6 +237,13 @@ export class BoardController {
     }
     
     this.userPic = '';
+    this.anonymousImage = function(msg){
+      if(msg.from != "anonymous")
+        return false;
+      else 
+        return true;
+    }
+    
     let userPromise = Dashboard.getUserPic(Dashboard.getUserID());
     userPromise.on("value",(snapshot)=>{
       this.userPic = snapshot.val().google.profileImageURL;
