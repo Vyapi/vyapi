@@ -12,8 +12,9 @@ export class ActionController {
 
     var roomRef = new Firebase('https://vyapi.firebaseio.com/rooms/'+this.roomID);
     this.actionLabel='Action Items';
-    roomRef.once("value",(snapshot)=>{
+    roomRef.on("value",(snapshot)=>{
       let labelData = snapshot.val();
+      console.log(snapshot.val());
       this.actionLabel = labelData.actionLabel;
       console.log(actionLabel);
     });
