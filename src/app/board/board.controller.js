@@ -83,7 +83,7 @@ export class BoardController {
           lane: id,
           dl: 0
         });
-         (new Firebase("https://vyapi.firebaseio.com/messages/" + roomID)).endAt().limit(1).on('child_added',(snapshot)=>{
+        (new Firebase("https://vyapi.firebaseio.com/messages/" + roomID)).endAt().limit(1).on('child_added',(snapshot)=>{
           let lastchildadded=snapshot.val();
           (new Firebase(roomURL + "/" + lastchildadded.key)).setPriority(1);
           let currPriority = 2;
@@ -95,8 +95,8 @@ export class BoardController {
               currPriority++;
             }
           }
-         });
-                  (new Firebase("https://vyapi.firebaseio.com/messages/" + roomID)).endAt().limit(1).on('child_added',(snapshot)=>{
+        });
+        (new Firebase("https://vyapi.firebaseio.com/messages/" + roomID)).endAt().limit(1).on('child_added',(snapshot)=>{
           let lastchildadded=snapshot.val();
           (new Firebase(roomURL + "/" + lastchildadded.key)).setPriority(1);
           let currPriority = 2;
@@ -108,7 +108,7 @@ export class BoardController {
               currPriority++;
             }
           }
-         });
+        });
         this.userMessagePlus = '';
         this.userMessageMinus = '';
 
@@ -264,29 +264,35 @@ export class BoardController {
         $('.save-btn').css({'display' : 'none'});
         $('#stickyTextarea').blur();
         // $('#stickyTextarea').removeAttribute("disabled");
+      }*/
+    }
+
+    this.userPic = [];
+    this.anonymousImage = function(msg){
+      if(msg.from != "anonymous")
+        return false;
+      else
+        return true;
+    }
+    this.getUserPic = function(userId){
+      if(this.userPic[userId] === undefined)
+      {
+        (new Firebase ("https://vyapi.firebaseio.com/users/" + userId+ "/google/profileImageURL")).once("value",(snapshot)=>{
+          this.userPic[userId] = snapshot.val();
+        });
+      }
+      return this.userPic[userId];
+    }
+
+    /*//CODE TO LIMIT THE CHARACTER IN TEXTAREA
+    this.limitText = function (limitField, limitCount, limitNum) {
+      if (limitField.value.length > limitNum) {
+        limitField.value = limitField.value.substring(0, limitNum);
+      } else {
+        limitCount.value = limitNum - limitField.value.length;
       }
     }*/
   }
-
-  this.userPic = [];
-  this.anonymousImage = function(msg){
-    if(msg.from != "anonymous")
-      return false;
-    else
-      return true;
-  }
-  this.getUserPic = function(userId){
-    if(this.userPic[userId] === undefined)
-    {
-      (new Firebase ("https://vyapi.firebaseio.com/users/" + userId+ "/google/profileImageURL")).once("value",(snapshot)=>{
-        this.userPic[userId] = snapshot.val();
-      });
-    }
-    return this.userPic[userId];
-  }
-  return this.userPic[userId];
-
-}
 }
 
 
