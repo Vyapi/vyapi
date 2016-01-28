@@ -284,14 +284,12 @@ export class BoardController {
       return this.userPic[userId];
     }
 
-    /*//CODE TO LIMIT THE CHARACTER IN TEXTAREA
-    this.limitText = function (limitField, limitCount, limitNum) {
-      if (limitField.value.length > limitNum) {
-        limitField.value = limitField.value.substring(0, limitNum);
-      } else {
-        limitCount.value = limitNum - limitField.value.length;
+    //CODE TO LIMIT THE CHARACTER IN TEXTAREA
+    $('.sticky-textarea').keypress(function(event) {
+      if (event.keyCode == 13) {
+        event.preventDefault();
       }
-    }*/
+    });
   }
 }
 
