@@ -8,7 +8,7 @@
       <form ng-submit="board.submit('plus')">
         <div class="form-group">
           <div class="input-group">
-            <span type="button" id="anonymousTogglePlus" class="input-group-addon btn btn-success anonymousToggle" ng-click="board.toggle()">
+            <span type="button" id="anonymousTogglePlus" class="input-group-addon btn btn-success anonymous-toggle" ng-click="board.toggle()">
               <span class="glyphicon glyphicon-eye-close pull-right"></span>
             </span>
             <input id="userTextPlus" ng-model="board.userMessagePlus" type="text" class="form-control form-control-inverted" aria-definedby="anonymousToggle" placeholder="Type a message">
@@ -37,7 +37,7 @@
               <div class="sticky__head">
                 <button class="btn btn-default btn-xs" ng-click="board.like(msg);"><i class="fa fa-thumbs-up like-btn"></i> {{ msg.dl }} likes</button>
                 <!-- <img class = "sticky-user-image img-circle" title="{{msg.from}} height="25em" width="25em" " ng-src="{{board.userPic}}"> -->
-                <img ng-if=" !board.anonymousImage(msg) " class = "sticky-user-image img-circle pull-right" title="{{msg.from}}" height="25em" width="25em" ng-src="{{ board.getUserPic(msg.uid) }}">
+                <img ng-if=" !board.anonymousImage(msg) " class = "sticky-user-image pull-right" title="{{msg.from}}" height="25em" width="25em" ng-src="{{ board.getUserPic(msg.uid) }}">
                 <!-- <i ng-if= " board.anonymousImage(msg) " title= " Anonymous " class="fa fa-odnoklassniki"></i>  -->
                 <button class="btn btn-default btn-xs pull-right sticky__head--anonymous-sticky" ng-if="board.anonymousImage(msg)" ><i class="fa fa-user-secret fa-lg"></i></button>
               </div>
@@ -52,7 +52,7 @@
       <form ng-submit="board.submit('minus')">
         <div class="form-group">
           <div class="input-group">
-            <span type="button" id="anonymousToggleMinus" class="input-group-addon btn btn-success anonymousToggle" ng-click="board.toggle()">
+            <span type="button" id="anonymousToggleMinus" class="input-group-addon btn btn-success anonymous-toggle" ng-click="board.toggle()">
               <span class="glyphicon glyphicon-eye-close success pull-right"></span>
             </span>
             <input id="userTextMinus" ng-model="board.userMessageMinus" type="text" class="form-control userText form-control-inverted" placeholder="Type a message..."/>
@@ -84,8 +84,15 @@
                   <button class="btn btn-default btn-xs pull-right sticky__head--anonymous-sticky" ng-if="board.anonymousImage(msg)" ><i class="fa fa-user-secret fa-lg"></i></button>
                 </div>
               </div>
-            </li>
-          </ul>
-        </div>
+
+              <div class="sticky__head">
+                <button class="btn btn-default btn-xs" ng-click="board.like(msg);"><i class="fa fa-thumbs-up like-btn"></i> {{ msg.dl }} likes</button>
+                <img ng-if=" !board.anonymousImage(msg) " class = "sticky-user-image pull-right" title="{{msg.from}}" height="25em" width="25em" ng-src="{{ board.getUserPic(msg.uid) }}">
+                <!-- <i ng-if= " board.anonymousImage(msg) " title= " Anonymous " class="fa fa-odnoklassniki"></i>  -->
+                <button class="btn btn-default btn-xs pull-right sticky__head--anonymous-sticky" ng-if="board.anonymousImage(msg)" ><i class="fa fa-user-secret fa-lg"></i></button>
+              </div>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
