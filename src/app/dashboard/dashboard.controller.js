@@ -1,9 +1,13 @@
 export class DashboardController {
-	constructor ($firebaseArray,Dashboard,$location,$log,$window){
+	constructor ($firebaseArray,Auth,Dashboard,$location,$log,$window,$cookies){
 		'ngInject';
 		this.path = $location.absUrl().replace('dashboard', 'room');
 		this.cards(Dashboard);
 		this.setParam(Dashboard);
+		this.location = $location;
+		this.cookies = $cookies;
+		this.auth = Auth;
+		this.clog = $log;
 		this.rooms = [];
 		this.userPic = '';
 		this.car= [];
@@ -35,6 +39,13 @@ export class DashboardController {
 		this.saveValues = function(){
 			this.save(Dashboard);
 		};
+		// Changes to redirect to cookie path
+		var path = $cookies.get('path');
+		if(path){
+			$cookies.remove('path');
+			$location.path(path);
+		}
+		// Finish of changes to cookie path
 	}
 
 	cards(Dashboard)
@@ -99,12 +110,11 @@ export class DashboardController {
 		Dashboard.remove(roomKey);
 	}
 
-	firebaseAuthlogout()
-	{
-		let ref = new Firebase("https://vyapi.firebaseio.com");
-		ref.unauth();
-		this.windowLoc.location.href='/';
-	}
+	firebaseAuthlogout(){
+    this.auth.logout()
+    this.clog.log("Logged out");
+    this.location.path('/');
+  }
 
 	edit(Dashboard,roomKey){
 		this.editKey = roomKey;

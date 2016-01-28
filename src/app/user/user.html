@@ -7,7 +7,7 @@
           <div>
             <ul class="list-inline" style="width: 1000px">
               <li ng-repeat = "(uid, user) in users.onlineUsers" style="float:right" class="ng-animate ng-enter ng-leave animated bounce">
-              <a class="user-anchor" href="#" title="{{user.name}}"><img class =  "user-image img-circle" title="{{user.name}}" ng-src="{{user.photo}}"></img><span class="user-badge">{{users.getMessageContributions(uid)}}</span></a>
+                <a class="user-anchor" href="#" title="{{user.name}}"><img class =  "user-image hvr-bounce-in img-circle" title="{{user.name}}" ng-src="{{user.photo}}"></img><span class="user-badge">{{users.getMessageContributions(uid)}}</span></a>
               </li>
             </ul>
           </div>

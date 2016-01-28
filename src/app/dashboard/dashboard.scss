@@ -1,5 +1,6 @@
 body {
 	background-image: url("/app/dashboard/wood.jpg");
+  background-size: cover;
 	/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
 @font-face {
@@ -88,4 +89,7 @@ text-align: center;
 #navbar--background {
   background-color: transparent;
   border-color: transparent;
+}
+.icon--white {
+  color: white;
 }
