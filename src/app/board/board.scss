@@ -52,7 +52,7 @@ body {
   justify-content: space-around;
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
   /*font-family: myFirstFont;*/
-  font-size: 0.9em;
+  font-size: 0.85em;
 }
 
 .sticky-note {
@@ -115,8 +115,7 @@ body {
   border: none;
   outline: none;
   background: transparent;
-  font-family: $font-family-sans-serif
-;
+  -ms-overflow-style: none;
 }
 
 .sticky__head--anonymous-sticky {
