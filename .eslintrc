@@ -17,5 +17,9 @@
     "inject": true,
     "Firebase": true,
     "_": true
-  }
+  },
+  "rules": {
+        "no-console":0,
+        "angular/log":0
+    }
 }
