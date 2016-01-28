@@ -58,27 +58,27 @@
 				<h4 class="modal-title">Room Name</h4>
 			</div>
       <form role ="form" ng-submit="dashboard.createRoom()" name="form">
-			<div class="modal-body">
-					<div class="form-group">
-						<label>Room Name</label>
-						<input type="text" class="form-control" id="roomName" name="roomName" placeholder="Room Name" ng-model="dashboard.roomName" required>
-						<br>
-						<label>Label for section one</label>
-						<input type="text" class="form-control" id="plusLabel" name="plusLabel" placeholder="What we did right!"  ng-model="dashboard.plusName" ng-init="dashboard.plusName = 'What we did right!' ">
-						<br>
-						<label>Label for section two</label>
-						<input type="text" class="form-control" id="plusLabel" name="plusLabel" placeholder="What should improve!" ng-model="dashboard.minusName" ng-init="dashboard.minusName = 'What should improve!' ">
-						<br>
-						<label>Label for section three</label>
-						<input type="text" class="form-control" id="plusLabel" name="plusLabel" placeholder="Action Items!" ng-model="dashboard.actionName" ng-init="dashboard.actionName ='Action Items!'">
-					</div>
+       <div class="modal-body">
+         <div class="form-group">
+          <label>Room Name</label>
+          <input type="text" class="form-control" id="roomName" name="roomName" placeholder="Room Name" ng-model="dashboard.roomName" required>
+          <br>
+          <label>Label for section one</label>
+          <input type="text" class="form-control" id="plusLabel" name="plusLabel" placeholder="What we did right!"  ng-model="dashboard.plusName" ng-init="dashboard.plusName = 'What we did right!' ">
+          <br>
+          <label>Label for section two</label>
+          <input type="text" class="form-control" id="plusLabel" name="plusLabel" placeholder="What should improve!" ng-model="dashboard.minusName" ng-init="dashboard.minusName = 'What should improve!' ">
+          <br>
+          <label>Label for section three</label>
+          <input type="text" class="form-control" id="plusLabel" name="plusLabel" placeholder="Action Items!" ng-model="dashboard.actionName" ng-init="dashboard.actionName ='Action Items!'">
         </div>
-        <div class="modal-footer">
-          <input  class="btn btn-default"  type="submit" value="Add" name="add">
-        </div>
-      </form>
-    </div>
+      </div>
+      <div class="modal-footer">
+        <input  class="btn btn-default"  type="submit" value="Add" name="add">
+      </div>
+    </form>
   </div>
+</div>
 </div>
 </div>
 

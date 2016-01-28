@@ -116,17 +116,17 @@ export class DashboardController {
     this.location.path('/');
   }
 
-	edit(Dashboard,roomKey){
-		this.editKey = roomKey;
-		let currentRoom = _.find(this.rooms,{key : roomKey});
-		this.rName = currentRoom.roomName;
-		this.pName = currentRoom.plusLabel;
-		this.mName = currentRoom.minusLabel;
-		this.aName = currentRoom.actionLabel;
-		Dashboard.editRoom();
-	}
+  edit(Dashboard,roomKey){
+    this.editKey = roomKey;
+    let currentRoom = _.find(this.rooms,{key : roomKey});
+    this.rName = currentRoom.roomName;
+    this.pName = currentRoom.plusLabel;
+    this.mName = currentRoom.minusLabel;
+    this.aName = currentRoom.actionLabel;
+    Dashboard.editRoom();
+  }
 
-	save(Dashboard){
-		Dashboard.saveValues(this.editKey,this.rName,this.pName,this.mName,this.aName);
-	}
+  save(Dashboard){
+    Dashboard.saveValues(this.editKey,this.rName,this.pName,this.mName,this.aName);
+  }
 }

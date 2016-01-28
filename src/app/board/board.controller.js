@@ -29,7 +29,7 @@ export class BoardController {
       this.minusLabel = labelData.minusLabel;
       console.log(this.plusLabel);
       console.log(this.minusLabel);
-   });
+    });
 
     var roomURL= "https://vyapi.firebaseio.com/messages/" + roomID;
     this.msgRef = new Firebase(roomURL);
@@ -240,28 +240,28 @@ export class BoardController {
         $('#stickyTextarea').blur();
         // $('#stickyTextarea').removeAttribute("disabled");
       }
-      }*/
-    }
+    }*/
+  }
 
-    this.userPic = [];
-    this.anonymousImage = function(msg){
-      if(msg.from != "anonymous")
-        return false;
-      else
-        return true;
+  this.userPic = [];
+  this.anonymousImage = function(msg){
+    if(msg.from != "anonymous")
+      return false;
+    else
+      return true;
+  }
+  this.getUserPic = function(userId){
+    if(this.userPic[userId] === undefined)
+    {
+      (new Firebase ("https://vyapi.firebaseio.com/users/" + userId+ "/google/profileImageURL")).once("value",(snapshot)=>{
+        this.userPic[userId] = snapshot.val();
+      });
     }
-    this.getUserPic = function(userId){
-      if(this.userPic[userId] === undefined)
-      {
-        (new Firebase ("https://vyapi.firebaseio.com/users/" + userId+ "/google/profileImageURL")).once("value",(snapshot)=>{
-          this.userPic[userId] = snapshot.val();
-        });
-      }
-      return this.userPic[userId];
-
-    }
+    return this.userPic[userId];
 
   }
+
+}
 }
 
 
