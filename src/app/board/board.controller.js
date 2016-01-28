@@ -1,11 +1,12 @@
 export class BoardController {
-  constructor($firebaseArray, $location, $log) {
+  constructor ($firebaseArray, $location,$log, $stateParams, Dashboard) {
 
     'ngInject';
 
     var userName = "";
     var appURL = "https://vyapi.firebaseio.com/";
     var roomID = $location.path().split("/")[2];
+    var roomId = $stateParams.roomKey;
     var anonymous = true;
     $log.log("roomID is " + roomID);
 
@@ -13,51 +14,45 @@ export class BoardController {
     var userRef = new Firebase("https://vyapi.firebaseio.com/messages");
     var authData = userRef.getAuth();
     var googleId = authData.google.id;
-    var userId = "google:" + googleId;
+    var userId = "google:"+googleId;
     var anonymous = true;
-
-
-    var roomURL= "https://vyapi.firebaseio.com/messages/" + roomID;
-    var roomRef= new Firebase("https://vyapi.firebaseio.com/rooms/" + roomID);
-    this.msgRef = new Firebase(roomURL);
-    this.messages = $firebaseArray(this.msgRef);
 
     this.plusLabel='';
     this.minusLabel='';
+    this.roomName='';
+    var roomRef= new Firebase("https://vyapi.firebaseio.com/rooms/" + roomID);
     roomRef.on("value",(snapshot)=>{
       console.log(snapshot.val());
       let labelData = snapshot.val();
+      this.roomName = labelData.roomName;
       this.plusLabel = labelData.plusLabel;
       this.minusLabel = labelData.minusLabel;
-      //console.log(this.plusLabel);
-    //console.log(this.minusLabel);
+      console.log(this.plusLabel);
+      console.log(this.minusLabel);
     });
 
-
-    var roomURL = "https://vyapi.firebaseio.com/messages/" + roomID;
-    console.log(roomURL);
+    var roomURL= "https://vyapi.firebaseio.com/messages/" + roomID;
     this.msgRef = new Firebase(roomURL);
     this.messages = $firebaseArray(this.msgRef);
 
-
+    var onlineUsersRef = new Firebase(appURL + "onlineUsers/");
+    this.onlineUsers = {};
 
     //CODE TO MAKE THE USER ANONYMOUS
     var anonymous = true;
-    this.toggle = function () {
+    this.toggle = function() {
       anonymous = !anonymous;
-      if (!anonymous) {
+      if(!anonymous){
         userName = authData.google.displayName;
-        $('.anonymousToggle').css({"background-color": "#eeeeee", "color": "black"});
+        $('.anonymous-toggle').css({"background-color":"#eeeeee","color":"black"});
       } else {
         userName = "anonymous";
-        $('.anonymousToggle').css({"background-color": "#6D6A68", "color": "white"});
+        $('.anonymous-toggle').css({"background-color":"#6D6A68","color":"white"});
       }
-      console.log(userName);
     };
 
     //CODE TO ENTER THE OBJECT IN FIREBASE DATABASE
     this.submit = function (id) {
-      //console.log("in adding message");
       let userMessage = (id == 'plus') ? this.userMessagePlus : this.userMessageMinus;
       var ref = new Firebase("https://vyapi.firebaseio.com/rooms/" + roomID);
       var dashboard;
@@ -67,21 +62,18 @@ export class BoardController {
       else
         dashboard=new Firebase(ref+"/neg");
 
-        dashboard.once("value",(snapshot)=>{
-
+      dashboard.once("value",(snapshot)=>{
         num = parseInt(snapshot.val());
         num++;
-        if (id == 'plus')
-          ref.update({pos: num});
-        else
-           ref.update({neg : num});
-         console.log(num);
+        if(id =='plus')
+         ref.update({pos : num});
+       else
+         ref.update({neg : num});
 
-      });
-
+     });
 
       if (userMessage) {
-        if (!userName) userName = "anonymous";
+        if(!userName) userName = "anonymous";
         // $log.log(authData);
 
         this.messages.$add({
@@ -91,87 +83,132 @@ export class BoardController {
           lane: id,
           dl: 0
         });
-
+         (new Firebase("https://vyapi.firebaseio.com/messages/" + roomID)).endAt().limit(1).on('child_added',(snapshot)=>{
+          let lastchildadded=snapshot.val();
+          (new Firebase(roomURL + "/" + lastchildadded.key)).setPriority(1);
+          let currPriority = 2;
+          let children = document.getElementById("chat-messages-plus").childNodes;
+          for(var c in children) {
+            if(children[c].childNodes[1] != undefined) {
+              var uniqueMsgID = children[c].childNodes[1].getAttribute('id');
+              (new Firebase(roomURL + "/" + uniqueMsgID)).setPriority(currPriority);
+              currPriority++;
+            }
+          }
+         });
+                  (new Firebase("https://vyapi.firebaseio.com/messages/" + roomID)).endAt().limit(1).on('child_added',(snapshot)=>{
+          let lastchildadded=snapshot.val();
+          (new Firebase(roomURL + "/" + lastchildadded.key)).setPriority(1);
+          let currPriority = 2;
+          let children = document.getElementById("chat-messages-minus").childNodes;
+          for(var c in children) {
+            if(children[c].childNodes[1] != undefined) {
+              var uniqueMsgID = children[c].childNodes[1].getAttribute('id');
+              (new Firebase(roomURL + "/" + uniqueMsgID)).setPriority(currPriority);
+              currPriority++;
+            }
+          }
+         });
         this.userMessagePlus = '';
         this.userMessageMinus = '';
+
       }
     };
-
 
     //CODE TO DISPLAY THE 5 SECOND NOTIFICATION FOR ANONYMITY
     $('#anonymousWarn').fadeIn().delay(5000).fadeOut();
 
     //CODE TO COUNT THE NO. OF LIKES ON A MESSAGE
     (new Firebase(roomURL)).on('child_added', (messagesObj) => {
+
+
       (new Firebase(encodeURI(roomURL + "/" + messagesObj.key() + "/like"))).on('value', (userId) => {
-        if (userId.val() != null && messagesObj.key()) { //likes are there for this message
+        if(userId.val() != null && messagesObj.key()) { //likes are there for this message
           //this.noOfLikes [messagesObj.val().uid] =userId.numChildren();
           let fredNameRef = new Firebase(roomURL + "/" + messagesObj.key());
           // Modify the 'first' and 'last' children, but leave other data at fredNameRef unchanged
-          fredNameRef.update({dl: userId.numChildren()});
+          fredNameRef.update({ dl: userId.numChildren() });
         }
-        else {
+        else
+        {
           //this.noOfLikes [messagesObj.val().text] =userId.numChildren();
           let fredNameRef = new Firebase(roomURL + "/" + messagesObj.key());
           // Modify the 'first' and 'last' children, but leave other data at fredNameRef unchanged
-          fredNameRef.update({dl: userId.numChildren()});
+          fredNameRef.update({ dl: userId.numChildren() });
         }
       });
     });
 
     //handle like button click for a message
-    this.like = function (msg) {
-      let msgLike = (new Firebase(roomURL)).child(msg.$id + "/like/" + authData.uid);
-      msgLike.once("value", function (value) {
-        //console.log('triggring event');
-        if (value.exists()) {
+    this.like = function(msg) {
+      let msgLike = (new Firebase(roomURL)).child(msg.$id + "/like/" +authData.uid);
+      msgLike.once("value" , function(value){
+        if(value.exists()){
           msgLike.remove();
         }
-        else {
+        else{
           msgLike.set(1);
           msgLike.off();
         }
       });
 
       let msgLikes = (new Firebase(roomURL)).child(msg.$id + "/like/");
-      msgLikes.once('value', function (snapshot) {
-        msg.noOfLikes = snapshot.numChildren();
+      msgLikes.once('value', function(snapshot) {
+        msg.noOfLikes=snapshot.numChildren();
       });
     }
 
     //CODE TO ENABLE DRAG AND DROP OF STICKYs
-    $('.delete-btn').css({'visibility': 'hidden'});
-    $('.like-btn').css({'visibility': 'hidden'});
-    $('.edit-btn').css({'visibility': 'hidden'});
-    $('.save-btn').css({'display': 'hidden'});
-    $("#chat-messages-plus").sortable();
-    $("#chat-messages-minus").sortable();
+    $("#chat-messages-plus").disableSelection();
+    $("#chat-messages-minus").disableSelection();
+    $("#chat-messages-plus").sortable({
+
+      //console.log("Drag working 1");
+      start: function(event, ui) {
+          // console.log("Drag working 2");
+        },
+        change: function(event, ui) {
+        },
+        update: function(event, ui) {
+          var currPriority = 1;
+          var children = document.getElementById("chat-messages-plus").childNodes;
+          for(var c in children) {
+            if(children[c].childNodes[1] != undefined) {
+              var uniqueMsgID = children[c].childNodes[1].getAttribute('id');
+              (new Firebase(roomURL + "/" + uniqueMsgID)).setPriority(currPriority);
+              currPriority++;
+            }
+          }
+        }
+      });
+
+    $("#chat-messages-minus").sortable({
+
+      //console.log("Drag working 1");
+      start: function(event, ui) {
+          // console.log("Drag working 2");
+
+        },
+        change: function(event, ui) {
+        },
+        update: function(event, ui) {
+          var currPriority = 1;
+          var children = document.getElementById("chat-messages-minus").childNodes;
+          for(var c in children) {
+            if(children[c].childNodes[1] != undefined) {
+              var uniqueMsgID = children[c].childNodes[1].getAttribute('id');
+              (new Firebase(roomURL + "/" + uniqueMsgID)).setPriority(currPriority);
+              currPriority++;
+            }
+          }
+        }
+      });
     $("#chat-messages-plus").disableSelection();
     $("#chat-messages-minus").disableSelection();
 
-    //CODE TO SHOW DELETE/LIKE ETC ON HOVER
-    this.hover = function (msgId) {
-      if (msgId === userId) {
-        $('.edit-btn').css({'visibility': 'visible'});
-      }
-      // $('.delete-btn').css({'visibility' : 'visible'});
-      // $('.like-btn').css({'visibility' : 'visible'});
-      // $('.edit-btn').css({'visibility' : 'visible'});
-    };
-
-    this.show = function (msgId) {
-      if (msgId === userId) {
-        $('.edit-btn').css({'visibility': 'hidden'});
-      }
-      // $('.delete-btn').css({'visibility' : 'hidden'});
-      // $('.like-btn').css({'visibility' : 'hidden'});
-      // $('.edit-btn').css({'visibility' : 'hidden'});
-
     //CODE TO DELETE THE MESSAGE POSTED
     this.delete=function(msg,temp){
-      console.log("in delete function");
       var ide=msg.$id;
-      //console.log(msg);
       var refe = new Firebase("https://vyapi.firebaseio.com/rooms/"+roomID);
       var dash;
       var number;
@@ -179,14 +216,13 @@ export class BoardController {
         dash=new Firebase(refe+"/pos");
       else
         dash=new Firebase(refe+"/neg");
-        dash.once("value",(snapshot)=>{
+      dash.once("value",(snapshot)=>{
         number = parseInt(snapshot.val());
         number=number-1;
         if(temp === 5)
-        refe.update({pos : number});
-      else
-        refe.update({neg : number});
-        console.log("deletong",number);
+          refe.update({pos : number});
+        else
+          refe.update({neg : number});
       });
 
 
@@ -194,50 +230,65 @@ export class BoardController {
       if(msg.uid === userId)
         this.msgRef.child(messageId).remove();
 
-
-      if(msg.uid === "google:"+authData.google.id)
-        this.msgRef.child(ide).remove();
-      //console.log("delete: " + msg.$id);
-
     };
 
-      //CODE TO SHOW THE EDIT BUTTON ONLY ON SELF STICKYs
-      this.getListId = function (msgId) {
-        console.log(msgId);
-        return msgId;
-      }
-
-      //CODE TO EDIT THE STICKY NOTES
-      this.isOwner = function (msgId) {
-        if (msgId === userId)
-          return true;
-        else
-          return false;
-      }
-
-      this.currentMessageText = "hello";
-      this.currentMessage;
-
-      this.edit = function (msg) {
-        this.currentMessageText = msg.text;
-        this.currentMessage = msg;
-        // $('#stickyTextarea').setAttribute("disabled","disabled");
-        $('#stickyTextarea').focus();
-        $('.edit-btn').css({'display': 'none'});
-        $('.save-btn').css({'display': 'inline-block'});
-      }
-
-      this.saveEdit = function (msg) {
-        (new Firebase(roomURL + "/" + msg.$id + "/text")).set(msg.text);
-        if (msg.uid == userId) {
-          $('.edit-btn').css({'display': 'inline-block'});
-          $('.save-btn').css({'display': 'none'});
-          $('#stickyTextarea').blur();
-          // $('#stickyTextarea').removeAttribute("disabled");
-        }
-      }
+    //CODE TO SHOW THE EDIT BUTTON ONLY ON SELF STICKYs
+    this.getListId = function (msgId) {
+      return msgId;
     }
+
+    //CODE TO EDIT THE STICKY NOTES
+    this.isOwner = function (msgId) {
+      if (msgId === userId)
+        return true;
+      else
+        return false;
+    }
+
+    this.currentMessageText = "hello";
+    this.currentMessage;
+
+    this.edit = function(msg) {
+      this.currentMessageText= msg.text;
+      this.currentMessage = msg;
+      // // $('#stickyTextarea').setAttribute("disabled","disabled");
+      // $('#stickyTextarea').focus();
+      // $('.edit-btn').css({'display' : 'none'});
+      // $('.save-btn').css({'display' : 'inline-block'});
+    }
+
+    this.saveEdit = function (msg) {
+      (new Firebase(roomURL + "/" + msg.$id+"/text")).set(msg.text);
+      /*if(msg.uid == userId) {
+        $('.edit-btn').css({'display' : 'inline-block'});
+        $('.save-btn').css({'display' : 'none'});
+        $('#stickyTextarea').blur();
+        // $('#stickyTextarea').removeAttribute("disabled");
+      }
+    }*/
   }
+
+  this.userPic = [];
+  this.anonymousImage = function(msg){
+    if(msg.from != "anonymous")
+      return false;
+    else
+      return true;
+  }
+  this.getUserPic = function(userId){
+    if(this.userPic[userId] === undefined)
+    {
+      (new Firebase ("https://vyapi.firebaseio.com/users/" + userId+ "/google/profileImageURL")).once("value",(snapshot)=>{
+        this.userPic[userId] = snapshot.val();
+      });
+    }
+    return this.userPic[userId];
+  }
+  return this.userPic[userId];
+
 }
+}
+
+
 
 

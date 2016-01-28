@@ -1,5 +1,5 @@
 describe('controllers', () => {
-	let dashboard;
+	var dashboard;
 
 	beforeEach(angular.mock.module('vyapi'));
 
@@ -8,6 +8,9 @@ describe('controllers', () => {
 	}));
 
 	it('to be defined	',function(){
+		spyOn(dashboard,"setParam");
+		spyOn(dashboard,"createRoom");
+		expect(dashboard.setParam()).toHaveBeenCalled;
 		expect(dashboard.path).toBeDefined();
 		expect(dashboard.rooms).toBeDefined();
 	});

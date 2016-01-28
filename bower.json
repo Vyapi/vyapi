@@ -16,6 +16,8 @@
     "angular-animate": "1.4.8",
     "jquery-ui": "~1.11.4",
     "font-awesome": "fontawesome#~4.5.0",
+    "hover": "~2.0.2",
+    "angular-cookies": "~1.4.9",
     "ng-csv": "~0.3.6"
   },
   "devDependencies": {
