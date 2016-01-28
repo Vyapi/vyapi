@@ -5,7 +5,7 @@
       <h2 class="group-header">{{ action.actionLabel }}</h2>
       <div class="form-group">
         <div class="input-group">
-          <input ng-model="action.text" class="form-control" placeholder="Type an action..."  aria-label="..."/>
+          <input ng-model="action.text" class="form-control userText form-control-inverted" placeholder="Type an action..."  aria-label="..."/>
           <!-- <input type="text" class="form-control" aria-label="..."> -->
           <div class="input-group-btn">
             <span class="form-control">
@@ -21,8 +21,8 @@
     ​
     ​
     <ul id="action-items" class="list-unstyled">
-      <li data-ng-repeat="item in action.items.slice().reverse()">
-        <article class="stickyAction" ng-mouseover="action.hover(item.key)" ng-mouseout="action.show(item.key)">
+      <li data-ng-repeat="item in action.items.slice().reverse()" class="stickyAction">
+        <article ng-mouseover="action.hover(item.key)" ng-mouseout="action.show(item.key)">
           <div class="stickyAction__head">
             <select type="button" ng-options="asn for asn in action.assignee" ng-model="item.name" ng-change="action.modify(item)" class="btn btn-default dropdown-toggle">
             </select>
