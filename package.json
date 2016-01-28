@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "dependencies": {
     "bootstrap": "3.3.6",
-    "underscore": "^1.8.3",
-    "ng-csv":"^0.3.6"
+    "isparta": "4.0.0",
+    "ng-csv": "^0.3.6",
+    "underscore": "^1.8.3"
   },
   "scripts": {
     "preinstall": "bower install",
