@@ -3,21 +3,10 @@ body {
   /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
 
-@font-face {
-  font-family: myFirstFont;
-  src: url("https://fonts.googleapis.com/css?family=Average+Sans");
-}
 
 .group-header {
   color: #EED;
 }
-
-@font-face {
-    font-family: myFirstFont;
-    src: url("https://fonts.googleapis.com/css?family=Average+Sans");
-}
-
-
 
 #action-items .stickyAction
 {
@@ -27,9 +16,7 @@ body {
 }
 
 .stickyAction {
-//  float: left;
-  // max-width: ;
-  width:100%;
+  width:85%;
   min-height: 50px;
   max-height: 193px;
   margin: 0.5em 0.8em 0.8em 0.5em;
@@ -53,7 +40,7 @@ body {
 .stickyAction__head {
   max-height: 50px;
   min-height: 50px;
-  min-width:100%;
+  min-width:85%;
   vertical-align: middle;
   /*padding-bottom: 1px;*/
   padding-top: 0.5em;
@@ -62,11 +49,10 @@ body {
   color: white;
 }
 
-
 .stickyAction__body { //changed
   max-height: 190px;
   min-height: 50px;
-  width: 100%;
+  width: 85%;
   height: 100%;
   padding: 0.1em 0.5em 0.5em 0.5em;
   overflow-y: auto;
@@ -87,7 +73,7 @@ body {
 }
 
 .usertext { //changed
-  width: 100%;
+  width: 85%;
   height: 50px;
   border: none;
   resize: none;
@@ -95,10 +81,6 @@ body {
   outline: none;
   font-family: $font-family-sans-serif;
   background: transparent;
-}
-
-.fa-thumbs-up {
-  color: black;
 }
 
 .button-id{
