@@ -1,5 +1,5 @@
 export class BoardController {
-  constructor ($firebaseArray, $location,$log) {
+  constructor ($firebaseArray, $location,$log, Dashboard) {
 
     'ngInject';
 
@@ -235,6 +235,13 @@ export class BoardController {
       }
       }*/
     }
+    
+    this.userPic = '';
+    let userPromise = Dashboard.getUserPic(Dashboard.getUserID());
+    userPromise.on("value",(snapshot)=>{
+      this.userPic = snapshot.val().google.profileImageURL;
+      //console.log("hi",this.userPic);
+    });
   }
 }
 
