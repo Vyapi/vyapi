@@ -1,4 +1,5 @@
 <div class="container-fluid board-container">
+<h1 class="group-header room-title">{{board.roomName}}</h1>
 
   <div class="row">
     <div class="col-md-6">
@@ -59,7 +60,7 @@
       </form>
 
       <ul id="chat-messages-minus" class="list-unstyled">
-        <li class = "ng-animate ng-enter animated bounceIn" data-ng-repeat="msg in board.messages | filter:{lane:'minus'}">
+        <li data-ng-repeat="msg in board.messages | filter:{lane:'minus'}">
           <div class="sticky" id="{{msg.$id}}">
             <div class="sticky-note" ng-mouseover="board.hover(msg.uid)" ng-mouseout="board.show(msg.uid)">
               <div class="sticky__top">
@@ -76,6 +77,7 @@
                   <p class="sticky-text">{{ msg.text }}</p>
                 </div>
               </div>
+
               <div class="sticky__head">
                 <button class="btn btn-default btn-xs like-btn" ng-click="board.like(msg);"><i class="fa fa-thumbs-up"></i> {{ msg.dl }} likes</button>
                 <img ng-if=" !board.anonymousImage(msg) " class = "sticky-user-image pull-right" title="{{msg.from}}" ng-src="{{ board.getUserPic(msg.uid) }}">
