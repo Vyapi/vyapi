@@ -1,12 +1,9 @@
-body 
+body
 {
 	background-image: url("/app/dashboard/wood.jpg");
   background-size: cover;
-  font-family: 'Open Sans', sans-serif;
 }
-#div_hover:hover .plus_icon {
-   color: white;
-}
+
 .card__body:hover .top_icon {
    visibility: visible;
 }
@@ -15,9 +12,23 @@ body
   color: #808080;
   visibility: hidden;
 }
-.plus_icon{
-  color:rgba(191, 154, 109, 0.8);
+
+#div_hover:hover .plus_icon {
+   color:rgba(255, 255, 255, 0.99);
 }
+.plus_icon{
+  color:rgba(255, 255, 255, 0.5);
+}
+#div_hover:hover {
+background-color: rgba(222, 184, 135, 0.85)
+}
+#div_hover{
+text-align: center;
+background-color: rgba(222, 184, 135, 0.5);
+box-shadow: 0px 0px 12px 2px rgba(0, 0, 0, 0.6) inset;
+
+}
+
 .btn-circle {
   width: 25px;
   height: 25px;
@@ -38,50 +49,63 @@ body
 #card_text{
   height: 70%;
   padding: 0.5em 0em 0em 0em;
-  font-family: 'Open Sans', sans-serif;
 }
 
-#div_hover:hover { 
-background-color: rgba(191, 154, 109, 0.52);
-color:#FFFFFF; 
-}
 
-a:hover
+
+.card_link
 {
-  text-decoration: none;
-  color: #808080;
+  color:rgba(0,0,0,0.6);
+  display: block;
 }
-a{
-  color:#000000;
+.card_link:hover
+{
+    text-decoration: none;
+    color: rgba(0,0,0,1);
 }
-li { float: left; }
+.card_list
+{ 
+  float: left;
+}
 
-#div_hover{
-text-align: center;
-background-color: #FFFFFF;
-}
 
-.roomName {
-  width: 100%;
-  height: 20%;
-  text-align: center;
-  bottom: 0;
-  position: absolute;
-  background-color: rgba(191, 154, 109, 0.52);
-}
+
+
 
 .card {
   float: left;
   margin: 0.5em 0.8em 0.8em 0.5em;
   border-radius: 4px;
-  background-color: #FFF;
-  background-image: url("http://www.transparenttextures.com/patterns/cream-pixels.png");
+  background-color: rgba(253,249,243,1);
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-around;
-  box-shadow: 8px 8px 20px rgba(0,0,0,0.6);
+  box-shadow: 3px 3px 10px rgba(0,0,0,0.5);
   font-size: 0.9em;
+  &__body {
+    max-height: 190px;
+    min-height: 190px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    word-break: break-all;
+    color: black;
+    hyphens: auto;
+  }
+  &__roomname {
+    width: 100%;
+    text-align: center;
+    bottom: 0;
+    position: absolute;
+    background-color: rgba(222, 184, 135, 0.52);
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+  }
 }
 
 .card-note {
@@ -100,29 +124,15 @@ background-color: #FFFFFF;
   color: white;
 }
 
-.card__body {
-  max-height: 190px;
-  min-height: 190px;
-  width: 100%;
-  height: 100%;
-  position: relative;
-  overflow-y: auto;
-  overflow-x: hidden;
-  -ms-hyphens: auto;
-  -moz-hyphens: auto;
-  -webkit-hyphens: auto;
-  word-break: break-all;
-  color: black;
-  hyphens: auto;
-}
+
 .card__body::-webkit-scrollbar {
  display: none;
 }
 .roomName_center
 {
-vertical-align: middle;  
+vertical-align: middle;
 }
-.roomName p{
+.card__roomname p{
   vertical-align: middle;
   display: inline-block;
 }
@@ -132,7 +142,7 @@ vertical-align: middle;
   border: none;
   background: transparent;
   color: black;
-  
+
 }
 #navbar--background {
   background-color: transparent;
