@@ -1,11 +1,10 @@
 <div class="container-fluid board-container">
 
-
+<h1 class="group-header room-title">{{board.roomName}}</h1>
   <div class="bg-success center-block" id="anonymousWarn" class="has-success anonymousWarn">Ssshh.. You're anonymous now</div>
-
   <div class="row">
     <div class="col-md-6">
-      <h2 class="group-header">What we did right!</h2>
+      <h2 class="group-header">{{ board.plusLabel }}</h2>
       <form ng-submit="board.submit('plus')">
         <div class="form-group">
           <div class="input-group">
@@ -46,7 +45,7 @@
    </div>
 
    <div class="col-md-6">
-    <h2 class="group-header">What could improve!</h2>
+    <h2 class="group-header">{{ board.minusLabel }}</h2>
     <form ng-submit="board.submit('minus')">
       <div class="form-group">
         <div class="input-group">
