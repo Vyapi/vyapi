@@ -43,13 +43,4 @@ describe('service Dashboard', () => {
 			expect(data).toEqual("success");
 		}));
 	});
-	/*
-		 it('should return array of object', inject(webDevTec => {
-		 const data = webDevTec.getTec();
-		 expect(data).toEqual(jasmine.any(Array));
-		 expect(data[0]).toEqual(jasmine.any(Object));
-		 expect(data.length > 5).toBeTruthy();
-		 }));
-		 });
-	 */
 });
