@@ -2,8 +2,12 @@
 .icon--white {
   color: white;
 }
-
-.roomname--white, .roomname--white:hover {
-  color: aliceblue;
+#link--underline, #link--underline:hover {
   text-decoration: none;
+}
+.roomname--white {
+  color: white;
+  font-weight: 500;
+  font-size: x-large;
+  margin-top: 10px;
 }
