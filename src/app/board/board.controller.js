@@ -1,11 +1,12 @@
 export class BoardController {
-  constructor ($firebaseArray, $location,$log) {
+  constructor ($firebaseArray, $location,$log, $stateParams, Dashboard) {
 
     'ngInject';
 
     var userName = "";
     var appURL = "https://vyapi.firebaseio.com/";
     var roomID = $location.path().split("/")[2];
+    var roomId = $stateParams.roomKey;
     var anonymous = true;
     $log.log("roomID is " + roomID);
 
@@ -17,7 +18,6 @@ export class BoardController {
     var anonymous = true;
 
     var roomURL= "https://vyapi.firebaseio.com/messages/" + roomID;
-    console.log(roomURL);
     this.msgRef = new Firebase(roomURL);
     this.messages = $firebaseArray(this.msgRef);
 
@@ -35,12 +35,10 @@ export class BoardController {
         userName = "anonymous";
         $('.anonymousToggle').css({"background-color":"#6D6A68","color":"white"});
       }
-      console.log(userName);
     };
 
     //CODE TO ENTER THE OBJECT IN FIREBASE DATABASE
     this.submit = function (id) {
-      //console.log("in adding message");
       let userMessage = (id == 'plus') ? this.userMessagePlus : this.userMessageMinus;
       var ref = new Firebase("https://vyapi.firebaseio.com/rooms/" + roomID);
       var dashboard;
@@ -57,7 +55,6 @@ export class BoardController {
          ref.update({pos : num});
        else
          ref.update({neg : num});
-       console.log(num);
 
      });
 
@@ -107,7 +104,6 @@ export class BoardController {
     this.like = function(msg) {
       let msgLike = (new Firebase(roomURL)).child(msg.$id + "/like/" +authData.uid);
       msgLike.once("value" , function(value){
-        //console.log('triggring event');
         if(value.exists()){
           msgLike.remove();
         }
@@ -127,12 +123,9 @@ export class BoardController {
     $("#chat-messages-plus").disableSelection();
     $("#chat-messages-minus").disableSelection();
     $("#chat-messages-plus").sortable({
-      //console.log("Drag working 1");
         start: function(event, ui) {
-          // console.log("Drag working 2");
         },
         change: function(event, ui) {
-          // console.log("Drag working 3");
         },
         update: function(event, ui) {
           var currPriority = 1;
@@ -148,12 +141,9 @@ export class BoardController {
     });
 
     $("#chat-messages-minus").sortable({
-      //console.log("Drag working 1");
         start: function(event, ui) {
-          // console.log("Drag working 2");
         },
         change: function(event, ui) {
-          // console.log("Drag working 3");
         },
         update: function(event, ui) {
           var currPriority = 1;
@@ -172,9 +162,7 @@ export class BoardController {
 
     //CODE TO DELETE THE MESSAGE POSTED
     this.delete=function(msg,temp){
-      // console.log("in delete function");
       var ide=msg.$id;
-      //console.log(msg);
       var refe = new Firebase("https://vyapi.firebaseio.com/rooms/"+roomID);
       var dash;
       var number;
@@ -189,7 +177,6 @@ export class BoardController {
           refe.update({pos : number});
         else
           refe.update({neg : number});
-        // console.log("deletong",number);
       });
 
 
@@ -201,7 +188,6 @@ export class BoardController {
 
     //CODE TO SHOW THE EDIT BUTTON ONLY ON SELF STICKYs
     this.getListId = function (msgId) {
-      console.log(msgId);
       return msgId;
     }
 
@@ -234,6 +220,24 @@ export class BoardController {
         // $('#stickyTextarea').removeAttribute("disabled");
       }
       }*/
+    }
+    
+    this.userPic = [];
+    this.anonymousImage = function(msg){
+      if(msg.from != "anonymous")
+        return false;
+      else
+        return true;
+    }
+    this.getUserPic = function(userId){
+      if(this.userPic[userId] === undefined)
+      {
+        (new Firebase ("https://vyapi.firebaseio.com/users/" + userId+ "/google/profileImageURL")).once("value",(snapshot)=>{
+          this.userPic[userId] = snapshot.val();
+        });
+      }
+      return this.userPic[userId];
+    
     }
   }
 }
