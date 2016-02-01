@@ -75,7 +75,6 @@ export class DashboardController {
 		}
 		let userID = Dashboard.getUserID();
 		if(!userID){
-			console.log("In !userid");
 			this.rooms = ["mock data"];
 			return "set param is being called";
 		}
