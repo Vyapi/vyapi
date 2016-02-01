@@ -1,6 +1,5 @@
 <div class="row">
   <div class="col-md-12">
-    ​
     <form ng-submit="action.add()">
       <h2 class="group-header">{{ action.actionLabel }}</h2>
       <div class="form-group">
@@ -18,10 +17,8 @@
         </div>
       </div>
     </form>
-    ​
-    ​
     <ul id="action-items" class="list-unstyled">
-<li data-ng-repeat="item in action.items.slice().reverse()">
+      <li class = "ng-animate ng-enter animated bounceIn" data-ng-repeat="item in action.items.slice().reverse()">
         <article class="stickyAction" ng-mouseover="action.hover(item.key)" ng-mouseout="action.show(item.key)"><br/>
           <div class="stickyAction__head">
             <select type="button" ng-options="asn for asn in action.assignee" ng-model="item.name" ng-change="action.modify(item)" class="btn btn-default dropdown-toggle">
