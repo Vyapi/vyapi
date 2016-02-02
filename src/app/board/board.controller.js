@@ -7,7 +7,10 @@ export class BoardController {
     var appURL = "https://vyapi.firebaseio.com/";
     var roomID = $location.path().split("/")[2];
     var roomId = $stateParams.roomKey;
-    var anonymous = true;
+    this.anonymous = true;
+    $("#delete-confirmation").hide();
+    $("#anonymous-confirmation").hide();
+    $("#visible-confirmation").hide();
     $log.log("roomID is " + roomID);
 
 
@@ -15,7 +18,6 @@ export class BoardController {
     var authData = userRef.getAuth();
     var googleId = authData.google.id;
     var userId = "google:"+googleId;
-    var anonymous = true;
 
     this.plusLabel='';
     this.minusLabel='';
@@ -39,15 +41,18 @@ export class BoardController {
     this.onlineUsers = {};
 
     //CODE TO MAKE THE USER ANONYMOUS
-    var anonymous = true;
     this.toggle = function() {
-      anonymous = !anonymous;
-      if(!anonymous){
+      this.anonymous = !this.anonymous;
+      if(!this.anonymous){
         userName = authData.google.displayName;
-        $('.anonymous-toggle').css({"background-color":"#eeeeee","color":"black"});
+
+        $("#visible-confirmation").show();
+        setTimeout(function() { $("#visible-confirmation").hide(); }, 1500);
       } else {
         userName = "anonymous";
-        $('.anonymous-toggle').css({"background-color":"#6D6A68","color":"white"});
+
+        $("#anonymous-confirmation").show();
+        setTimeout(function() { $("#anonymous-confirmation").hide(); }, 1500);
       }
     };
 
@@ -161,50 +166,42 @@ export class BoardController {
     //CODE TO ENABLE DRAG AND DROP OF STICKYs
     $("#chat-messages-plus").disableSelection();
     $("#chat-messages-minus").disableSelection();
-    $("#chat-messages-plus").sortable({
 
-      //console.log("Drag working 1");
+    $("#chat-messages-plus").sortable({
       start: function(event, ui) {
-          // console.log("Drag working 2");
-        },
-        change: function(event, ui) {
-        },
-        update: function(event, ui) {
-          var currPriority = 1;
-          var children = document.getElementById("chat-messages-plus").childNodes;
-          for(var c in children) {
-            if(children[c].childNodes[1] != undefined) {
-              var uniqueMsgID = children[c].childNodes[1].getAttribute('id');
-              (new Firebase(roomURL + "/" + uniqueMsgID)).setPriority(currPriority);
-              currPriority++;
-            }
+      },
+      change: function(event, ui) {
+      },
+      update: function(event, ui) {
+        var currPriority = 1;
+        var children = $('.grab-handle').childNodes;
+        for(var c in children) {
+          if(children[c].childNodes[1] != undefined) {
+            var uniqueMsgID = children[c].childNodes[1].getAttribute('id');
+            (new Firebase(roomURL + "/" + uniqueMsgID)).setPriority(currPriority);
+            currPriority++;
           }
         }
-      });
+      }
+    });
 
     $("#chat-messages-minus").sortable({
-
-      //console.log("Drag working 1");
       start: function(event, ui) {
-          // console.log("Drag working 2");
-
-        },
-        change: function(event, ui) {
-        },
-        update: function(event, ui) {
-          var currPriority = 1;
-          var children = document.getElementById("chat-messages-minus").childNodes;
-          for(var c in children) {
-            if(children[c].childNodes[1] != undefined) {
-              var uniqueMsgID = children[c].childNodes[1].getAttribute('id');
-              (new Firebase(roomURL + "/" + uniqueMsgID)).setPriority(currPriority);
-              currPriority++;
-            }
+      },
+      change: function(event, ui) {
+      },
+      update: function(event, ui) {
+        var currPriority = 1;
+        var children = $('.grab-handle').childNodes;
+        for(var c in children) {
+          if(children[c].childNodes[1] != undefined) {
+            var uniqueMsgID = children[c].childNodes[1].getAttribute('id');
+            (new Firebase(roomURL + "/" + uniqueMsgID)).setPriority(currPriority);
+            currPriority++;
           }
         }
-      });
-    $("#chat-messages-plus").disableSelection();
-    $("#chat-messages-minus").disableSelection();
+      }
+    });
 
     //CODE TO DELETE THE MESSAGE POSTED
     this.delete=function(msg,temp){
@@ -225,11 +222,13 @@ export class BoardController {
           refe.update({neg : number});
       });
 
-
       let messageId=msg.$id;
-      if(msg.uid === userId)
+      if(msg.uid === userId){
         this.msgRef.child(messageId).remove();
+      }
 
+      $("#delete-confirmation").show();
+      setTimeout(function() { $("#delete-confirmation").hide(); }, 1200);
     };
 
     //CODE TO SHOW THE EDIT BUTTON ONLY ON SELF STICKYs

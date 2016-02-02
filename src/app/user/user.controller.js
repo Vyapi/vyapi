@@ -24,7 +24,7 @@ export class UserController {
       } else {
         var path = $location.path();
         this.cookies.put('path',path);
-        alert("Not Logged in. Please login\n Redirecting to login page");
+        // alert("Not Logged in. Please login\n Redirecting to login page");
         $window.location.href = "http://" + $window.location.host + "#/";
         $log.error("Not Logged in. Please login");
         return;
