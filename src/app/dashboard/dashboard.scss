@@ -21,12 +21,18 @@ body
   color:rgba(255, 255, 255, 0.5);
 }
 #div_hover:hover {
-background-color: rgba(222, 184, 135, 0.85)
+transform: scale(1.01);
 }
 #div_hover{
 text-align: center;
+border-top: 1px solid rgba(0, 0, 0, 0.6);
+border-right: 1px solid rgba(255, 255, 255, 0.1);
+border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+border-left: 1px solid rgba(0, 0, 0, 0.6);
 background-color: rgba(222, 184, 135, 0.5);
-box-shadow: 0px 0px 12px 2px rgba(0, 0, 0, 0.6) inset;
+-webkit-box-shadow: inset 8px 8px 39px 3px rgba(0,0,0,0.29);
+-moz-box-shadow: inset 8px 8px 39px 3px rgba(0,0,0,0.29);
+box-shadow: inset 8px 8px 39px 3px rgba(0,0,0,0.29);
 }
 
 .btn-circle {
@@ -150,4 +156,29 @@ vertical-align: middle;
 }
 .icon--white {
   color: white;
+}
+.icon-background {
+      padding: 5px 10px;
+    -moz-border-radius: 100px;
+    -webkit-border-radius: 100px;
+    border-radius: 100px;
+}
+.icon-inline {
+  display: inline;
+    padding: 5%;
+}
+.line-padding {
+  margin: 5%;
+}
+.icon-orange {
+  background-color: #f0ad4e;
+}
+.icon-blue {
+  background-color: #2098d1;
+}
+.icon-red {
+  background-color: #d9534f;
+}
+.icon-green {
+  background-color: #5cb85c;
 }
