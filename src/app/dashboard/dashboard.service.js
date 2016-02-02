@@ -6,7 +6,7 @@ export class Dashboard{
 		this.roomsURL = this.rootURL + 'rooms';
 		this.roomsRef = new Firebase(this.rootURL + 'rooms');
 		this.messageRef = new Firebase(this.rootURL + 'messages');
-		let data = $firebaseArray(this.roomsRef);
+		$firebaseArray(this.roomsRef);
 	}
 	getRooms(userID){
 		if(!userID)
@@ -18,7 +18,7 @@ export class Dashboard{
 		if(!authData){
 			authData = {};
 			authData.uid = "success";
-		};
+		}
 		return authData.uid;
 	}
 	getUserPic(userID){
@@ -39,11 +39,11 @@ export class Dashboard{
 		if(!userID)
 			return "success";
 		this.roomsRef.push({roomName : roomName, ownedBy : userID, plusLabel : plusName, minusLabel : minusName, actionLabel : actionName,date: d, pos:0, neg:0});
-		$('#myModal').modal('hide');
+		angular.element('#myModal').modal('hide');
 		return;
 	}
 	editRoom(){
-		$('#editModal').modal('show');
+		angular.element('#editModal').modal('show');
 		return "success";
 	}
 	saveValues(roomKey,rName, pName, mName, aName)
@@ -54,7 +54,7 @@ export class Dashboard{
 		roomDbRef.update({
 			roomName : rName, plusLabel : pName, minusLabel : mName, actionLabel : aName
 		});
-		$('#editModal').modal('hide');
+		angular.element('#editModal').modal('hide');
 		return;
 	}
 }

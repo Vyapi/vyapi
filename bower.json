@@ -36,6 +36,20 @@
       ]
     }
   },
+  "overrides": {
+    "font-awesome": {
+      "main": [
+        "css/font-awesome.css",
+        "scss/font-awesome.scss",
+        "fonts/fontawesome-webfont.eot",
+        "fonts/fontawesome-webfont.svg",
+        "fonts/fontawesome-webfont.ttf",
+        "fonts/fontawesome-webfont.woff",
+        "fonts/fontawesome-webfont.woff2",
+        "fonts/FontAwesome.eot"
+      ]
+    }
+  },
   "resolutions": {
     "jquery": "~2.1.4",
     "angular": "~1.4.2"

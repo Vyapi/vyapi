@@ -16,7 +16,7 @@ export class ActionController {
       let labelData = snapshot.val();
       console.log(snapshot.val());
       this.actionLabel = labelData.actionLabel;
-      console.log(actionLabel);
+      console.log(this.actionLabel);
     });
     var room = roomRef.child("members");
     room.on("value", (snapshot) => {
@@ -48,46 +48,32 @@ export class ActionController {
   hover(key)
   {
     //console.log(''+key);
-    $('#'+key).css({'visibility' : 'visible'});
+    angular.element('#'+key).css({'visibility' : 'visible'});
   }
 
   show(key)
   {
     //console.log(''+key);
-    $('#'+key).css({'visibility' : 'hidden'});
-  };
+    angular.element('#'+key).css({'visibility' : 'hidden'});
+  }
 
 
-  add()
-  {
-    this.items.push({task:this.text,name:this.person});
-    console.log(this.roomID);
-    this.myDataRef.push({task:this.text,name:this.person});
+  add() {
+    this.items.$add({task:this.text,name:this.person});
     this.text = '';
   }
 
-  change(person)
-  {
+  change(person) {
     this.person=person;
   }
 
-  modify(person)
-  {
-    this.clog.log('modify'+person.name);
-    this.myDataRef.child(person.key).set({task:person.task,name:person.name});
-    this.person=person;
+  modify(person) {
+    //this.clog.log('modify'+person.name);
+    //this.myDataRef.child(person.key).set({task:person.task,name:person.name});
+    //this.person=person;
   }
 
-  remove(item)
-  {
-    console.log(item.key);
-    // this.myDataRef.child(item.key).remove();
-    let messageId=item.key;
-    this.myDataRef.child(messageId).remove();
-    // var found = this.items.indexOf(item);
-    // console.log(found);
-    /*while (found !== -1) {
-    this.items.splice(found, 1);
-    found = this.items.indexOf(item);*/
+  remove(item) {
+    this.items.$remove(item);
   }
 }
