@@ -21,7 +21,7 @@ export class Auth{
 				console.log('this is the data'+dataLocal);
 				ref.child("users/"+ dataLocal.uid).set(dataLocal);
 				this.location.path('/dashboard');
-				return true;
+				return "success";
 			}).catch(function(error){
 				this.clog.error("Authentication failed:", error);
 				return false;
