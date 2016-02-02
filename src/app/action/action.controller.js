@@ -16,7 +16,7 @@ export class ActionController {
       let labelData = snapshot.val();
       console.log(snapshot.val());
       this.actionLabel = labelData.actionLabel;
-      console.log(actionLabel);
+      console.log(this.actionLabel);
     });
     var room = roomRef.child("members");
     room.on("value", (snapshot) => {
@@ -48,14 +48,14 @@ export class ActionController {
   hover(key)
   {
     //console.log(''+key);
-    $('#'+key).css({'visibility' : 'visible'});
+    angular.element('#'+key).css({'visibility' : 'visible'});
   }
 
   show(key)
   {
     //console.log(''+key);
-    $('#'+key).css({'visibility' : 'hidden'});
-  };
+    angular.element('#'+key).css({'visibility' : 'hidden'});
+  }
 
 
   add()
