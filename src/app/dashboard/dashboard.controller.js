@@ -88,8 +88,7 @@ export class DashboardController {
 		roomsPromise.on("value",(snapshot)=>{
 			let i=0;
 			let rooms = snapshot.val();
-			rooms = _.map(rooms,(room,key,url,mem,msg,date)=>{
-				let temp;
+			rooms = _.map(rooms,(room,key,url,mem)=>{
 				room.key = key;
 				room.url = this.path + '/' +  key;
 				room.mem = this.car[i];

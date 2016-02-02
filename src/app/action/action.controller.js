@@ -16,7 +16,7 @@ export class ActionController {
       let labelData = snapshot.val();
       console.log(snapshot.val());
       this.actionLabel = labelData.actionLabel;
-      console.log(actionLabel);
+      console.log(this.actionLabel);
     });
     var room = roomRef.child("members");
     room.on("value", (snapshot) => {
@@ -35,7 +35,28 @@ export class ActionController {
 
     this.myDataRef = new Firebase('https://vyapi.firebaseio.com/action/'+this.roomID);
     this.items=$firebaseArray(this.myDataRef);
+    this.myDataRef.on('value',(snapshot)=>{
+      let actions=snapshot.val();
+      this.items = _.map(actions,(action,key)=>{
+        action.key=key;
+        return action;
+      });
+      console.table(this.items);
+    });
   }
+
+  hover(key)
+  {
+    //console.log(''+key);
+    angular.element('#'+key).css({'visibility' : 'visible'});
+  }
+
+  show(key)
+  {
+    //console.log(''+key);
+    angular.element('#'+key).css({'visibility' : 'hidden'});
+  }
+
 
   add() {
     this.items.$add({task:this.text,name:this.person});
