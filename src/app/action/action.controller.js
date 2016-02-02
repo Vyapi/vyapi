@@ -14,9 +14,7 @@ export class ActionController {
     this.actionLabel='';
     roomRef.on("value",(snapshot)=>{
       let labelData = snapshot.val();
-      console.log(snapshot.val());
       this.actionLabel = labelData.actionLabel;
-      console.log(this.actionLabel);
     });
     var room = roomRef.child("members");
     room.on("value", (snapshot) => {
@@ -26,7 +24,6 @@ export class ActionController {
         $firebaseArray(googleData);
         googleData.on('value',(userSnapshot)=>{
           var userNames=userSnapshot.val()['displayName'];
-          console.log('pushed', userNames);
           this.assignee.push(userNames);
         });
       });
@@ -36,19 +33,6 @@ export class ActionController {
     this.myDataRef = new Firebase('https://vyapi.firebaseio.com/action/'+this.roomID);
     this.items=$firebaseArray(this.myDataRef);
   }
-
-  hover(key)
-  {
-    //console.log(''+key);
-    angular.element('#'+key).css({'visibility' : 'visible'});
-  }
-
-  show(key)
-  {
-    //console.log(''+key);
-    angular.element('#'+key).css({'visibility' : 'hidden'});
-  }
-
 
   add() {
     this.items.$add({task:this.text,name:this.person});
