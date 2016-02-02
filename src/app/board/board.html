@@ -13,11 +13,11 @@
         </div>
       </form>
       <ul id="chat-messages-plus" class="list-unstyled">
-        <li class = "ng-animate ng-enter animated bounceIn" data-ng-repeat="msg in board.messages | filter:{lane:'plus'}">
+        <li data-ng-repeat="msg in board.messages | filter:{lane:'plus'}">
           <div class="sticky" id="{{msg.$id}}">
             <div class="sticky-note" ng-mouseover="board.hover(msg.uid)" ng-mouseout="board.show(msg.uid)">
               <div class="sticky__top">
-                <i class="fa fa-hand-rock-o pull-left grab-handle"></i>
+                <i class="fa fa-hand-rock-o pull-left grab-handle" id="grab-handle-plus"></i>
                 <i class="fa fa-times pull-right delete-btn"  ng-click="board.delete(msg,5)"></i>
                 <!-- <span ng-if="board.isOwner(msg.uid)"><i class="fa fa-floppy-o pull-right edit-btn" ng-click="board.saveEdit(msg)" ></i></span> -->
                 <!-- <span ng-if="board.isOwner(msg.uid)"><i class="fa fa-check pull-right save-btn" ng-click="board.saveEdit(msg)"></i></span> -->
@@ -56,11 +56,11 @@
         </div>
       </form>
       <ul id="chat-messages-minus" class="list-unstyled">
-        <li class = "ng-animate ng-enter animated bounceIn" data-ng-repeat="msg in board.messages | filter:{lane:'minus'}">
+        <li data-ng-repeat="msg in board.messages | filter:{lane:'minus'}">
           <div class="sticky" id="{{msg.$id}}">
             <div class="sticky-note" ng-mouseover="board.hover(msg.uid)" ng-mouseout="board.show(msg.uid)">
               <div class="sticky__top">
-                <i class="fa fa-hand-rock-o pull-left grab-handle"></i>
+                <i class="fa fa-hand-rock-o pull-left grab-handle" id="grab-handle-minus"></i>
                 <i class="fa fa-times pull-right delete-btn"  ng-click="board.delete(msg,6)"></i>
                 <!-- <span ng-if="board.isOwner(msg.uid)"><i class="fa fa-floppy-o pull-right edit-btn" ng-click="board.saveEdit(msg)"></i></span> -->
                 <!-- <span ng-if="board.isOwner(msg.uid)"><i class="fa fa-check pull-right save-btn" ng-click="board.saveEdit(msg)"></i></span> -->

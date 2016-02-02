@@ -161,6 +161,7 @@ export class BoardController {
     //CODE TO ENABLE DRAG AND DROP OF STICKYs
     $("#chat-messages-plus").disableSelection();
     $("#chat-messages-minus").disableSelection();
+
     $("#chat-messages-plus").sortable({
 
       //console.log("Drag working 1");
@@ -171,7 +172,7 @@ export class BoardController {
         },
         update: function(event, ui) {
           var currPriority = 1;
-          var children = document.getElementById("chat-messages-plus").childNodes;
+          var children = $('.grab-handle').childNodes;
           for(var c in children) {
             if(children[c].childNodes[1] != undefined) {
               var uniqueMsgID = children[c].childNodes[1].getAttribute('id');
@@ -193,7 +194,7 @@ export class BoardController {
         },
         update: function(event, ui) {
           var currPriority = 1;
-          var children = document.getElementById("chat-messages-minus").childNodes;
+          var children = $('.grab-handle').childNodes;
           for(var c in children) {
             if(children[c].childNodes[1] != undefined) {
               var uniqueMsgID = children[c].childNodes[1].getAttribute('id');

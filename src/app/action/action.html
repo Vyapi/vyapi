@@ -1,35 +1,36 @@
-<div class="row actionboard-padding">
-  <div class="col-md-12">
-    <form ng-submit="action.add()">
+<div class="container-fluid action-container">
+  <div class="row actionboard-padding">
+    <div class="col-md-12">
       <h2 class="group-header">{{ action.actionLabel }}</h2>
-      <div class="form-group">
-        <div class="input-group">
-          <input ng-model="action.text" class="form-control userText form-control-inverted ng-valid ng-dirty ng-touched" placeholder="Type an action..."  aria-label="..."/>
-          <!-- <input type="text" class="form-control" aria-label="..."> -->
-          <div class="input-group-btn">
-            <span class="form-control">
-              <select type="button" class="btn btn-default dropdown-toggle" ng-options="person for person in action.assignee" ng-model="person" ng-change="action.change(person)" style="">
-                <option value="" class="dropdown-menu dropdown-menu-right">Assignee</option>
-                <span class="caret"></span>
-              </select>
-            </span>
-          </div><!-- /btn-group -->
+      <form ng-submit="action.add()">
+        <div class="form-group">
+          <div class="input-group">
+            <input ng-model="action.text" class="form-control userText form-control-inverted ng-valid ng-dirty ng-touched" placeholder="Type an action...">
+            <div class="input-group-btn">
+              <span class="form-control">
+                <select type="button" class="btn btn-default dropdown-toggle" ng-options="person for person in action.assignee" ng-model="person" ng-change="action.change(person)" style="">
+                  <option value="" class="dropdown-menu dropdown-menu-right">Assignee</option>
+                  <span class="caret"></span>
+                </select>
+              </span>
+            </div><!-- /btn-group -->
+          </div>
         </div>
-      </div>
-    </form>
-    <ul id="action-items" class="list-unstyled">
-      <li class = "ng-animate ng-enter animated bounceIn" data-ng-repeat="item in action.items.slice().reverse()">
-        <article class="stickyAction" ng-mouseover="action.hover(item.key)" ng-mouseout="action.show(item.key)"><br/>
-          <div class="stickyAction__head">
-            <select type="button" ng-options="asn for asn in action.assignee" ng-model="item.name" ng-change="action.modify(item)" class="btn btn-default dropdown-toggle">
-            </select>
-            <i class="fa fa-times pull-right delete-btn button-id" id="{{item.key}}" ng-click="action.remove(item)"><span class="Done"></span></i>
-          </div>
-          <div class="stickyAction__body" style="max-height: 10; min-height: 10; overflow-y: scroll;">
-            <p class="usertext">{{ item.task }}</p>
-          </div>
-        </article>
-      </li>
-    </ul>
+      </form>
+      <ul id="action-items" class="list-unstyled">
+        <li class = "ng-animate ng-enter animated bounceIn" data-ng-repeat="item in action.items.slice().reverse()">
+          <article class="stickyAction" ng-mouseover="action.hover(item.key)" ng-mouseout="action.show(item.key)"><br/>
+            <div class="stickyAction__head">
+              <select type="button" ng-options="asn for asn in action.assignee" ng-model="item.name" ng-change="action.modify(item)" class="btn btn-default dropdown-toggle">
+              </select>
+              <i class="fa fa-times pull-right delete-btn button-id" id="{{item.key}}" ng-click="action.remove(item)"><span class="Done"></span></i>
+            </div>
+            <div class="stickyAction__body">
+              <p class="usertext">{{ item.task }}</p>
+            </div>
+          </article>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>

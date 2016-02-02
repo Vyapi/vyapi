@@ -17,13 +17,11 @@ export class Auth{
 			var objLocal = this.fireConnect.connect();
 			var dataLocal = objLocal.$getAuth();
 			var ref = this.fireConnect.getRef();
-			if(!dataLocal)
-				return "success";
 			objLocal.$authWithOAuthPopup("google").then((dataLocal) =>{
 				console.log('this is the data'+dataLocal);
 				ref.child("users/"+ dataLocal.uid).set(dataLocal);
 				this.location.path('/dashboard');
-				return true;
+				return "success";
 			}).catch(function(error){
 				this.clog.error("Authentication failed:", error);
 				return false;
