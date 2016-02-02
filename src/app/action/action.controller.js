@@ -34,22 +34,26 @@ export class ActionController {
     this.items=$firebaseArray(this.myDataRef);
   }
 
+
   add() {
     this.items.$add({task:this.text,name:this.person});
     this.text = '';
   }
 
-  change(person) {
+  change(person)
+  {
     this.person=person;
   }
 
-  modify(person) {
-    //this.clog.log('modify'+person.name);
-    //this.myDataRef.child(person.key).set({task:person.task,name:person.name});
-    //this.person=person;
+  modify(person)
+  {
+    this.clog.log('modify'+person.name);
+    this.myDataRef.child(person.key).set({task:person.task,name:person.name});
+    this.person=person;
   }
 
-  remove(item) {
+  remove(item)
+  {
     this.items.$remove(item);
   }
 }
