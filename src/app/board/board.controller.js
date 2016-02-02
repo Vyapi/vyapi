@@ -1,5 +1,5 @@
 export class BoardController {
-  constructor ($firebaseArray, $location,$log, $stateParams,$document, Dashboard) {
+  constructor ($firebaseArray, $location,$log, $stateParams, Dashboard) {
 
     'ngInject';
 
@@ -7,7 +7,10 @@ export class BoardController {
     var appURL = "https://vyapi.firebaseio.com/";
     var roomID = $location.path().split("/")[2];
     var roomId = $stateParams.roomKey;
-    var anonymous = true;
+    this.anonymous = true;
+    $("#delete-confirmation").hide();
+    $("#anonymous-confirmation").hide();
+    $("#visible-confirmation").hide();
     $log.log("roomID is " + roomID);
 
 
@@ -15,7 +18,6 @@ export class BoardController {
     var authData = userRef.getAuth();
     var googleId = authData.google.id;
     var userId = "google:"+googleId;
-    anonymous = true;
 
     this.plusLabel='';
     this.minusLabel='';
@@ -39,15 +41,18 @@ export class BoardController {
     this.onlineUsers = {};
 
     //CODE TO MAKE THE USER ANONYMOUS
-    anonymous = true;
     this.toggle = function() {
-      anonymous = !anonymous;
-      if(!anonymous){
+      this.anonymous = !this.anonymous;
+      if(!this.anonymous){
         userName = authData.google.displayName;
-        angular.element('.anonymous-toggle').css({"background-color":"#eeeeee","color":"black"});
+
+        $("#visible-confirmation").show();
+        setTimeout(function() { $("#visible-confirmation").hide(); }, 1500);
       } else {
         userName = "anonymous";
-        angular.element('.anonymous-toggle').css({"background-color":"#6D6A68","color":"white"});
+
+        $("#anonymous-confirmation").show();
+        setTimeout(function() { $("#anonymous-confirmation").hide(); }, 1500);
       }
     };
 
@@ -87,7 +92,7 @@ export class BoardController {
           let lastchildadded=snapshot.val();
           (new Firebase(roomURL + "/" + lastchildadded.key)).setPriority(1);
           let currPriority = 2;
-          let children = $document.getElementById("chat-messages-plus").childNodes;
+          let children = document.getElementById("chat-messages-plus").childNodes;
           for(var c in children) {
             if(children[c].childNodes[1] != undefined) {
               var uniqueMsgID = children[c].childNodes[1].getAttribute('id');
@@ -100,7 +105,7 @@ export class BoardController {
           let lastchildadded=snapshot.val();
           (new Firebase(roomURL + "/" + lastchildadded.key)).setPriority(1);
           let currPriority = 2;
-          let children = $document.getElementById("chat-messages-minus").childNodes;
+          let children = document.getElementById("chat-messages-minus").childNodes;
           for(var c in children) {
             if(children[c].childNodes[1] != undefined) {
               var uniqueMsgID = children[c].childNodes[1].getAttribute('id');
@@ -116,7 +121,7 @@ export class BoardController {
     };
 
     //CODE TO DISPLAY THE 5 SECOND NOTIFICATION FOR ANONYMITY
-    angular.element('#anonymousWarn').fadeIn().delay(5000).fadeOut();
+    $('#anonymousWarn').fadeIn().delay(5000).fadeOut();
 
     //CODE TO COUNT THE NO. OF LIKES ON A MESSAGE
     (new Firebase(roomURL)).on('child_added', (messagesObj) => {
@@ -159,16 +164,17 @@ export class BoardController {
     }
 
     //CODE TO ENABLE DRAG AND DROP OF STICKYs
-    angular.element("#chat-messages-plus").disableSelection();
-    angular.element("#chat-messages-minus").disableSelection();
-    angular.element("#chat-messages-plus").sortable({
+    $("#chat-messages-plus").disableSelection();
+    $("#chat-messages-minus").disableSelection();
+
+    $("#chat-messages-plus").sortable({
       start: function(event, ui) {
       },
       change: function(event, ui) {
       },
       update: function(event, ui) {
         var currPriority = 1;
-        var children = angular.element('.grab-handle').childNodes;
+        var children = $('.grab-handle').childNodes;
         for(var c in children) {
           if(children[c].childNodes[1] != undefined) {
             var uniqueMsgID = children[c].childNodes[1].getAttribute('id');
@@ -179,15 +185,14 @@ export class BoardController {
       }
     });
 
-
-    angular.element("#chat-messages-minus").sortable({
+    $("#chat-messages-minus").sortable({
       start: function(event, ui) {
       },
       change: function(event, ui) {
       },
       update: function(event, ui) {
         var currPriority = 1;
-        var children = angular.element('.grab-handle').childNodes;
+        var children = $('.grab-handle').childNodes;
         for(var c in children) {
           if(children[c].childNodes[1] != undefined) {
             var uniqueMsgID = children[c].childNodes[1].getAttribute('id');
@@ -217,12 +222,13 @@ export class BoardController {
           refe.update({neg : number});
       });
 
-
       let messageId=msg.$id;
       if(msg.uid === userId){
         this.msgRef.child(messageId).remove();
       }
 
+      $("#delete-confirmation").show();
+      setTimeout(function() { $("#delete-confirmation").hide(); }, 1200);
     };
 
     //CODE TO SHOW THE EDIT BUTTON ONLY ON SELF STICKYs
@@ -268,7 +274,7 @@ export class BoardController {
         return true;
     }
     this.getUserPic = function(userId){
-      if(this.userPic[userId] === angular.isUndefined)
+      if(this.userPic[userId] === undefined)
       {
         (new Firebase ("https://vyapi.firebaseio.com/users/" + userId+ "/google/profileImageURL")).once("value",(snapshot)=>{
           this.userPic[userId] = snapshot.val();
@@ -278,10 +284,14 @@ export class BoardController {
     }
 
     //CODE TO LIMIT THE CHARACTER IN TEXTAREA
-    angular.element('.sticky-textarea').keypress(function(event) {
+    $('.sticky-textarea').keypress(function(event) {
       if (event.keyCode == 13) {
         event.preventDefault();
       }
     });
   }
 }
+
+
+
+
