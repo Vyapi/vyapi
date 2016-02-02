@@ -20,6 +20,7 @@
   },
   "rules": {
     "no-console": 0,
-    "angular/log": 0
+    "angular/log": 0,
+    "no-undef":0
   }
 }
