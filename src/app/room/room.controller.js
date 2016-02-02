@@ -72,7 +72,7 @@ export class RoomController {
         this.action = snapshot2.val();
         this.action = _.map(this.action,(d)=>d);
 
-        this.allActions= _.groupBy(this.messages,'lane')
+        this.allActions= _.groupBy(this.messages,'lane');
         let positiveActs = this.allActions.plus;
         let negativeActs = this.allActions.minus;
         let actions = this.action;
@@ -125,7 +125,7 @@ export class RoomController {
 
     //CodeforExport
     this.exportSheetCreator=function(){
-      this.allActions= _.groupBy(this.messages,'lane')
+      this.allActions= _.groupBy(this.messages,'lane');
       let positiveActs = this.allActions.plus;
       let negativeActs = this.allActions.minus;
       let actions = this.action;

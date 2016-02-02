@@ -5,7 +5,7 @@
       <div class="row">
         <div class="col-md-12 user-column">
           <div>
-            <ul class="list-inline" style="width: 1000px">
+            <ul class="list-inline" style="width: 780px">
               <li ng-repeat = "(uid, user) in users.onlineUsers" style="float:right" class="ng-animate ng-enter ng-leave animated bounce">
                 <a class="user-anchor" href="#" title="{{user.name}}"><img class =  "user-image hvr-bounce-in img-circle" title="{{user.name}}" ng-src="{{user.photo}}"></img><span class="user-badge">{{users.getMessageContributions(uid)}}</span></a>
               </li>
