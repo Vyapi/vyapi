@@ -6,7 +6,7 @@ describe('service Auth', () => {
 	}));
 
 	describe('all the functions', () => {
-		it('login should exist', inject(Auth => {
+		xit('login should exist', inject(Auth => {
 			expect(Auth.login).not.toBeNull();
 			var data = Auth.login();
 			console.log(data);
