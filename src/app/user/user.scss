@@ -3,14 +3,12 @@
   bottom: 0;
   overflow: hidden;
   margin-top: 4em;
+  text-align: center;
 }
 
 .user-anchor {
   display: inline-block;
-}
-
-.user-column {
-  display: flex;
+  text-align: center;
 }
 
 .user-badge {
@@ -30,7 +28,6 @@
 
 .navbar-bottom {
   text-align: center;
-  display: inline-block;
   background-color: rgba(239,236,228,0);
 }
 

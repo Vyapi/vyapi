@@ -116,6 +116,10 @@ body {
 .sticky__head--anonymous-sticky {
   background: transparent;
   border: none;
+  color: #333;
+  position: relative;
+  top: 4px;
+  font-size: 1.3em;
 }
 
 .sticky__head--anonymous-sticky:hover {
