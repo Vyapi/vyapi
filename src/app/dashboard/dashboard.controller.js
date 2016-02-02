@@ -2,8 +2,6 @@ export class DashboardController {
 	constructor ($firebaseArray,Auth,Dashboard,$location,$log,$window,$cookies){
 		'ngInject';
 		this.path = $location.absUrl().replace('dashboard', 'room');
-		this.cards(Dashboard);
-		this.setParam(Dashboard);
 		this.location = $location;
 		this.cookies = $cookies;
 		this.auth = Auth;
@@ -20,6 +18,9 @@ export class DashboardController {
 		this.mName='';
 		this.pName='';
 		this.editKey='';
+		this.cards(Dashboard);
+		this.setParam(Dashboard);
+
 		this.createRoom = function(){
 			if(!this.roomName)
 			{
@@ -69,7 +70,9 @@ export class DashboardController {
 
 	setParam(Dashboard){
 		if(!Dashboard)
+		{
 			return;
+		}
 		let userID = Dashboard.getUserID();
 		if(!userID){
 			this.rooms = ["mock data"];
