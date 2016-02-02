@@ -21,6 +21,8 @@
   "rules": {
     "no-console": 0,
     "angular/log": 0,
-    "no-unused-vars": [0 ,{"vars": "all"}]
+    "no-unused-vars": [0 ,{"vars": "all"}],
+    "no-undef": 0,
+    "angular/angularelement": 0
   }
 }
