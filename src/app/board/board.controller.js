@@ -7,7 +7,10 @@ export class BoardController {
     var appURL = "https://vyapi.firebaseio.com/";
     var roomID = $location.path().split("/")[2];
     var roomId = $stateParams.roomKey;
-    var anonymous = true;
+    this.anonymous = true;
+    $("#delete-confirmation").hide();
+    $("#anonymous-confirmation").hide();
+    $("#visible-confirmation").hide();
     $log.log("roomID is " + roomID);
 
 
@@ -15,7 +18,6 @@ export class BoardController {
     var authData = userRef.getAuth();
     var googleId = authData.google.id;
     var userId = "google:"+googleId;
-    var anonymous = true;
 
     this.plusLabel='';
     this.minusLabel='';
@@ -39,15 +41,18 @@ export class BoardController {
     this.onlineUsers = {};
 
     //CODE TO MAKE THE USER ANONYMOUS
-    var anonymous = true;
     this.toggle = function() {
-      anonymous = !anonymous;
-      if(!anonymous){
+      this.anonymous = !this.anonymous;
+      if(!this.anonymous){
         userName = authData.google.displayName;
-        $('.anonymous-toggle').css({"background-color":"#eeeeee","color":"black"});
+
+        $("#visible-confirmation").show();
+        setTimeout(function() { $("#visible-confirmation").hide(); }, 1500);
       } else {
         userName = "anonymous";
-        $('.anonymous-toggle').css({"background-color":"#6D6A68","color":"white"});
+
+        $("#anonymous-confirmation").show();
+        setTimeout(function() { $("#anonymous-confirmation").hide(); }, 1500);
       }
     };
 
@@ -180,8 +185,6 @@ export class BoardController {
       }
     });
 
-
-
     $("#chat-messages-minus").sortable({
       start: function(event, ui) {
       },
@@ -219,12 +222,13 @@ export class BoardController {
           refe.update({neg : number});
       });
 
-
       let messageId=msg.$id;
       if(msg.uid === userId){
         this.msgRef.child(messageId).remove();
       }
 
+      $("#delete-confirmation").show();
+      setTimeout(function() { $("#delete-confirmation").hide(); }, 1200);
     };
 
     //CODE TO SHOW THE EDIT BUTTON ONLY ON SELF STICKYs
