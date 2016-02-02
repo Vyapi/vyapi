@@ -35,14 +35,6 @@ export class ActionController {
 
     this.myDataRef = new Firebase('https://vyapi.firebaseio.com/action/'+this.roomID);
     this.items=$firebaseArray(this.myDataRef);
-    this.myDataRef.on('value',(snapshot)=>{
-      let actions=snapshot.val();
-      this.items = _.map(actions,(action,key)=>{
-        action.key=key;
-        return action;
-      });
-      console.table(this.items);
-    });
   }
 
   hover(key)
