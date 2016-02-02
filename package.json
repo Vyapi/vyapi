@@ -72,7 +72,8 @@
   "scripts": {
     "preinstall": "bower install",
     "postinstall": "gulp build && npm cache clear && npm cache ls",
-    "start": "node server.js"
+    "start": "node server.js",
+    "test" : "gulp test"
   },
   "engines": {
     "node": ">=0.10.0"
