@@ -2,14 +2,18 @@
  *  If you want to override some bootstrap variables, you have to change values here.
  *  The list of variables are listed here bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss
  */
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700);
+
 $navbar-inverse-link-color: #5AADBB;
 $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700);
 $font-family-sans-serif: 'Roboto', sans-serif;
+
 /**
  *  Do not remove the comments below. It's the markers used by wiredep to inject
  *  sass dependencies when defined in the bower.json of your dependencies
  */
+
 // bower:scss
 // endbower
 
@@ -32,5 +36,6 @@ $font-family-sans-serif: 'Roboto', sans-serif;
  *  Do not remove the comments below. It's the markers used by gulp-inject to inject
  *  all your sass files automatically
  */
+
 // injector
 // endinjector
