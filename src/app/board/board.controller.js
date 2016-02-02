@@ -163,49 +163,42 @@ export class BoardController {
     $("#chat-messages-minus").disableSelection();
 
     $("#chat-messages-plus").sortable({
-
-      //console.log("Drag working 1");
       start: function(event, ui) {
-          // console.log("Drag working 2");
-        },
-        change: function(event, ui) {
-        },
-        update: function(event, ui) {
-          var currPriority = 1;
-          var children = $('.grab-handle').childNodes;
-          for(var c in children) {
-            if(children[c].childNodes[1] != undefined) {
-              var uniqueMsgID = children[c].childNodes[1].getAttribute('id');
-              (new Firebase(roomURL + "/" + uniqueMsgID)).setPriority(currPriority);
-              currPriority++;
-            }
+      },
+      change: function(event, ui) {
+      },
+      update: function(event, ui) {
+        var currPriority = 1;
+        var children = $('.grab-handle').childNodes;
+        for(var c in children) {
+          if(children[c].childNodes[1] != undefined) {
+            var uniqueMsgID = children[c].childNodes[1].getAttribute('id');
+            (new Firebase(roomURL + "/" + uniqueMsgID)).setPriority(currPriority);
+            currPriority++;
           }
         }
-      });
+      }
+    });
+
+
 
     $("#chat-messages-minus").sortable({
-
-      //console.log("Drag working 1");
       start: function(event, ui) {
-          // console.log("Drag working 2");
-
-        },
-        change: function(event, ui) {
-        },
-        update: function(event, ui) {
-          var currPriority = 1;
-          var children = $('.grab-handle').childNodes;
-          for(var c in children) {
-            if(children[c].childNodes[1] != undefined) {
-              var uniqueMsgID = children[c].childNodes[1].getAttribute('id');
-              (new Firebase(roomURL + "/" + uniqueMsgID)).setPriority(currPriority);
-              currPriority++;
-            }
+      },
+      change: function(event, ui) {
+      },
+      update: function(event, ui) {
+        var currPriority = 1;
+        var children = $('.grab-handle').childNodes;
+        for(var c in children) {
+          if(children[c].childNodes[1] != undefined) {
+            var uniqueMsgID = children[c].childNodes[1].getAttribute('id');
+            (new Firebase(roomURL + "/" + uniqueMsgID)).setPriority(currPriority);
+            currPriority++;
           }
         }
-      });
-    $("#chat-messages-plus").disableSelection();
-    $("#chat-messages-minus").disableSelection();
+      }
+    });
 
     //CODE TO DELETE THE MESSAGE POSTED
     this.delete=function(msg,temp){
@@ -228,8 +221,9 @@ export class BoardController {
 
 
       let messageId=msg.$id;
-      if(msg.uid === userId)
+      if(msg.uid === userId){
         this.msgRef.child(messageId).remove();
+      }
 
     };
 

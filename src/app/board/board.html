@@ -13,9 +13,9 @@
         </div>
       </form>
       <ul id="chat-messages-plus" class="list-unstyled">
-        <li data-ng-repeat="msg in board.messages | filter:{lane:'plus'}">
+        <li class = "animated bounceIn" id="plus-list" data-ng-repeat="msg in board.messages | filter:{lane:'plus'}">
           <div class="sticky" id="{{msg.$id}}">
-            <div class="sticky-note" ng-mouseover="board.hover(msg.uid)" ng-mouseout="board.show(msg.uid)">
+            <div class="sticky-note">
               <div class="sticky__top">
                 <i class="fa fa-hand-rock-o pull-left grab-handle" id="grab-handle-plus"></i>
                 <i class="fa fa-times pull-right delete-btn"  ng-click="board.delete(msg,5)"></i>
@@ -56,9 +56,9 @@
         </div>
       </form>
       <ul id="chat-messages-minus" class="list-unstyled">
-        <li data-ng-repeat="msg in board.messages | filter:{lane:'minus'}">
+        <li class = "minus-list animated bounceIn" data-ng-repeat="msg in board.messages | filter:{lane:'minus'}">
           <div class="sticky" id="{{msg.$id}}">
-            <div class="sticky-note" ng-mouseover="board.hover(msg.uid)" ng-mouseout="board.show(msg.uid)">
+            <div class="sticky-note">
               <div class="sticky__top">
                 <i class="fa fa-hand-rock-o pull-left grab-handle" id="grab-handle-minus"></i>
                 <i class="fa fa-times pull-right delete-btn"  ng-click="board.delete(msg,6)"></i>
