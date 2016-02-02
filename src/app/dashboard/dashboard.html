@@ -38,13 +38,13 @@
           <i class="glyphicon glyphicon-pencil pull-right top_icon" ng-click="dashboard.editRoom(room.key)"></i>
           </div>
 
-            <a class="card_link" href="{{room.url}}">
               <div id="card_text">
-  							<p><p class="btn btn-info btn-circle btn-xs"><i class="fa fa-users white"></i></p>{{room.mem}}</p>
-                <p><p class="btn btn-warning btn-circle btn-xs"><i class="glyphicon glyphicon-calendar white"></i></p>{{room.date}}</p>
-                <p><p class="btn btn-success btn-circle btn-xs"><i class="glyphicon glyphicon-ok"></i></p>{{room.pos}}</p>
-                <p><p class="btn btn-danger btn-circle btn-xs"><i class="glyphicon glyphicon-remove"></i></p>{{room.neg}}</p>
+  				<div class="line-padding"><div class="icon-inline" title="Members"><i class="fa fa-users white icon-background icon-blue"></i></div>{{room.mem}}</div>
+  				<div class="line-padding"><div class="icon-inline" title="Date Created"><i class="glyphicon glyphicon-calendar white icon-background icon-orange"></i></div>{{room.date}}</div>
+  				<div class="line-padding"><div class="icon-inline" title={{room.plusLabel}}><i class="glyphicon glyphicon-plus white icon-background icon-green"></i></div>{{room.pos}}</div>
+  				<div class="line-padding"><div class="icon-inline" title={{room.minusLabel}}><i class="glyphicon glyphicon-minus white icon-background icon-red"></i></div>{{room.neg}}</div>
               </div>
+                          <a class="card_link" href="{{room.url}}">
 							<div class="card__roomname">
 								<h5>{{room.roomName}}</h5>
 							</div>
@@ -52,9 +52,8 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		</li>
-	</ul>
+      </li>
+  </ul>
 </div>
 
 <div class="modal fade" id="myModal" role="dialog">
@@ -85,7 +84,6 @@
       </div>
     </form>
   </div>
-</div>
 </div>
 </div>
 
