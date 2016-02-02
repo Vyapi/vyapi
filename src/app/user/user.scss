@@ -43,7 +43,7 @@
   color: black;
   text-align:center;
   position: fixed;
-  bottom: 1.25em;
+  bottom: .5em;
   right: .5em;
 }
 
@@ -60,11 +60,9 @@ li.ng-enter {
 }
 
 .user-image {
- height: 4.5em;
- padding-right: .25em;
- padding-left: .25em;
- padding-top: .25em;
- padding-bottom: .25em;
+ height: 3.5em;
+ padding: 0.25em 0.25em 0.25em 0.25em;
+ margin-bottom: 0.25em;
  border: .5em;
  animation: up-bump 0.4s ease;
 }
