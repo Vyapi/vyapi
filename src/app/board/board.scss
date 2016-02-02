@@ -8,7 +8,7 @@ body {
   float: center;
 }
 
-.delete-confirmation {
+.delete-confirmation, .visible-confirmation, .anonymous-confirmation {
   position: fixed;
   left: 45%;
   z-index: 1;
@@ -18,7 +18,6 @@ body {
   margin-left: auto;
   margin-right: auto;
   padding: 10px 30px;
-  visibility: hidden;
 }
 
 .group-header {
@@ -135,21 +134,26 @@ body {
   font-size: 1.3em;
 }
 
-.sticky__head--anonymous-sticky:hover {
-  background: transparent;
-  border: none;
-  cursor: default;
-}
-
 .sticky-user-image {
   border-radius: 4px;
   height: 2em;
   width: 2em;
 }
 
-.anonymous-toggle {
-  background-color: #666;
+.anonymous-toggle.anonymous {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#45484d+0,000000+100;Black+3D+%231 */
+  background: #45484d; /* Old browsers */
+  background: linear-gradient(#45484d 0%, #000000 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   color: white;
+  border: 1px solid #333;
+}
+
+.anonymous-toggle {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,f6f6f6+47,ededed+100;White+3D+%231 */
+  background: #ffffff; /* Old browsers */
+  background: linear-gradient(to bottom, #ffffff 0%,#cccccc 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  color: black;
+  border: 1px solid white;
 }
 
 .grab-handle {
@@ -178,5 +182,5 @@ body {
 }
 
 .board-container {
-  padding: 0%;
+  padding: 0;
 }
