@@ -11,7 +11,7 @@ export class ActionController {
     this.roomID=$stateParams.roomKey;
 
     var roomRef = new Firebase('https://vyapi.firebaseio.com/rooms/'+this.roomID);
-    this.actionLabel='Action Items';
+    this.actionLabel='';
     roomRef.on("value",(snapshot)=>{
       let labelData = snapshot.val();
       console.log(snapshot.val());
