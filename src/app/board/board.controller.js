@@ -180,8 +180,6 @@ export class BoardController {
       }
     });
 
-
-
     $("#chat-messages-minus").sortable({
       start: function(event, ui) {
       },
@@ -219,12 +217,14 @@ export class BoardController {
           refe.update({neg : number});
       });
 
-
       let messageId=msg.$id;
       if(msg.uid === userId){
         this.msgRef.child(messageId).remove();
       }
 
+      $('#delete-confirmation').fadeIn("fast", function(){
+        $("#delete-confirmation").fadeOut(4000);
+      });
     };
 
     //CODE TO SHOW THE EDIT BUTTON ONLY ON SELF STICKYs

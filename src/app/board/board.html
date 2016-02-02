@@ -1,6 +1,8 @@
 <div class="container-fluid board-container">
   <div class="row">
-    <p class="bg-success delete-confirmation">Message Deleted</p>
+    <p id="delete-confirmation" class="bg-success delete-confirmation">Message Deleted</p>
+    <!-- <p class="bg-success anonymous-confirmation">Ssshh.. You're Anonymous Now..</p> -->
+    <!-- <p class="bg-success visible-confirmation">Others Can See You Now..</p> -->
     <div class="col-md-6">
       <h2 class="group-header">{{board.plusLabel}}</h2>
       <form ng-submit="board.submit('plus')">
