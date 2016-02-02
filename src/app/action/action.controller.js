@@ -14,9 +14,7 @@ export class ActionController {
     this.actionLabel='';
     roomRef.on("value",(snapshot)=>{
       let labelData = snapshot.val();
-      console.log(snapshot.val());
       this.actionLabel = labelData.actionLabel;
-      console.log(actionLabel);
     });
     var room = roomRef.child("members");
     room.on("value", (snapshot) => {
@@ -26,7 +24,6 @@ export class ActionController {
         $firebaseArray(googleData);
         googleData.on('value',(userSnapshot)=>{
           var userNames=userSnapshot.val()['displayName'];
-          console.log('pushed', userNames);
           this.assignee.push(userNames);
         });
       });
@@ -37,24 +34,9 @@ export class ActionController {
     this.items=$firebaseArray(this.myDataRef);
   }
 
-  hover(key)
-  {
-    //console.log(''+key);
-    $('#'+key).css({'visibility' : 'visible'});
-  }
 
-  show(key)
-  {
-    //console.log(''+key);
-    $('#'+key).css({'visibility' : 'hidden'});
-  };
-
-
-  add()
-  {
-    this.items.push({task:this.text,name:this.person});
-    console.log(this.roomID);
-    this.myDataRef.push({task:this.text,name:this.person});
+  add() {
+    this.items.$add({task:this.text,name:this.person});
     this.text = '';
   }
 
@@ -72,14 +54,6 @@ export class ActionController {
 
   remove(item)
   {
-    console.log(item.key);
-    // this.myDataRef.child(item.key).remove();
-    let messageId=item.key;
-    this.myDataRef.child(messageId).remove();
-    // var found = this.items.indexOf(item);
-    // console.log(found);
-    /*while (found !== -1) {
-    this.items.splice(found, 1);
-    found = this.items.indexOf(item);*/
+    this.items.$remove(item);
   }
 }
