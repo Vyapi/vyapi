@@ -9,7 +9,7 @@ test:
 
 deployment:
   staging:
-    branch: develop
+    branch: feature/herokudeployment
     heroku:
       appname: vyapi
   production:
