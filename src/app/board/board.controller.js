@@ -1,5 +1,5 @@
 export class BoardController {
-  constructor ($firebaseArray, $location,$log, $stateParams,$document, Dashboard) {
+  constructor ($firebaseArray, $location,$log, $stateParams, Dashboard) {
 
     'ngInject';
 
@@ -15,7 +15,7 @@ export class BoardController {
     var authData = userRef.getAuth();
     var googleId = authData.google.id;
     var userId = "google:"+googleId;
-    anonymous = true;
+    var anonymous = true;
 
     this.plusLabel='';
     this.minusLabel='';
@@ -39,15 +39,15 @@ export class BoardController {
     this.onlineUsers = {};
 
     //CODE TO MAKE THE USER ANONYMOUS
-    anonymous = true;
+    var anonymous = true;
     this.toggle = function() {
       anonymous = !anonymous;
       if(!anonymous){
         userName = authData.google.displayName;
-        angular.element('.anonymous-toggle').css({"background-color":"#eeeeee","color":"black"});
+        $('.anonymous-toggle').css({"background-color":"#eeeeee","color":"black"});
       } else {
         userName = "anonymous";
-        angular.element('.anonymous-toggle').css({"background-color":"#6D6A68","color":"white"});
+        $('.anonymous-toggle').css({"background-color":"#6D6A68","color":"white"});
       }
     };
 
@@ -87,7 +87,7 @@ export class BoardController {
           let lastchildadded=snapshot.val();
           (new Firebase(roomURL + "/" + lastchildadded.key)).setPriority(1);
           let currPriority = 2;
-          let children = $document.getElementById("chat-messages-plus").childNodes;
+          let children = document.getElementById("chat-messages-plus").childNodes;
           for(var c in children) {
             if(children[c].childNodes[1] != undefined) {
               var uniqueMsgID = children[c].childNodes[1].getAttribute('id');
@@ -100,7 +100,7 @@ export class BoardController {
           let lastchildadded=snapshot.val();
           (new Firebase(roomURL + "/" + lastchildadded.key)).setPriority(1);
           let currPriority = 2;
-          let children = $document.getElementById("chat-messages-minus").childNodes;
+          let children = document.getElementById("chat-messages-minus").childNodes;
           for(var c in children) {
             if(children[c].childNodes[1] != undefined) {
               var uniqueMsgID = children[c].childNodes[1].getAttribute('id');
@@ -116,7 +116,7 @@ export class BoardController {
     };
 
     //CODE TO DISPLAY THE 5 SECOND NOTIFICATION FOR ANONYMITY
-    angular.element('#anonymousWarn').fadeIn().delay(5000).fadeOut();
+    $('#anonymousWarn').fadeIn().delay(5000).fadeOut();
 
     //CODE TO COUNT THE NO. OF LIKES ON A MESSAGE
     (new Firebase(roomURL)).on('child_added', (messagesObj) => {
@@ -159,16 +159,17 @@ export class BoardController {
     }
 
     //CODE TO ENABLE DRAG AND DROP OF STICKYs
-    angular.element("#chat-messages-plus").disableSelection();
-    angular.element("#chat-messages-minus").disableSelection();
-    angular.element("#chat-messages-plus").sortable({
+    $("#chat-messages-plus").disableSelection();
+    $("#chat-messages-minus").disableSelection();
+
+    $("#chat-messages-plus").sortable({
       start: function(event, ui) {
       },
       change: function(event, ui) {
       },
       update: function(event, ui) {
         var currPriority = 1;
-        var children = angular.element('.grab-handle').childNodes;
+        var children = $('.grab-handle').childNodes;
         for(var c in children) {
           if(children[c].childNodes[1] != undefined) {
             var uniqueMsgID = children[c].childNodes[1].getAttribute('id');
@@ -180,14 +181,15 @@ export class BoardController {
     });
 
 
-    angular.element("#chat-messages-minus").sortable({
+
+    $("#chat-messages-minus").sortable({
       start: function(event, ui) {
       },
       change: function(event, ui) {
       },
       update: function(event, ui) {
         var currPriority = 1;
-        var children = angular.element('.grab-handle').childNodes;
+        var children = $('.grab-handle').childNodes;
         for(var c in children) {
           if(children[c].childNodes[1] != undefined) {
             var uniqueMsgID = children[c].childNodes[1].getAttribute('id');
@@ -268,7 +270,7 @@ export class BoardController {
         return true;
     }
     this.getUserPic = function(userId){
-      if(this.userPic[userId] === angular.isUndefined)
+      if(this.userPic[userId] === undefined)
       {
         (new Firebase ("https://vyapi.firebaseio.com/users/" + userId+ "/google/profileImageURL")).once("value",(snapshot)=>{
           this.userPic[userId] = snapshot.val();
@@ -278,10 +280,14 @@ export class BoardController {
     }
 
     //CODE TO LIMIT THE CHARACTER IN TEXTAREA
-    angular.element('.sticky-textarea').keypress(function(event) {
+    $('.sticky-textarea').keypress(function(event) {
       if (event.keyCode == 13) {
         event.preventDefault();
       }
     });
   }
 }
+
+
+
+

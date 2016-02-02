@@ -1,5 +1,6 @@
 <div class="container-fluid board-container">
   <div class="row">
+    <p class="bg-success delete-confirmation">Message Deleted</p>
     <div class="col-md-6">
       <h2 class="group-header">{{board.plusLabel}}</h2>
       <form ng-submit="board.submit('plus')">
@@ -35,7 +36,7 @@
                 <!-- <img class = "sticky-user-image img-circle" title="{{msg.from}} height="25em" width="25em" " ng-src="{{board.userPic}}"> -->
                 <img ng-if=" !board.anonymousImage(msg) " class = "sticky-user-image pull-right" title="{{msg.from}}" ng-src="{{ board.getUserPic(msg.uid) }}">
                 <!-- <i ng-if= " board.anonymousImage(msg) " title= " Anonymous " class="fa fa-odnoklassniki"></i>  -->
-                <button class="btn btn-default btn-xs pull-right sticky__head--anonymous-sticky" ng-if="board.anonymousImage(msg)" ><i class="fa fa-user-secret fa-lg"></i></button>
+                <span class="pull-right sticky__head--anonymous-sticky" ng-if="board.anonymousImage(msg)" ><i class="fa fa-user-secret fa-lg"></i></span>
               </div>
             </div>
           </div>
@@ -77,12 +78,12 @@
                 <button class="btn btn-danger btn-xs like-btn" ng-click="board.like(msg);"><i class="fa fa-thumbs-up"></i> {{ msg.dl }} likes</button>
                 <img ng-if=" !board.anonymousImage(msg) " class = "sticky-user-image pull-right" title="{{msg.from}}" ng-src="{{ board.getUserPic(msg.uid) }}">
                 <!-- <i ng-if= " board.anonymousImage(msg) " title= " Anonymous " class="fa fa-odnoklassniki"></i>  -->
-                <button class="btn btn-default btn-xs pull-right sticky__head--anonymous-sticky" ng-if="board.anonymousImage(msg)" ><i class="fa fa-user-secret fa-lg"></i></button>
+                <span class="pull-right sticky__head--anonymous-sticky" ng-if="board.anonymousImage(msg)" ><i class="fa fa-user-secret fa-lg"></i></span>
               </div>
             </div>
           </div>
-          </li>
-        </ul>
-      </div>
+        </li>
+      </ul>
     </div>
   </div>
+</div>
