@@ -205,6 +205,9 @@ export class BoardController {
 
     //CODE TO DELETE THE MESSAGE POSTED
     this.delete=function(msg,temp){
+      var result=window.confirm("This card will be deleted.Are you sure?");
+      if(result)
+      {
       var ide=msg.$id;
       var refe = new Firebase("https://vyapi.firebaseio.com/rooms/"+roomID);
       var dash;
@@ -229,6 +232,7 @@ export class BoardController {
 
       $("#delete-confirmation").show();
       setTimeout(function() { $("#delete-confirmation").hide(); }, 1200);
+    }
     };
 
     //CODE TO SHOW THE EDIT BUTTON ONLY ON SELF STICKYs
