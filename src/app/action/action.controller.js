@@ -54,6 +54,10 @@ export class ActionController {
 
   remove(item)
   {
+     var result=window.confirm("This action item will be deleted.Are you sure?");
+      if(result)
+      {
     this.items.$remove(item);
+  }
   }
 }
