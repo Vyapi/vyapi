@@ -146,21 +146,23 @@ export class BoardController {
 
     //handle like button click for a message
     this.like = function(msg) {
-      let msgLike = (new Firebase(roomURL)).child(msg.$id + "/like/" +authData.uid);
-      msgLike.once("value" , function(value){
-        if(value.exists()){
-          msgLike.remove();
-        }
-        else{
-          msgLike.set(1);
-          msgLike.off();
-        }
-      });
-
-      let msgLikes = (new Firebase(roomURL)).child(msg.$id + "/like/");
-      msgLikes.once('value', function(snapshot) {
-        msg.noOfLikes=snapshot.numChildren();
-      });
+      let googleId = msg.$id;
+      if(msg.uid != userId){
+        let msgLike = (new Firebase(roomURL)).child(msg.$id + "/like/" +authData.uid);
+        msgLike.once("value" , function(value){
+          if(value.exists()){
+              msgLike.remove();
+          }
+          else{
+            msgLike.set(1);
+            msgLike.off();
+          }
+        });
+        let msgLikes = (new Firebase(roomURL)).child(msg.$id + "/like/");
+          msgLikes.once('value', function(snapshot) {
+          msg.noOfLikes=snapshot.numChildren();
+        });
+      }
     }
 
     //CODE TO ENABLE DRAG AND DROP OF STICKYs
