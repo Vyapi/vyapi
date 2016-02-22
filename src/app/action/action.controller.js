@@ -47,8 +47,9 @@ export class ActionController {
 
   modify(person)
   {
+    console.log(person);
     this.clog.log('modify'+person.name);
-    this.myDataRef.child(person.key).set({task:person.task,name:person.name});
+    this.myDataRef.child(person.$id).set({task:person.task,name:person.name});
     this.person=person;
   }
 
