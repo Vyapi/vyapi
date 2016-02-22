@@ -151,15 +151,16 @@ export class BoardController {
         let msgLike = (new Firebase(roomURL)).child(msg.$id + "/like/" +authData.uid);
         msgLike.once("value" , function(value){
           if(value.exists()){
-              msgLike.remove();
+            msgLike.remove();
           }
           else{
             msgLike.set(1);
             msgLike.off();
           }
         });
+
         let msgLikes = (new Firebase(roomURL)).child(msg.$id + "/like/");
-          msgLikes.once('value', function(snapshot) {
+        msgLikes.once('value', function(snapshot) {
           msg.noOfLikes=snapshot.numChildren();
         });
       }
@@ -297,7 +298,3 @@ export class BoardController {
     });
   }
 }
-
-
-
-
