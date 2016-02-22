@@ -146,21 +146,23 @@ export class BoardController {
 
     //handle like button click for a message
     this.like = function(msg) {
-      let msgLike = (new Firebase(roomURL)).child(msg.$id + "/like/" +authData.uid);
-      msgLike.once("value" , function(value){
-        if(value.exists()){
-          msgLike.remove();
-        }
-        else{
-          msgLike.set(1);
-          msgLike.off();
-        }
-      });
-
-      let msgLikes = (new Firebase(roomURL)).child(msg.$id + "/like/");
-      msgLikes.once('value', function(snapshot) {
-        msg.noOfLikes=snapshot.numChildren();
-      });
+      let googleId = msg.$id;
+      if(msg.uid != userId){
+        let msgLike = (new Firebase(roomURL)).child(msg.$id + "/like/" +authData.uid);
+        msgLike.once("value" , function(value){
+          if(value.exists()){
+              msgLike.remove();
+          }
+          else{
+            msgLike.set(1);
+            msgLike.off();
+          }
+        });
+        let msgLikes = (new Firebase(roomURL)).child(msg.$id + "/like/");
+          msgLikes.once('value', function(snapshot) {
+          msg.noOfLikes=snapshot.numChildren();
+        });
+      }
     }
 
     //CODE TO ENABLE DRAG AND DROP OF STICKYs
@@ -205,6 +207,9 @@ export class BoardController {
 
     //CODE TO DELETE THE MESSAGE POSTED
     this.delete=function(msg,temp){
+      var result=window.confirm("This card will be deleted.Are you sure?");
+      if(result)
+      {
       var ide=msg.$id;
       var refe = new Firebase("https://vyapi.firebaseio.com/rooms/"+roomID);
       var dash;
@@ -229,6 +234,7 @@ export class BoardController {
 
       $("#delete-confirmation").show();
       setTimeout(function() { $("#delete-confirmation").hide(); }, 1200);
+    }
     };
 
     //CODE TO SHOW THE EDIT BUTTON ONLY ON SELF STICKYs
