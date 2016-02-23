@@ -1,5 +1,5 @@
 export class BoardController {
-  constructor ($firebaseArray, $location,$log, $stateParams, Dashboard) {
+  constructor ($firebaseArray, $location,$log, $stateParams, Dashboard, $timeout) {
 
     'ngInject';
 
@@ -47,12 +47,12 @@ export class BoardController {
         userName = authData.google.displayName;
 
         $("#visible-confirmation").show();
-        setTimeout(function() { $("#visible-confirmation").hide(); }, 1500);
+        $timeout(function() { $("#visible-confirmation").hide(); }, 1500);
       } else {
         userName = "anonymous";
 
         $("#anonymous-confirmation").show();
-        setTimeout(function() { $("#anonymous-confirmation").hide(); }, 1500);
+        $timeout(function() { $("#anonymous-confirmation").hide(); }, 1500);
       }
     };
 
@@ -92,7 +92,7 @@ export class BoardController {
           let lastchildadded=snapshot.val();
           (new Firebase(roomURL + "/" + lastchildadded.key)).setPriority(1);
           let currPriority = 2;
-          let children = document.getElementById("chat-messages-plus").childNodes;
+          let children = $document.getElementById("chat-messages-plus").childNodes;
           for(var c in children) {
             if(children[c].childNodes[1] != undefined) {
               var uniqueMsgID = children[c].childNodes[1].getAttribute('id');
@@ -105,7 +105,7 @@ export class BoardController {
           let lastchildadded=snapshot.val();
           (new Firebase(roomURL + "/" + lastchildadded.key)).setPriority(1);
           let currPriority = 2;
-          let children = document.getElementById("chat-messages-minus").childNodes;
+          let children = $document.getElementById("chat-messages-minus").childNodes;
           for(var c in children) {
             if(children[c].childNodes[1] != undefined) {
               var uniqueMsgID = children[c].childNodes[1].getAttribute('id');
@@ -207,7 +207,7 @@ export class BoardController {
 
     //CODE TO DELETE THE MESSAGE POSTED
     this.delete=function(msg,temp){
-      var result=window.confirm("This card will be deleted.Are you sure?");
+      var result=$window.confirm("This card will be deleted.Are you sure?");
       if(result)
       {
       var ide=msg.$id;
@@ -233,7 +233,7 @@ export class BoardController {
       }
 
       $("#delete-confirmation").show();
-      setTimeout(function() { $("#delete-confirmation").hide(); }, 1200);
+      $timeout(function() { $("#delete-confirmation").hide(); }, 1200);
     }
     };
 
@@ -280,7 +280,7 @@ export class BoardController {
         return true;
     }
     this.getUserPic = function(userId){
-      if(this.userPic[userId] === undefined)
+      if(angular.isUndefined(this.userPic[userId]))
       {
         (new Firebase ("https://vyapi.firebaseio.com/users/" + userId+ "/google/profileImageURL")).once("value",(snapshot)=>{
           this.userPic[userId] = snapshot.val();
