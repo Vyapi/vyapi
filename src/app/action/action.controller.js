@@ -39,6 +39,10 @@ export class ActionController {
     this.items.$add({task:this.text,name:this.person});
     this.text = '';
   }
+  
+  saveEdit(item) {
+    (new Firebase('https://vyapi.firebaseio.com/action/'+this.roomID+'/'+item.$id+'/task/')).set(item.task);
+  }
 
   change(person)
   {
@@ -47,17 +51,16 @@ export class ActionController {
 
   modify(person)
   {
-    this.clog.log('modify'+person.name);
     this.myDataRef.child(person.$id).set({task:person.task,name:person.name});
     this.person=person;
   }
 
   remove(item)
   {
-     var result=window.confirm("This action item will be deleted.Are you sure?");
+     var result=$window.confirm("This action item will be deleted.Are you sure?");
       if(result)
       {
-    this.items.$remove(item);
-  }
+        this.items.$remove(item);
+      }
   }
 }
