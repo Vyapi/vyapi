@@ -27,7 +27,7 @@
               </div>
               <div class="sticky__body">
                 <div ng-if="board.isOwner(msg.uid)" >
-                  <textarea class="sticky-textarea" id="stickyTextarea" ng-model="msg.text" ng-change="board.saveEdit(msg)" ng-model-options='{ debounce: 1000 }' maxlength="135">{{ msg.text }}</textarea>
+                  <textarea class="sticky-textarea" ng-model="msg.text" ng-change="board.saveEdit(msg)" ng-model-options='{ debounce: 1000 }' maxlength="135">{{ msg.text }}</textarea>
                 </div>
                 <div ng-if="!board.isOwner(msg.uid)" >
                   <p class="sticky-text">{{ msg.text }}</p>
@@ -70,7 +70,7 @@
               </div>
               <div class="sticky__body">
                 <div ng-if="board.isOwner(msg.uid)" >
-                  <textarea class="sticky-textarea" id="stickyTextarea" ng-model="msg.text" ng-change="board.saveEdit(msg)" ng-model-options='{ debounce: 1000 }' maxlength="135" >{{ msg.text }}</textarea>
+                  <textarea class="sticky-textarea" ng-model="msg.text" ng-change="board.saveEdit(msg)" ng-model-options='{ debounce: 1000 }' maxlength="135" >{{ msg.text }}</textarea>
                 </div>
                 <div ng-if="!board.isOwner(msg.uid)" >
                   <p class="sticky-text">{{ msg.text }}</p>
