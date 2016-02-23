@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Droid+Sans);
 
 img.screenshot--shadow {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -15,4 +16,9 @@ img.screenshot--margin {
   width: 100%;
   padding-top:8%;
   color: white;
+}
+.brown-text {
+  color: #452A22;
+  font-family: 'Droid Sans', sans-serif;
+  font-weight: lighter;
 }
