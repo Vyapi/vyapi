@@ -7,12 +7,10 @@
           <div class="input-group">
             <input ng-model="action.text" class="form-control userText form-control-inverted ng-valid ng-dirty ng-touched" placeholder="Type an action...">
             <div class="input-group-btn">
-              <span class="form-control">
                 <select type="button" class="btn btn-default dropdown-toggle" ng-options="person for person in action.assignee" ng-model="person" ng-change="action.change(person)" style="">
                   <option value="" class="dropdown-menu dropdown-menu-right">Assignee</option>
                   <span class="caret"></span>
                 </select>
-              </span>
             </div><!-- /btn-group -->
           </div>
         </div>
@@ -26,7 +24,7 @@
               <i class="fa fa-times fa-lg pull-right button-id" ng-click="action.remove(item)"><span class="Done"></span></i>
             </div>
             <div class="stickyAction__body">
-              <p class="usertext">{{ item.task }}</p>
+              <textarea class="usertext" ng-change="action.saveEdit(item)" ng-model-options='{ debounce: 1000 }' ng-model='item.task'></textarea>
             </div>
           </article>
         </li>
