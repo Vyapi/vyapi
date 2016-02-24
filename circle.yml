@@ -4,7 +4,7 @@ dependencies:
     - npm install -g firebase-tools
     - bower install
 
-test:
+test:  
   override:
 
 deployment:
@@ -12,3 +12,7 @@ deployment:
     branch: master
     commands:
       - firebase deploy --token "-K8NQX-IOHSbncOIwSal|a19b96123552661ca03db64eb0ff6da0"
+  staging:
+    branch: develop
+    heroku:
+      appname: vyapiretro
