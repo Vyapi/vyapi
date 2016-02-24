@@ -8,6 +8,15 @@ export class BoardController {
     var roomID = $location.path().split("/")[2];
     var roomId = $stateParams.roomKey;
     this.anonymous = true;
+
+    var notificationIDs = ["#delete-confirmation", "#anonymous-confirmation", "#visible-confirmation", "#like-denied"];
+    this.hideAllNotifications = function() {
+      notificationIDs.forEach(function(id) {
+        $(id).hide();
+      });
+    }
+    this.hideAllNotifications();
+
     $("#delete-confirmation").hide();
     $("#anonymous-confirmation").hide();
     $("#visible-confirmation").hide();
@@ -44,14 +53,14 @@ export class BoardController {
     //CODE TO MAKE THE USER ANONYMOUS
     this.toggle = function() {
       this.anonymous = !this.anonymous;
-      if(!this.anonymous){
+      this.hideAllNotifications();
+      
+      if(!this.anonymous) {
         userName = authData.google.displayName;
-
         $("#visible-confirmation").show();
         $timeout(function() { $("#visible-confirmation").hide(); }, 2500);
       } else {
         userName = "anonymous";
-
         $("#anonymous-confirmation").show();
         $timeout(function() { $("#anonymous-confirmation").hide(); }, 2500);
       }
@@ -142,6 +151,7 @@ export class BoardController {
     this.like = function(msg) {
       let googleId = msg.$id;
       if(msg.uid == userId) {
+        this.hideAllNotifications();
         $("#like-denied").show();
         $timeout(function() { $("#like-denied").hide(); }, 2500);
       }
@@ -231,6 +241,7 @@ export class BoardController {
         this.msgRef.child(messageId).remove();
       }
 
+      this.hideAllNotifications();
       $("#delete-confirmation").show();
       $timeout(function() { $("#delete-confirmation").hide(); }, 2500);
     }
