@@ -5,3 +5,6 @@ coverage/
 .idea/
 .tmp/
 dist/
+npm-debug.log
+.DS_Store
+/*.env

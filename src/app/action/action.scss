@@ -10,7 +10,7 @@
 }
 
 .stickyAction {
-  width:95%;
+  width:99%;
   min-height: 50px;
   max-height: 80px;
   margin: 0.5em 0.8em 0.8em 0.5em;
@@ -78,12 +78,11 @@
 .stickyAction:hover .button-id {
   visibility: visible;
 }
-.actionboard-padding {
-  padding: 0%;
-}
 
 .stickyAction__head {
   padding: 3px;
 }
 
-
+.action-container {
+  padding: 0%
+}
