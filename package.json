@@ -2,8 +2,6 @@
   "name": "vyapi",
   "version": "0.0.0",
   "main": "server.js",
-  "devDependencies": {
-},
   "dependencies": {
     "bootstrap": "3.3.6",
     "underscore": "^1.8.3",
@@ -21,6 +19,7 @@
     "del": "~2.0.2",
     "ejs": "~1.0.0",
     "express": "^4.9.8",
+    "estraverse": "~4.1.0",
     "eslint-loader": "~1.1.0",
     "eslint-plugin-angular": "~0.12.0",
     "gulp": "~3.9.0",
@@ -66,8 +65,9 @@
     "uglify-save-license": "~0.4.1",
     "webpack-stream": "~2.1.1",
     "wiredep": "~2.2.2",
-    "wrench": "~1.5.8",
-    "estraverse": "~4.1.0"
+    "wrench": "~1.5.8"
+  },
+  "devDependencies": {
   },
   "scripts": {
     "preinstall": "bower install",
@@ -75,7 +75,6 @@
     "start": "node server.js",
     "test" : "gulp test"
   },
-
   "engines": {
     "node": ">=0.10.0"
   }
