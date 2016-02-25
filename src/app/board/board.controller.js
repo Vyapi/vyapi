@@ -108,16 +108,7 @@ export class BoardController {
     (new Firebase(roomURL)).on('child_added', (messagesObj) => {
       (new Firebase(encodeURI(roomURL + "/" + messagesObj.key() + "/like"))).on('value', (userId) => {
           let fredNameRef = new Firebase(roomURL + "/" + messagesObj.key());
-          // Modify the 'first' and 'last' children, but leave other data at fredNameRef unchanged
-          let decorationStrPre = "", decorationStrPost = "";
-          
-          if( userId.numChildren() > 100)
-            decorationStrPost = "+";
-          else if(userId.numChildren() > 1)
-            decorationStrPost = " likes";
-          else
-            decorationStrPost = " like";
-          fredNameRef.update({ dl: decorationStrPre + userId.numChildren() + decorationStrPost });
+          fredNameRef.update({ dl: userId.numChildren() });
       });
     });
 
