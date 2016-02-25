@@ -33,9 +33,7 @@ export class DashboardController {
 			}
 		};
 		this.removeRoom = function(roomKey){
-			var result = $window.confirm("This room will be deleted.Are you sure?");
-			if(result)
-              this.remove(Dashboard,roomKey);
+			this.remove(Dashboard,roomKey);
 		};
 		this.editRoom = function(roomKey){
 			this.edit(Dashboard,roomKey);
