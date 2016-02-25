@@ -9,19 +9,21 @@ export class FireConnect{
   }
 
   connect(path='/'){
-    this.ref = new Firebase(`https://vyapi.firebaseio.com${path}`);
-    this.authObj = this.fa(this.ref);
-    this.clog.info(`authObject returned, connection made to ${path}`);
+    this.authObj = this.fa(this.getRef(path));
+    //this.clog.info(`connect called`);
     return this.authObj;
   }
 
-  getRef(){
-    this.clog.info("reference to the firebase auth returned");
-    return this.ref;
+  getRef(path='/'){
+    return new Firebase(`${this.firebaseURL}${path}`);
   }
 
-  getUserAuth(){
-    this.clog.info("auth status of user returned");
-    return this.authData;
+  getUserAuthObj(path='/'){
+    if(this.authObj == null) {
+      //this.clog.info(`fresh auth fetch`);
+      this.authObj = this.fa(this.getRef(path));
+    }
+    //this.clog.info(`CACHED auth send`);
+    return this.authObj;
   }
 }

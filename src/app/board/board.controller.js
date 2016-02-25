@@ -1,5 +1,5 @@
 export class BoardController {
-  constructor ($firebaseArray, $location,$log, $stateParams, Dashboard, $timeout) {
+  constructor ($firebaseArray, $location,$log, $stateParams, Dashboard, $timeout, $window) {
 
     'ngInject';
 
@@ -17,13 +17,6 @@ export class BoardController {
     }
     this.hideAllNotifications();
 
-    $("#delete-confirmation").hide();
-    $("#anonymous-confirmation").hide();
-    $("#visible-confirmation").hide();
-    $("#like-denied").hide();
-    $log.log("roomID is " + roomID);
-
-
     var userRef = new Firebase("https://vyapi.firebaseio.com/messages");
     var authData = userRef.getAuth();
     var googleId = authData.google.id;
@@ -34,13 +27,10 @@ export class BoardController {
     this.roomName='';
     var roomRef= new Firebase("https://vyapi.firebaseio.com/rooms/" + roomID);
     roomRef.on("value",(snapshot)=>{
-      console.log(snapshot.val());
       let labelData = snapshot.val();
       this.roomName = labelData.roomName;
       this.plusLabel = labelData.plusLabel;
       this.minusLabel = labelData.minusLabel;
-      console.log(this.plusLabel);
-      console.log(this.minusLabel);
     });
 
     var roomURL= "https://vyapi.firebaseio.com/messages/" + roomID;
@@ -81,11 +71,10 @@ export class BoardController {
         num = parseInt(snapshot.val());
         num++;
         if(id =='plus')
-         ref.update({pos : num});
-       else
-         ref.update({neg : num});
-
-     });
+          ref.update({pos : num});
+        else
+          ref.update({neg : num});
+      });
 
       if (userMessage) {
         if(!userName) userName = "anonymous";
@@ -98,34 +87,16 @@ export class BoardController {
           lane: id,
           dl: 0
         });
-        (new Firebase("https://vyapi.firebaseio.com/messages/" + roomID)).endAt().limit(1).on('child_added',(snapshot)=>{
-          let lastchildadded=snapshot.val();
-          (new Firebase(roomURL + "/" + lastchildadded.key)).setPriority(1);
-          let currPriority = 2;
-          let children = $document.getElementById("chat-messages-plus").childNodes;
-          for(var c in children) {
-            if(children[c].childNodes[1] != undefined) {
-              var uniqueMsgID = children[c].childNodes[1].getAttribute('id');
-              (new Firebase(roomURL + "/" + uniqueMsgID)).setPriority(currPriority);
-              currPriority++;
-            }
-          }
-        });
-        (new Firebase("https://vyapi.firebaseio.com/messages/" + roomID)).endAt().limit(1).on('child_added',(snapshot)=>{
-          let lastchildadded=snapshot.val();
-          (new Firebase(roomURL + "/" + lastchildadded.key)).setPriority(1);
-          let currPriority = 2;
-          let children = $document.getElementById("chat-messages-minus").childNodes;
-          for(var c in children) {
-            if(children[c].childNodes[1] != undefined) {
-              var uniqueMsgID = children[c].childNodes[1].getAttribute('id');
-              (new Firebase(roomURL + "/" + uniqueMsgID)).setPriority(currPriority);
-              currPriority++;
-            }
-          }
-        });
-        this.userMessagePlus = '';
-        this.userMessageMinus = '';
+
+        var children = $(`#chat-messages-${id} .sticky`);
+        for(var c = 0; c < children.length; ++c) {
+          (new Firebase(roomURL + "/" + children[c].id)).setPriority(c);
+        }
+        
+        if(id == "plus")
+          this.userMessagePlus = '';
+        else if(id == "minus" )
+          this.userMessageMinus = '';
 
       }
     };
@@ -138,12 +109,15 @@ export class BoardController {
       (new Firebase(encodeURI(roomURL + "/" + messagesObj.key() + "/like"))).on('value', (userId) => {
           let fredNameRef = new Firebase(roomURL + "/" + messagesObj.key());
           // Modify the 'first' and 'last' children, but leave other data at fredNameRef unchanged
-          let decorationStr = "";
-          if(userId.numChildren() > 1)
-            decorationStr = " likes";
+          let decorationStrPre = "", decorationStrPost = "";
+          
+          if( userId.numChildren() > 100)
+            decorationStrPost = "+";
+          else if(userId.numChildren() > 1)
+            decorationStrPost = " likes";
           else
-            decorationStr = " like";
-          fredNameRef.update({ dl: userId.numChildren() + decorationStr });
+            decorationStrPost = " like";
+          fredNameRef.update({ dl: decorationStrPre + userId.numChildren() + decorationStrPost });
       });
     });
 
@@ -179,36 +153,53 @@ export class BoardController {
     $("#chat-messages-minus").disableSelection();
 
     $("#chat-messages-plus").sortable({
-      start: function(event, ui) {
+      start: function(event, ui) { //dragging started
+        ui.item.startHtml = ui.item.html();
+        ui.item.html('<div style="display: inline-block;" class="zoom" >' + ui.item.startHtml + '</div>');
       },
-      change: function(event, ui) {
+      stop: function(event, ui) {
+        ui.item.html(ui.item.startHtml);
       },
-      update: function(event, ui) {
+      change: function(event, ui) { //every time ordering changes
+      },
+      revert: true, //smooth come back when sticky move fails
+      cursor: "move", //change cursor while dragging
+      update: function(event, ui) { //sort operation complete
+        ui.item.html(ui.item.startHtml);
+        //var stickyId = ($.parseHTML(ui.item.startHtml))[1].id;
+        //console.log(stickyId);
         var currPriority = 1;
-        var children = $('.grab-handle').childNodes;
+        var children = $("#chat-messages-plus .sticky");
         for(var c in children) {
-          if(children[c].childNodes[1] != undefined) {
-            var uniqueMsgID = children[c].childNodes[1].getAttribute('id');
-            (new Firebase(roomURL + "/" + uniqueMsgID)).setPriority(currPriority);
-            currPriority++;
-          }
+          (new Firebase(roomURL + "/" + children[c].id)).setPriority(currPriority);
+          currPriority++;
         }
       }
     });
 
     $("#chat-messages-minus").sortable({
       start: function(event, ui) {
+        ui.item.startHtml = ui.item.html();
+        ui.item.html('<div style="display: inline-block;" class="zoom" >' + ui.item.startHtml + '</div>');
+      },
+      stop: function(event, ui) {
+        ui.item.html(ui.item.startHtml);
       },
       change: function(event, ui) {
       },
+      revert: true,
+      cursor: "move",
       update: function(event, ui) {
+        ui.item.html(ui.item.startHtml);
         var currPriority = 1;
-        var children = $('.grab-handle').childNodes;
+        var children = $('#chat-messages-minus')[0].childNodes;
         for(var c in children) {
-          if(children[c].childNodes[1] != undefined) {
-            var uniqueMsgID = children[c].childNodes[1].getAttribute('id');
-            (new Firebase(roomURL + "/" + uniqueMsgID)).setPriority(currPriority);
-            currPriority++;
+          if(children[c].nodeName == "LI") {
+            var uniqueMsgID = children[c].childNodes[1].getAttribute("id");
+            if(uniqueMsgID != undefined) {
+              (new Firebase(roomURL + "/" + uniqueMsgID)).setPriority(currPriority);
+              currPriority++;
+            }
           }
         }
       }

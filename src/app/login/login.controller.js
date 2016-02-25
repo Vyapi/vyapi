@@ -1,27 +1,27 @@
 export class LoginController{
-  constructor($log,$location,Auth,FireData){
+  constructor($log,Auth,FireData, $state){
     'ngInject';
     this.auth = Auth;
     this.clog = $log;
-    this.location = $location;
     this.fd = FireData;
+    this.state = $state;
 
     //check if user is logged in, and redirect accordingly
     var auth = this.fd.getAuthData();
     if(auth){
-      $location.path('/dashboard');
+      this.state.go('dashboard');
     }
 
   }
+
   firebaseAuthLogin(){
-    var status = this.auth.login();
-    this.clog.log(status);
-    if(status){
-      this.clog.log("Logged in");
-      this.location.path('/dashboard');
-    }else{
-      this.clog.log("Not logged in, error");
-    }
+    this.auth.login()
+      .then(response => {
+        this.state.go('dashboard');
+      })
+      .catch(error => {
+        this.clog.error("Error in login\n" + error);
+      });
   }
 
   firebaseAuthLogout(){

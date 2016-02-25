@@ -1,41 +1,41 @@
 export class Auth{
-	constructor(FireData,FireConnect,$log,$location){
-		'ngInject';
-		this.clog = $log;
-		this.fireData = FireData;
-		this.fireConnect = FireConnect;
-		this.location = $location;
-	}
+    constructor(FireData,FireConnect,$log,$location){
+        'ngInject';
+        this.clog = $log;
+        this.fireData = FireData;
+        this.fireConnect = FireConnect;
+        this.location = $location;
+    }
 
-	login(){
-		var auth = this.fireData.authExist();
-		if(auth){
-			this.clog.log("User is alredy logged in");
-			this.location.path('/dashboard');
-		}
-		else{
-			var objLocal = this.fireConnect.connect();
-			var dataLocal = objLocal.$getAuth();
-			var ref = this.fireConnect.getRef();
-			objLocal.$authWithOAuthPopup("google").then((dataLocal) =>{
-				console.log('this is the data'+dataLocal);
-				ref.child("users/"+ dataLocal.uid).set(dataLocal);
-				this.location.path('/dashboard');
-				return "success";
-			}).catch(function(error){
-				this.clog.error("Authentication failed:", error);
-				return false;
-			});
+    login(){
+        return new Promise((resolve, reject) => {
+          var auth = this.fireData.authExist();
+          if(auth){
+              //this.clog.log("User is alredy logged in");
+              resolve(true);
+          }
+          else{
+              var objLocal = this.fireConnect.getUserAuthObj();
+              var dataLocal = objLocal.$getAuth();
+              var ref = this.fireConnect.getRef();
+              objLocal.$authWithOAuthPopup("google").then((dataLocal) =>{
+                  //console.log('this is the data');
+                  //console.log(dataLocal);
+                  ref.child("users/"+ dataLocal.uid).set(dataLocal);
+                  resolve(true);
+              }).catch(function(error){
+                  reject(error);
+              });
+          }
+        });
+    }
 
-		}
-	}
-
-	logout(){
-		var objLocal = this.fireConnect.connect();
-		var auth = this.fireData.authExist();
-		if(auth){
-			objLocal.$unauth();
-		}
-		return "success";
-	}
+    logout(){
+        var objLocal = this.fireConnect.getUserAuthObj();
+        var auth = this.fireData.authExist();
+        if(auth){
+            objLocal.$unauth();
+        }
+        return true;
+    }
 }

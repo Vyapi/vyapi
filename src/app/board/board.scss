@@ -5,7 +5,7 @@
 .delete-confirmation, .visible-confirmation, .anonymous-confirmation {
   position: fixed;
   left: 45%;
-  z-index: 1;
+  z-index: 10;
   display: inline-block;
   text-align: center;
   border-radius: 10px;
@@ -56,6 +56,7 @@
 }
 
 .sticky-note {
+  cursor: move;
   flex: 0 1 auto;
   align-self: auto;
   max-width: 140px;
@@ -77,6 +78,7 @@
 }
 
 .sticky__head {
+  cursor: move;
   max-height: 25px;
   min-height: 25px;
   vertical-align: middle;
@@ -177,4 +179,12 @@
 
 .board-container {
   padding: 0;
+}
+
+.zoom {
+  -webkit-transform:scale(0.9);
+  -ms-transform:scale(0.9);
+  -o-transform:scale(0.9);
+  -moz-transform:scale(0.9);
+  transform:scale(0.9);
 }

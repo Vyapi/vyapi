@@ -13,14 +13,15 @@ import { LoginController } from './login/login.controller';
 import { FireConnect } from '../app/components/data/connectdb.service';
 import { FireData } from '../app/components/data/data.service';
 
+
 angular.module('vyapi', ['ui.router', 'toastr', 'firebase', 'ngAnimate','ngCookies','ngCsv'])
 
   .config(config)
   .config(routerConfig)
   .run(runBlock)
-  .service('Dashboard',Dashboard)
   .service('FireConnect',FireConnect)
   .service('FireData',FireData)
+  .service('Dashboard',Dashboard)
   .service('Auth',Auth)
   .controller('MainController', MainController)
   .controller('UserController', UserController)
