@@ -207,7 +207,7 @@ export class BoardController {
 
     //CODE TO DELETE THE MESSAGE POSTED
     this.delete=function(msg,temp){
-      var result=$window.confirm("This card will be deleted.Are you sure?");
+      var result=$window.confirm("This card will be deleted. Are you sure?");
       if(result)
       {
       var ide=msg.$id;
