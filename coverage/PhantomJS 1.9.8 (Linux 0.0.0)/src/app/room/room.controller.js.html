@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/app/room/room.controller.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">all files</a> / <a href="index.html">src/app/room/</a> room.controller.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">20.15% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>27/134</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">35.71% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>10/28</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">40% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>6/15</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">2% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>2/100</span>
+      </div>
+      <div class='fl pad1y'>
+        <span class="strong">7 statements, 2 functions, 5 branches</span>
+        <span class="quiet">Ignored</span>  &nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export class RoomController {
+<span class="fstat-no" title="function not covered" >  constructor ($firebaseAuth, $stateParams, $scope,$log,Auth,$location,Dashboard) <span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >{</span></span></span></span></span></span></span>
+<span class="cstat-no" title="statement not covered" >    'ngInject';</span>
+<span class="cstat-no" title="statement not covered" >    this.auth = Auth;</span>
+<span class="cstat-no" title="statement not covered" >    this.location = $location;</span>
+<span class="cstat-no" title="statement not covered" >    this.clog = $log;</span>
+<span class="cstat-no" title="statement not covered" >    $scope.getview=null;</span>
+<span class="cstat-no" title="statement not covered" >    $log.info(`in room controller in room ${$stateParams.roomKey }`);</span>
+<span class="cstat-no" title="statement not covered" >    $</span>log.log($stateParams.roomKey);
+&nbsp;
+    //console.log("my code!");
+    this.roomLabel = '';
+<span class="cstat-no" title="statement not covered" >    let roomK = $stateParams.roomKey;</span>
+<span class="cstat-no" title="statement not covered" >    console.log(roomK);</span>
+<span class="cstat-no" title="statement not covered" >    let roomRef = new Firebase("https://vyapi.firebaseio.com/rooms/"+roomK);</span>
+<span class="cstat-no" title="statement not covered" >    r</span>oomRef.on("value",<span class="fstat-no" title="function not covered" >(snapshot)=&gt;{</span>
+<span class="cstat-no" title="statement not covered" >      console.log(snapshot.val());</span>
+<span class="cstat-no" title="statement not covered" >      let labelData = snapshot.val();</span>
+<span class="cstat-no" title="statement not covered" >      this.roomLabel = labelData.roomName;</span>
+<span class="cstat-no" title="statement not covered" >      console.log(this.roomLabel);</span>
+    });
+    //console.log("my code ends!" + roomRef);
+&nbsp;
+    var keys = [];
+<span class="cstat-no" title="statement not covered" >    var key;</span>
+<span class="cstat-no" title="statement not covered" >    t</span>his.messages= {}; // pr
+    this.action={};// pr
+    this.finalArray=[]; // pr
+		this.userPic = '';
+<span class="cstat-no" title="statement not covered" >		let userPromise = Dashboard.getUserPic(Dashboard.getUserID());</span>
+<span class="cstat-no" title="statement not covered" >		userPromise.on("value",<span class="fstat-no" title="function not covered" >(snapshot)=&gt;{</span></span>
+<span class="cstat-no" title="statement not covered" >			this.userPic = s</span>napshot.val().google.profileImageURL;
+			//console.log("hi",this.userPic);
+		});
+<span class="cstat-no" title="statement not covered" >    var userRef = new Firebase("https://vyapi.firebaseio.com/rooms/");</span>
+<span class="cstat-no" title="statement not covered" >    userRef.on('value',<span class="fstat-no" title="function not covered" >(snap)=&gt;<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >{</span></span></span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      f</span>or (key in snap.val()) {
+<span class="cstat-no" title="statement not covered" >        i</span>f (snap.val().hasOwnProperty(key)) {
+<span class="cstat-no" title="statement not covered" >          keys.push(key);</span>
+        }
+      }
+      //console.log(keys[0]);
+      var flag=0;
+<span class="cstat-no" title="statement not covered" >      var roomId =$</span>stateParams.roomKey;
+      //console.log(roomId);
+      for(key in keys)
+      {
+<span class="cstat-no" title="statement not covered" >        i</span>f(keys[key]===roomId)
+        {
+<span class="cstat-no" title="statement not covered" >          $log.log("success");</span>
+<span class="cstat-no" title="statement not covered" >          flag=1;</span>
+<span class="cstat-no" title="statement not covered" >          break;</span>
+        }
+      }
+<span class="cstat-no" title="statement not covered" >      i</span>f(flag==0)
+      {
+<span class="cstat-no" title="statement not covered" >        $scope.getview=true;</span>
+      }
+&nbsp;
+    });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var roomId =$stateParams.roomKey;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var ref = new Firebase("https://vyapi.firebaseio.com/messages/"+roomId);</span>
+<span class="cstat-no" title="statement not covered" >    ref.on("value",<span class="fstat-no" title="function not covered" >(snapshot)=&gt;<span class="cstat-no" title="statement not covered" >{</span></span></span>
+<span class="cstat-no" title="statement not covered" >      this.messages = snapshot.val();</span>
+<span class="cstat-no" title="statement not covered" >      t</span>his.messages = _.map(this.messages,<span class="fstat-no" title="function not covered" >(</span>d)=&gt;d);
+      //execute after populating messages
+      var ref2 = new Firebase("https://vyapi.firebaseio.com/action/"+roomId);
+<span class="cstat-no" title="statement not covered" >      ref2.on("value",<span class="fstat-no" title="function not covered" >(snapshot2)=&gt;{</span></span>
+<span class="cstat-no" title="statement not covered" >        this.action = snapshot2.val();</span>
+<span class="cstat-no" title="statement not covered" >        this.action = _.map(this.action,<span class="fstat-no" title="function not covered" >(</span>d)=&gt;d);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.allActions= _.groupBy(this.messages,'lane')</span>
+<span class="cstat-no" title="statement not covered" >        let positiveActs = this.allActions.plus;</span>
+<span class="cstat-no" title="statement not covered" >        let negativeActs = this.allActions.minus;</span>
+<span class="cstat-no" title="statement not covered" >        let actions = this.action;</span>
+<span class="cstat-no" title="statement not covered" >        var Length =[];</span>
+<span class="cstat-no" title="statement not covered" >        Length[0]= positiveActs.length;</span>
+<span class="cstat-no" title="statement not covered" >        Length[1]= negativeActs.length;</span>
+<span class="cstat-no" title="statement not covered" >        Length[2] = this.action.length;</span>
+<span class="cstat-no" title="statement not covered" >        var iterator = _.max(Length);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        let csv = [];</span>
+<span class="cstat-no" title="statement not covered" >        f</span>or(var index=0;index&lt;iterator;index++)
+        {
+<span class="cstat-no" title="statement not covered" >          let obj={};</span>
+<span class="cstat-no" title="statement not covered" >          i</span>f(positiveActs[index]!=undefined)
+          {
+<span class="cstat-no" title="statement not covered" >            obj.Positive=positiveActs[index].text;</span>
+<span class="cstat-no" title="statement not covered" >            obj.PositiveName=positiveActs[index].from;</span>
+          }else //FILL WITH BLANK values
+          {
+<span class="cstat-no" title="statement not covered" >            obj.Positive='';</span>
+<span class="cstat-no" title="statement not covered" >            obj.PositiveName='';</span>
+          }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >          i</span>f(negativeActs[index]!=undefined)
+          {
+<span class="cstat-no" title="statement not covered" >            obj.improve= negativeActs[index].text;</span>
+<span class="cstat-no" title="statement not covered" >            obj.improveName= negativeActs[index].from;</span>
+          }else
+          {
+<span class="cstat-no" title="statement not covered" >            obj.improve= '';</span>
+<span class="cstat-no" title="statement not covered" >            obj.improveName= '';</span>
+          }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >          i</span>f(actions[index]!=undefined)
+          {
+<span class="cstat-no" title="statement not covered" >            obj.actionItem=actions[index].task;</span>
+<span class="cstat-no" title="statement not covered" >            obj.owner= actions[index].name;</span>
+          }else
+          {
+<span class="cstat-no" title="statement not covered" >            obj.actionItem='';</span>
+<span class="cstat-no" title="statement not covered" >            obj.owner= '';</span>
+          }
+<span class="cstat-no" title="statement not covered" >          csv.push(obj);</span>
+<span class="cstat-no" title="statement not covered" >          this.finalArray = csv;</span>
+        }
+      });
+    });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    t</span>his.header = ["Positive","PositiveName","improve","improveName","action","owner"];
+&nbsp;
+    //CodeforExport
+    this.exportSheetCreator=<span class="fstat-no" title="function not covered" >function(){</span>
+<span class="cstat-no" title="statement not covered" >      this.allActions= _.groupBy(this.messages,'lane')</span>
+<span class="cstat-no" title="statement not covered" >      let positiveActs = this.allActions.plus;</span>
+<span class="cstat-no" title="statement not covered" >      let negativeActs = this.allActions.minus;</span>
+<span class="cstat-no" title="statement not covered" >      let actions = this.action;</span>
+<span class="cstat-no" title="statement not covered" >      var Length =[];</span>
+<span class="cstat-no" title="statement not covered" >      Length[0]= positiveActs.length;</span>
+<span class="cstat-no" title="statement not covered" >      Length[1]= negativeActs.length;</span>
+<span class="cstat-no" title="statement not covered" >      Length[2] = this.action.length;</span>
+<span class="cstat-no" title="statement not covered" >      var iterator = _.max(Length);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      let csv = [];</span>
+<span class="cstat-no" title="statement not covered" >      f</span>or(var index=0;index&lt;iterator;index++)
+      {
+<span class="cstat-no" title="statement not covered" >        let obj={};</span>
+<span class="cstat-no" title="statement not covered" >        i</span>f(positiveActs[index]!=undefined)
+        {
+<span class="cstat-no" title="statement not covered" >          obj.Positive=positiveActs[index].text;</span>
+<span class="cstat-no" title="statement not covered" >          obj.PositiveName=positiveActs[index].from;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        i</span>f(negativeActs[index]!=undefined)
+        {
+<span class="cstat-no" title="statement not covered" >          obj.improve= negativeActs[index].text;</span>
+<span class="cstat-no" title="statement not covered" >          obj.improveName= negativeActs[index].from;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        i</span>f(actions[index]!=undefined)
+        {
+<span class="cstat-no" title="statement not covered" >          obj.actionItem=actions[index].task;</span>
+<span class="cstat-no" title="statement not covered" >          obj.owner= actions[index].name;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        csv.push(obj);</span>
+<span class="cstat-no" title="statement not covered" >        this.finalArray = csv;</span>
+      }
+<span class="cstat-no" title="statement not covered" >      this.header = ["Positive","PositiveName","improve","improveName","action","owner"];</span>
+<span class="cstat-no" title="statement not covered" >      console.table(this.finalArray);</span>
+    }
+  }
+&nbsp;
+  firebaseAuthlogout(){
+<span class="cstat-no" title="statement not covered" >    this.auth.logout()</span>
+<span class="cstat-no" title="statement not covered" >    this.clog.log("Logged out");</span>
+<span class="cstat-no" title="statement not covered" >    this.location.path('/');</span>
+  }
+}
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Feb 27 2016 13:38:30 GMT+0530 (IST)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>
