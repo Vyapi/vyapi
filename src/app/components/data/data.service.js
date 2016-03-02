@@ -10,22 +10,18 @@ export class FireData{
   }
 
   getAuthData(){
-    var authObjLocal = this.fc.connect('/')
+    var authObjLocal = this.fc.getUserAuthObj('/')
     var auth = authObjLocal.$getAuth();
     return auth;
   }
 
   authExist(path='/'){
-    var authObjLocal = this.fc.connect(path);
+    var authObjLocal = this.fc.getUserAuthObj(path);
     var authDataLocal = authObjLocal.$getAuth();
     if (authDataLocal) {
       return authDataLocal;
     }
-    else
-    {
-      return false;
-    }
-    return;
+    return null;
   }
 
   getUid(){

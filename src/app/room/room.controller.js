@@ -1,25 +1,20 @@
 export class RoomController {
-  constructor ($firebaseAuth, $stateParams, $scope,$log,Auth,$location,Dashboard) {
+  constructor ($firebaseAuth, $firebaseArray, $stateParams, $scope,$log,Auth,$location,Dashboard, FireData) {
     'ngInject';
     this.auth = Auth;
     this.location = $location;
     this.clog = $log;
+    this.firedata = FireData;
     $scope.getview=null;
-    $log.info(`in room controller in room ${$stateParams.roomKey }`);
-    $log.log($stateParams.roomKey);
+    $log.log(`roomid: ${$stateParams.roomKey }`);
 
-    //console.log("my code!");
     this.roomLabel = '';
     let roomK = $stateParams.roomKey;
-    console.log(roomK);
     let roomRef = new Firebase("https://vyapi.firebaseio.com/rooms/"+roomK);
-    roomRef.on("value",(snapshot)=>{
-      console.log(snapshot.val());
+    roomRef.once("value",(snapshot)=>{
       let labelData = snapshot.val();
       this.roomLabel = labelData.roomName;
-      console.log(this.roomLabel);
     });
-    //console.log("my code ends!" + roomRef);
 
     var keys = [];
     var key;
@@ -27,7 +22,7 @@ export class RoomController {
     this.action={};// pr
     this.finalArray=[]; // pr
 		this.userPic = '';
-		let userPromise = Dashboard.getUserPic(Dashboard.getUserID());
+		let userPromise = Dashboard.getUserPic(this.firedata.getUid());
 		userPromise.on("value",(snapshot)=>{
 			this.userPic = snapshot.val().google.profileImageURL;
 			//console.log("hi",this.userPic);
@@ -48,7 +43,6 @@ export class RoomController {
       {
         if(keys[key]===roomId)
         {
-          $log.log("success");
           flag=1;
           break;
         }
@@ -159,6 +153,33 @@ export class RoomController {
       }
       this.header = ["Positive","PositiveName","improve","improveName","action","owner"];
       console.table(this.finalArray);
+    }
+    
+    //sort by likes
+    this.sortByLikes = function() {
+      ref.orderByChild("dl").once("value", function(snapshot) {
+        var arr = [];
+        var val = snapshot.val();
+        for(var i in val) {
+          val[i].msgId = i;
+          arr.push(val[i]);
+        }
+        //decending sort by no of likes
+        arr.sort(function(a,b) {
+          return b.dl - a.dl;
+        });
+
+        var link = "https://vyapi.firebaseio.com/messages/" + $stateParams.roomKey;
+        for(var i = 0; i < arr.length; ++i)
+            (new Firebase(link)).child(arr[i].msgId).setPriority(i);
+        
+      });
+//       var messages = $firebaseArray(new Firebase("https://vyapi.firebaseio.com/messages/" + $stateParams.roomKey));
+//       console.log("sort by likes" + messages.length);
+//       messages.sort(function(a,b){
+//         console.log((a.dl.split(' ')[0] +" - " + b.dl.split(' ')[0]));
+//         return -(a.dl.split(' ')[0] - b.dl.split(' ')[0]);
+//       });
     }
   }
 

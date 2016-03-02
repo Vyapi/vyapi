@@ -11,11 +11,6 @@ describe('service Dashboard', () => {
 			var data = Dashboard.getRooms();
 			expect(data).toEqual("success");
 		}));
-		it('getUserID should exist', inject(Dashboard => {
-			expect(Dashboard.getUserID).not.toBeNull();
-			var data = Dashboard.getUserID();
-			expect(data).toEqual("success");
-		}));
 		it('getUserPic should exist', inject(Dashboard => {
 			expect(Dashboard.getUserPic).not.toBeNull();
 			var data = Dashboard.getUserPic();

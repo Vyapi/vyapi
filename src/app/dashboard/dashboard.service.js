@@ -13,14 +13,6 @@ export class Dashboard{
 			return "success";
 		return this.roomsRef.orderByChild("ownedBy").equalTo(userID)
 	}
-	getUserID(){
-		let authData = this.rootRef.getAuth();
-		if(!authData){
-			authData = {};
-			authData.uid = "success";
-		}
-		return authData.uid;
-	}
 	getUserPic(userID){
 		if(!userID)
 			return "success";

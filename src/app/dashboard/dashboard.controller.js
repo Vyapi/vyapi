@@ -1,11 +1,12 @@
 export class DashboardController {
-	constructor ($firebaseArray,Auth,Dashboard,$location,$log,$window,$cookies){
+	constructor ($firebaseArray,Auth, FireData, Dashboard,$location,$log,$window,$cookies){
 		'ngInject';
 		this.path = $location.absUrl().replace('dashboard', 'room');
 		this.location = $location;
 		this.cookies = $cookies;
 		this.auth = Auth;
 		this.clog = $log;
+        this.firedata = FireData;
 		this.rooms = [];
 		this.userPic = '';
 		this.car= [];
@@ -53,7 +54,7 @@ export class DashboardController {
 	{
 		let card_count=0;
 		let car = [];
-		let userID = Dashboard.getUserID();
+		let userID = this.firedata.getUid();
 		if(!userID){
 			return;
 		}
@@ -73,7 +74,7 @@ export class DashboardController {
 		{
 			return;
 		}
-		let userID = Dashboard.getUserID();
+		let userID = this.firedata.getUid();
 		if(!userID){
 			this.rooms = ["mock data"];
 			return "set param is being called";
@@ -100,7 +101,7 @@ export class DashboardController {
 	}
 	create(Dashboard)
 	{
-		let userID = Dashboard.getUserID();
+		let userID = this.firedata.getUid();
 		if(!userID)
 			return;
 		let d=new Date();

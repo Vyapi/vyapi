@@ -1,29 +1,36 @@
-<div class="action-container">
-  <h2 class="group-header">{{ action.actionLabel }}</h2>
-  <form ng-submit="action.add()">
-    <div class="form-group">
-      <div class="input-group">
-        <input ng-model="action.text" class="form-control userText form-control-inverted ng-valid ng-dirty ng-touched" placeholder="Type an action...">
-        <div class="input-group-btn">
-          <select type="button" class="btn btn-default dropdown-toggle" ng-options="person for person in action.assignee" ng-model="person" ng-change="action.change(person)">
-            <option value="" class="dropdown-menu dropdown-menu-right">Assignee</option>
-          </select>
+<div class="container-fluid action-container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="group-header">{{ action.actionLabel }}</h2>
+      <form ng-submit="action.add()">
+        <div class="form-group">
+          <div class="input-group">
+            <input ng-model="action.text" class="form-control userText form-control-inverted ng-valid ng-dirty ng-touched" placeholder="Type an action...">
+            <div class="input-group-btn">
+              <span class="form-control">
+                <select type="button" class="btn btn-default dropdown-toggle" ng-options="person for person in action.assignee" ng-model="person" ng-change="action.change(person)" style="">
+                  <option value="" class="dropdown-menu dropdown-menu-right">Assignee</option>
+                  <span class="caret"></span>
+                </select>
+              </span>
+            </div><!-- /btn-group -->
+          </div>
         </div>
-      </div>
+      </form>
+      <ul id="action-items" class="list-unstyled">
+        <li class = "ng-animate ng-enter animated bounceIn" data-ng-repeat="item in action.items.slice().reverse()">
+          <article class="stickyAction"><br/>
+            <div class="stickyAction__head">
+              <select type="button" ng-options="asn for asn in action.assignee" ng-model="item.name" ng-change="action.modify(item)" class="btn btn-default dropdown-toggle">
+              </select>
+              <i class="fa fa-times fa-lg pull-right button-id" ng-click="action.remove(item)"><span class="Done"></span></i>
+            </div>
+            <div class="stickyAction__body">
+              <p class="usertext">{{ item.task }}</p>
+            </div>
+          </article>
+        </li>
+      </ul>
     </div>
-  </form>
-  <ul id="action-items" class="list-unstyled">
-    <li class = "ng-animate ng-enter animated bounceIn" data-ng-repeat="item in action.items.slice().reverse()">
-      <article class="stickyAction"><br/>
-        <div class="stickyAction__head">
-          <select type="button" ng-options="asn for asn in action.assignee" ng-model="item.name" ng-change="action.modify(item)" class="btn btn-default dropdown-toggle">
-          </select>
-          <i class="fa fa-times fa-lg pull-right button-id delete-btn" ng-click="action.remove(item)"></i>
-        </div>
-        <div class="stickyAction__body">
-          <textarea class="usertext" ng-change="action.saveEdit(item)" ng-model-options='{ debounce: 1000 }' ng-model='item.task' maxlength="101"></textarea>
-        </div>
-      </article>
-    </li>
-  </ul>
+  </div>
 </div>
