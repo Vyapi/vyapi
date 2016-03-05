@@ -5,6 +5,7 @@ export function runBlock ($rootScope, $state) {
     // We can catch the error thrown when the $requireAuth promise is rejected
     // and redirect the user back to the home page
     if (error === "AUTH_REQUIRED") {
+      console.log('AUTH_REQUIRED error. redir to home');
       $state.go("home");
     }
     else {
