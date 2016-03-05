@@ -1,10 +1,15 @@
 export class Auth{
-    constructor(FireData,FireConnect,$log,$location){
+    constructor(FireData,FireConnect,$log,$location, $localStorage){
         'ngInject';
         this.clog = $log;
         this.fireData = FireData;
         this.fireConnect = FireConnect;
         this.location = $location;
+        
+        this.googleLogout = function() {
+          delete $localStorage.userInfo;
+          delete $localStorage.auth;
+        }
     }
 
     login(){

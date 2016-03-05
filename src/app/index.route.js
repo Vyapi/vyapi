@@ -1,11 +1,25 @@
 export function routerConfig ($stateProvider, $urlRouterProvider,$locationProvider) {
   'ngInject';
   $stateProvider
+  .state('auth',{
+    url: '/googleAuth',
+    controller: 'GoogleAuth',
+    controllerAs: 'GoogleAuth'
+  })
   .state('home',{
     url:'/',
     templateUrl: 'app/login/login.html',
     controller: 'LoginController',
-    controllerAs: 'login'
+    controllerAs: 'login',
+    resolve: {
+      auth: function($localStorage, $q, $location) {
+        if($localStorage.auth != undefined && $localStorage.userInfo != undefined ) { //already authenticated
+          //todo: verify the auth and then redirect to dashboard
+          $location.path('/dashboard');
+        }
+        return $q.resolve();
+      }
+    }
   })
   .state('dashboard', {
     url: '/dashboard',
@@ -13,8 +27,18 @@ export function routerConfig ($stateProvider, $urlRouterProvider,$locationProvid
     controller:'DashboardController',
     controllerAs: 'dashboard',
     resolve: {
-      auth: function($firebaseAuth, FireConnect) {
-        return FireConnect.getUserAuthObj().$requireAuth();
+      auth: function($localStorage, $q, $cookies, $location) {
+        if($localStorage.auth == undefined || $localStorage.userInfo == undefined ) {
+          $cookies.put('path', $location.path());
+          return $q.reject('AUTH_REQUIRED');
+        }
+        else if($cookies.get('path')) {
+          console.log('going to cookie path');
+          let path = $cookies.get('path');
+          $cookies.remove('path');
+          $location.path(path);
+        }
+        return $q.resolve();
       }
     }
   })
@@ -49,8 +73,18 @@ export function routerConfig ($stateProvider, $urlRouterProvider,$locationProvid
       }
     },
     resolve: {
-      auth: function($firebaseAuth, FireConnect) {
-        return FireConnect.getUserAuthObj().$requireAuth();
+      auth: function($localStorage, $q, $cookies, $location) {
+        if($localStorage.auth == undefined || $localStorage.userInfo == undefined ) {
+          $cookies.put('path', $location.path());
+          return $q.reject('AUTH_REQUIRED');
+        }
+        else if($cookies.get('path')) {
+          console.log('going to cookie path');
+          let path = $cookies.get('path');
+          $cookies.remove('path');
+          $location.path(path);
+        }
+        return $q.resolve();
       }
     }
   });

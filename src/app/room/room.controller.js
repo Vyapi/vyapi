@@ -1,12 +1,11 @@
 export class RoomController {
-  constructor ($firebaseAuth, $firebaseArray, $stateParams, $scope,$log,Auth,$location,Dashboard, FireData) {
+  constructor ($stateParams, $scope,$log,Auth,$location,Dashboard, $localStorage) {
     'ngInject';
     this.auth = Auth;
     this.location = $location;
     this.clog = $log;
-    this.firedata = FireData;
     $scope.getview=null;
-    $log.log(`roomid: ${$stateParams.roomKey }`);
+    //$log.log(`roomid: ${$stateParams.roomKey }`);
 
     this.roomLabel = '';
     let roomK = $stateParams.roomKey;
@@ -21,12 +20,7 @@ export class RoomController {
     this.messages= {}; // pr
     this.action={};// pr
     this.finalArray=[]; // pr
-		this.userPic = '';
-		let userPromise = Dashboard.getUserPic(this.firedata.getUid());
-		userPromise.on("value",(snapshot)=>{
-			this.userPic = snapshot.val().google.profileImageURL;
-			//console.log("hi",this.userPic);
-		});
+    this.userPic = $localStorage.userInfo['picture'];
     var userRef = new Firebase("https://vyapi.firebaseio.com/rooms/");
     userRef.on('value',(snap)=>{
 
@@ -71,8 +65,8 @@ export class RoomController {
         let negativeActs = this.allActions.minus;
         let actions = this.action;
         var Length =[];
-        Length[0]= positiveActs.length;
-        Length[1]= negativeActs.length;
+        Length[0]= positiveActs != undefined ? positiveActs.length : 0;
+        Length[1]= negativeActs != undefined ? negativeActs.length : 0;
         Length[2] = this.action.length;
         var iterator = _.max(Length);
 
@@ -80,7 +74,7 @@ export class RoomController {
         for(var index=0;index<iterator;index++)
         {
           let obj={};
-          if(positiveActs[index]!=undefined)
+          if(positiveActs != undefined && positiveActs[index]!=undefined)
           {
             obj.Positive=positiveActs[index].text;
             obj.PositiveName=positiveActs[index].from;
@@ -90,7 +84,7 @@ export class RoomController {
             obj.PositiveName='';
           }
 
-          if(negativeActs[index]!=undefined)
+          if(negativeActs != undefined && negativeActs[index]!=undefined)
           {
             obj.improve= negativeActs[index].text;
             obj.improveName= negativeActs[index].from;
@@ -124,8 +118,8 @@ export class RoomController {
       let negativeActs = this.allActions.minus;
       let actions = this.action;
       var Length =[];
-      Length[0]= positiveActs.length;
-      Length[1]= negativeActs.length;
+      Length[0]= positiveActs != undefined ? positiveActs.length : 0;
+      Length[1]= negativeActs != undefined ? negativeActs.length : 0;
       Length[2] = this.action.length;
       var iterator = _.max(Length);
 
@@ -133,12 +127,12 @@ export class RoomController {
       for(var index=0;index<iterator;index++)
       {
         let obj={};
-        if(positiveActs[index]!=undefined)
+        if(positiveActs != undefined && positiveActs[index]!=undefined)
         {
           obj.Positive=positiveActs[index].text;
           obj.PositiveName=positiveActs[index].from;
         }
-        if(negativeActs[index]!=undefined)
+        if(negativeActs != undefined && negativeActs[index]!=undefined)
         {
           obj.improve= negativeActs[index].text;
           obj.improveName= negativeActs[index].from;
@@ -152,7 +146,7 @@ export class RoomController {
         this.finalArray = csv;
       }
       this.header = ["Positive","PositiveName","improve","improveName","action","owner"];
-      console.table(this.finalArray);
+      //console.table(this.finalArray);
     }
     
     //sort by likes
@@ -184,8 +178,12 @@ export class RoomController {
   }
 
   firebaseAuthlogout(){
-    this.auth.logout()
-    this.clog.log("Logged out");
+    this.auth.logout();
+    this.location.path('/');
+  }
+  
+  googleAuthLogout() {
+    this.auth.googleLogout();
     this.location.path('/');
   }
 }

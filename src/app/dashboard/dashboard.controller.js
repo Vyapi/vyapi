@@ -1,12 +1,13 @@
 export class DashboardController {
-	constructor ($firebaseArray,Auth, FireData, Dashboard,$location,$log,$window,$cookies){
+	constructor ($firebaseArray,Auth, Dashboard,$location,$log,$window,$cookies, $localStorage){
 		'ngInject';
 		this.path = $location.absUrl().replace('dashboard', 'room');
 		this.location = $location;
 		this.cookies = $cookies;
 		this.auth = Auth;
 		this.clog = $log;
-        this.firedata = FireData;
+        //this.firedata = FireData;
+        this.localStorage = $localStorage;
 		this.rooms = [];
 		this.userPic = '';
 		this.car= [];
@@ -54,7 +55,7 @@ export class DashboardController {
 	{
 		let card_count=0;
 		let car = [];
-		let userID = this.firedata.getUid();
+		let userID = this.localStorage.userInfo['id'];//this.firedata.getUid();
 		if(!userID){
 			return;
 		}
@@ -74,15 +75,15 @@ export class DashboardController {
 		{
 			return;
 		}
-		let userID = this.firedata.getUid();
+		let userID = this.localStorage.userInfo['id'];//this.firedata.getUid();
+        console.log("userID: " + userID);
 		if(!userID){
 			this.rooms = ["mock data"];
 			return "set param is being called";
 		}
-		let userPromise = Dashboard.getUserPic(userID);
-		userPromise.on("value",(snapshot)=>{
-			this.userPic= snapshot.val().google.profileImageURL;
-		});
+		
+		this.userPic = this.localStorage.userInfo['picture'];
+		
 		let roomsPromise = Dashboard.getRooms(userID);
 		if(!roomsPromise)
 			return;
@@ -101,7 +102,7 @@ export class DashboardController {
 	}
 	create(Dashboard)
 	{
-		let userID = this.firedata.getUid();
+		let userID = this.localStorage.userInfo['id'];//this.firedata.getUid();
 		if(!userID)
 			return;
 		let d=new Date();
@@ -113,9 +114,14 @@ export class DashboardController {
 		Dashboard.remove(roomKey);
 	}
 
-	firebaseAuthlogout(){
+  firebaseAuthlogout(){
     this.auth.logout()
     this.clog.log("Logged out");
+    this.location.path('/');
+  }
+
+  googleAuthLogout() {
+    this.auth.googleLogout();
     this.location.path('/');
   }
 

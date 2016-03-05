@@ -1,5 +1,5 @@
 export class BoardController {
-  constructor ($firebaseArray, $location,$log, $stateParams, Dashboard, $timeout, $window) {
+  constructor ($firebaseArray, $location,$log, $stateParams, Dashboard, $timeout, $window, $localStorage) {
 
     'ngInject';
 
@@ -17,10 +17,7 @@ export class BoardController {
     }
     this.hideAllNotifications();
 
-    var userRef = new Firebase("https://vyapi.firebaseio.com/messages");
-    var authData = userRef.getAuth();
-    var googleId = authData.google.id;
-    var userId = "google:"+googleId;
+    var userId = $localStorage.userInfo['id'];
 
     this.plusLabel='';
     this.minusLabel='';
@@ -46,7 +43,7 @@ export class BoardController {
       this.hideAllNotifications();
       
       if(!this.anonymous) {
-        userName = authData.google.displayName;
+        userName = $localStorage.userInfo['given_name'];//authData.google.displayName;
         $("#visible-confirmation").show();
         $timeout(function() { $("#visible-confirmation").hide(); }, 2500);
       } else {
@@ -264,17 +261,18 @@ export class BoardController {
       }*/
     }
 
-    this.userPic = [];
     this.anonymousImage = function(msg){
       if(msg.from != "anonymous")
         return false;
       else
         return true;
     }
+
+    this.userPic = [];
     this.getUserPic = function(userId){
       if(angular.isUndefined(this.userPic[userId]))
       {
-        (new Firebase ("https://vyapi.firebaseio.com/users/" + userId+ "/google/profileImageURL")).once("value",(snapshot)=>{
+        (new Firebase ("https://vyapi.firebaseio.com/users/" + userId+ "/picture")).once("value",(snapshot)=>{
           this.userPic[userId] = snapshot.val();
         });
       }

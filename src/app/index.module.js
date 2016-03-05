@@ -12,9 +12,10 @@ import { RoomController } from './room/room.controller';
 import { LoginController } from './login/login.controller';
 import { FireConnect } from '../app/components/data/connectdb.service';
 import { FireData } from '../app/components/data/data.service';
+import { GoogleAuth } from '../app/components/data/googleAuth.js';
 
 
-angular.module('vyapi', ['ui.router', 'toastr', 'firebase', 'ngAnimate','ngCookies','ngCsv'])
+angular.module('vyapi', ['ui.router', 'toastr', 'firebase', 'ngAnimate','ngCookies','ngCsv', 'ngStorage'])
 
   .config(config)
   .config(routerConfig)
@@ -30,3 +31,4 @@ angular.module('vyapi', ['ui.router', 'toastr', 'firebase', 'ngAnimate','ngCooki
   .controller('BoardController', BoardController)
   .controller('RoomController', RoomController)
   .controller('LoginController', LoginController)
+  .controller('GoogleAuth', GoogleAuth)
