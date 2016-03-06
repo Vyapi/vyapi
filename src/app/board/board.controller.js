@@ -82,7 +82,7 @@ export class BoardController {
 
         this.messages.$add({
           from: userName,
-          uid: authData.uid,
+          uid: $localStorage.userInfo['id'],
           text: userMessage,
           lane: id,
           dl: 0
@@ -121,7 +121,7 @@ export class BoardController {
         $timeout(function() { $("#like-denied").hide(); }, 2500);
       }
       else {
-        let msgLike = (new Firebase(roomURL)).child(msg.$id + "/like/" +authData.uid);
+        let msgLike = (new Firebase(roomURL)).child(msg.$id + "/like/" +$localStorage.userInfo['id']);
         msgLike.once("value" , function(value){
           if(value.exists()){
             msgLike.remove();
@@ -201,7 +201,6 @@ export class BoardController {
       var result=$window.confirm("This card will be deleted. Are you sure?");
       if(result)
       {
-      var ide=msg.$id;
       var refe = new Firebase("https://vyapi.firebaseio.com/rooms/"+roomID);
       var dash;
       var number;
