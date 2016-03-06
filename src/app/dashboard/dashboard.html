@@ -19,18 +19,20 @@
 <div class="container-fluid">
   <ul class="list-unstyled list-inline">
     <li class="card_list">
-      <div class="card card-note card__body" id="div_hover">
-        <div class="create">
-          <a data-toggle="modal" data-target="#myModal" href="#" title="Create new room"><i class="glyphicon glyphicon-plus fa-5x plus_icon"></i></a>
+      <a data-toggle="modal" data-target="#myModal" href="#" title="Create new room">
+        <div class="card card-note card__body" id="div_hover">
+          <div class="create">
+            <i class="fa fa-plus fa-5x plus_icon"></i>
+          </div>
         </div>
-      </div>
+      </a>
     </li>
     <li class="card_list" ng-repeat="room in dashboard.rooms">
       <div class="card">
         <div class="card-note">
           <div class="card__body">
             <div class="card_top">
-              <i class="glyphicon glyphicon-remove pull-right top_icon" data-toggle="modal" data-target="#delAlert" title="Delete room"></i>
+              <a href=""><i class="fa fa-remove pull-right top_icon" data-toggle="modal" data-target="#delAlert" title="Delete room"></i></a>
               <div id="delAlert" class="modal fade" role="dialog">
                 <div class="modal-dialog">
                   <div class="modal-content">
@@ -48,7 +50,8 @@
                   </div>
                 </div>
               </div>
-              <i class="glyphicon glyphicon-pencil pull-right top_icon" ng-click="dashboard.editRoom(room.key)" title="Edit room"></i>
+              <a href=""><i class="fa fa-edit pull-right top_icon" ng-click="dashboard.editRoom(room.key)" title="Edit room"></i></a>
+              <a href=""><i class="fa fa-envelope-o pull-right top_icon" data-toggle="modal" ng-click="dashboard.inviteSetup(room.key)" data-target="#inviteModal" title="Invite"></i></a>
             </div>
             <div id="card_text">
               <div class="line-padding">
@@ -56,15 +59,15 @@
                 {{room.mem}}
               </div>
               <div class="line-padding">
-                <div class="icon-inline" title="Date Created"><i class="glyphicon glyphicon-calendar white icon-background icon-orange"></i></div>
+                <div class="icon-inline" title="Date Created"><i class="fa fa-calendar white icon-background icon-orange"></i></div>
                 {{room.date}}
               </div>
               <div class="line-padding">
-                <div class="icon-inline" title={{room.plusLabel}}><i class="glyphicon glyphicon-plus white icon-background icon-green"></i></div>
+                <div class="icon-inline" title={{room.plusLabel}}><i class="fa fa-plus white icon-background icon-green"></i></div>
                 {{room.pos}}
               </div>
               <div class="line-padding">
-                <div class="icon-inline" title={{room.minusLabel}}><i class="glyphicon glyphicon-minus white icon-background icon-red"></i></div>
+                <div class="icon-inline" title={{room.minusLabel}}><i class="fa fa-minus white icon-background icon-red"></i></div>
                 {{room.neg}}
               </div>
             </div>
