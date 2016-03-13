@@ -82,7 +82,7 @@ export class BoardController {
 
         this.messages.$add({
           from: userName,
-          uid: authData.uid,
+          uid: $localStorage.userInfo['id'],
           text: userMessage,
           lane: id,
           dl: 0
@@ -121,7 +121,7 @@ export class BoardController {
         $timeout(function() { $("#like-denied").hide(); }, 2500);
       }
       else {
-        let msgLike = (new Firebase(roomURL)).child(msg.$id + "/like/" +authData.uid);
+        let msgLike = (new Firebase(roomURL)).child(msg.$id + "/like/" +$localStorage.userInfo['id']);
         msgLike.once("value" , function(value){
           if(value.exists()){
             msgLike.remove();
@@ -157,13 +157,19 @@ export class BoardController {
       cursor: "move", //change cursor while dragging
       update: function(event, ui) { //sort operation complete
         ui.item.html(ui.item.startHtml);
-        //var stickyId = ($.parseHTML(ui.item.startHtml))[1].id;
-        //console.log(stickyId);
+//         var children = $('#chat-messages-plus')[0].childNodes;
+//         for(var c in children) {
+//           if(children[c].nodeName == "LI") {
+//             console.log(children[c].childNodes[0].getAttribute('id'));
+//           }
+//         }
         var currPriority = 1;
         var children = $("#chat-messages-plus .sticky");
         for(var c in children) {
-          (new Firebase(roomURL + "/" + children[c].id)).setPriority(currPriority);
-          currPriority++;
+          if(children[c].id) {
+            (new Firebase(roomURL + "/" + children[c].id)).setPriority(currPriority);
+            currPriority++;
+          }
         }
       }
     });
@@ -183,14 +189,11 @@ export class BoardController {
       update: function(event, ui) {
         ui.item.html(ui.item.startHtml);
         var currPriority = 1;
-        var children = $('#chat-messages-minus')[0].childNodes;
+        var children = $('#chat-messages-minus .sticky');
         for(var c in children) {
-          if(children[c].nodeName == "LI") {
-            var uniqueMsgID = children[c].childNodes[1].getAttribute("id");
-            if(uniqueMsgID != undefined) {
-              (new Firebase(roomURL + "/" + uniqueMsgID)).setPriority(currPriority);
-              currPriority++;
-            }
+          if(children[c].id) {
+            (new Firebase(roomURL + "/" + children[c].id)).setPriority(currPriority);
+            currPriority++;
           }
         }
       }
@@ -201,7 +204,6 @@ export class BoardController {
       var result=$window.confirm("This card will be deleted. Are you sure?");
       if(result)
       {
-      var ide=msg.$id;
       var refe = new Firebase("https://vyapi.firebaseio.com/rooms/"+roomID);
       var dash;
       var number;

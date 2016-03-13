@@ -22,7 +22,7 @@
             <div class="sticky-note">
               <div class="sticky__top">
                 <i class="fa fa-hand-rock-o fa-lg pull-left grab-handle" id="grab-handle-plus" title="drag"></i>
-                <i class="fa fa-times fa-lg pull-right delete-btn" ng-click="board.delete(msg,5)" title="delete"></i>
+                <i ng-if="board.isOwner(msg.uid)" class="fa fa-times fa-lg pull-right delete-btn" ng-click="board.delete(msg,5)" title="delete"></i>
                 <!-- <span ng-if="board.isOwner(msg.uid)"><i class="fa fa-floppy-o pull-right edit-btn" ng-click="board.saveEdit(msg)" ></i></span> -->
                 <!-- <span ng-if="board.isOwner(msg.uid)"><i class="fa fa-check pull-right save-btn" ng-click="board.saveEdit(msg)"></i></span> -->
               </div>
@@ -65,7 +65,7 @@
             <div class="sticky-note">
               <div class="sticky__top">
                 <i class="fa fa-hand-rock-o fa-lg pull-left grab-handle" id="grab-handle-minus" title="drag"></i>
-                <i class="fa fa-times fa-lg pull-right delete-btn" ng-click="board.delete(msg,6)" title="delete"></i>
+                <i ng-if="board.isOwner(msg.uid)" class="fa fa-times fa-lg pull-right delete-btn" ng-click="board.delete(msg,6)" title="delete"></i>
                 <!-- <span ng-if="board.isOwner(msg.uid)"><i class="fa fa-floppy-o pull-right edit-btn" ng-click="board.saveEdit(msg)"></i></span> -->
                 <!-- <span ng-if="board.isOwner(msg.uid)"><i class="fa fa-check pull-right save-btn" ng-click="board.saveEdit(msg)"></i></span> -->
               </div>
