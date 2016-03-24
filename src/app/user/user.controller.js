@@ -1,5 +1,5 @@
 export class UserController {
-  constructor($firebaseArray, $firebaseAuth, $log, $location, $window, $stateParams,$cookies) {
+  constructor($firebaseArray, $log, $location, $window, $stateParams,$cookies, $localStorage) {
     'ngInject';
 
     var appURL = "https://vyapi.firebaseio.com/";
@@ -11,24 +11,8 @@ export class UserController {
 
     this.goOnline = function() {
 
-      var uid;
-
-      //find user ID of self
-      this.fa = $firebaseAuth;
-      this.ref = new Firebase(appURL);
-      this.authObj = this.fa(this.ref);
-      var authData = this.authObj.$getAuth();
-      if (authData) {
-        $log.log("Logged in as:", authData.uid);
-        uid = authData.uid;
-      } else {
-        var path = $location.path();
-        this.cookies.put('path',path);
-        // alert("Not Logged in. Please login\n Redirecting to login page");
-        $window.location.href = "http://" + $window.location.host + "#/";
-        $log.error("Not Logged in. Please login");
-        return;
-      }
+      var uid = $localStorage.userInfo['id'];
+      console.log("self id: " + uid);
 
       //get roomId from URL
       var roomId = $stateParams.roomKey;
@@ -47,7 +31,7 @@ export class UserController {
             if(snap.exists() == false) {
               $log.error("Room: " + roomId + " does not exist");
               alert("Room: " + roomId + " does not exist.\nRedirecting to dashboard");
-              $window.location.href = "http://" + $window.location.host + "#/dashboard";
+              $window.location.href = "http://" + $window.location.host + "/dashboard";
               return;
             } else {
               //register self as online. add self to members of the room
@@ -67,13 +51,13 @@ export class UserController {
         $log.log("User: " + userId.key() + " came online");
 
         //fetch details of the user that just came online
-        (new Firebase(encodeURI(appURL + "users/" + userId.key() + "/google/cachedUserProfile/given_name/"))).once("value", (value) => {
+        (new Firebase(encodeURI(appURL + "users/" + userId.key() + "/name/"))).once("value", (value) => {
           var userName = value.val();
-          (new Firebase(encodeURI(appURL + "users/" + userId.key() + "/google/profileImageURL/"))).once("value", (value) => {
+          (new Firebase(encodeURI(appURL + "users/" + userId.key() + "/picture"))).once("value", (value) => {
             var profileImageURL = value.val();
             this.onlineUsers[userId.key()] = {name: userName, photo : profileImageURL};
-            for(var u in this.onlineUsers)
-              $log.log(u);
+            //for(var u in this.onlineUsers)
+              //$log.log(u);
           });
         });
       });
