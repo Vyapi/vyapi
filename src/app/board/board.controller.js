@@ -44,7 +44,7 @@ export class BoardController {
     this.toggle = function() {
       this.anonymous = !this.anonymous;
       this.hideAllNotifications();
-      
+
       if(!this.anonymous) {
         userName = authData.google.displayName;
         $("#visible-confirmation").show();
@@ -82,7 +82,7 @@ export class BoardController {
 
         this.messages.$add({
           from: userName,
-          uid: $localStorage.userInfo['id'],
+          uid: userId,
           text: userMessage,
           lane: id,
           dl: 0
@@ -92,7 +92,7 @@ export class BoardController {
         for(var c = 0; c < children.length; ++c) {
           (new Firebase(roomURL + "/" + children[c].id)).setPriority(c);
         }
-        
+
         if(id == "plus")
           this.userMessagePlus = '';
         else if(id == "minus" )
@@ -121,7 +121,7 @@ export class BoardController {
         $timeout(function() { $("#like-denied").hide(); }, 2500);
       }
       else {
-        let msgLike = (new Firebase(roomURL)).child(msg.$id + "/like/" +$localStorage.userInfo['id']);
+        let msgLike = (new Firebase(roomURL)).child(msg.$id + "/like/" +userId);
         msgLike.once("value" , function(value){
           if(value.exists()){
             msgLike.remove();
@@ -204,31 +204,33 @@ export class BoardController {
       var result=$window.confirm("This card will be deleted. Are you sure?");
       if(result)
       {
-      var refe = new Firebase("https://vyapi.firebaseio.com/rooms/"+roomID);
-      var dash;
-      var number;
-      if(temp === 5)
-        dash=new Firebase(refe+"/pos");
-      else
-        dash=new Firebase(refe+"/neg");
-      dash.once("value",(snapshot)=>{
-        number = parseInt(snapshot.val());
-        number=number-1;
+        var refe = new Firebase("https://vyapi.firebaseio.com/rooms/"+roomID);
+        var dash;
+        var number;
         if(temp === 5)
-          refe.update({pos : number});
+          dash=new Firebase(refe+"/pos");
         else
-          refe.update({neg : number});
-      });
+          dash=new Firebase(refe+"/neg");
+        dash.once("value",(snapshot)=>{
+          number = parseInt(snapshot.val());
+          number=number-1;
+          if(temp === 5)
+            refe.update({pos : number});
+          else
+            refe.update({neg : number});
+        });
 
-      let messageId=msg.$id;
-      if(msg.uid === userId){
-        this.msgRef.child(messageId).remove();
+        let messageId=msg.$id;
+        if(msg.uid === userId){
+          this.msgRef.child(messageId).remove();
+        }
+
+        this.hideAllNotifications();
+        $("#delete-confirmation").show();
+        $timeout(function() {
+          $("#delete-confirmation").hide();
+        }, 2500);
       }
-
-      this.hideAllNotifications();
-      $("#delete-confirmation").show();
-      $timeout(function() { $("#delete-confirmation").hide(); }, 2500);
-    }
     };
 
     //CODE TO SHOW THE EDIT BUTTON ONLY ON SELF STICKYs
