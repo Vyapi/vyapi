@@ -20,10 +20,10 @@ export class ActionController {
     room.on("value", (snapshot) => {
       snapshot.forEach((uid)=>{
         var personRef = new Firebase('https://vyapi.firebaseio.com/users/');
-        var googleData=personRef.child(''+uid.key()+'/google/');
+        var googleData=personRef.child(''+uid.key());
         $firebaseArray(googleData);
         googleData.on('value',(userSnapshot)=>{
-          var userNames=userSnapshot.val()['displayName'];
+          var userNames=userSnapshot.val()['name'];
           this.assignee.push(userNames);
         });
       });
