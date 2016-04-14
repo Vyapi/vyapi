@@ -19,7 +19,7 @@ export class UserController {
       this.authObj = this.fa(this.ref);
       var authData = this.authObj.$getAuth();
       if (authData) {
-        $log.log("Logged in as:", authData.uid);
+//        $log.log("Logged in as:", authData.uid);
         uid = authData.uid;
       } else {
         var path = $location.path();
@@ -37,7 +37,7 @@ export class UserController {
       var connectedRef = new Firebase(appURL + ".info/connected");
       connectedRef.on("value", (snap) => {
         if (snap.val() === true) {
-          $log.log("connected");
+//          $log.log("connected");
           //register self as online
 
           onlineUsersRef.child(roomId + "/" + uid).set("0");
@@ -64,7 +64,7 @@ export class UserController {
 
       //user came online
       onlineUsersRef.child(roomId).on("child_added", (userId) => {
-        $log.log("User: " + userId.key() + " came online");
+//        $log.log("User: " + userId.key() + " came online");
 
         //fetch details of the user that just came online
         (new Firebase(encodeURI(appURL + "users/" + userId.key() + "/google/cachedUserProfile/given_name/"))).once("value", (value) => {
@@ -72,15 +72,15 @@ export class UserController {
           (new Firebase(encodeURI(appURL + "users/" + userId.key() + "/google/profileImageURL/"))).once("value", (value) => {
             var profileImageURL = value.val();
             this.onlineUsers[userId.key()] = {name: userName, photo : profileImageURL};
-            for(var u in this.onlineUsers)
-              $log.log(u);
+//            for(var u in this.onlineUsers)
+//              $log.log(u);
           });
         });
       });
 
       //user went offline
       onlineUsersRef.child(roomId).on("child_removed", (userId)=> {
-        $log.log("User: " + userId.key() + " went offline");
+//        $log.log("User: " + userId.key() + " went offline");
         delete this.onlineUsers[userId.key()];
       });
 
