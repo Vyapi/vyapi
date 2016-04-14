@@ -7,8 +7,8 @@
           <div class="input-group">
             <input ng-model="action.text" class="form-control userText form-control-inverted ng-valid ng-dirty ng-touched" placeholder="Type an action...">
             <div class="input-group-btn">
-              <span class="form-control">
-                <select type="button" class="btn btn-default dropdown-toggle" ng-options="person for person in action.assignee" ng-model="person" ng-change="action.change(person)" style="">
+              <span class="form-control assignee-container">
+                <select type="button" class="btn btn-default dropdown-toggle assignee-select" ng-options="person for person in action.assignee" ng-model="person" ng-change="action.change(person)">
                   <option value="" class="dropdown-menu dropdown-menu-right">Assignee</option>
                   <span class="caret"></span>
                 </select>
@@ -21,7 +21,7 @@
         <li class = "ng-animate ng-enter animated bounceIn" data-ng-repeat="item in action.items.slice().reverse()">
           <article class="stickyAction"><br/>
             <div class="stickyAction__head">
-              <select type="button" ng-options="asn for asn in action.assignee" ng-model="item.name" ng-change="action.modify(item)" class="btn btn-default dropdown-toggle">
+              <select type="button" ng-options="asn for asn in action.assignee" ng-model="item.name" ng-change="action.modify(item)" class="btn btn-default dropdown-toggle action-card-select">
               </select>
               <i class="fa fa-times fa-lg pull-right button-id" ng-click="action.remove(item)"><span class="Done"></span></i>
             </div>

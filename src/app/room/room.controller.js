@@ -6,7 +6,7 @@ export class RoomController {
     this.clog = $log;
     this.firedata = FireData;
     $scope.getview=null;
-    $log.log(`roomid: ${$stateParams.roomKey }`);
+//    $log.log(`roomid: ${$stateParams.roomKey }`);
 
     this.roomLabel = '';
     let roomK = $stateParams.roomKey;
@@ -154,7 +154,7 @@ export class RoomController {
       this.header = ["Positive","PositiveName","improve","improveName","action","owner"];
       console.table(this.finalArray);
     }
-    
+
     //sort by likes
     this.sortByLikes = function() {
       ref.orderByChild("dl").once("value", function(snapshot) {
@@ -170,9 +170,9 @@ export class RoomController {
         });
 
         var link = "https://vyapi.firebaseio.com/messages/" + $stateParams.roomKey;
-        for(var i = 0; i < arr.length; ++i)
+        for(i = 0; i < arr.length; ++i)
             (new Firebase(link)).child(arr[i].msgId).setPriority(i);
-        
+
       });
 //       var messages = $firebaseArray(new Firebase("https://vyapi.firebaseio.com/messages/" + $stateParams.roomKey));
 //       console.log("sort by likes" + messages.length);
